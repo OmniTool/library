@@ -9,7 +9,7 @@
 
 <form method="POST">
     <p><input placeholder="ID" name="id"></p>
-    <p><button formaction="findgenre">Найти</button></p>
+    <p><button formaction="findauthor">Найти</button></p>
 </form>
 
 </body>
