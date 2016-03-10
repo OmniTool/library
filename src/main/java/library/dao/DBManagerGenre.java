@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerGenre implements DBManager <Genre, Integer> {
+public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
 
     DBConnector connector = new DBConnectorPool();
 
