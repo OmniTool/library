@@ -35,13 +35,15 @@ public class ShowAllGenres extends HttpServlet {
         try {
             List<Genre> list = dao.getAll();
             for (Genre genre : list) {
-                out.print("<p>" + genre.getTitle() + " (" + genre.getDescription() + ")" + "</p>");
+                out.print("<p>" + genre.getId() + ": " + genre.getTitle() + " (" + genre.getDescription() + ")" + "</p>");
             }
         } catch (SQLException e) {
             out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
         } catch (NamingException e) {
             out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
         }
+
+        out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
 
         out.print("</body>");
         out.print("</html>");

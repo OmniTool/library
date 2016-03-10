@@ -10,8 +10,6 @@
 <h2>Тест</h2>
 <h3>Жанры</h3>
 
-<br>
-
 <form>
     <p><button formaction="showallgenres">Показать каталог</button></p>
 </form>
@@ -20,20 +18,15 @@
     <p><button formaction="addgenre">Добавить жанр</button></p>
 </form>
 
-<form method="POST">
-    <p><input placeholder="ID" name="genreId"></p>
+<form >
     <p><button formaction="findgenre">Найти жанр по ID</button></p>
 </form>
 
-<form method="POST">
-    <p><input placeholder="ID" name="genreId"></p>
-    <p><input placeholder="Название жанра" name="genreTittle"></p>
-    <p><input placeholder="Описание жанра" name="genreDescription"></p>
+<form >
     <p><button formaction="editgenre">Изменить жанр</button></p>
 </form>
 
-<form method="POST">
-    <p><input placeholder="ID" name="genreId"></p>
+<form >
     <p><button formaction="removegenre">Удалить жанр</button></p>
 </form>
 

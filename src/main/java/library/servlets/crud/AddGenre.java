@@ -54,6 +54,8 @@ public class AddGenre extends HttpServlet {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 dao.create(genre);
+
+                out.print("Add:<br>");
                 out.print("title = " + genre.getTitle() + "<br>");
                 out.print("description = " + genre.getDescription() + "<br>");
             } catch (SQLException e) {
@@ -63,8 +65,14 @@ public class AddGenre extends HttpServlet {
 
             }
 
-        out.print("</body>");
-        out.print("</html>");
+
+            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
+
+            out.print("</body>");
+            out.print("</html>");
+
+            //req.setAttribute("genre", genre);
+
         }
     }
 }

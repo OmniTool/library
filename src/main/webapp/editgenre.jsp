@@ -5,12 +5,13 @@
 </head>
 <body>
 
-<h1>Добавление жанра</h1>
+<h1>Изменение жанра</h1>
 
 <form method="POST">
-    <p><input placeholder="Название жанра" name="title"></p>
-    <p><input placeholder="Описание жанра" name="description"></p>
-    <p><button formaction="addgenre">Добавить</button></p>
+    <p><input placeholder="ID" name="id"></p>
+    <p><input placeholder="Новое название жанра" name="title"></p> //выводить то что есть сейчас - сначала поиск по Id
+    <p><input placeholder="Новое описание жанра" name="description"></p>
+    <p><button formaction="editgenre">Изменить жанр</button></p>
 </form>
 
 </body>
