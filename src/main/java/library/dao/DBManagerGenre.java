@@ -54,7 +54,9 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+
             preparedStatement.setInt(1, id);
+
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 genre.setId(rs.getInt("id"));
@@ -80,9 +82,11 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-            preparedStatement.setString(1, "'" + entity.getTitle() + "'");
-            preparedStatement.setString(2, "'" + entity.getDescription() + "'");
+
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setString(2, entity.getDescription());
             preparedStatement.setInt(3, entity.getId());
+
             preparedStatement.executeUpdate();
         } finally {
             if (connection != null)
@@ -100,7 +104,9 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+
             preparedStatement.setInt(1, entity.getId());
+
             preparedStatement.executeUpdate();
         } finally {
             if (connection != null)
@@ -118,8 +124,10 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-            preparedStatement.setString(1, "'" + entity.getTitle() + "'");
-            preparedStatement.setString(2, "'" + entity.getDescription() + "'");
+
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setString(2, entity.getDescription());
+
             preparedStatement.executeUpdate();
         } finally {
         if (connection != null)
