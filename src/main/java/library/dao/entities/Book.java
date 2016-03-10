@@ -1,4 +1,4 @@
-package library.objects;
+package library.dao.entities;
 
 import java.util.ArrayList;
 
@@ -49,5 +49,16 @@ public class Book {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", tittle='" + tittle + '\'' +
+                ", pubYear=" + pubYear +
+                ", genereId=" + genereId +
+                ", authorsIdList=" + authorsIdList +
+                '}';
     }
 }

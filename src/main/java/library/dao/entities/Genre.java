@@ -1,4 +1,4 @@
-package library.objects;
+package library.dao.entities;
 
 public class Genre {
 
@@ -29,5 +29,14 @@ public class Genre {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

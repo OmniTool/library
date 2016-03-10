@@ -1,4 +1,4 @@
-package library.objects;
+package library.dao.entities;
 
 import java.util.ArrayList;
 
@@ -67,5 +67,18 @@ public class Author {
 
     public void setBooksIdList(ArrayList<Integer> booksIdList) {
         this.booksIdList = booksIdList;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", secondName='" + secondName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", birthYear=" + birthYear +
+                ", biography='" + biography + '\'' +
+                ", booksIdList=" + booksIdList +
+                '}';
     }
 }
