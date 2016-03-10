@@ -7,27 +7,17 @@
 </head>
 <body>
 <h1>Библиотека</h1>
-<h2>Тест</h2>
-<h3>Жанры</h3>
 
 <form>
-    <p><button formaction="showallgenres">Показать каталог</button></p>
+    <p><button formaction="authors.jsp">Авторы</button></p>
+</form>
+
+<form >
+    <p><button formaction="books.jsp">Книги</button></p>
 </form>
 
 <form>
-    <p><button formaction="addgenre">Добавить жанр</button></p>
-</form>
-
-<form >
-    <p><button formaction="findgenre">Найти жанр по ID</button></p>
-</form>
-
-<form >
-    <p><button formaction="editgenre">Изменить жанр</button></p>
-</form>
-
-<form >
-    <p><button formaction="removegenre">Удалить жанр</button></p>
+    <p><button formaction="genres.jsp">Жанры</button></p>
 </form>
 
 </body>

@@ -5,11 +5,11 @@
 </head>
 <body>
 
-<h1>Изменение жанра</h1>
+<h1>Поиск жанра по id</h1>
 
 <form method="POST">
     <p><input placeholder="ID" name="id"></p>
-    <p><button formaction="findgenre">Найти жанр по ID</button></p>
+    <p><button formaction="findgenre">Найти</button></p>
 </form>
 
 </body>

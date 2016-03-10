@@ -5,11 +5,11 @@
 </head>
 <body>
 
-<h1>Изменение жанра</h1>
+<h1>Редактирование книги</h1>
 
 <form method="POST">
-    <p><input placeholder="ID" name="id"></p>
-    <p><button formaction="removegenre">Удалить</button></p>
+
+    <p><button formaction="editbook">Изменить</button></p>
 </form>
 
 </body>

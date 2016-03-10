@@ -5,18 +5,18 @@ import java.util.ArrayList;
 public class Book {
 
     private int id;
-    private String tittle;
+    private String title;
     private int pubYear;
     private int genereId;
     private ArrayList<Integer> authorsIdList;
 
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getPubYear() {
@@ -55,7 +55,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", tittle='" + tittle + '\'' +
+                ", title='" + title + '\'' +
                 ", pubYear=" + pubYear +
                 ", genereId=" + genereId +
                 ", authorsIdList=" + authorsIdList +
