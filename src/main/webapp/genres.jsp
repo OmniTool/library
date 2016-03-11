@@ -30,6 +30,10 @@
     <p><button formaction="removegenre">Удалить жанр</button></p>
 </form>
 
+<form >
+    <p><button formaction="findgenrebyname">Найти жанр по названию</button></p>
+</form>
+
 
 </body>
 </html>

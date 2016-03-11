@@ -134,4 +134,8 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
             connection.close();
         }
     }
+
+
+
+
 }
