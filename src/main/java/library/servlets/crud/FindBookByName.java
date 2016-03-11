@@ -1,7 +1,6 @@
 package library.servlets.crud;
 
 import library.dao.DBManagerBook;
-import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
 import library.dao.entities.Book;
 
@@ -15,14 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
-@WebServlet("/findbook")
-public class FindBook extends HttpServlet {
+@WebServlet("/findbookbyname")
+public class FindBookByName extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("findbook.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("findbookbyname.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -37,26 +37,24 @@ public class FindBook extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        int id = 0;
+        String title = null;
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            id = Integer.parseInt(ids[0]); //���������...... �����?
+        String[] titles = req.getParameterValues("title");
+        if (titles.length != 0) {
+            title = titles[0]; //���������...... ������ ������?
         }
 
         //���������.............
         boolean isValid = true;
 
-        if (isValid && id != 0) {
+        if (isValid && title != null) {
             ManagerDAO dao = new DBManagerBook();
             try {
-                Book book = (Book) dao.getEntityById(id);
-
-                out.print("Find: " + id + "<br>");
-                out.print("id = " + book.getId() + "<br>");
-                out.print("title = " + book.getTitle() + "<br>");
-                out.print("pubYear = " + book.getPubYear() + "<br>");
-                out.print("genereId = " + book.getGenereId() + "<br>");
+                List<Book> list = dao.getAll();
+                for (Book book : list) {
+                    if (book.getTitle().toUpperCase().contains(title.toUpperCase()))
+                        out.print("<p>" + book + "</p>");
+                }
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
             } catch (NamingException e) {

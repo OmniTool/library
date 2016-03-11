@@ -1,8 +1,9 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerGenre;
+import library.dao.DBManagerBook;
+import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
-import library.dao.entities.Genre;
+import library.dao.entities.Book;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -21,13 +22,14 @@ public class AddBook extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("addgenre.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -35,28 +37,33 @@ public class AddBook extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        Genre genre = new Genre();
+        Book book = new Book();
 
         String[] titles = req.getParameterValues("title");
         if (titles.length != 0) {
-            genre.setTitle(titles[0]);
+            book.setTitle(titles[0]);
         }
-        String[] descriptions = req.getParameterValues("description");
-        if (descriptions.length != 0) {
-            genre.setDescription(descriptions[0]);
+        String[] pubYears = req.getParameterValues("pubYear");
+        if (pubYears.length != 0) {
+            book.setPubYear(Integer.parseInt(pubYears[0]));
+        }
+        String[] genereIds = req.getParameterValues("genereId");
+        if (genereIds.length != 0) {
+            book.setGenereId(Integer.parseInt(genereIds[0]));
         }
 
-        //‚‡ÎË‰‡ˆËˇ.............
+        //–≤–∞–ª–∏–¥–∞—Ü–∏—è.............
         boolean isValid = true;
 
         if (isValid) {
-            ManagerDAO dao = new DBManagerGenre();
+            ManagerDAO dao = new DBManagerBook();
             try {
-                dao.create(genre);
+                dao.create(book);
 
                 out.print("Add:<br>");
-                out.print("title = " + genre.getTitle() + "<br>");
-                out.print("description = " + genre.getDescription() + "<br>");
+                out.print("title = " + book.getTitle() + "<br>");
+                out.print("pubYear = " + book.getPubYear() + "<br>");
+                out.print("genereId = " + book.getGenereId() + "<br>");
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
             } catch (NamingException e) {
@@ -70,8 +77,8 @@ public class AddBook extends HttpServlet {
             out.print("</body>");
             out.print("</html>");
 
-            //req.setAttribute("genre", genre);
-
+            //req.setAttribute("book", book);
+            out.close();
         }
     }
 }

@@ -29,6 +29,7 @@ public class FindGenreByName extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -40,19 +41,19 @@ public class FindGenreByName extends HttpServlet {
 
         String[] titles = req.getParameterValues("title");
         if (titles.length != 0) {
-            title = titles[0]; //проверить...... пустая строка?
+            title = titles[0]; //
         }
 
-        //валидация.............
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
         boolean isValid = true;
 
-        if (isValid && !(title ==null)) {
+        if (isValid && title != null) {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 List<Genre> list = dao.getAll();
                 for (Genre genre : list) {
-                    if (genre.getTitle().contains(title))
-                        out.print("<p>" + genre.getId() + ": " + genre.getTitle() + " (" + genre.getDescription() + ")" + "</p>");
+                    if (genre.getTitle().toUpperCase().contains(title.toUpperCase()))
+                        out.print("<p>" + genre + "</p>");
                 }
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
@@ -65,6 +66,8 @@ public class FindGenreByName extends HttpServlet {
 
             out.print("</body>");
             out.print("</html>");
+
+            out.close();
         }
     }
 }

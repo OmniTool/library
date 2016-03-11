@@ -8,7 +8,9 @@
 <h1>Добавление книги</h1>
 
 <form method="POST">
-
+    <p><input placeholder="Название книги" name="title"></p>
+    <p><input placeholder="Год публикации" name="pubYear"></p>
+    <p><input placeholder="Жанр id" name="genereId"></p>
     <p><button formaction="addbook">Добавить</button></p>
 </form>
 

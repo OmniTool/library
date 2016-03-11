@@ -1,8 +1,9 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerGenre;
+import library.dao.DBManagerBook;
+import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
-import library.dao.entities.Genre;
+import library.dao.entities.Book;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ public class ShowAllBooks extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -29,13 +31,13 @@ public class ShowAllBooks extends HttpServlet {
         + "<title>Библиотека</title>"
         + "</head>");
         out.print("<body>");
-        out.print("<h1>Genres</h1>");
+        out.print("<h1>Books</h1>");
 
-        ManagerDAO dao = new DBManagerGenre();
+        ManagerDAO dao = new DBManagerBook();
         try {
-            List<Genre> list = dao.getAll();
-            for (Genre genre : list) {
-                out.print("<p>" + genre.getId() + ": " + genre.getTitle() + " (" + genre.getDescription() + ")" + "</p>");
+            List<Book> list = dao.getAll();
+            for (Book book : list) {
+                out.print("<p>" + book + "</p>");
             }
         } catch (SQLException e) {
             out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
@@ -47,6 +49,8 @@ public class ShowAllBooks extends HttpServlet {
 
         out.print("</body>");
         out.print("</html>");
+
+        out.close();
     }
 
 

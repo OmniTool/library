@@ -5,16 +5,13 @@
 </head>
 <body>
 
-<h1>Редактирование автора</h1>
+<h1>Поиск автора по ФИО</h1>
 
 <form method="POST">
-    <p><input placeholder="ID" name="id"></p>
     <p><input placeholder="Фамилия" name="secondName"></p>
     <p><input placeholder="Имя" name="firstName"></p>
     <p><input placeholder="Отчество" name="middleName"></p>
-    <p><input placeholder="Год рождения" name="birthYear"></p>
-    <p><input placeholder="Биография" name="biography"></p>
-    <p><button formaction="editauthor">Изменить</button></p>
+    <p><button formaction="findauthorbyname">Найти</button></p>
 </form>
 
 </body>

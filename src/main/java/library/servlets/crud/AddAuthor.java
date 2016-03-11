@@ -1,8 +1,9 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerGenre;
+import library.dao.DBManagerAuthor;
+import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
-import library.dao.entities.Genre;
+import library.dao.entities.Author;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -21,13 +22,14 @@ public class AddAuthor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("addgenre.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -35,28 +37,44 @@ public class AddAuthor extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        Genre genre = new Genre();
+        Author author = new Author();
 
-        String[] titles = req.getParameterValues("title");
-        if (titles.length != 0) {
-            genre.setTitle(titles[0]);
+        String[] secondNames = req.getParameterValues("secondName"); // –ø–æ–º–µ–Ω—è—Ç—å
+        if (secondNames.length != 0) {
+            author.setSecondName(secondNames[0]);
         }
-        String[] descriptions = req.getParameterValues("description");
-        if (descriptions.length != 0) {
-            genre.setDescription(descriptions[0]);
+        String[] firstNames = req.getParameterValues("firstName");
+        if (firstNames.length != 0) {
+            author.setFirstName(firstNames[0]);
+        }
+        String[] middleNames = req.getParameterValues("middleName");
+        if (middleNames.length != 0) {
+            author.setMiddleName(middleNames[0]);
+        }
+        String[] birthYears = req.getParameterValues("birthYear");
+        if (birthYears.length != 0) {
+            author.setBirthYear(Integer.parseInt(birthYears[0]));
+        }
+        String[] biographys = req.getParameterValues("biography");
+        if (biographys.length != 0) {
+            author.setBiography(biographys[0]);
         }
 
-        //‚‡ÎË‰‡ˆËˇ.............
+        //–≤–∞–ª–∏–¥–∞—Ü–∏—è.............
         boolean isValid = true;
 
         if (isValid) {
-            ManagerDAO dao = new DBManagerGenre();
+            ManagerDAO dao = new DBManagerAuthor();
             try {
-                dao.create(genre);
+                dao.create(author);
 
                 out.print("Add:<br>");
-                out.print("title = " + genre.getTitle() + "<br>");
-                out.print("description = " + genre.getDescription() + "<br>");
+                out.print("secondName = " + author.getSecondName() + "<br>");
+                out.print("firstName = " + author.getFirstName() + "<br>");
+                out.print("middleName = " + author.getMiddleName() + "<br>");
+                out.print("birthYear = " + author.getBirthYear() + "<br>");
+                out.print("biography = " + author.getBiography() + "<br>");
+
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
             } catch (NamingException e) {
@@ -70,8 +88,11 @@ public class AddAuthor extends HttpServlet {
             out.print("</body>");
             out.print("</html>");
 
-            //req.setAttribute("genre", genre);
 
+
+            //req.setAttribute("author", author);
+
+            out.close();
         }
     }
 }

@@ -1,8 +1,9 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerGenre;
+import library.dao.DBManagerAuthor;
+import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
-import library.dao.entities.Genre;
+import library.dao.entities.Author;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +22,7 @@ public class FindAuthor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -46,14 +47,16 @@ public class FindAuthor extends HttpServlet {
         boolean isValid = true;
 
         if (isValid && id != 0) {
-            ManagerDAO dao = new DBManagerGenre();
+            ManagerDAO dao = new DBManagerAuthor();
             try {
-                Genre genre = (Genre) dao.getEntityById(id);
+                Author author = (Author) dao.getEntityById(id);
 
                 out.print("Find: " + id + "<br>");
-                out.print("id = " + genre.getId() + "<br>");
-                out.print("title = " + genre.getTitle() + "<br>");
-                out.print("description = " + genre.getDescription() + "<br>");
+                out.print("secondName = " + author.getSecondName() + "<br>");
+                out.print("firstName = " + author.getFirstName() + "<br>");
+                out.print("middleName = " + author.getMiddleName() + "<br>");
+                out.print("birthYear = " + author.getBirthYear() + "<br>");
+                out.print("biography = " + author.getBiography() + "<br>");
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
             } catch (NamingException e) {
@@ -65,6 +68,8 @@ public class FindAuthor extends HttpServlet {
 
             out.print("</body>");
             out.print("</html>");
+
+            out.close();
         }
     }
 }

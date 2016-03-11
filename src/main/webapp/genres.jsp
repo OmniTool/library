@@ -18,9 +18,9 @@
     <p><button formaction="addgenre">Добавить жанр</button></p>
 </form>
 
-<form >
-    <p><button formaction="findgenre">Найти жанр по ID</button></p>
-</form>
+<%--<form >--%>
+    <%--<p><button formaction="findgenre">Найти жанр по ID</button></p>--%>
+<%--</form>--%>
 
 <form >
     <p><button formaction="editgenre">Изменить жанр</button></p>

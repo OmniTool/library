@@ -29,6 +29,7 @@ public class RemoveGenre extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -64,6 +65,8 @@ public class RemoveGenre extends HttpServlet {
 
             out.print("</body>");
             out.print("</html>");
+
+            out.close();
         }
     }
 }

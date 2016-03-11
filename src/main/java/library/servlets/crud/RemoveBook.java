@@ -1,8 +1,9 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerGenre;
+import library.dao.DBManagerBook;
+import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
-import library.dao.entities.Genre;
+import library.dao.entities.Book;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -21,13 +22,14 @@ public class RemoveBook extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("deletegenre.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("deletebook.jsp");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -35,23 +37,23 @@ public class RemoveBook extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        Genre genre = new Genre();
+        Book book = new Book();
 
         String[] ids = req.getParameterValues("id");
         if (ids.length != 0) {
-            genre.setId(Integer.parseInt(ids[0])); //проверить...... число?
+            book.setId(Integer.parseInt(ids[0])); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅ?
         }
 
-        //валидация.............
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
         boolean isValid = true;
 
         if (isValid) {
-            ManagerDAO dao = new DBManagerGenre();
+            ManagerDAO dao = new DBManagerBook();
             try {
-                dao.delete(genre);
+                dao.delete(book);
 
                 out.print("Delete:<br>");
-                out.print("id = " + genre.getId() + "<br>");
+                out.print("id = " + book.getId() + "<br>");
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
             } catch (NamingException e) {
@@ -63,6 +65,8 @@ public class RemoveBook extends HttpServlet {
 
             out.print("</body>");
             out.print("</html>");
+
+            out.close();
         }
     }
 }

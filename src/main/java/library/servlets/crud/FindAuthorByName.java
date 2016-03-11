@@ -1,7 +1,6 @@
 package library.servlets.crud;
 
 import library.dao.DBManagerAuthor;
-import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
 import library.dao.entities.Author;
 
@@ -15,21 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
-@WebServlet("/editauthor")
-public class EditAuthor extends HttpServlet {
+@WebServlet("/findauthorbyname")
+public class FindAuthorByName extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("findauthorbyname.jsp");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -37,49 +37,58 @@ public class EditAuthor extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        Author author = new Author();
-
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            author.setId(Integer.parseInt(ids[0])); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅ?
-        }
+        String secondName = null;
+        String firstName = null;
+        String middleName = null;
 
         String[] secondNames = req.getParameterValues("secondName");
         if (secondNames.length != 0) {
-            author.setSecondName(secondNames[0]);
+            secondName = secondNames[0]; //проверить...... пустая строка?
         }
         String[] firstNames = req.getParameterValues("firstName");
         if (firstNames.length != 0) {
-            author.setFirstName(firstNames[0]);
+            firstName = firstNames[0]; //проверить...... пустая строка?
         }
         String[] middleNames = req.getParameterValues("middleName");
         if (middleNames.length != 0) {
-            author.setMiddleName(middleNames[0]);
-        }
-        String[] birthYears = req.getParameterValues("birthYear");
-        if (birthYears.length != 0) {
-            author.setBirthYear(Integer.parseInt(birthYears[0]));
-        }
-        String[] biographys = req.getParameterValues("biography");
-        if (biographys.length != 0) {
-            author.setBiography(biographys[0]);
+            middleName = middleNames[0]; //проверить...... пустая строка?
         }
 
-        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
+        //валидация.............
         boolean isValid = true;
 
-        if (isValid) {
+        if (isValid && (secondName != null || firstName != null || middleName != null)) { //дописать
             ManagerDAO dao = new DBManagerAuthor();
-            try {
-                dao.update(author);
+            int count = 0;
 
-                out.print("Edit:<br>");
-                out.print("id = " + author.getId() + "<br>");
-                out.print("secondName = " + author.getSecondName() + "<br>");
-                out.print("firstName = " + author.getFirstName() + "<br>");
-                out.print("middleName = " + author.getMiddleName() + "<br>");
-                out.print("birthYear = " + author.getBirthYear() + "<br>");
-                out.print("biography = " + author.getBiography() + "<br>");
+            try {
+                List<Author> list = dao.getAll();
+
+                for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
+                    Author current = iter.next();
+                    if (!current.getSecondName().toUpperCase().contains(secondName.toUpperCase())) {
+                        iter.remove();
+                    }
+                }
+
+                for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
+                    Author current = iter.next();
+                    if (!current.getFirstName().toUpperCase().contains(firstName.toUpperCase())) {
+                        iter.remove();
+                    }
+                }
+
+                for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
+                    Author current = iter.next();
+                    if (!current.getMiddleName().toUpperCase().contains(middleName.toUpperCase())) {
+                        iter.remove();
+                    }
+                }
+
+                for (Author author : list) {
+                    out.print("<p>" + author + "</p>");
+                }
+
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
             } catch (NamingException e) {

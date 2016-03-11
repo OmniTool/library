@@ -29,6 +29,7 @@ public class AddGenre extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -47,7 +48,7 @@ public class AddGenre extends HttpServlet {
             genre.setDescription(descriptions[0]);
         }
 
-        //валидация.............
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
         boolean isValid = true;
 
         if (isValid) {
@@ -72,7 +73,7 @@ public class AddGenre extends HttpServlet {
             out.print("</html>");
 
             //req.setAttribute("genre", genre);
-
+            out.close();
         }
     }
 }

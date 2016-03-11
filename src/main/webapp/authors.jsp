@@ -18,9 +18,9 @@
     <p><button formaction="addauthor">Добавить автора</button></p>
 </form>
 
-<form >
-    <p><button formaction="findauthor">Найти автора по ID</button></p>
-</form>
+<%--<form >--%>
+    <%--<p><button formaction="findauthor">Найти автора по ID</button></p>--%>
+<%--</form>--%>
 
 <form >
     <p><button formaction="editauthor">Изменить автора</button></p>
@@ -30,6 +30,9 @@
     <p><button formaction="removeauthor">Удалить автора</button></p>
 </form>
 
+<form >
+    <p><button formaction="findauthorbyname">Найти автора по ФИО</button></p>
+</form>
 
 </body>
 </html>

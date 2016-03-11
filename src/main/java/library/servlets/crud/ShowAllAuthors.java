@@ -1,8 +1,9 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerGenre;
+import library.dao.DBManagerAuthor;
+import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
-import library.dao.entities.Genre;
+import library.dao.entities.Author;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -21,21 +22,22 @@ public class ShowAllAuthors extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
         out.print("<html>");
         out.print("<head>"
-        + "<title>¡Ë·ÎËÓÚÂÍ‡</title>"
+        + "<title>–ë–∏–±–ª–∏–æ—Ç–µ–∫–∞</title>"
         + "</head>");
         out.print("<body>");
-        out.print("<h1>Genres</h1>");
+        out.print("<h1>Authors</h1>");
 
-        ManagerDAO dao = new DBManagerGenre();
+        ManagerDAO dao = new DBManagerAuthor();
         try {
-            List<Genre> list = dao.getAll();
-            for (Genre genre : list) {
-                out.print("<p>" + genre.getId() + ": " + genre.getTitle() + " (" + genre.getDescription() + ")" + "</p>");
+            List<Author> list = dao.getAll();
+            for (Author author : list) {
+                out.print("<p>" + author + "</p>");
             }
         } catch (SQLException e) {
             out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
@@ -47,6 +49,8 @@ public class ShowAllAuthors extends HttpServlet {
 
         out.print("</body>");
         out.print("</html>");
+
+        out.close();
     }
 
 

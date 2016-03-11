@@ -29,6 +29,7 @@ public class EditGenre extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -40,7 +41,7 @@ public class EditGenre extends HttpServlet {
 
         String[] ids = req.getParameterValues("id");
         if (ids.length != 0) {
-            genre.setId(Integer.parseInt(ids[0])); //проверить...... число?
+            genre.setId(Integer.parseInt(ids[0])); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅ?
         }
 
         String[] titles = req.getParameterValues("title");
@@ -53,7 +54,7 @@ public class EditGenre extends HttpServlet {
             genre.setDescription(descriptions[0]);
         }
 
-        //валидация.............
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
         boolean isValid = true;
 
         if (isValid) {
@@ -76,6 +77,8 @@ public class EditGenre extends HttpServlet {
 
             out.print("</body>");
             out.print("</html>");
+
+            out.close();
         }
     }
 }

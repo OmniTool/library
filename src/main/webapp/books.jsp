@@ -18,9 +18,9 @@
     <p><button formaction="addbook">Добавить книгу</button></p>
 </form>
 
-<form >
-    <p><button formaction="findbook">Найти книгу по ID</button></p>
-</form>
+<%--<form >--%>
+    <%--<p><button formaction="findbook">Найти книгу по ID</button></p>--%>
+<%--</form>--%>
 
 <form >
     <p><button formaction="editbook">Изменить книгу</button></p>
@@ -30,6 +30,9 @@
     <p><button formaction="removebook">Удалить книгу</button></p>
 </form>
 
+<form >
+    <p><button formaction="findbookbyname">Найти книгу по заглавию</button></p>
+</form>
 
 </body>
 </html>

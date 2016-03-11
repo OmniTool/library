@@ -124,6 +124,7 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
     public void create(Book entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO books (title, pub_year, genere_id) VALUES (?, ?, ?)";
+        //String statementSQL = "INSERT INTO books (title, pub_year, genere_id) VALUES ('русская книга из запроса eeeeeelllkkkkk', 1234, 55)";
 
         Connection connection = null;
 

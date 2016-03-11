@@ -29,6 +29,7 @@ public class FindGenre extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -40,10 +41,10 @@ public class FindGenre extends HttpServlet {
 
         String[] ids = req.getParameterValues("id");
         if (ids.length != 0) {
-            id = Integer.parseInt(ids[0]); //проверить...... число?
+            id = Integer.parseInt(ids[0]); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅ?
         }
 
-        //валидация.............
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
         boolean isValid = true;
 
         if (isValid && id != 0) {
@@ -66,6 +67,8 @@ public class FindGenre extends HttpServlet {
 
             out.print("</body>");
             out.print("</html>");
+
+            out.close();
         }
     }
 }
