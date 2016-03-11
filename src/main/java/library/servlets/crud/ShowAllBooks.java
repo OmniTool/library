@@ -28,7 +28,7 @@ public class ShowAllBooks extends HttpServlet {
         out.print("<!DOCTYPE html>");
         out.print("<html>");
         out.print("<head>"
-        + "<title>Библиотека</title>"
+        + "<title>Р‘РёР±Р»РёРѕС‚РµРєР°</title>"
         + "</head>");
         out.print("<body>");
         out.print("<h1>Books</h1>");

@@ -41,10 +41,10 @@ public class RemoveGenre extends HttpServlet {
 
         String[] ids = req.getParameterValues("id");
         if (ids.length != 0) {
-            genre.setId(Integer.parseInt(ids[0])); //проверить...... число?
+            genre.setId(Integer.parseInt(ids[0])); //РїСЂРѕРІРµСЂРёС‚СЊ...... С‡РёСЃР»Рѕ?
         }
 
-        //валидация.............
+        //РІР°Р»РёРґР°С†РёСЏ.............
         boolean isValid = true;
 
         if (isValid) {
