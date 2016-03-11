@@ -6,6 +6,7 @@ import library.dao.ManagerDAO;
 import library.dao.entities.Author;
 
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,36 +22,21 @@ public class ShowAllAuthors extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<head>"
-        + "<title>Библиотека</title>"
-        + "</head>");
-        out.print("<body>");
-        out.print("<h1>Authors</h1>");
 
         ManagerDAO dao = new DBManagerAuthor();
         try {
             List<Author> list = dao.getAll();
-            for (Author author : list) {
-                out.print("<p>" + author + "</p>");
-            }
+            req.setAttribute("list", list);
+            req.setAttribute("pageName", "Авторы");
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
+            dispatcher.forward(req, resp);
+
         } catch (SQLException e) {
-            out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
+            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
         } catch (NamingException e) {
-            out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
+            System.out.println(e.getMessage());
         }
-
-        out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-        out.print("</body>");
-        out.print("</html>");
-
-        out.close();
     }
 
 
