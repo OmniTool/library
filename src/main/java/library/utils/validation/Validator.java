@@ -5,7 +5,8 @@ import library.dao.ManagerDAO;
 
 public abstract class Validator <E> {
 
-    public abstract boolean exists(E entity);
+    public abstract boolean isIdExists(E entity);
+    public abstract boolean isNameExists(E entity);
 
     public abstract boolean canBeUpdated(E entity);
     public abstract boolean canBeCreated(E entity);

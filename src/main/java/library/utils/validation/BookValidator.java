@@ -9,7 +9,12 @@ public class BookValidator extends Validator<Book> {
     private static ManagerDAO dao = new DBManagerBook();
 
     @Override
-    public boolean exists(Book entity) {
+    public boolean isIdExists(Book entity) {
+        return false;
+    }
+
+    @Override
+    public boolean isNameExists(Book entity) {
         return false;
     }
 
