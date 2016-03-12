@@ -1,6 +1,33 @@
 package library.utils.validation;
 
-public interface Validator <E> {
-    boolean exists(E entity);
-    boolean isUsed(E entity);
+import library.dao.DBManagerGenre;
+import library.dao.ManagerDAO;
+
+public abstract class Validator <E> {
+
+    public abstract boolean exists(E entity);
+
+    public abstract boolean canBeUpdated(E entity);
+    public abstract boolean canBeCreated(E entity);
+    public abstract boolean canBeDeleted(E entity);
+
+    protected abstract boolean isUsed(E entity);
+
+    private boolean isIntegerNumber(String str) { //число, +число, -число
+        if (str == null)
+            return false;
+        return str.matches("^-?\\+?\\d+$");
+    }
+
+    private boolean isEmptyString(String str) {
+        if(str == null || str.equals("")) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
 }

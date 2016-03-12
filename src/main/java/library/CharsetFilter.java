@@ -7,15 +7,12 @@ import javax.servlet.http.*;
 
 public class CharsetFilter implements Filter
 {
-    // кодировка
+
     private String encoding;
 
     public void init(FilterConfig config) throws ServletException
     {
-        // читаем из конфигурации
         encoding = config.getInitParameter("requestEncoding");
-
-        // если не установлена - устанавливаем Cp1251
         if( encoding==null ) encoding="UTF-8";
     }
 
