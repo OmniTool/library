@@ -8,7 +8,7 @@
 <h1>Добавление жанра</h1>
 
 <form method="POST">
-    <p><input placeholder="Название жанра" name="title"></p>
+    <p><input placeholder="Название жанра" name="title" required></p>
     <p><input placeholder="Описание жанра" name="description"></p>
     <p><button formaction="addgenre">Добавить</button></p>
 </form>
