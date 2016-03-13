@@ -151,7 +151,10 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
         }
     }
 
-
+    @Override
+    public Author searchEntityByName(Author entity) throws SQLException, NamingException {
+        return null;
+    }
 
 
 }

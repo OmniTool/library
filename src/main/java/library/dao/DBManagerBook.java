@@ -142,4 +142,9 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
             connection.close();
         }
     }
+
+    @Override
+    public Book searchEntityByName(Book entity) throws SQLException, NamingException {
+        return null;
+    }
 }

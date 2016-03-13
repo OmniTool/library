@@ -12,5 +12,6 @@ public interface ManagerDAO <E, K> {
     void update(E entity) throws SQLException, NamingException;
     void delete(E entity) throws SQLException, NamingException;
     void create(E entity) throws SQLException, NamingException;
+    E searchEntityByName(E entity) throws SQLException, NamingException;
 
 }

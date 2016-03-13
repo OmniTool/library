@@ -135,7 +135,10 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
         }
     }
 
-
+    @Override
+    public Genre searchEntityByName(Genre entity) throws SQLException, NamingException {
+        return null;
+    }
 
 
 }
