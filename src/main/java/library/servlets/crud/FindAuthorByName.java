@@ -30,6 +30,7 @@ public class FindAuthorByName extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -43,21 +44,21 @@ public class FindAuthorByName extends HttpServlet {
 
         String[] secondNames = req.getParameterValues("secondName");
         if (secondNames.length != 0) {
-            secondName = secondNames[0]; //проверить...... пустая строка?
+            secondName = secondNames[0]; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ?
         }
         String[] firstNames = req.getParameterValues("firstName");
         if (firstNames.length != 0) {
-            firstName = firstNames[0]; //проверить...... пустая строка?
+            firstName = firstNames[0]; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ?
         }
         String[] middleNames = req.getParameterValues("middleName");
         if (middleNames.length != 0) {
-            middleName = middleNames[0]; //проверить...... пустая строка?
+            middleName = middleNames[0]; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ?
         }
 
-        //валидация.............
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
         boolean isValid = true;
 
-        if (isValid && (secondName != null || firstName != null || middleName != null)) { //дописать
+        if (isValid && (secondName != null || firstName != null || middleName != null)) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             ManagerDAO dao = new DBManagerAuthor();
             int count = 0;
 

@@ -29,6 +29,7 @@ public class FindAuthor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         out.print("<!DOCTYPE html>");
@@ -40,10 +41,10 @@ public class FindAuthor extends HttpServlet {
 
         String[] ids = req.getParameterValues("id");
         if (ids.length != 0) {
-            id = Integer.parseInt(ids[0]); //проверить...... число?
+            id = Integer.parseInt(ids[0]); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...... пїЅпїЅпїЅпїЅпїЅ?
         }
 
-        //валидация.............
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.............
         boolean isValid = true;
 
         if (isValid && id != 0) {
