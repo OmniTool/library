@@ -9,8 +9,8 @@
 
 <form method="POST">
     <p><input placeholder="ID" name="id"></p>
-    <p><input placeholder="Новое название жанра" name="title" required></p>
-    <p><input placeholder="Новое описание жанра" name="description"></p>
+    <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern=".*" title="Введите название жанра"></p>
+    <p><input type="text" value="" placeholder="Описание жанра" name="description"></p>
     <p><button formaction="editgenre">Изменить</button></p>
 </form>
 
