@@ -1,5 +1,7 @@
 package library.dao;
 
+import library.dao.entities.BookAuthor;
+
 import javax.naming.NamingException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

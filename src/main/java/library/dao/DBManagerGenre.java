@@ -27,11 +27,11 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Genre genre = new Genre();
-                genre.setId(rs.getInt("id"));
-                genre.setTitle(rs.getString("title"));
-                genre.setDescription(rs.getString("description"));
-                list.add(genre);
+                Genre entity = new Genre();
+                entity.setId(rs.getInt("id"));
+                entity.setTitle(rs.getString("title"));
+                entity.setDescription(rs.getString("description"));
+                list.add(entity);
             }
             return list;
         } finally {
@@ -46,7 +46,7 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
     public Genre getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM genres WHERE id = ?";
-        Genre genre = new Genre();
+        Genre entity = new Genre();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -59,11 +59,11 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
 
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                genre.setId(rs.getInt("id"));
-                genre.setTitle(rs.getString("title"));
-                genre.setDescription(rs.getString("description"));
+                entity.setId(rs.getInt("id"));
+                entity.setTitle(rs.getString("title"));
+                entity.setDescription(rs.getString("description"));
             }
-            return genre;
+            return entity;
         } finally {
             if (connection != null)
                 connection.close();

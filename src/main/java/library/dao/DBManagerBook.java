@@ -30,12 +30,12 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Book book = new Book();
-                book.setId(rs.getInt("id"));
-                book.setTitle(rs.getString("title"));
-                book.setPubYear(rs.getInt("pub_year"));
-                book.setGenereId(rs.getInt("genere_id"));
-                list.add(book);
+                Book entity = new Book();
+                entity.setId(rs.getInt("id"));
+                entity.setTitle(rs.getString("title"));
+                entity.setPubYear(rs.getInt("pub_year"));
+                entity.setGenereId(rs.getInt("genere_id"));
+                list.add(entity);
             }
             return list;
         } finally {
@@ -50,7 +50,7 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
     public Book getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM books WHERE id = ?";
-        Book book = new Book();
+        Book entity = new Book();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -63,12 +63,12 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
 
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                book.setId(rs.getInt("id"));
-                book.setTitle(rs.getString("title"));
-                book.setPubYear(rs.getInt("pub_year"));
-                book.setGenereId(rs.getInt("genere_id"));
+                entity.setId(rs.getInt("id"));
+                entity.setTitle(rs.getString("title"));
+                entity.setPubYear(rs.getInt("pub_year"));
+                entity.setGenereId(rs.getInt("genere_id"));
             }
-            return book;
+            return entity;
         } finally {
             if (connection != null)
                 connection.close();

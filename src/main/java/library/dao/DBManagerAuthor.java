@@ -31,15 +31,15 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Author author = new Author();
-                author.setId(rs.getInt("id"));
-                author.setSecondName(rs.getString("second_name"));
-                author.setFirstName(rs.getString("first_name"));
-                author.setMiddleName(rs.getString("middle_name"));
-                author.setBirthYear(rs.getInt("birth_year"));
-                author.setBiography(rs.getString("biography"));
+                Author entity = new Author();
+                entity.setId(rs.getInt("id"));
+                entity.setSecondName(rs.getString("second_name"));
+                entity.setFirstName(rs.getString("first_name"));
+                entity.setMiddleName(rs.getString("middle_name"));
+                entity.setBirthYear(rs.getInt("birth_year"));
+                entity.setBiography(rs.getString("biography"));
 
-                list.add(author);
+                list.add(entity);
             }
             return list;
         } finally {
@@ -54,7 +54,7 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
     public Author getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM authors WHERE id = ?";
-        Author author = new Author();
+        Author entity = new Author();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -67,14 +67,14 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
 
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                author.setId(rs.getInt("id"));
-                author.setSecondName(rs.getString("second_name"));
-                author.setFirstName(rs.getString("first_name"));
-                author.setMiddleName(rs.getString("middle_name"));
-                author.setBirthYear(rs.getInt("birth_year"));
-                author.setBiography(rs.getString("biography"));
+                entity.setId(rs.getInt("id"));
+                entity.setSecondName(rs.getString("second_name"));
+                entity.setFirstName(rs.getString("first_name"));
+                entity.setMiddleName(rs.getString("middle_name"));
+                entity.setBirthYear(rs.getInt("birth_year"));
+                entity.setBiography(rs.getString("biography"));
             }
-            return author;
+            return entity;
         } finally {
             if (connection != null)
                 connection.close();

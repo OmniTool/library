@@ -1,8 +1,10 @@
 package library.servlets.crud;
 
+import library.dao.DBManagerAuthor;
 import library.dao.DBManagerBook;
 import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
+import library.dao.entities.Author;
 import library.dao.entities.Book;
 import library.utils.validation.BookValidator;
 import library.utils.validation.Validator;
@@ -17,12 +19,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/addbook")
 public class AddBook extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ManagerDAO dao = new DBManagerAuthor();
+        try {
+            List<Author> list = dao.getAll();
+            req.setAttribute("sourceList", list);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+        } catch (NamingException e) {
+            System.out.println(e.getMessage());
+        }
+        req.setAttribute("resultList", new ArrayList<Book>());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
         dispatcher.forward(req, resp);
