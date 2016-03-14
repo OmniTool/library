@@ -39,20 +39,20 @@ public class AddBook extends HttpServlet {
 
         Book book = new Book();
 
-        String[] titles = req.getParameterValues("title");
-        if (titles.length != 0) {
-            book.setTitle(titles[0]);
-        }
-        String[] pubYears = req.getParameterValues("pubYear");
-        if (pubYears.length != 0) {
-            book.setPubYear(Integer.parseInt(pubYears[0]));
-        }
-        String[] genereIds = req.getParameterValues("genereId");
-        if (genereIds.length != 0) {
-            book.setGenereId(Integer.parseInt(genereIds[0]));
-        }
+        String  titles = req.getParameter("title");
 
-        //валидация.............
+            book.setTitle(titles );
+
+        String  pubYears = req.getParameter("pubYear");
+
+            book.setPubYear(Integer.parseInt(pubYears ));
+
+        String  genereIds = req.getParameter("genereId");
+
+            book.setGenereId(Integer.parseInt(genereIds ));
+
+
+
         boolean isValid = true;
 
         if (isValid) {
@@ -77,7 +77,6 @@ public class AddBook extends HttpServlet {
             out.print("</body>");
             out.print("</html>");
 
-            //req.setAttribute("book", book);
             out.close();
         }
     }

@@ -39,33 +39,32 @@ public class EditAuthor extends HttpServlet {
 
         Author author = new Author();
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            author.setId(Integer.parseInt(ids[0])); //���������...... �����?
-        }
+        String ids = req.getParameter("id");
 
-        String[] secondNames = req.getParameterValues("secondName");
-        if (secondNames.length != 0) {
-            author.setSecondName(secondNames[0]);
-        }
-        String[] firstNames = req.getParameterValues("firstName");
-        if (firstNames.length != 0) {
-            author.setFirstName(firstNames[0]);
-        }
-        String[] middleNames = req.getParameterValues("middleName");
-        if (middleNames.length != 0) {
-            author.setMiddleName(middleNames[0]);
-        }
-        String[] birthYears = req.getParameterValues("birthYear");
-        if (birthYears.length != 0) {
-            author.setBirthYear(Integer.parseInt(birthYears[0]));
-        }
-        String[] biographys = req.getParameterValues("biography");
-        if (biographys.length != 0) {
-            author.setBiography(biographys[0]);
-        }
+            author.setId(Integer.parseInt(ids));
 
-        //���������.............
+        String secondNames = req.getParameter("secondName");
+        
+            author.setSecondName(secondNames);
+        
+        String firstNames = req.getParameter("firstName");
+        
+            author.setFirstName(firstNames);
+        
+        String middleNames = req.getParameter("middleName");
+        
+            author.setMiddleName(middleNames);
+        
+        String birthYears = req.getParameter("birthYear");
+        
+            author.setBirthYear(Integer.parseInt(birthYears));
+        
+        String biographys = req.getParameter("biography");
+        
+            author.setBiography(biographys);
+        
+
+
         boolean isValid = true;
 
         if (isValid) {

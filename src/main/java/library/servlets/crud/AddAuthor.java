@@ -39,28 +39,28 @@ public class AddAuthor extends HttpServlet {
 
         Author author = new Author();
 
-        String[] secondNames = req.getParameterValues("secondName"); // поменять
-        if (secondNames.length != 0) {
-            author.setSecondName(secondNames[0]);
-        }
-        String[] firstNames = req.getParameterValues("firstName");
-        if (firstNames.length != 0) {
-            author.setFirstName(firstNames[0]);
-        }
-        String[] middleNames = req.getParameterValues("middleName");
-        if (middleNames.length != 0) {
-            author.setMiddleName(middleNames[0]);
-        }
-        String[] birthYears = req.getParameterValues("birthYear");
-        if (birthYears.length != 0) {
-            author.setBirthYear(Integer.parseInt(birthYears[0]));
-        }
-        String[] biographys = req.getParameterValues("biography");
-        if (biographys.length != 0) {
-            author.setBiography(biographys[0]);
-        }
+        String secondNames = req.getParameter("secondName"); // поменять
 
-        //валидация.............
+            author.setSecondName(secondNames);
+
+        String firstNames = req.getParameter("firstName");
+
+            author.setFirstName(firstNames);
+
+        String middleNames = req.getParameter("middleName");
+
+            author.setMiddleName(middleNames);
+
+        String birthYears = req.getParameter("birthYear");
+
+            author.setBirthYear(Integer.parseInt(birthYears));
+
+        String biographys = req.getParameter("biography");
+
+            author.setBiography(biographys);
+
+
+
         boolean isValid = true;
 
         if (isValid) {
@@ -87,10 +87,6 @@ public class AddAuthor extends HttpServlet {
 
             out.print("</body>");
             out.print("</html>");
-
-
-
-            //req.setAttribute("author", author);
 
             out.close();
         }

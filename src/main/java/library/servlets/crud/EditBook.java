@@ -39,23 +39,22 @@ public class EditBook extends HttpServlet {
 
         Book book = new Book();
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            book.setId(Integer.parseInt(ids[0])); //���������...... �����?
-        }
+        String ids = req.getParameter("id");
 
-        String[] titles = req.getParameterValues("title");
-        if (titles.length != 0) {
-            book.setTitle(titles[0]);
-        }
-        String[] pubYears = req.getParameterValues("pubYear");
-        if (pubYears.length != 0) {
-            book.setPubYear(Integer.parseInt(pubYears[0]));
-        }
-        String[] genereIds = req.getParameterValues("genereId");
-        if (genereIds.length != 0) {
-            book.setGenereId(Integer.parseInt(genereIds[0]));
-        }
+            book.setId(Integer.parseInt(ids));
+
+        String titles = req.getParameter("title");
+
+            book.setTitle(titles);
+
+        String pubYears = req.getParameter("pubYear");
+
+            book.setPubYear(Integer.parseInt(pubYears));
+
+        String genereIds = req.getParameter("genereId");
+
+            book.setGenereId(Integer.parseInt(genereIds));
+
 
         //���������.............
         boolean isValid = true;

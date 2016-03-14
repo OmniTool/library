@@ -39,16 +39,16 @@ public class AddGenre extends HttpServlet {
 
         Genre genre = new Genre();
 
-        String[] titles = req.getParameterValues("title");
-        if (titles.length != 0) {
-            genre.setTitle(titles[0]);
-        }
-        String[] descriptions = req.getParameterValues("description");
-        if (descriptions.length != 0) {
-            genre.setDescription(descriptions[0]);
-        }
+        String  titles = req.getParameter("title");
 
-        //���������.............
+            genre.setTitle(titles );
+
+        String  descriptions = req.getParameter("description");
+
+            genre.setDescription(descriptions );
+
+
+
         boolean isValid = true;
 
         if (isValid) {
@@ -72,7 +72,6 @@ public class AddGenre extends HttpServlet {
             out.print("</body>");
             out.print("</html>");
 
-            //req.setAttribute("genre", genre);
             out.close();
         }
     }

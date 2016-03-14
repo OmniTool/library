@@ -39,20 +39,18 @@ public class EditGenre extends HttpServlet {
 
         Genre genre = new Genre();
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            genre.setId(Integer.parseInt(ids[0])); //���������...... �����?
-        }
+        String ids = req.getParameter("id");
 
-        String[] titles = req.getParameterValues("title");
-        if (titles.length != 0) {
-            genre.setTitle(titles[0]);
-        }
+            genre.setId(Integer.parseInt(ids)); 
 
-        String[] descriptions = req.getParameterValues("description");
-        if (descriptions.length != 0) {
-            genre.setDescription(descriptions[0]);
-        }
+        String titles = req.getParameter("title");
+
+            genre.setTitle(titles);
+
+        String descriptions = req.getParameter("description");
+
+            genre.setDescription(descriptions);
+
 
         //���������.............
         boolean isValid = true;

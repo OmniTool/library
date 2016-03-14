@@ -39,12 +39,12 @@ public class RemoveBook extends HttpServlet {
 
         Book book = new Book();
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            book.setId(Integer.parseInt(ids[0])); //���������...... �����?
-        }
+        String ids = req.getParameter("id");
 
-        //���������.............
+            book.setId(Integer.parseInt(ids));
+
+
+
         boolean isValid = true;
 
         if (isValid) {

@@ -39,12 +39,12 @@ public class RemoveGenre extends HttpServlet {
 
         Genre genre = new Genre();
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            genre.setId(Integer.parseInt(ids[0])); //проверить...... число?
-        }
+        String ids = req.getParameter("id");
 
-        //валидация.............
+            genre.setId(Integer.parseInt(ids));
+
+
+
         boolean isValid = true;
 
         if (isValid) {

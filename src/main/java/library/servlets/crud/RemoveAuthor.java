@@ -39,12 +39,12 @@ public class RemoveAuthor extends HttpServlet {
 
         Author author = new Author();
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            author.setId(Integer.parseInt(ids[0])); //���������...... �����?
-        }
+        String ids = req.getParameter("id");
 
-        //���������.............
+            author.setId(Integer.parseInt(ids));
+
+
+
         boolean isValid = true;
 
         if (isValid) {

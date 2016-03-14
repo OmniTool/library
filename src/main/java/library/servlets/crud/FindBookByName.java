@@ -39,12 +39,12 @@ public class FindBookByName extends HttpServlet {
 
         String title = null;
 
-        String[] titles = req.getParameterValues("title");
-        if (titles.length != 0) {
-            title = titles[0]; //���������...... ������ ������?
-        }
+        String titles = req.getParameter("title");
 
-        //���������.............
+            title = titles;
+
+
+
         boolean isValid = true;
 
         if (isValid && title != null) {

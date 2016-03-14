@@ -42,20 +42,20 @@ public class FindAuthorByName extends HttpServlet {
         String firstName = null;
         String middleName = null;
 
-        String[] secondNames = req.getParameterValues("secondName");
-        if (secondNames.length != 0) {
-            secondName = secondNames[0]; //���������...... ������ ������?
-        }
-        String[] firstNames = req.getParameterValues("firstName");
-        if (firstNames.length != 0) {
-            firstName = firstNames[0]; //���������...... ������ ������?
-        }
-        String[] middleNames = req.getParameterValues("middleName");
-        if (middleNames.length != 0) {
-            middleName = middleNames[0]; //���������...... ������ ������?
-        }
+        String secondNames = req.getParameter("secondName");
 
-        //���������.............
+            secondName = secondNames;
+
+        String firstNames = req.getParameter("firstName");
+
+            firstName = firstNames;
+
+        String middleNames = req.getParameter("middleName");
+
+            middleName = middleNames;
+
+
+
         boolean isValid = true;
 
         if (isValid && (secondName != null || firstName != null || middleName != null)) { //��������

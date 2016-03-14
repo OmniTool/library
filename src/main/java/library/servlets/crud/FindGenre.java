@@ -39,12 +39,12 @@ public class FindGenre extends HttpServlet {
 
         int id = 0;
 
-        String[] ids = req.getParameterValues("id");
-        if (ids.length != 0) {
-            id = Integer.parseInt(ids[0]); //���������...... �����?
-        }
+        String ids = req.getParameter("id");
 
-        //���������.............
+            id = Integer.parseInt(ids);
+
+
+
         boolean isValid = true;
 
         if (isValid && id != 0) {
