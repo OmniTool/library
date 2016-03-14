@@ -16,8 +16,6 @@
             <p class="centred"><a href="authors.jsp" class="menu">Авторы</a></p>
             <p class="centred"><a href="books.jsp" class="menu">Книги</a></p>
             <p class="centred"><a href="genres.jsp" class="menu">Жанры</a></p>
-            <p>____</p>
-            <p>____</p>
             <p class="centred"><h1>Библиотека</h1></p>
         </div>
     </div>

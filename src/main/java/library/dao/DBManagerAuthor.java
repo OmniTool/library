@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
@@ -152,8 +153,31 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
     }
 
     @Override
-    public Author searchEntityByName(Author entity) throws SQLException, NamingException {
-        return null;
+    public List<Author> searchEntityByName(Author entity) throws SQLException, NamingException {
+        List<Author> list = getAll();
+
+        for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
+            Author current = iter.next();
+            if (!current.getSecondName().toUpperCase().contains(entity.getSecondName().toUpperCase())) {
+                iter.remove();
+            }
+        }
+
+        for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
+            Author current = iter.next();
+            if (!current.getFirstName().toUpperCase().contains(entity.getFirstName().toUpperCase())) {
+                iter.remove();
+            }
+        }
+
+        for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
+            Author current = iter.next();
+            if (!current.getMiddleName().toUpperCase().contains(entity.getMiddleName().toUpperCase())) {
+                iter.remove();
+            }
+        }
+
+        return list;
     }
 
 

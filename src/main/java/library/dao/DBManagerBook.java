@@ -144,7 +144,37 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
     }
 
     @Override
-    public Book searchEntityByName(Book entity) throws SQLException, NamingException {
-        return null;
+    public List<Book> searchEntityByName(Book entity) throws SQLException, NamingException {
+
+        String statementSQL = "SELECT * FROM books WHERE title LIKE ?";
+        List<Book> list = new ArrayList<>();
+
+        Connection connection = null;
+        ResultSet rs = null;
+
+        try {
+            connection = connector.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+
+            preparedStatement.setString(1, "%" + entity.getTitle() + "%");
+
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Book book = new Book();
+                book.setId(rs.getInt("id"));
+                book.setTitle(rs.getString("title"));
+                book.setPubYear(rs.getInt("pub_year"));
+                book.setGenereId(rs.getInt("genere_id"));
+                list.add(book);
+            }
+            return list;
+        } finally {
+            if (connection != null)
+                connection.close();
+            if (rs != null)
+                rs.close();
+        }
     }
+
+
 }

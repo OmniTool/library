@@ -37,23 +37,21 @@ public class FindBookByName extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        String title = null;
+        Book book = new Book();
 
         String titles = req.getParameter("title");
 
-            title = titles;
-
+            book.setTitle(titles );
 
 
         boolean isValid = true;
 
-        if (isValid && title != null) {
+        if (isValid && book.getTitle() != null) {
             ManagerDAO dao = new DBManagerBook();
             try {
-                List<Book> list = dao.getAll();
-                for (Book book : list) {
-                    if (book.getTitle().toUpperCase().contains(title.toUpperCase()))
-                        out.print("<p>" + book + "</p>");
+                List<Book> list = dao.searchEntityByName(book);
+                for (Book boo : list) {
+                        out.print("<p>" + boo + "</p>");
                 }
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");

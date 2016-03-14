@@ -37,23 +37,22 @@ public class FindGenreByName extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        String title = null;
+        Genre genre = new Genre();
 
         String titles = req.getParameter("title");
 
-            title = titles;
+            genre.setTitle(titles );
 
 
 
         boolean isValid = true;
 
-        if (isValid && title != null) {
+        if (isValid && genre.getTitle() != null) {
             ManagerDAO dao = new DBManagerGenre();
             try {
-                List<Genre> list = dao.getAll();
-                for (Genre genre : list) {
-                    if (genre.getTitle().toUpperCase().contains(title.toUpperCase()))
-                        out.print("<p>" + genre + "</p>");
+                List<Genre> list = dao.searchEntityByName(genre);
+                for (Genre genr : list) {
+                        out.print("<p>" + genr + "</p>");
                 }
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");

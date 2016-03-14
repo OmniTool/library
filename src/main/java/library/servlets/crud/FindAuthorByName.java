@@ -38,56 +38,34 @@ public class FindAuthorByName extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        String secondName = null;
-        String firstName = null;
-        String middleName = null;
+        Author author = new Author();
 
-        String secondNames = req.getParameter("secondName");
+        String secondNames = req.getParameter("secondName"); // поменять
 
-            secondName = secondNames;
+        author.setSecondName(secondNames);
 
         String firstNames = req.getParameter("firstName");
 
-            firstName = firstNames;
+        author.setFirstName(firstNames);
 
         String middleNames = req.getParameter("middleName");
 
-            middleName = middleNames;
+        author.setMiddleName(middleNames);
 
 
 
         boolean isValid = true;
 
-        if (isValid && (secondName != null || firstName != null || middleName != null)) { //��������
+        if (isValid && (author.getSecondName() != null || author.getFirstName() != null || author.getMiddleName() != null)) { //��������
             ManagerDAO dao = new DBManagerAuthor();
             int count = 0;
 
             try {
-                List<Author> list = dao.getAll();
 
-                for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
-                    Author current = iter.next();
-                    if (!current.getSecondName().toUpperCase().contains(secondName.toUpperCase())) {
-                        iter.remove();
-                    }
-                }
+                List<Author> list = dao.searchEntityByName(author);
 
-                for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
-                    Author current = iter.next();
-                    if (!current.getFirstName().toUpperCase().contains(firstName.toUpperCase())) {
-                        iter.remove();
-                    }
-                }
-
-                for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
-                    Author current = iter.next();
-                    if (!current.getMiddleName().toUpperCase().contains(middleName.toUpperCase())) {
-                        iter.remove();
-                    }
-                }
-
-                for (Author author : list) {
-                    out.print("<p>" + author + "</p>");
+                for (Author auth : list) {
+                    out.print("<p>" + auth + "</p>");
                 }
 
             } catch (SQLException e) {

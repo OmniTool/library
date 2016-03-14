@@ -136,8 +136,34 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
     }
 
     @Override
-    public Genre searchEntityByName(Genre entity) throws SQLException, NamingException {
-        return null;
+    public List<Genre> searchEntityByName(Genre entity) throws SQLException, NamingException {
+        String statementSQL = "SELECT * FROM genres WHERE title LIKE ?";
+        List<Genre> list = new ArrayList<>();
+
+        Connection connection = null;
+        ResultSet rs = null;
+
+        try {
+            connection = connector.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+
+            preparedStatement.setString(1, "%" + entity.getTitle() + "%");
+
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Genre genre = new Genre();
+                genre.setId(rs.getInt("id"));
+                genre.setTitle(rs.getString("title"));
+                genre.setDescription(rs.getString("description"));
+                list.add(genre);
+            }
+            return list;
+        } finally {
+            if (connection != null)
+                connection.close();
+            if (rs != null)
+                rs.close();
+        }
     }
 
 
