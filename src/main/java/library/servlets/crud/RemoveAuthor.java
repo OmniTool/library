@@ -4,6 +4,8 @@ import library.dao.DBManagerAuthor;
 import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
 import library.dao.entities.Author;
+import library.utils.validation.AuthorValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -45,9 +47,9 @@ public class RemoveAuthor extends HttpServlet {
 
 
 
-        boolean isValid = true;
+        Validator validator = new AuthorValidator();
 
-        if (isValid) {
+        if (validator.canBeDeleted(author)) {
             ManagerDAO dao = new DBManagerAuthor();
             try {
                 dao.delete(author);

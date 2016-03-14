@@ -10,31 +10,31 @@ public class AuthorValidator extends Validator<Author> {
 
     @Override
     public boolean isIdExists(Author entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isNameExists(Author entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeUpdated(Author entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeCreated(Author entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeDeleted(Author entity) {
-        return false;
+        return true;
     }
 
     @Override
     protected boolean isUsed(Author entity) {
-        return false;
+        return true;
     }
 }

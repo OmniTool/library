@@ -3,6 +3,8 @@ package library.servlets.crud;
 import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 import library.dao.entities.Genre;
+import library.utils.validation.GenreValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -49,9 +51,9 @@ public class AddGenre extends HttpServlet {
 
 
 
-        boolean isValid = true;
+        Validator validator = new GenreValidator();
 
-        if (isValid) {
+        if (validator.canBeCreated(genre)) {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 dao.create(genre);

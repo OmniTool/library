@@ -4,6 +4,8 @@ import library.dao.DBManagerAuthor;
 import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
 import library.dao.entities.Author;
+import library.utils.validation.AuthorValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -60,10 +62,9 @@ public class AddAuthor extends HttpServlet {
             author.setBiography(biographys);
 
 
+        Validator validator = new AuthorValidator();
 
-        boolean isValid = true;
-
-        if (isValid) {
+        if (validator.canBeCreated(author)) {
             ManagerDAO dao = new DBManagerAuthor();
             try {
                 dao.create(author);

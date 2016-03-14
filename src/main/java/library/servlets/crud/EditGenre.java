@@ -3,6 +3,8 @@ package library.servlets.crud;
 import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 import library.dao.entities.Genre;
+import library.utils.validation.GenreValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -52,10 +54,9 @@ public class EditGenre extends HttpServlet {
             genre.setDescription(descriptions);
 
 
-        //���������.............
-        boolean isValid = true;
+        Validator validator = new GenreValidator();
 
-        if (isValid) {
+        if (validator.canBeUpdated(genre)) {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 dao.update(genre);

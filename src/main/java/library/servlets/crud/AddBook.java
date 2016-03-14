@@ -4,6 +4,8 @@ import library.dao.DBManagerBook;
 import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
 import library.dao.entities.Book;
+import library.utils.validation.BookValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -53,9 +55,9 @@ public class AddBook extends HttpServlet {
 
 
 
-        boolean isValid = true;
+        Validator validator = new BookValidator();
 
-        if (isValid) {
+        if (validator.canBeCreated(book)) {
             ManagerDAO dao = new DBManagerBook();
             try {
                 dao.create(book);

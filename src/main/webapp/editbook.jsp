@@ -13,6 +13,7 @@
     <p><input type="text" value="" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ"></p>
     <p><input placeholder="Жанр id" name="genereId"></p>
     <p><button formaction="editbook">Изменить</button></p>
+
 </form>
 
 </body>

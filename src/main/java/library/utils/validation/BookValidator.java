@@ -10,31 +10,31 @@ public class BookValidator extends Validator<Book> {
 
     @Override
     public boolean isIdExists(Book entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isNameExists(Book entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeUpdated(Book entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeCreated(Book entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeDeleted(Book entity) {
-        return false;
+        return true;
     }
 
     @Override
     protected boolean isUsed(Book entity) {
-        return false;
+        return true;
     }
 }

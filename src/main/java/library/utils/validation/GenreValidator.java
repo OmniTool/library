@@ -12,31 +12,31 @@ public class GenreValidator extends Validator<Genre> {
 
     @Override
     public boolean isIdExists(Genre entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isNameExists(Genre entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeUpdated(Genre entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeCreated(Genre entity) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canBeDeleted(Genre entity) {
-        return false;
+        return true;
     }
 
     @Override
     protected boolean isUsed(Genre entity) {
-        return false;
+        return true;
     }
 }

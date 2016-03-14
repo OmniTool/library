@@ -4,6 +4,8 @@ import library.dao.DBManagerAuthor;
 import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
 import library.dao.entities.Author;
+import library.utils.validation.AuthorValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -62,12 +64,12 @@ public class EditAuthor extends HttpServlet {
         String biographys = req.getParameter("biography");
         
             author.setBiography(biographys);
-        
 
 
-        boolean isValid = true;
 
-        if (isValid) {
+        Validator validator = new AuthorValidator();
+
+        if (validator.canBeUpdated(author)) {
             ManagerDAO dao = new DBManagerAuthor();
             try {
                 dao.update(author);

@@ -4,6 +4,8 @@ import library.dao.DBManagerBook;
 import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
 import library.dao.entities.Book;
+import library.utils.validation.BookValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -56,10 +58,9 @@ public class EditBook extends HttpServlet {
             book.setGenereId(Integer.parseInt(genereIds));
 
 
-        //���������.............
-        boolean isValid = true;
+        Validator validator = new BookValidator();
 
-        if (isValid) {
+        if (validator.canBeUpdated(book)) {
             ManagerDAO dao = new DBManagerBook();
             try {
                 dao.update(book);
