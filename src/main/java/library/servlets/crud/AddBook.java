@@ -1,11 +1,10 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerAuthor;
+import library.dao.*;
 import library.dao.DBManagerBook;
-import library.dao.DBManagerBook;
-import library.dao.ManagerDAO;
 import library.dao.entities.Author;
 import library.dao.entities.Book;
+import library.dao.entities.Genre;
 import library.utils.validation.BookValidator;
 import library.utils.validation.Validator;
 
@@ -29,15 +28,18 @@ public class AddBook extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ManagerDAO dao = new DBManagerAuthor();
+        ManagerDAO daoGenre = new DBManagerGenre();
         try {
-            List<Author> list = dao.getAll();
-            req.setAttribute("sourceList", list);
+            List<Author> listAuthor = dao.getAll();
+            req.setAttribute("sourceListAuthor", listAuthor);
+            List<Genre> listGenre = daoGenre.getAll();
+            req.setAttribute("sourceListGenre", listGenre);
         } catch (SQLException e) {
             System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
-        req.setAttribute("resultList", new ArrayList<Book>());
+        req.setAttribute("resultListAuthor", new ArrayList<Author>());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
 
@@ -70,6 +72,10 @@ public class AddBook extends HttpServlet {
         String  genereIds = req.getParameter("genereId");
 
             book.setGenereId(Integer.parseInt(genereIds ));
+
+        String[] authorsIds = req.getParameterValues("resultListAuthor");
+
+
 
 
 
