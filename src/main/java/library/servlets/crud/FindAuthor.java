@@ -20,32 +20,12 @@ import java.util.List;
 @WebServlet("/findauthor")
 public class FindAuthor extends HttpServlet {
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor.jsp");
-//        req.setAttribute("pageName", "");
-//        dispatcher.forward(req, resp);
-//    }
-
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setContentType("text/html");
-//        resp.setCharacterEncoding("UTF-8");
-//        PrintWriter out = resp.getWriter();
-//
-//        out.print("<!DOCTYPE html>");
-//        out.print("<html>");
-//        out.print("<body>");
-//        out.print("<h1></h1>");
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//
 
         int id = 0;
-
         String ids = req.getParameter("id");
-
             id = Integer.parseInt(ids);
-
-
 
         boolean isValid = true;
 
@@ -55,35 +35,22 @@ public class FindAuthor extends HttpServlet {
 
             //ManagerDAO daoTest = new DBManagerBook();
             try {
-                Author author = (Author) dao.getEntityById(id);
-                author.setBooksList(subDao.searchBooksByAuthor(author));
+                Author entity = (Author) dao.getEntityById(id);
+                entity.setBooksList(subDao.searchBooksByAuthor(entity));
                 //author.setBooksList(daoTest.getAll());
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
-                req.setAttribute("entity", author);
-                req.setAttribute("pageName", author.getFirstName() + author.getSecondName() + author.getMiddleName());
+                req.setAttribute("entity", entity);
+                req.setAttribute("pageName", entity.getFirstName() + entity.getSecondName() + entity.getMiddleName());
                 req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
-                req.setAttribute("list", author.getBooksList());
+                req.setAttribute("list", entity.getBooksList());
                 dispatcher.forward(req, resp);
-
-//                out.print("Find: " + id + "<br>");
-//                out.print("secondName = " + author.getSecondName() + "<br>");
-//                out.print("firstName = " + author.getFirstName() + "<br>");
-//                out.print("middleName = " + author.getMiddleName() + "<br>");
-//                out.print("birthYear = " + author.getBirthYear() + "<br>");
-//                out.print("biography = " + author.getBiography() + "<br>");
+//
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
-            }
-
-//            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-//
-//            out.print("</body>");
-//            out.print("</html>");
-//
-//            out.close();
+            }//
         }
     }
 }

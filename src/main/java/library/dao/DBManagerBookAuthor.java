@@ -169,7 +169,6 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 list.add(dao.getEntityById(id));
-
             }
             return list;
         } finally {
@@ -182,7 +181,33 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     public List<Author> searchAuthorsByBook(Book entity) throws SQLException, NamingException {
-        return null;
+        List<Integer> listId = new ArrayList<>();
+        List<Author> list = new ArrayList<>();
+        DBManagerAuthor dao = new DBManagerAuthor();
+
+        String statementSQL = "SELECT * FROM books_authors WHERE book_id = ?";
+
+        Connection connection = null;
+        ResultSet rs = null;
+
+        try {
+            connection = connector.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+
+            preparedStatement.setInt(1, entity.getId());
+
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                list.add(dao.getEntityById(id));
+            }
+            return list;
+        } finally {
+            if (connection != null)
+                connection.close();
+            if (rs != null)
+                rs.close();
+        }
     }
 
 

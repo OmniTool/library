@@ -16,6 +16,8 @@
         <p class="centred menu"><a href="books">Книги</a></p>
         <p class="centred menu"><a href="genres">Жанры</a></p>
         <p class="topspace"><h1 class="leftspace">Библиотека</h1></p>
+        <p class="topspace"><img class="logo" src="images/logo.png" alt=""></p>
+
     </div>
 </div>
 
