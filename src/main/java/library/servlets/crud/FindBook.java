@@ -19,16 +19,16 @@ import java.sql.SQLException;
 @WebServlet("/findbook")
 public class FindBook extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("findbook.jsp");
+//        req.setAttribute("pageName", "");
+//        dispatcher.forward(req, resp);
+//    }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("findbook.jsp");
-        req.setAttribute("pageName", "");
-        dispatcher.forward(req, resp);
-    }
-
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
