@@ -2,6 +2,8 @@ package library.dao;
 
 import library.dao.connectors.DBConnector;
 import library.dao.connectors.DBConnectorPool;
+import library.dao.entities.Author;
+import library.dao.entities.Book;
 import library.dao.entities.BookAuthor;
 
 import javax.naming.NamingException;
@@ -142,35 +144,44 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     @Override
     public List<BookAuthor> searchEntityByName(BookAuthor entity) throws SQLException, NamingException {
 
-//        String statementSQL = "SELECT * FROM books_authors WHERE title LIKE ?";
-//        List<BookAuthor> list = new ArrayList<>();
 //
-//        Connection connection = null;
-//        ResultSet rs = null;
-//
-//        try {
-//            connection = connector.getConnection();
-//            PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-//
-//            preparedStatement.setString(1, "%" + entity.getTitle() + "%");
-//
-//            rs = preparedStatement.executeQuery();
-//            while (rs.next()) {
-//                BookAuthor book = new BookAuthor();
-//                book.setId(rs.getInt("id"));
-//                book.setTitle(rs.getString("title"));
-//                book.setPubYear(rs.getInt("pub_year"));
-//                book.setGenereId(rs.getInt("genere_id"));
-//                list.add(book);
-//            }
-//            return list;
-//        } finally {
-//            if (connection != null)
-//                connection.close();
-//            if (rs != null)
-//                rs.close();
-//        }
 
+        return null;
+    }
+
+    public List<Book> searchBooksByAuthor(Author entity) throws SQLException, NamingException {
+        List<Integer> listId = new ArrayList<>();
+        List<Book> list = new ArrayList<>();
+        DBManagerBook dao = new DBManagerBook();
+
+        String statementSQL = "SELECT * FROM books_authors WHERE author_id = ?";
+
+        Connection connection = null;
+        ResultSet rs = null;
+
+        try {
+            connection = connector.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+
+            preparedStatement.setInt(1, entity.getId());
+
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                list.add(dao.getEntityById(id));
+
+            }
+            return list;
+        } finally {
+            if (connection != null)
+                connection.close();
+            if (rs != null)
+                rs.close();
+        }
+
+    }
+
+    public List<Author> searchAuthorsByBook(Book entity) throws SQLException, NamingException {
         return null;
     }
 

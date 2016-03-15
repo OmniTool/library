@@ -2,6 +2,7 @@ package library.servlets.crud;
 
 import library.dao.DBManagerBook;
 import library.dao.DBManagerBook;
+import library.dao.DBManagerBookAuthor;
 import library.dao.ManagerDAO;
 import library.dao.entities.Book;
 
@@ -50,11 +51,10 @@ public class FindBook extends HttpServlet {
 
         if (isValid && id != 0) {
             ManagerDAO dao = new DBManagerBook();
+            DBManagerBookAuthor subDao = new DBManagerBookAuthor();
             try {
                 Book book = (Book) dao.getEntityById(id);
-
-
-
+                book.setAuthorsList(subDao.searchAuthorsByBook(book));
 //                out.print("Find: " + id + "<br>");
 //                out.print("id = " + book.getId() + "<br>");
 //                out.print("title = " + book.getTitle() + "<br>");

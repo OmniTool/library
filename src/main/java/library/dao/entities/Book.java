@@ -1,6 +1,7 @@
 package library.dao.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Book {
 
@@ -8,7 +9,7 @@ public class Book {
     private String title;
     private int pubYear;
     private int genereId;
-    private ArrayList<Integer> authorsIdList;
+    private List<Author> authorsList;
 
 
     public String getTitle() {
@@ -35,12 +36,12 @@ public class Book {
         this.genereId = genereId;
     }
 
-    public ArrayList<Integer> getAuthorsIdList() {
-        return authorsIdList;
+    public List<Author> getAuthorsList() {
+        return authorsList;
     }
 
-    public void setAuthorsIdList(ArrayList<Integer> authorsIdList) {
-        this.authorsIdList = authorsIdList;
+    public void setAuthorsList(List<Author> authorsIdList) {
+        this.authorsList = authorsIdList;
     }
 
     public int getId() {
@@ -58,7 +59,7 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", pubYear=" + pubYear +
                 ", genereId=" + genereId +
-                ", authorsIdList=" + authorsIdList +
+                ", authorsIdList=" + authorsList +
                 '}';
     }
 }

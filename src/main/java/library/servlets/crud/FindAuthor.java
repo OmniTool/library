@@ -1,9 +1,9 @@
 package library.servlets.crud;
 
+import library.dao.*;
 import library.dao.DBManagerAuthor;
-import library.dao.DBManagerAuthor;
-import library.dao.ManagerDAO;
 import library.dao.entities.Author;
+import library.dao.entities.Book;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/findauthor")
 public class FindAuthor extends HttpServlet {
@@ -50,13 +51,19 @@ public class FindAuthor extends HttpServlet {
 
         if (isValid && id != 0) {
             ManagerDAO dao = new DBManagerAuthor();
+            DBManagerBookAuthor subDao = new DBManagerBookAuthor();
+
+            //ManagerDAO daoTest = new DBManagerBook();
             try {
                 Author author = (Author) dao.getEntityById(id);
+                author.setBooksList(subDao.searchBooksByAuthor(author));
+                //author.setBooksList(daoTest.getAll());
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("info.jsp");
-                req.setAttribute("item", author);
-                req.setAttribute("pageName", author.getFirstName() + author.getSecondName() + author.getMiddleName());
-                req.setAttribute("breadcrumb", "<a href=\"/authors\">Авторы</a>");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
+                req.setAttribute("entity", author);
+                req.setAttribute("itemName", author.getFirstName() + author.getSecondName() + author.getMiddleName());
+                req.setAttribute("pageName", "<a href=\"/authors\">Авторы</a>");
+                req.setAttribute("list", author.getBooksList());
                 dispatcher.forward(req, resp);
 
 //                out.print("Find: " + id + "<br>");
