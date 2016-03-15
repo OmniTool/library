@@ -2,6 +2,9 @@
 <html>
 <head>
     <title></title>
+    <style>
+        <%@include file='css/style.css' %>
+    </style>
 </head>
 <body>
 
@@ -10,7 +13,7 @@
 <form method="POST">
 
     <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern=".*" title="Введите название жанра"></p>
-    <p><input type="text" value="" placeholder="Описание жанра" name="description"></p>
+    <p><textarea name="description" value="" placeholder="Описание жанра"></textarea></p>
     <p><button formaction="addgenre">Добавить</button></p>
 </form>
 

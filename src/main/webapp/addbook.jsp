@@ -26,14 +26,7 @@
     <div class="block">
         <form id="resultForm">
             <p><select size="5" name="result" class="listMulticatch" multiple>
-                <option>Выбранные авторы</option>
-                <%--<c:forEach var="item" items="${sourceList}">--%>
-                    <%--<option value="${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</option>--%>
-                <%--</c:forEach>--%>
-                <c:forEach var="item" items="${resultList}">
-                    <%--<option value="${item.key}">${item.value}</option>--%>
-                    <option value="${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</option>
-                </c:forEach>
+                <%--<option>Выбранные авторы</option>--%>
 
             </select>
         </form>
@@ -47,7 +40,7 @@
     <div class="block">
         <form id="sourceForm">
             <p><select size="5" name="source" class="listMulticatch" multiple>
-                <option>Выберите автора</option>
+                <%--<option>Выберите автора</option>--%>
                 <c:forEach var="item" items="${sourceList}">
                     <option value="${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</option>
                 </c:forEach>
@@ -76,9 +69,10 @@
 //        var option = new Option("Текст", "value", true, true);
 
         var form2 = document.forms["resultForm"];
-//        var option2 = new Option("Текст ++++++++++++++++", "999", true, true);
-        var result = form2.elements.result;
-        result.add(selectedItem);
+        var option2 = new Option("Текст ++++++++++++++++", "999", true, true);
+        var resultSelect = form2.elements.result;
+        //resultSelect.add(selectedItem);
+        resultSelect.appendChild(option2);
 
 //        tmp.add(selectedItem)
 //        selection.add(selectedItem);

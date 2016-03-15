@@ -2,6 +2,9 @@
 <html>
 <head>
     <title></title>
+    <style>
+        <%@include file='css/style.css' %>
+    </style>
 </head>
 <body>
 

@@ -3,8 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title></title>
+
+        <title></title>
+        <style>
+            <%@include file='css/style.css' %>
+        </style>
 </head>
 <body>
 <h1>Библиотека</h1>
