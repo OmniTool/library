@@ -23,6 +23,7 @@ public class FindBookByName extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("findbookbyname.jsp");
+        req.setAttribute("pageName", "");
         dispatcher.forward(req, resp);
     }
 

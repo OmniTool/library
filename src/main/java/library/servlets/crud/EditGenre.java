@@ -25,6 +25,7 @@ public class EditGenre extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
+        req.setAttribute("pageName", "");
         dispatcher.forward(req, resp);
     }
 

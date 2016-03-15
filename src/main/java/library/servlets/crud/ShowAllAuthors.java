@@ -30,6 +30,7 @@ public class ShowAllAuthors extends HttpServlet {
             req.setAttribute("pageName", "Авторы");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
+            req.setAttribute("pageName", "");
             dispatcher.forward(req, resp);
 
         } catch (SQLException e) {

@@ -25,6 +25,7 @@ public class EditBook extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("editbook.jsp");
+        req.setAttribute("pageName", "");
         dispatcher.forward(req, resp);
     }
 

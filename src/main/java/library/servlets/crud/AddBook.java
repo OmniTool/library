@@ -40,6 +40,7 @@ public class AddBook extends HttpServlet {
         req.setAttribute("resultList", new ArrayList<Book>());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
+        req.setAttribute("pageName", "");
         dispatcher.forward(req, resp);
     }
 

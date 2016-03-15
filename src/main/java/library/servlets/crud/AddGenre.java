@@ -25,6 +25,7 @@ public class AddGenre extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addgenre.jsp");
+        req.setAttribute("pageName", "");
         dispatcher.forward(req, resp);
     }
 
