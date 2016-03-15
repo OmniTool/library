@@ -30,6 +30,9 @@ public class ShowAllGenres extends HttpServlet {
             List<Genre> list = dao.getAll();
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Жанры");
+            req.setAttribute("action", "addgenre");
+            req.setAttribute("ref", "/findgenre?id=");
+
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("genrelist.jsp");
             dispatcher.forward(req, resp);

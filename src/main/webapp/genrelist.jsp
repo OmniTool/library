@@ -21,46 +21,21 @@
 
     <p>
     <form>
-        <p><button formaction="addgenre">Добавить жанр</button></p>
+        <p><button formaction="${action}">Добавить</button></p>
     </form>
     </p>
 
     <p class="topspace">
         <c:forEach var="item" items="${list}">
     <p>
-        <a href="" class="content">${item.title}</a>
+        <a href="${ref}${item.id}" class="content">${item.title}</a>
 
     </p>
     </c:forEach>
     </p>
 
 
-    <p class="topspace">
-    <div class="block">
-    <form>
-        <p><button formaction="showallgenres">Показать каталог</button></p>
-    </form>
 
-
-
-    <%--<form >--%>
-    <%--<p><button formaction="findgenre">Найти жанр по ID</button></p>--%>
-    <%--</form>--%>
-
-    <form >
-        <p><button formaction="editgenre">Изменить жанр</button></p>
-    </form>
-
-    <form >
-        <p><button formaction="removegenre">Удалить жанр</button></p>
-    </form>
-
-    <form >
-        <p><button formaction="findgenrebyname">Найти жанр по названию</button></p>
-    </form>
-
-    </div>
-    </p>
 
 </div>
 
