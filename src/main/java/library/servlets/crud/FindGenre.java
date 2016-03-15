@@ -33,7 +33,7 @@ public class FindGenre extends HttpServlet {
             try {
                 Genre entity = (Genre) dao.getEntityById(id);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
                 req.setAttribute("entity", entity);
                 req.setAttribute("pageName", entity.getTitle());
                 req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");

@@ -24,11 +24,11 @@
 
     <p>
         <div class="block">
-    <p ><h3 class="centred">Год рождения<h3></p>
-    <p class="centred content">${entity.birthYear}</p>
-    <p class="topspace"><h3 class="centred">Биография<h3></p>
-    <p class="centred content">${entity.biography}</p>
-    <p class="topspace"><h3 class="centred">Книги<h3></p>
+    <p ><h3 class="centred">Год публикации</h3></p>
+    <p class="centred">${entity.pubYear}</p>
+    <p class="topspace"><h3 class="centred">Жанр</h3></p>
+    <p class="centred">${entity.genereId}</p>
+    <p class="topspace"><h3 class="centred">Авторы</h3></p>
     <p class="centred">
         <c:forEach var="item" items="${list}">
     <p>
