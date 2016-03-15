@@ -34,7 +34,7 @@ public class ShowAllGenres extends HttpServlet {
             req.setAttribute("ref", "/findgenre?id=");
 
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("genrelist.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
             req.setAttribute("pageName", "Жанры");
             dispatcher.forward(req, resp);
 

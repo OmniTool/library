@@ -3,25 +3,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-        <title></title>
-        <style>
-            <%@include file='css/style.css' %>
-        </style>
+    <title>${pageName}</title>
+    <style>
+        <%@include file='css/style.css' %>
+    </style>
 </head>
 <body>
-<h1>Библиотека</h1>
-<h2>${pageName}</h2>
-<button formaction="">Добавить</button>
-<br><br>
 
-<c:forEach var="item" items="${list}">
+<div class="parent topspace">
+    <div class="block">
+        <p><h1 class="centred"><a href="/index.jsp">Библиотека</a></h1></p>
+        <p><h2 class="centred">${pageName}</h2></p>
+    </div>
+</div>
+
+<div class="parent big_topspace">
+
     <p>
-        <a href="">${item.secondName} ${item.firstName} ${item.middleName}</a>
-        <button formaction="">Удалить</button>
-        <button formaction="">Редактировать</button>
+    <form>
+        <p><button formaction="${action}">Добавить</button></p>
+    </form>
     </p>
-</c:forEach>
+
+    <p class="topspace">
+        <c:forEach var="item" items="${list}">
+    <p>
+        <a href="${ref}${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</a>
+    </p>
+    </c:forEach>
+    </p>
+
+
+
+
+</div>
+
+
 
 </body>
 </html>
+
+
+
+
+

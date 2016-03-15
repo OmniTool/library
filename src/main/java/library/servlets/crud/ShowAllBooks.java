@@ -21,15 +21,17 @@ import java.util.List;
 public class ShowAllBooks extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ManagerDAO dao = new DBManagerBook();
         try {
             List<Book> list = dao.getAll();
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Книги");
+            req.setAttribute("action", "addbook");
+            req.setAttribute("ref", "/findbook?id=");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("booklist.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
             req.setAttribute("pageName", "Книги");
             dispatcher.forward(req, resp);
 
