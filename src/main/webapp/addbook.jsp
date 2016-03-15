@@ -11,6 +11,7 @@
 <br>
 <br>
 <div class="parent">
+    <p><h2>Добавление книги</h2></p>
     <p>
     <div class="block">
         <form method="POST">
@@ -24,22 +25,28 @@
     <p>
     <div class="block">
         <form id="resultForm">
-            <p><select size="5" name="result" class="listMulticatch">
+            <p><select size="5" name="result" class="listMulticatch" multiple>
+                <option>Выбранные авторы</option>
+                <%--<c:forEach var="item" items="${sourceList}">--%>
+                    <%--<option value="${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</option>--%>
+                <%--</c:forEach>--%>
                 <c:forEach var="item" items="${resultList}">
                     <%--<option value="${item.key}">${item.value}</option>--%>
+                    <option value="${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</option>
                 </c:forEach>
+
             </select>
         </form>
     </div>
 
     <div class="block">
-        <p><button form="sourceForm" onclick="dataSelectAdd(this.form)"><<</button></p>
-        <p><button form="resultForm" onclick="dataSelectDelete(this.form)">>></button></p>
+        <p><button form="sourceForm" onclick="dataSelectAdd()"><<</button></p>
+        <p><button form="resultForm" onclick="dataSelectDelete()">>></button></p>
     </div>
 
     <div class="block">
         <form id="sourceForm">
-            <p><select size="5" name="source" class="listMulticatch">
+            <p><select size="5" name="source" class="listMulticatch" multiple>
                 <option>Выберите автора</option>
                 <c:forEach var="item" items="${sourceList}">
                     <option value="${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</option>
@@ -55,14 +62,61 @@
 
 
 <script>
-    function dataSelectAdd(form) {
-        var target = form.source.selectedIndex
-        var forAdd;
-        if(target) alert("Выбран автор c id: " + form.source.options[target].value)
-        if(target) forAdd = form.source.options[target].value;
+    function dataSelectAdd() {
+        var form1 = document.forms["sourceForm"];
+        var selectedItem = form1.elements.source;
+
+        for (var i = 0; i < selectedItem.options.length; i++) {
+            var option = selectedItem.options[i];
+            if(option.selected) {
+                alert( option.value );
+            }
+        }
+
+//        var option = new Option("Текст", "value", true, true);
+
+        var form2 = document.forms["resultForm"];
+//        var option2 = new Option("Текст ++++++++++++++++", "999", true, true);
+        var result = form2.elements.result;
+        result.add(selectedItem);
+
+//        tmp.add(selectedItem)
+//        selection.add(selectedItem);
+
+
+
+
+
+
+
+
+
+
+        // one select only
+//        var target = form.source.selectedIndex
+//        var forAdd;
+//        if(target) alert("Выбран автор c id: " + form.source.options[target].value)
+//        if(target) forAdd = form.source.options[target].value;
+
+        // option = new Option(text, value, defaultSelected, selected);
+        // var option = new Option("Текст", "value", true, true);
 
     }
-    //    document.getElementById('id')
+    function dataSelectDelete() {
+
+
+
+        var form2 = document.forms["resultForm"];
+        var select = form2.elements.result;
+        for (var i = 0; i < select.options.length; i++) {
+            var option = select.options[i];
+            if(option.selected) {
+                alert( option.value );
+            }
+        }
+
+
+    }
 </script>
 
 </body>
