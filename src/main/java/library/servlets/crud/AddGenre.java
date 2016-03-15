@@ -25,7 +25,7 @@ public class AddGenre extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addgenre.jsp");
-        req.setAttribute("pageName", "");
+        req.setAttribute("pageName", "Добавление жанра");
         dispatcher.forward(req, resp);
     }
 
@@ -60,6 +60,7 @@ public class AddGenre extends HttpServlet {
                 dao.create(genre);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+                //req.setAttribute("pageName", "Жанры");
                 dispatcher.forward(req, resp);
 
 

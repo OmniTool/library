@@ -25,7 +25,7 @@ public class AddAuthor extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
-        req.setAttribute("pageName", "");
+        req.setAttribute("pageName", "Добавление автора");
         dispatcher.forward(req, resp);
     }
 
@@ -71,6 +71,7 @@ public class AddAuthor extends HttpServlet {
                 dao.create(author);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+                //req.setAttribute("pageName", "Авторы");
                 dispatcher.forward(req, resp);
 
 //                out.print("Add:<br>");

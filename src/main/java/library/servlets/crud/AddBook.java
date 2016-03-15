@@ -40,7 +40,7 @@ public class AddBook extends HttpServlet {
         req.setAttribute("resultList", new ArrayList<Book>());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
-        req.setAttribute("pageName", "");
+        req.setAttribute("pageName", "Добавление ниги");
         dispatcher.forward(req, resp);
     }
 
@@ -79,6 +79,7 @@ public class AddBook extends HttpServlet {
                 dao.create(book);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("books");
+                //req.setAttribute("pageName", "Книги");
                 dispatcher.forward(req, resp);
 
 //                out.print("Add:<br>");

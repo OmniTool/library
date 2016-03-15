@@ -11,7 +11,6 @@
 <h1>Добавление автора</h1>
 
 <form method="POST">
-
     <p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите фамилию"></p>
     <p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите имя"></p>
     <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите отчество"></p>

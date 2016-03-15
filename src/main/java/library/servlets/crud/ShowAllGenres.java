@@ -35,7 +35,7 @@ public class ShowAllGenres extends HttpServlet {
 
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("genrelist.jsp");
-            req.setAttribute("pageName", "");
+            req.setAttribute("pageName", "Жанры");
             dispatcher.forward(req, resp);
 
         } catch (SQLException e) {

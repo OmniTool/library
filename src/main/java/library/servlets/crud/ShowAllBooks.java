@@ -30,7 +30,7 @@ public class ShowAllBooks extends HttpServlet {
             req.setAttribute("pageName", "Книги");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("booklist.jsp");
-            req.setAttribute("pageName", "");
+            req.setAttribute("pageName", "Книги");
             dispatcher.forward(req, resp);
 
         } catch (SQLException e) {
