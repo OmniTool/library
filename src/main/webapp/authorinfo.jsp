@@ -16,7 +16,7 @@
 <div class="parent topspace">
     <div class="block">
         <p><h1 class="centred"><a href="/index.jsp">Библиотека</a></h1></p>
-        <p><h2 class="centred">${pageName} > ${itemName}</h2></p>
+        <p><h2 class="centred">${bread} > ${pageName}</h2></p>
     </div>
 </div>
 

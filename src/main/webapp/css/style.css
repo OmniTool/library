@@ -133,6 +133,10 @@ a:active {
     margin-top: 30px;
 }
 
+.leftspace {
+    margin-left: 10px;
+}
+
 .big_topspace {
     margin-top: 150px;
 }

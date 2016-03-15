@@ -61,8 +61,8 @@ public class FindAuthor extends HttpServlet {
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
                 req.setAttribute("entity", author);
-                req.setAttribute("itemName", author.getFirstName() + author.getSecondName() + author.getMiddleName());
-                req.setAttribute("pageName", "<a href=\"/authors\">Авторы</a>");
+                req.setAttribute("pageName", author.getFirstName() + author.getSecondName() + author.getMiddleName());
+                req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
                 req.setAttribute("list", author.getBooksList());
                 dispatcher.forward(req, resp);
 

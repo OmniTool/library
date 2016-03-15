@@ -9,7 +9,14 @@
 </head>
 <body>
 
-<div class="parent">
+<div class="parent topspace">
+    <div class="block">
+        <p><h1 class="centred"><a href="/index.jsp">Библиотека</a></h1></p>
+        <p><h2 class="centred">${bread} > ${pageName}</h2></p>
+    </div>
+</div>
+
+<div class="parent big_topspace">
     <p><h2>Добавление книги</h2></p>
     <p>
     <div class="block">
