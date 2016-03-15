@@ -29,7 +29,6 @@
         <c:forEach var="item" items="${list}">
     <p>
         <a href="${ref}${item.id}" class="content">${item.title}</a>
-
     </p>
     </c:forEach>
     </p>

@@ -29,14 +29,14 @@ public class FindAuthor extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
+//        resp.setContentType("text/html");
+//        resp.setCharacterEncoding("UTF-8");
+//        PrintWriter out = resp.getWriter();
+//
+//        out.print("<!DOCTYPE html>");
+//        out.print("<html>");
+//        out.print("<body>");
+//        out.print("<h1></h1>");
 
         int id = 0;
 
@@ -53,25 +53,30 @@ public class FindAuthor extends HttpServlet {
             try {
                 Author author = (Author) dao.getEntityById(id);
 
-                out.print("Find: " + id + "<br>");
-                out.print("secondName = " + author.getSecondName() + "<br>");
-                out.print("firstName = " + author.getFirstName() + "<br>");
-                out.print("middleName = " + author.getMiddleName() + "<br>");
-                out.print("birthYear = " + author.getBirthYear() + "<br>");
-                out.print("biography = " + author.getBiography() + "<br>");
-            } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
-            } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("info.jsp");
+                req.setAttribute("item", author);
+                req.setAttribute("pageName", author.getFirstName() + author.getSecondName() + author.getMiddleName());
+                req.setAttribute("breadcrumb", "<a href=\"/authors\">Авторы</a>");
+                dispatcher.forward(req, resp);
 
+//                out.print("Find: " + id + "<br>");
+//                out.print("secondName = " + author.getSecondName() + "<br>");
+//                out.print("firstName = " + author.getFirstName() + "<br>");
+//                out.print("middleName = " + author.getMiddleName() + "<br>");
+//                out.print("birthYear = " + author.getBirthYear() + "<br>");
+//                out.print("biography = " + author.getBiography() + "<br>");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
             }
 
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
+//            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
+//
+//            out.print("</body>");
+//            out.print("</html>");
+//
+//            out.close();
         }
     }
 }
