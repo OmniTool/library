@@ -30,14 +30,14 @@ public class AddAuthor extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
+//        resp.setContentType("text/html");
+//        resp.setCharacterEncoding("UTF-8");
+//        PrintWriter out = resp.getWriter();
+//
+//        out.print("<!DOCTYPE html>");
+//        out.print("<html>");
+//        out.print("<body>");
+//        out.print("<h1></h1>");
 
         Author author = new Author();
 
@@ -69,27 +69,29 @@ public class AddAuthor extends HttpServlet {
             try {
                 dao.create(author);
 
-                out.print("Add:<br>");
-                out.print("secondName = " + author.getSecondName() + "<br>");
-                out.print("firstName = " + author.getFirstName() + "<br>");
-                out.print("middleName = " + author.getMiddleName() + "<br>");
-                out.print("birthYear = " + author.getBirthYear() + "<br>");
-                out.print("biography = " + author.getBiography() + "<br>");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+                dispatcher.forward(req, resp);
+
+//                out.print("Add:<br>");
+//                out.print("secondName = " + author.getSecondName() + "<br>");
+//                out.print("firstName = " + author.getFirstName() + "<br>");
+//                out.print("middleName = " + author.getMiddleName() + "<br>");
+//                out.print("birthYear = " + author.getBirthYear() + "<br>");
+//                out.print("biography = " + author.getBiography() + "<br>");
 
             } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
+                System.out.println(e.getMessage());
             } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
-
+                System.out.println(e.getMessage());
             }
 
 
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
+//            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
+//
+//            out.print("</body>");
+//            out.print("</html>");
+//
+//            out.close();
         }
     }
 }

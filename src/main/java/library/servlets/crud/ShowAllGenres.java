@@ -16,11 +16,14 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/showallgenres")
+@WebServlet("/genres")
 public class ShowAllGenres extends HttpServlet {
 
+
+
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ManagerDAO dao = new DBManagerGenre();
         try {

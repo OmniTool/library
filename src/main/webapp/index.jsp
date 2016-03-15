@@ -10,18 +10,16 @@
 </head>
 <body>
 
-    <div class="parent">
-        <br>
-        <br>
-        <div class="block">
-            <p class="centred"><a href="authors.jsp" class="menu">Авторы</a></p>
-            <p class="centred"><a href="books.jsp" class="menu">Книги</a></p>
-            <p class="centred"><a href="genres.jsp" class="menu">Жанры</a></p>
-            <p class="centred"><h1>Библиотека</h1></p>
-        </div>
+<div class="parent topspace">
+    <div class="block">
+        <p class="centred menu"><a href="authors">Авторы</a></p>
+        <p class="centred menu"><a href="books">Книги</a></p>
+        <p class="centred menu"><a href="genres">Жанры</a></p>
+        <p class="topspace"><h1 class="centred">Библиотека</h1></p>
     </div>
+</div>
 
-    <br><br>
+<br><br>
 
 
 

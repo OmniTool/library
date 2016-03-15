@@ -30,14 +30,14 @@ public class AddGenre extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
+//        resp.setContentType("text/html");
+//        resp.setCharacterEncoding("UTF-8");
+//        PrintWriter out = resp.getWriter();
+//
+//        out.print("<!DOCTYPE html>");
+//        out.print("<html>");
+//        out.print("<body>");
+//        out.print("<h1></h1>");
 
         Genre genre = new Genre();
 
@@ -58,23 +58,27 @@ public class AddGenre extends HttpServlet {
             try {
                 dao.create(genre);
 
-                out.print("Add:<br>");
-                out.print("title = " + genre.getTitle() + "<br>");
-                out.print("description = " + genre.getDescription() + "<br>");
-            } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
-            } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+                dispatcher.forward(req, resp);
 
+
+
+//                out.print("Add:<br>");
+//                out.print("title = " + genre.getTitle() + "<br>");
+//                out.print("description = " + genre.getDescription() + "<br>");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
             }
 
 
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
+//            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
+//
+//            out.print("</body>");
+//            out.print("</html>");
+//
+//            out.close();
         }
     }
 }

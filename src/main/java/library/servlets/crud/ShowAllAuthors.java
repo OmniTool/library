@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/showallauthors")
+@WebServlet("/authors")
 public class ShowAllAuthors extends HttpServlet {
 
     @Override

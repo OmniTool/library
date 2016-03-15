@@ -8,8 +8,7 @@
     </style>
 </head>
 <body>
-<br>
-<br>
+
 <div class="parent">
     <p><h2>Добавление книги</h2></p>
     <p>
