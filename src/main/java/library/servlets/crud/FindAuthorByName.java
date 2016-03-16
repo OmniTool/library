@@ -46,12 +46,11 @@ public class FindAuthorByName extends HttpServlet {
 
         boolean isValid = true;
 
-        if (isValid && (author.getSecondName() != null || author.getFirstName() != null || author.getMiddleName() != null)) { //��������
+        if (isValid && (author.getSecondName() != null || author.getFirstName() != null || author.getMiddleName() != null)) {
             ManagerDAO dao = new DBManagerAuthor();
             int count = 0;
 
             try {
-
                 List<Author> list = dao.searchEntityByName(author);
 
             } catch (SQLException e) {
@@ -59,6 +58,10 @@ public class FindAuthorByName extends HttpServlet {
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
+        } else {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+            dispatcher.forward(req, resp);
         }
+
     }
 }

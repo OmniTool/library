@@ -47,6 +47,9 @@ public class FindGenreByName extends HttpServlet {
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
+        } else {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+            dispatcher.forward(req, resp);
         }
     }
 }

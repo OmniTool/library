@@ -47,6 +47,9 @@ public class FindBookByName extends HttpServlet {
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
+        } else {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("books");
+            dispatcher.forward(req, resp);
         }
     }
 }
