@@ -12,16 +12,17 @@
 
 <div class="parent topspace">
     <div class="block">
-        <p><h1 class="centred"><a href="/index.jsp">Библиотека</a></h1></p>
+        <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred">${bread} > ${pageName}</h2></p>
     </div>
 </div>
 
 <div class="parent big_topspace">
+
     <p>
     <div class="block">
         <form class="centred" method="POST">
-            <p><input type="text" value="" maxlength="64" placeholder="Название книги" name="title" required pattern="\S*\S" title="Введите название книги"></p>
+            <p><input type="text" value="" maxlength="64" placeholder="Название книги" name="title" required pattern=".*\S.*" title="Введите название книги"></p>
             <p><input type="text" value="" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <%--<p><input placeholder="Жанр id" name="genereId" required></p>--%>
 
@@ -70,31 +71,31 @@
     </p>
 </div>
 
-<script>
-    function dataSelectAdd() {
-        var form1 = document.forms["sourceForm"];
-        var selectedItem = form1.elements.source;
-        for (var i = 0; i < selectedItem.options.length; i++) {
-            var option = selectedItem.options[i];
-            if(option.selected) {
-                alert( option.value );
-            }
-        }
-
-        var form2 = document.forms["resultForm"];
-        var resultSelect = form2.elements.result;
-        resultSelect.add(selectedItem);
-    }
-    function dataSelectDelete() {
-        var form2 = document.forms["resultForm"];
-        var select = form2.elements.result;
-        for (var i = 0; i < select.options.length; i++) {
-            var option = select.options[i];
-            if(option.selected) {
-                alert( option.value );
-            }
-        }
-    }
+<script src="js/twoselect.js">
+//    function dataSelectAdd() {
+//        var form1 = document.forms["sourceForm"];
+//        var selectedItem = form1.elements.source;
+//        for (var i = 0; i < selectedItem.options.length; i++) {
+//            var option = selectedItem.options[i];
+//            if(option.selected) {
+//                alert( option.value );
+//            }
+//        }
+//
+//        var form2 = document.forms["resultForm"];
+//        var resultSelect = form2.elements.result;
+//        resultSelect.add(selectedItem);
+//    }
+//    function dataSelectDelete() {
+//        var form2 = document.forms["resultForm"];
+//        var select = form2.elements.result;
+//        for (var i = 0; i < select.options.length; i++) {
+//            var option = select.options[i];
+//            if(option.selected) {
+//                alert( option.value );
+//            }
+//        }
+//    }
 </script>
 
 </body>

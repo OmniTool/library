@@ -40,14 +40,18 @@ public class EditAuthor extends HttpServlet {
 
             if (isValid && id != 0) {
                 ManagerDAO daoAuthor = new DBManagerAuthor();
-                //ManagerDAO daoBook = new DBManagerAuthor();
+                ManagerDAO daoBook = new DBManagerBook();
                 DBManagerBookAuthor subDao = new DBManagerBookAuthor();
 
                 try {
                     Author entity = (Author) daoAuthor.getEntityById(id);
                     Validator validator = new AuthorValidator();
                     validator.trim(entity);
+
                     entity.setBooksList(subDao.searchBooksByAuthor(entity));
+
+                    List<Book> listBook = daoBook.getAll();
+                    req.setAttribute("sourceListBook", listBook);
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
                     req.setAttribute("entity", entity);

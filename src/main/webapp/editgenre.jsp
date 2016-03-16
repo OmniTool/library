@@ -23,7 +23,7 @@
     <div class="block">
         <form method="POST" class="centred">
             <p><input value="${entity.id}" hidden name="id"></p>
-            <p><input type="text" name="title" value="${entity.title}" maxlength="64" placeholder="Название жанра" required pattern="\S*" title="Введите название жанра"></p>
+            <p><input type="text" name="title" value="${entity.title}" maxlength="64" placeholder="Название жанра" required pattern=".*\S.*" title="Введите название жанра"></p>
             <p><textarea name="description" placeholder="Описание жанра">${entity.description}</textarea></p>
             <p><button formaction="editgenre">Изменить</button></p>
         </form>

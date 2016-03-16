@@ -11,9 +11,9 @@
 <h1>Поиск автора по ФИО</h1>
 
 <form method="POST">
-    <p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите фамилию"></p>
-    <p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите имя"></p>
-    <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите отчество"></p>
+    <p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" pattern=".*" title="Введите фамилию"></p>
+    <p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" pattern=".*" title="Введите имя"></p>
+    <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*" title="Введите отчество"></p>
     <p><button formaction="findauthorbyname">Найти</button></p>
 </form>
 

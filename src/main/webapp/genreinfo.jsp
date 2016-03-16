@@ -18,7 +18,7 @@
 
 
     <div class="block">
-        <p><h1 class="centred"><a href="/index.jsp">Библиотека</a></h1></p>
+        <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred">${bread} > ${entity.title}</h2></p>
     </div>
 </div>

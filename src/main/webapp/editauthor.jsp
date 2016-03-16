@@ -26,9 +26,9 @@
     <div class="block">
         <form method="POST" class="centred">
             <p><input value="${entity.id}" hidden name="id"></p>
-            <p><input type="text" value="${entity.secondName}" maxlength="64" placeholder="Фамилия" name="secondName" required pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите фамилию"></p>
-            <p><input type="text" value="${entity.firstName}" maxlength="64" placeholder="Имя" name="firstName" required pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите имя"></p>
-            <p><input type="text" value="${entity.middleName}" maxlength="64" placeholder="Отчество" name="middleName" pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите отчество"></p>
+            <p><input type="text" value="${entity.secondName}" maxlength="64" placeholder="Фамилия" name="secondName" required pattern=".*\S.*" title="Введите фамилию"></p>
+            <p><input type="text" value="${entity.firstName}" maxlength="64" placeholder="Имя" name="firstName" required pattern=".*\S.*" title="Введите имя"></p>
+            <p><input type="text" value="${entity.middleName}" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*\S.*" title="Введите отчество"></p>
             <p><input type="text" value="${entity.birthYear}" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <p><textarea name="biography" placeholder="Биография">${entity.biography}</textarea></p>
             <p><button formaction="editauthor">Изменить</button></p>
@@ -68,49 +68,37 @@
 
 </div>
 
-<script>
-    function dataSelectAdd() {
-        var form1 = document.forms["sourceForm"];
-        var selectedItem = form1.elements.source;
-
-        for (var i = 0; i < selectedItem.options.length; i++) {
-            var option = selectedItem.options[i];
-            if(option.selected) {
-                alert( option.value );
-            }
-        }
-
-//        var option = new Option("Текст", "value", true, true);
-
-        var form2 = document.forms["resultForm"];
-        //var option2 = new Option("Текст ++++++++++++++++", "999", true, true);
-        var resultSelect = form2.elements.result;
-        resultSelect.add(selectedItem);
-        //resultSelect.appendChild(option2);
-
-//        tmp.add(selectedItem)
-//        selection.add(selectedItem);
-
-        // one select only
-//        var target = form.source.selectedIndex
-//        var forAdd;
-//        if(target) alert("Выбран автор c id: " + form.source.options[target].value)
-//        if(target) forAdd = form.source.options[target].value;
-
-        // option = new Option(text, value, defaultSelected, selected);
-        // var option = new Option("Текст", "value", true, true);
-
-    }
-    function dataSelectDelete() {
-        var form2 = document.forms["resultForm"];
-        var select = form2.elements.result;
-        for (var i = 0; i < select.options.length; i++) {
-            var option = select.options[i];
-            if(option.selected) {
-                alert( option.value );
-            }
-        }
-    }
+<script src="js/twoselect.js">
+//    function dataSelectAdd() {
+//        var form1 = document.forms["sourceForm"];
+//        var selectedItem = form1.elements.source;
+//
+//        for (var i = 0; i < selectedItem.options.length; i++) {
+//            var option = selectedItem.options[i];
+//            if(option.selected) {
+//                alert( option.value );
+//            }
+//        }
+//
+////        var option = new Option("Текст", "value", true, true);
+//
+//        var form2 = document.forms["resultForm"];
+//
+//        var resultSelect = form2.elements.result;
+//        resultSelect.add(selectedItem);
+//
+//
+//    }
+//    function dataSelectDelete() {
+//        var form2 = document.forms["resultForm"];
+//        var select = form2.elements.result;
+//        for (var i = 0; i < select.options.length; i++) {
+//            var option = select.options[i];
+//            if(option.selected) {
+//                alert( option.value );
+//            }
+//        }
+//    }
 </script>
 
 </body>

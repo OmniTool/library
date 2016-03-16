@@ -15,7 +15,7 @@
 
 <div class="parent topspace">
     <div class="block">
-        <p><h1 class="centred"><a href="/index.jsp">Библиотека</a></h1></p>
+        <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred">${bread} > ${pageName}</h2></p>
     </div>
 </div>
@@ -25,8 +25,8 @@
     <p>
     <div class="block">
         <form method="POST" class="centred">
-            <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern="\S*" title="Введите название жанра"></p>
-            <p><textarea name="description" value="" placeholder="Описание жанра"></textarea></p>
+            <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern=".*\S.*" title="Введите название жанра"></p>
+            <p><textarea name="description" placeholder="Описание жанра"></textarea></p>
             <p><button formaction="addgenre">Добавить</button></p>
         </form>
     </div>
