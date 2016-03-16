@@ -42,15 +42,15 @@ public class EditBook extends HttpServlet {
 
             ManagerDAO dao = new DBManagerBook();
             DBManagerBookAuthor subDao1 = new DBManagerBookAuthor();
-            ManagerDAO subDao2 = new DBManagerGenre();
             ManagerDAO daoGenre = new DBManagerGenre();
+            ManagerDAO daoAuthor = new DBManagerAuthor();
 
             try {
                 Book entity = (Book) dao.getEntityById(id);
 
                 entity.setAuthorsList(subDao1.searchAuthorsByBook(entity));
 
-                List<Author> listAuthor = dao.getAll();
+                List<Author> listAuthor = daoAuthor.getAll();
                 req.setAttribute("sourceListAuthor", listAuthor);
                 List<Genre> listGenre = daoGenre.getAll();
                 req.setAttribute("sourceListGenre", listGenre);
@@ -59,7 +59,7 @@ public class EditBook extends HttpServlet {
                 req.setAttribute("entity", entity);
                 req.setAttribute("pageName", "Редактирование");
                 req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
-                req.setAttribute("genre", subDao2.getEntityById(entity.getGenereId()));
+                req.setAttribute("genre", daoGenre.getEntityById(entity.getGenereId()));
                 req.setAttribute("ref", "/findauthor?id=");
                 req.setAttribute("refGenre", "/findgenre?id=");
                 dispatcher.forward(req, resp);

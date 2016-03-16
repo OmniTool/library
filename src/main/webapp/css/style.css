@@ -74,6 +74,9 @@ input {
     width: 300px;
 }
 
+input[type=button] {
+    width: 100px;
+}
 
 a {
 

@@ -47,12 +47,12 @@ public class FindBook extends HttpServlet {
                 req.setAttribute("ref", "/findauthor?id=");
                 req.setAttribute("refGenre", "/findgenre?id=");
                 dispatcher.forward(req, resp);
-//
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
-            }//
+            }
         }
     }
 }

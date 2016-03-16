@@ -31,20 +31,14 @@
 
     <p>
     <form method="GET">
-        <p><button formaction="/editbook?id=${entity.id}">Изменить</button></p>
-    </form>
-    <p><a class="btn" href="/editbook?id=${entity.id}">Изменить</a></p>
-
-    <form>
-        <p><button formaction="removebook">Удалить</button></p>
+        <p><input TYPE="button" VALUE="Изменить"
+                  onclick="window.location.href='/editbook?id=${entity.id}'"></p>
     </form>
 
-    <form method="get" action="/editbook?id=${entity.id}">
-        <button type="submit">Continue</button>
+    <form method="GET">
+        <p><input TYPE="button" VALUE="Удалить"
+                  onclick="window.location.href='/removebook?id=${entity.id}'"></p>
     </form>
-
-
-
     </p>
 
 
