@@ -26,13 +26,14 @@ public class ShowAllBooks extends HttpServlet {
         ManagerDAO dao = new DBManagerBook();
         try {
             List<Book> list = dao.getAll();
+
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Книги");
             req.setAttribute("action", "addbook");
             req.setAttribute("ref", "/findbook?id=");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
-            req.setAttribute("pageName", "Книги");
+
             dispatcher.forward(req, resp);
 
         } catch (SQLException e) {

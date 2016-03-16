@@ -147,7 +147,7 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
 
-            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setString(1, entity.getTitle() + "%");
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {

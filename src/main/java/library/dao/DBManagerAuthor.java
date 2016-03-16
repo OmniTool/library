@@ -3,6 +3,7 @@ package library.dao;
 import library.dao.connectors.DBConnector;
 import library.dao.connectors.DBConnectorPool;
 import library.dao.entities.Author;
+import library.dao.entities.Genre;
 import library.utils.validation.AuthorValidator;
 import library.utils.validation.BookValidator;
 import library.utils.validation.Validator;
@@ -157,21 +158,38 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
 
     @Override
     public List<Author> searchEntityByName(Author entity) throws SQLException, NamingException {
-        List<Author> list = getAll();
+        String statementSQL = "SELECT * FROM authors WHERE first_name LIKE ? AND middle_name LIKE ? AND second_name LIKE ?";
+        List<Author> list = new ArrayList<>();
 
-        Validator validator = new AuthorValidator();
+        Connection connection = null;
+        ResultSet rs = null;
 
-        for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
-            Author current = iter.next();
-            validator.trim(current);
-            if (!current.getSecondName().toUpperCase().equals(entity.getSecondName().toUpperCase())
-                    || !current.getFirstName().toUpperCase().equals(entity.getFirstName().toUpperCase())
-                    || !current.getMiddleName().toUpperCase().equals(entity.getMiddleName().toUpperCase())) {
-                iter.remove();
+        try {
+            connection = connector.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+
+            preparedStatement.setString(1, entity.getFirstName() + "%");
+            preparedStatement.setString(2, entity.getMiddleName() + "%");
+            preparedStatement.setString(3, entity.getSecondName() + "%");
+
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Author author = new Author();
+                author.setId(rs.getInt("id"));
+                author.setSecondName(rs.getString("second_name"));
+                author.setFirstName(rs.getString("first_name"));
+                author.setMiddleName(rs.getString("middle_name"));
+                author.setBirthYear(rs.getInt("birth_year"));
+                author.setBiography(rs.getString("biography"));
+                list.add(author);
             }
+            return list;
+        } finally {
+            if (connection != null)
+                connection.close();
+            if (rs != null)
+                rs.close();
         }
-
-        return list;
     }
 
 

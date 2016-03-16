@@ -26,13 +26,14 @@ public class ShowAllAuthors extends HttpServlet {
         ManagerDAO dao = new DBManagerAuthor();
         try {
             List<Author> list = dao.getAll();
+
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Авторы");
             req.setAttribute("action", "addauthor");
             req.setAttribute("ref", "/findauthor?id=");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
-            req.setAttribute("pageName", "Авторы");
+
             dispatcher.forward(req, resp);
 
         } catch (SQLException e) {

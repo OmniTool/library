@@ -3,6 +3,9 @@ package library.servlets.crud;
 import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 import library.dao.entities.Genre;
+import library.utils.validation.AuthorValidator;
+import library.utils.validation.GenreValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -35,12 +38,22 @@ public class FindGenreByName extends HttpServlet {
 
             genre.setTitle(titles.trim());
 
-        boolean isValid = true;
+        Validator validator = new GenreValidator();
+        validator.trim(genre);
 
-        if (isValid && genre.getTitle() != null) {
+        if (!validator.isEmptyString(genre.getTitle())) {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 List<Genre> list = dao.searchEntityByName(genre);
+
+                req.setAttribute("list", list);
+                req.setAttribute("pageName", genre.getTitle());
+                req.setAttribute("action", "addgenre");
+                req.setAttribute("ref", "/findgenre?id=");
+
+                RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
+
+                dispatcher.forward(req, resp);
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой

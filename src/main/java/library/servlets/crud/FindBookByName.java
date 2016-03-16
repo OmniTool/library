@@ -3,6 +3,9 @@ package library.servlets.crud;
 import library.dao.DBManagerBook;
 import library.dao.ManagerDAO;
 import library.dao.entities.Book;
+import library.utils.validation.AuthorValidator;
+import library.utils.validation.BookValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -35,12 +38,22 @@ public class FindBookByName extends HttpServlet {
 
             book.setTitle(titles.trim());
 
-        boolean isValid = true;
+        Validator validator = new BookValidator();
+        validator.trim(book);
 
-        if (isValid && book.getTitle() != null) {
+        if (!validator.isEmptyString(book.getTitle())) {
             ManagerDAO dao = new DBManagerBook();
             try {
                 List<Book> list = dao.searchEntityByName(book);
+
+                req.setAttribute("list", list);
+                req.setAttribute("pageName", book.getTitle());
+                req.setAttribute("action", "addbook");
+                req.setAttribute("ref", "/findbook?id=");
+
+                RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
+
+                dispatcher.forward(req, resp);
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой

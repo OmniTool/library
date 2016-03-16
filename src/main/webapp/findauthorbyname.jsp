@@ -13,7 +13,7 @@
 <form method="POST">
     <p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" pattern=".*\S.*" title="Введите фамилию" required></p>
     <p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" pattern=".*\S.*" title="Введите имя" required></p>
-    <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*\S.*" title="Введите отчество" required></p>
+    <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*\S.*" title="Введите отчество"></p>
     <p><button formaction="findauthorbyname">Найти</button></p>
 </form>
 

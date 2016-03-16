@@ -49,13 +49,21 @@ public class FindAuthorByName extends HttpServlet {
         Validator validator = new AuthorValidator();
         validator.trim(author);
 
-        if (validator.isEmptyString(author.getSecondName()) || validator.isEmptyString(author.getFirstName()) || validator.isEmptyString(author.getMiddleName())) {
+        if (!validator.isEmptyString(author.getSecondName()) || !validator.isEmptyString(author.getFirstName()) || !validator.isEmptyString(author.getMiddleName())) {
             ManagerDAO dao = new DBManagerAuthor();
-            int count = 0;
 
             try {
                 List<Author> list = dao.searchEntityByName(author);
-                System.out.println(list);
+
+
+                req.setAttribute("list", list);
+                req.setAttribute("pageName", author.getFirstName() + " " + author.getMiddleName() + " " + author.getSecondName());
+                req.setAttribute("action", "addauthor");
+                req.setAttribute("ref", "/findauthor?id=");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
+
+                dispatcher.forward(req, resp);
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
