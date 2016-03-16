@@ -3,6 +3,8 @@ package library.servlets.crud;
 import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 import library.dao.entities.Genre;
+import library.utils.validation.GenreValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;

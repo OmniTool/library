@@ -5,6 +5,7 @@ import library.dao.DBManagerBook;
 import library.dao.entities.Author;
 import library.dao.entities.Book;
 import library.dao.entities.Genre;
+import library.utils.validation.AuthorValidator;
 import library.utils.validation.BookValidator;
 import library.utils.validation.Validator;
 
@@ -42,6 +43,8 @@ public class EditBook extends HttpServlet {
 
             try {
                 Book entity = (Book) daoBook.getEntityById(id);
+                Validator validator = new BookValidator();
+                validator.trim(entity);
 
                 entity.setAuthorsList(daoBookAuthor.searchAuthorsByBook(entity));
 
@@ -97,6 +100,7 @@ public class EditBook extends HttpServlet {
         if (validator.canBeUpdated(book)) {
             ManagerDAO dao = new DBManagerBook();
             try {
+                validator.trim(book);
                 dao.update(book);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findbook?id=" + book.getId());

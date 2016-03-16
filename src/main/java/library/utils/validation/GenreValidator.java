@@ -21,6 +21,12 @@ public class GenreValidator extends Validator<Genre> {
     }
 
     @Override
+    public void trim(Genre entity) {
+        entity.setTitle(entity.getTitle().trim());
+        entity.setDescription(entity.getDescription().trim());
+    }
+
+    @Override
     public boolean canBeUpdated(Genre entity) {
         return true;
     }

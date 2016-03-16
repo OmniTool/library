@@ -8,6 +8,8 @@ public abstract class Validator <E> {
     public abstract boolean isIdExists(E entity);
     public abstract boolean isNameExists(E entity);
 
+    public abstract void trim(E entity);
+
     public abstract boolean canBeUpdated(E entity);
     public abstract boolean canBeCreated(E entity);
     public abstract boolean canBeDeleted(E entity);

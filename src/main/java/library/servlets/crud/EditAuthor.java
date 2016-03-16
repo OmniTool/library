@@ -6,6 +6,7 @@ import library.dao.entities.Author;
 import library.dao.entities.Book;
 import library.dao.entities.Genre;
 import library.utils.validation.AuthorValidator;
+import library.utils.validation.GenreValidator;
 import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
@@ -44,6 +45,8 @@ public class EditAuthor extends HttpServlet {
 
                 try {
                     Author entity = (Author) daoAuthor.getEntityById(id);
+                    Validator validator = new AuthorValidator();
+                    validator.trim(entity);
                     entity.setBooksList(subDao.searchBooksByAuthor(entity));
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
@@ -93,13 +96,12 @@ public class EditAuthor extends HttpServlet {
         
             author.setBiography(biographys);
 
-
-
         Validator validator = new AuthorValidator();
 
         if (validator.canBeUpdated(author)) {
             ManagerDAO dao = new DBManagerAuthor();
             try {
+                validator.trim(author);
                 dao.update(author);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor?id=" + author.getId());

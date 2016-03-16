@@ -50,14 +50,6 @@ public class AddBook extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setContentType("text/html");
-//        resp.setCharacterEncoding("UTF-8");
-//        PrintWriter out = resp.getWriter();
-//
-//        out.print("<!DOCTYPE html>");
-//        out.print("<html>");
-//        out.print("<body>");
-//        out.print("<h1></h1>");
 
         Book book = new Book();
 
@@ -73,39 +65,23 @@ public class AddBook extends HttpServlet {
 
             book.setGenereId(Integer.parseInt(genereIds ));
 
-        String[] authorsIds = req.getParameterValues("resultListAuthor");
-
-
-
-
-
         Validator validator = new BookValidator();
 
         if (validator.canBeCreated(book)) {
             ManagerDAO dao = new DBManagerBook();
             try {
+                validator.trim(book);
                 dao.create(book);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("books");
                 dispatcher.forward(req, resp);
 
-//                out.print("Add:<br>");
-//                out.print("title = " + book.getTitle() + "<br>");
-//                out.print("pubYear = " + book.getPubYear() + "<br>");
-//                out.print("genereId = " + book.getGenereId() + "<br>");
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
-
-
-//            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-//
-//            out.print("</body>");
-//            out.print("</html>");
-//
-//            out.close();
         }
     }
 }

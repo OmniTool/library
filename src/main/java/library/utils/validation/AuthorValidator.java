@@ -19,6 +19,10 @@ public class AuthorValidator extends Validator<Author> {
     }
 
     @Override
+    public void trim(Author entity) {
+    }
+
+    @Override
     public boolean canBeUpdated(Author entity) {
         return true;
     }

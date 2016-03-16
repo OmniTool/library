@@ -37,9 +37,11 @@ public class EditGenre extends HttpServlet {
 
             try {
                 Genre entity = (Genre) daoGenre.getEntityById(id);
+                Validator validator = new GenreValidator();
+                validator.trim(entity);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
-                req.setAttribute("bread", "<a href=\"/genres\">Книги</a>");
+                req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
                 req.setAttribute("entity", entity);
                 dispatcher.forward(req, resp);
             } catch (SQLException e) {
@@ -73,11 +75,11 @@ public class EditGenre extends HttpServlet {
         if (validator.canBeUpdated(genre)) {
             ManagerDAO dao = new DBManagerGenre();
             try {
+                validator.trim(genre);
                 dao.update(genre);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre?id=" + genre.getId());
                 dispatcher.forward(req, resp);
-
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

@@ -19,6 +19,10 @@ public class BookValidator extends Validator<Book> {
     }
 
     @Override
+    public void trim(Book entity) {
+    }
+
+    @Override
     public boolean canBeUpdated(Book entity) {
         return true;
     }
