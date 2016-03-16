@@ -22,29 +22,18 @@ public class FindGenreByName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("findgenrebyname.jsp");
-        req.setAttribute("pageName", "");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
 
         Genre genre = new Genre();
 
         String titles = req.getParameter("title");
 
-            genre.setTitle(titles );
-
-
+            genre.setTitle(titles.trim());
 
         boolean isValid = true;
 
@@ -52,22 +41,12 @@ public class FindGenreByName extends HttpServlet {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 List<Genre> list = dao.searchEntityByName(genre);
-                for (Genre genr : list) {
-                        out.print("<p>" + genr + "</p>");
-                }
+
             } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
+                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
-
+                System.out.println(e.getMessage());
             }
-
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
         }
     }
 }

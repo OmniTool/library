@@ -11,7 +11,7 @@
 <h1>Поиск жанра по названию</h1>
 
 <form method="POST">
-    <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" pattern=".*" title="Введите название жанра"></p>
+    <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" pattern=".*\S.*" title="Введите название жанра"></p>
     <p><button formaction="findgenrebyname">Найти</button></p>
 </form>
 

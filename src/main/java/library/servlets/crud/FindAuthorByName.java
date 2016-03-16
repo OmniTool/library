@@ -23,37 +23,26 @@ public class FindAuthorByName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("findauthorbyname.jsp");
-        req.setAttribute("pageName", "");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
 
         Author author = new Author();
 
         String secondNames = req.getParameter("secondName"); // поменять
 
-        author.setSecondName(secondNames);
+        author.setSecondName(secondNames.trim());
 
         String firstNames = req.getParameter("firstName");
 
-        author.setFirstName(firstNames);
+        author.setFirstName(firstNames.trim());
 
         String middleNames = req.getParameter("middleName");
 
-        author.setMiddleName(middleNames);
-
-
+        author.setMiddleName(middleNames.trim());
 
         boolean isValid = true;
 
@@ -65,23 +54,11 @@ public class FindAuthorByName extends HttpServlet {
 
                 List<Author> list = dao.searchEntityByName(author);
 
-                for (Author auth : list) {
-                    out.print("<p>" + auth + "</p>");
-                }
-
             } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
+                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
-
+                System.out.println(e.getMessage());
             }
-
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
         }
     }
 }
