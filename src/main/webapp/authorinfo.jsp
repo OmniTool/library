@@ -31,7 +31,7 @@
     <p class="topspace"><h3 class="centred">Книги</h3></p>
     <p class="centred">
         <c:forEach var="item" items="${list}">
-    <p>
+    <p class="centred">
         <a href="${ref}${item.id}" class="content">${item.title}</a>
     </p>
     </c:forEach>

@@ -28,7 +28,7 @@
     <p class="topspace">
         <c:forEach var="item" items="${list}">
     <p>
-        <a href="${ref}${item.id}" class="content">${item.firstName} ${item.secondName} ${item.middleName}</a>
+        <a href="${ref}${item.id}" class="content">${item.firstName} ${item.middleName} ${item.secondName}</a>
     </p>
     </c:forEach>
     </p>
