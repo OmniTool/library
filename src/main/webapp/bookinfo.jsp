@@ -7,9 +7,16 @@
     <style>
         <%@include file='css/style.css' %>
     </style>
-    <style>
+        <style>
+            a.button {
+                -webkit-appearance: button;
+                -moz-appearance: button;
+                appearance: button;
 
-    </style>
+                text-decoration: none;
+                color: initial;
+            }
+        </style>
 </head>
 <body>
 
@@ -23,8 +30,29 @@
 <div class="parent big_topspace">
 
     <p>
-        <div class="block">
-    <p ><h3 class="centred">Год публикации</h3></p>
+    <form method="GET">
+        <p><button formaction="/editbook?id=${entity.id}">Изменить</button></p>
+    </form>
+    <p><a class="btn" href="/editbook?id=${entity.id}">Изменить</a></p>
+
+    <form>
+        <p><button formaction="removebook">Удалить</button></p>
+    </form>
+
+    <form method="get" action="/editbook?id=${entity.id}">
+        <button type="submit">Continue</button>
+    </form>
+
+
+
+    </p>
+
+
+
+
+    <p>
+    <div class="block">
+        <p ><h3 class="centred">Год публикации</h3></p>
     <p class="centred">${entity.pubYear}</p>
     <p class="topspace"><h3 class="centred">Жанр</h3></p>
     <p class="centred"><a href="${refGenre}${genre.id}" class="content">${genre.title}</a></p>

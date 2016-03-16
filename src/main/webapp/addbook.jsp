@@ -26,7 +26,7 @@
             <p><input type="text" value="" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <%--<p><input placeholder="Жанр id" name="genereId" required></p>--%>
 
-            <p><select size="1" name="genereId">
+            <p><select class="listMulticatch" size="1" name="genereId">
                 <option disabled>Жанр</option>
                 <c:forEach var="genre" items="${sourceListGenre}">
                     <p>

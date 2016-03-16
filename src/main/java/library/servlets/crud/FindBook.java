@@ -24,6 +24,8 @@ public class FindBook extends HttpServlet {
 
         int id = 0;
         String ids = req.getParameter("id");
+
+
             id = Integer.parseInt(ids);
 
         boolean isValid = true;

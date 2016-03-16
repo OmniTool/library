@@ -87,7 +87,6 @@ public class AddBook extends HttpServlet {
                 dao.create(book);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("books");
-                //req.setAttribute("pageName", "Книги");
                 dispatcher.forward(req, resp);
 
 //                out.print("Add:<br>");
