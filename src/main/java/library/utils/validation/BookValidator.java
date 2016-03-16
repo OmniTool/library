@@ -20,6 +20,7 @@ public class BookValidator extends Validator<Book> {
 
     @Override
     public void trim(Book entity) {
+        entity.setTitle(entity.getTitle().trim());
     }
 
     @Override

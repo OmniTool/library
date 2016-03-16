@@ -20,6 +20,10 @@ public class AuthorValidator extends Validator<Author> {
 
     @Override
     public void trim(Author entity) {
+        entity.setFirstName(entity.getFirstName().trim());
+        entity.setMiddleName(entity.getMiddleName().trim());
+        entity.setSecondName(entity.getSecondName().trim());
+        entity.setBiography(entity.getBiography().trim());
     }
 
     @Override
