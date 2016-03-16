@@ -25,7 +25,7 @@
     <p>
     <div class="block">
         <form method="POST" class="centred">
-            <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern=".*" title="Введите название жанра"></p>
+            <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern="\S*" title="Введите название жанра"></p>
             <p><textarea name="description" value="" placeholder="Описание жанра"></textarea></p>
             <p><button formaction="addgenre">Добавить</button></p>
         </form>

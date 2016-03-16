@@ -23,7 +23,7 @@
     <div class="block">
         <form method="POST" class="centred">
             <p><input value="${entity.id}" hidden name="id"></p>
-            <p><input type="text" name="title" value="${entity.title}" maxlength="64" placeholder="Название жанра" required pattern=".*" title="Введите название жанра"></p>
+            <p><input type="text" name="title" value="${entity.title}" maxlength="64" placeholder="Название жанра" required pattern="\S*" title="Введите название жанра"></p>
             <p><textarea name="description" placeholder="Описание жанра">${entity.description}</textarea></p>
             <p><button formaction="editgenre">Изменить</button></p>
         </form>
@@ -37,30 +37,3 @@
 </html>
 
 
-
-
-
-
-
-
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-    <%--<title></title>--%>
-    <%--<style>--%>
-        <%--<%@include file='css/style.css' %>--%>
-    <%--</style>--%>
-<%--</head>--%>
-<%--<body>--%>
-
-<%--<h1>Редактирование жанра</h1>--%>
-
-<%--<form method="POST">--%>
-    <%--<p><input placeholder="ID" name="id"></p>--%>
-    <%--<p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern=".*" title="Введите название жанра"></p>--%>
-    <%--<p><textarea name="description" value="" placeholder="Описание жанра"></textarea></p>--%>
-    <%--<p><button formaction="editgenre">Изменить</button></p>--%>
-<%--</form>--%>
-
-<%--</body>--%>
-<%--</html>--%>

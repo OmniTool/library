@@ -22,7 +22,7 @@
     <div class="block">
         <form method="POST" class="centred">
             <p><input value="${entity.id}" hidden name="id"></p>
-            <p><input type="text" value="${entity.title}" maxlength="64" placeholder="Название книги" name="title" required pattern=".*" title="Введите название книги"></p>
+            <p><input type="text" value="${entity.title}" maxlength="64" placeholder="Название книги" name="title" required pattern="\S*" title="Введите название книги"></p>
             <p><input type="text" value="${entity.pubYear}" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <%--<p><input placeholder="Жанр id" name="genereId" required></p>--%>
 

@@ -25,9 +25,9 @@
     <p>
         <div class="block">
             <form method="POST" class="centred">
-                <p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите фамилию"></p>
-                <p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите имя"></p>
-                <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите отчество"></p>
+                <p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" required pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите фамилию"></p>
+                <p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" required pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите имя"></p>
+                <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите отчество"></p>
                 <p><input type="text" value="" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
                 <p><textarea name="biography" value="" placeholder="Биография"></textarea></p>
                 <p><button formaction="addauthor">Добавить</button></p>

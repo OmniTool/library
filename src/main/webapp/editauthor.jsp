@@ -26,9 +26,9 @@
     <div class="block">
         <form method="POST" class="centred">
             <p><input value="${entity.id}" hidden name="id"></p>
-            <p><input type="text" value="${entity.secondName}" maxlength="64" placeholder="Фамилия" name="secondName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите фамилию"></p>
-            <p><input type="text" value="${entity.firstName}" maxlength="64" placeholder="Имя" name="firstName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите имя"></p>
-            <p><input type="text" value="${entity.middleName}" maxlength="64" placeholder="Отчество" name="middleName" pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите отчество"></p>
+            <p><input type="text" value="${entity.secondName}" maxlength="64" placeholder="Фамилия" name="secondName" required pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите фамилию"></p>
+            <p><input type="text" value="${entity.firstName}" maxlength="64" placeholder="Имя" name="firstName" required pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите имя"></p>
+            <p><input type="text" value="${entity.middleName}" maxlength="64" placeholder="Отчество" name="middleName" pattern="^\S[a-zA-Zа-яА-Я \-]+\S$" title="Введите отчество"></p>
             <p><input type="text" value="${entity.birthYear}" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <p><textarea name="biography" placeholder="Биография">${entity.biography}</textarea></p>
             <p><button formaction="editauthor">Изменить</button></p>
@@ -124,33 +124,3 @@
 
 
 
-
-
-
-
-
-
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-    <%--<title></title>--%>
-    <%--<style>--%>
-        <%--<%@include file='css/style.css' %>--%>
-    <%--</style>--%>
-<%--</head>--%>
-<%--<body>--%>
-
-<%--<h1>Редактирование автора</h1>--%>
-
-<%--<form method="POST">--%>
-    <%--<p><input placeholder="ID" name="id"></p>--%>
-    <%--<p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите фамилию"></p>--%>
-    <%--<p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" required pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите имя"></p>--%>
-    <%--<p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern="^[a-zA-Zа-яА-Я \-]+$" title="Введите отчество"></p>--%>
-    <%--<p><input type="text" value="" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>--%>
-    <%--<p><textarea name="biography" value="" placeholder="Биография"></textarea></p>--%>
-    <%--<p><button formaction="editauthor">Изменить</button></p>--%>
-<%--</form>--%>
-
-<%--</body>--%>
-<%--</html>--%>
