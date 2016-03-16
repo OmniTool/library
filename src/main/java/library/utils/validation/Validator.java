@@ -3,26 +3,30 @@ package library.utils.validation;
 import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 
-public abstract class Validator <E> {
+public interface Validator <E> {
 
-    public abstract boolean isNameExists(E entity);
+    boolean isNameExists(E entity);
 
-    public abstract void trim(E entity);
+    void trim(E entity);
 
-    protected abstract boolean isUsed(E entity);
+    boolean isNumber(String str);
 
-    private boolean isIntegerNumber(String str) { //число, +число, -число
-        if (str == null)
-            return false;
-        return str.matches("-?\\+?\\d+");
-    }
+    boolean isEmptyString(String str);
 
-    private boolean isEmptyString(String str) {
-        if(str == null || str.equals("") || str.matches("\\s+")) {
-            return true;
-        }
-        return false;
-    }
+//    protected abstract boolean isUsed(E entity);
+
+//    private boolean isNumber(String str) { //число, +число, -число
+//        if (str == null)
+//            return false;
+//        return str.matches("-?\\+?\\d+");
+//    }
+//
+//    private boolean isEmptyString(String str) {
+//        if(str == null || str.equals("") || str.matches("\\s+")) {
+//            return true;
+//        }
+//        return false;
+//    }
 
 
 

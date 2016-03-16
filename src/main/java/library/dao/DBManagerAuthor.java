@@ -3,6 +3,9 @@ package library.dao;
 import library.dao.connectors.DBConnector;
 import library.dao.connectors.DBConnectorPool;
 import library.dao.entities.Author;
+import library.utils.validation.AuthorValidator;
+import library.utils.validation.BookValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -156,23 +159,14 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
     public List<Author> searchEntityByName(Author entity) throws SQLException, NamingException {
         List<Author> list = getAll();
 
-        for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
-            Author current = iter.next();
-            if (!current.getSecondName().toUpperCase().contains(entity.getSecondName().toUpperCase())) {
-                iter.remove();
-            }
-        }
+        Validator validator = new AuthorValidator();
 
         for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
             Author current = iter.next();
-            if (!current.getFirstName().toUpperCase().contains(entity.getFirstName().toUpperCase())) {
-                iter.remove();
-            }
-        }
-
-        for(Iterator<Author> iter = list.iterator(); iter.hasNext();){
-            Author current = iter.next();
-            if (!current.getMiddleName().toUpperCase().contains(entity.getMiddleName().toUpperCase())) {
+            validator.trim(current);
+            if (!current.getSecondName().toUpperCase().equals(entity.getSecondName().toUpperCase())
+                    || !current.getFirstName().toUpperCase().equals(entity.getFirstName().toUpperCase())
+                    || !current.getMiddleName().toUpperCase().equals(entity.getMiddleName().toUpperCase())) {
                 iter.remove();
             }
         }

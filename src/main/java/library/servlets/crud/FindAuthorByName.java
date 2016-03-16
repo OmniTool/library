@@ -3,6 +3,8 @@ package library.servlets.crud;
 import library.dao.DBManagerAuthor;
 import library.dao.ManagerDAO;
 import library.dao.entities.Author;
+import library.utils.validation.AuthorValidator;
+import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -44,15 +46,16 @@ public class FindAuthorByName extends HttpServlet {
 
         author.setMiddleName(middleNames.trim());
 
-        boolean isValid = true;
+        Validator validator = new AuthorValidator();
+        validator.trim(author);
 
-        if (isValid && (author.getSecondName() != null || author.getFirstName() != null || author.getMiddleName() != null)) {
+        if (validator.isEmptyString(author.getSecondName()) || validator.isEmptyString(author.getFirstName()) || validator.isEmptyString(author.getMiddleName())) {
             ManagerDAO dao = new DBManagerAuthor();
             int count = 0;
 
             try {
                 List<Author> list = dao.searchEntityByName(author);
-
+                System.out.println(list);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
