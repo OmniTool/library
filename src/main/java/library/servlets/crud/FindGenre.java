@@ -27,7 +27,7 @@ public class FindGenre extends HttpServlet {
 
 
         if (ids == null) { //TODO проверка на число
-            RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);

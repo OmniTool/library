@@ -39,6 +39,7 @@
         </form>
     </div>
     </p>
+
     <p>
     <div class="block">
         <form id="resultForm">
@@ -69,14 +70,10 @@
     </p>
 </div>
 
-
-
-
 <script>
     function dataSelectAdd() {
         var form1 = document.forms["sourceForm"];
         var selectedItem = form1.elements.source;
-
         for (var i = 0; i < selectedItem.options.length; i++) {
             var option = selectedItem.options[i];
             if(option.selected) {
@@ -84,40 +81,11 @@
             }
         }
 
-//        var option = new Option("Текст", "value", true, true);
-
         var form2 = document.forms["resultForm"];
-        //var option2 = new Option("Текст ++++++++++++++++", "999", true, true);
         var resultSelect = form2.elements.result;
         resultSelect.add(selectedItem);
-        //resultSelect.appendChild(option2);
-
-//        tmp.add(selectedItem)
-//        selection.add(selectedItem);
-
-
-
-
-
-
-
-
-
-
-        // one select only
-//        var target = form.source.selectedIndex
-//        var forAdd;
-//        if(target) alert("Выбран автор c id: " + form.source.options[target].value)
-//        if(target) forAdd = form.source.options[target].value;
-
-        // option = new Option(text, value, defaultSelected, selected);
-        // var option = new Option("Текст", "value", true, true);
-
     }
     function dataSelectDelete() {
-
-
-
         var form2 = document.forms["resultForm"];
         var select = form2.elements.result;
         for (var i = 0; i < select.options.length; i++) {
@@ -126,8 +94,6 @@
                 alert( option.value );
             }
         }
-
-
     }
 </script>
 

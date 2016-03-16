@@ -27,9 +27,8 @@ public class EditGenre extends HttpServlet {
         int id = 0;
         String ids = req.getParameter("id");
 
-
         if (ids == null) { //TODO проверка на число
-            RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);

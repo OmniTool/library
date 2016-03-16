@@ -21,43 +21,41 @@ import java.util.Enumeration;
 @WebServlet("/removegenre")
 public class RemoveGenre extends HttpServlet {
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("deletegenre.jsp");
-//        req.setAttribute("pageName", "");
-//        dispatcher.forward(req, resp);
-//    }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        Genre genre = new Genre();
-
+        int id = 0;
         String ids = req.getParameter("id");
 
-            genre.setId(Integer.parseInt(ids));
+        if (ids == null) { //TODO проверка на число
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
+            dispatcher1.forward(req, resp);
+        } else {
+            id = Integer.parseInt(ids);
+
+            Genre genre = new Genre();
+
+            genre.setId(id);
+
+            Validator validator = new GenreValidator();
+
+            if (validator.canBeDeleted(genre)) {
+                ManagerDAO dao = new DBManagerGenre();
+                try {
+                    dao.delete(genre);
+
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+                    dispatcher.forward(req, resp);
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                } catch (NamingException e) {
+                    System.out.println(e.getMessage());
+                }
 
 
-
-        Validator validator = new GenreValidator();
-
-        if (validator.canBeDeleted(genre)) {
-            ManagerDAO dao = new DBManagerGenre();
-            try {
-                dao.delete(genre);
-
-                RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
-                dispatcher.forward(req, resp);
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
             }
-
-
         }
     }
 }

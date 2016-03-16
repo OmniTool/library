@@ -21,41 +21,41 @@ import java.sql.SQLException;
 @WebServlet("/removebook")
 public class RemoveBook extends HttpServlet {
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("deletebook.jsp");
-//        req.setAttribute("pageName", "");
-//        dispatcher.forward(req, resp);
-//    }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        Book book = new Book();
-
+        int id = 0;
         String ids = req.getParameter("id");
 
-            book.setId(Integer.parseInt(ids));
+        if (ids == null) { //TODO проверка на число
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
+            dispatcher1.forward(req, resp);
+        } else {
+            id = Integer.parseInt(ids);
 
-        Validator validator = new BookValidator();
+            Book book = new Book();
 
-        if (validator.canBeDeleted(book)) {
-            ManagerDAO dao = new DBManagerBook();
-            try {
-                dao.delete(book);
+            book.setId(id);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("books");
-                dispatcher.forward(req, resp);
+            Validator validator = new BookValidator();
 
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
+            if (validator.canBeDeleted(book)) {
+                ManagerDAO dao = new DBManagerBook();
+                try {
+                    dao.delete(book);
+
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("books");
+                    dispatcher.forward(req, resp);
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                } catch (NamingException e) {
+                    System.out.println(e.getMessage());
+                }
+
+
             }
-
-
         }
     }
 }

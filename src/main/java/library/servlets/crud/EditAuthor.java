@@ -1,9 +1,10 @@
 package library.servlets.crud;
 
+import library.dao.*;
 import library.dao.DBManagerAuthor;
-import library.dao.DBManagerAuthor;
-import library.dao.ManagerDAO;
 import library.dao.entities.Author;
+import library.dao.entities.Book;
+import library.dao.entities.Genre;
 import library.utils.validation.AuthorValidator;
 import library.utils.validation.Validator;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/editauthor")
 public class EditAuthor extends HttpServlet {
@@ -24,21 +26,46 @@ public class EditAuthor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
-        req.setAttribute("pageName", "");
-        dispatcher.forward(req, resp);
+        int id = 0;
+        String ids = req.getParameter("id");
+
+        if (ids == null) { //TODO проверка на число
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("authors");
+            dispatcher1.forward(req, resp);
+        } else {
+            id = Integer.parseInt(ids);
+
+            boolean isValid = true;
+
+            if (isValid && id != 0) {
+                ManagerDAO daoAuthor = new DBManagerAuthor();
+                //ManagerDAO daoBook = new DBManagerAuthor();
+                DBManagerBookAuthor subDao = new DBManagerBookAuthor();
+
+                try {
+                    Author entity = (Author) daoAuthor.getEntityById(id);
+                    entity.setBooksList(subDao.searchBooksByAuthor(entity));
+
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
+                    req.setAttribute("entity", entity);
+                    //req.setAttribute("pageName", entity.getFirstName() + entity.getSecondName() + entity.getMiddleName());
+                    req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
+                    //req.setAttribute("list", entity.getBooksList());
+                    //req.setAttribute("ref", "/findbook?id=");
+                    dispatcher.forward(req, resp);
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                } catch (NamingException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
 
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
 
         Author author = new Author();
 
@@ -75,26 +102,16 @@ public class EditAuthor extends HttpServlet {
             try {
                 dao.update(author);
 
-                out.print("Edit:<br>");
-                out.print("id = " + author.getId() + "<br>");
-                out.print("secondName = " + author.getSecondName() + "<br>");
-                out.print("firstName = " + author.getFirstName() + "<br>");
-                out.print("middleName = " + author.getMiddleName() + "<br>");
-                out.print("birthYear = " + author.getBirthYear() + "<br>");
-                out.print("biography = " + author.getBiography() + "<br>");
-            } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
-            } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor?id=" + author.getId());
+                dispatcher.forward(req, resp);
 
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
             }
 
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
 
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
         }
     }
 }

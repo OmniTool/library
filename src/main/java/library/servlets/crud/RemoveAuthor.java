@@ -21,55 +21,41 @@ import java.sql.SQLException;
 @WebServlet("/removeauthor")
 public class RemoveAuthor extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("deleteauthor.jsp");
-        req.setAttribute("pageName", "");
-        dispatcher.forward(req, resp);
-    }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
-
-        Author author = new Author();
-
+        int id = 0;
         String ids = req.getParameter("id");
 
-            author.setId(Integer.parseInt(ids));
+        if (ids == null) { //TODO проверка на число
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("authors");
+            dispatcher1.forward(req, resp);
+        } else {
+            id = Integer.parseInt(ids);
 
+            Author author = new Author();
 
+            author.setId(id);
 
-        Validator validator = new AuthorValidator();
+            Validator validator = new AuthorValidator();
 
-        if (validator.canBeDeleted(author)) {
-            ManagerDAO dao = new DBManagerAuthor();
-            try {
-                dao.delete(author);
+            if (validator.canBeDeleted(author)) {
+                ManagerDAO dao = new DBManagerAuthor();
+                try {
+                    dao.delete(author);
 
-                out.print("Delete:<br>");
-                out.print("id = " + author.getId() + "<br>");
-            } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
-            } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+                    dispatcher.forward(req, resp);
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                } catch (NamingException e) {
+                    System.out.println(e.getMessage());
+                }
+
 
             }
-
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
         }
     }
 }

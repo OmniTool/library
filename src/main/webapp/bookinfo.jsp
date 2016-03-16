@@ -41,9 +41,6 @@
     </form>
     </p>
 
-
-
-
     <p>
     <div class="block">
         <p ><h3 class="centred">Год публикации</h3></p>

@@ -1,9 +1,9 @@
 package library.servlets.crud;
 
+import library.dao.*;
 import library.dao.DBManagerAuthor;
-import library.dao.DBManagerAuthor;
-import library.dao.ManagerDAO;
 import library.dao.entities.Author;
+import library.dao.entities.Genre;
 import library.utils.validation.AuthorValidator;
 import library.utils.validation.Validator;
 
@@ -17,12 +17,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/addauthor")
 public class AddAuthor extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ManagerDAO dao = new DBManagerBook();
+
+        try {
+            List<Author> list = dao.getAll();
+            req.setAttribute("sourceListBook", list);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+        } catch (NamingException e) {
+            System.out.println(e.getMessage());
+        }
+        req.setAttribute("resultListBook", new ArrayList<Author>());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
 
@@ -33,15 +47,7 @@ public class AddAuthor extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setContentType("text/html");
-//        resp.setCharacterEncoding("UTF-8");
-//        PrintWriter out = resp.getWriter();
 //
-//        out.print("<!DOCTYPE html>");
-//        out.print("<html>");
-//        out.print("<body>");
-//        out.print("<h1></h1>");
-
         Author author = new Author();
 
         String secondNames = req.getParameter("secondName"); // поменять
@@ -76,13 +82,6 @@ public class AddAuthor extends HttpServlet {
                 //req.setAttribute("pageName", "Авторы");
                 dispatcher.forward(req, resp);
 
-//                out.print("Add:<br>");
-//                out.print("secondName = " + author.getSecondName() + "<br>");
-//                out.print("firstName = " + author.getFirstName() + "<br>");
-//                out.print("middleName = " + author.getMiddleName() + "<br>");
-//                out.print("birthYear = " + author.getBirthYear() + "<br>");
-//                out.print("biography = " + author.getBiography() + "<br>");
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
@@ -90,12 +89,7 @@ public class AddAuthor extends HttpServlet {
             }
 
 
-//            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-//
-//            out.print("</body>");
-//            out.print("</html>");
-//
-//            out.close();
+
         }
     }
 }

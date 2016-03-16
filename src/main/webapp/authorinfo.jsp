@@ -22,7 +22,17 @@
 
 <div class="parent big_topspace">
 
+    <p>
+    <form method="GET">
+        <p><input TYPE="button" VALUE="Изменить"
+                  onclick="window.location.href='/editauthor?id=${entity.id}'"></p>
+    </form>
 
+    <form method="GET">
+        <p><input TYPE="button" VALUE="Удалить"
+                  onclick="window.location.href='/removeauthor?id=${entity.id}'"></p>
+    </form>
+    </p>
 
     <p>
         <div class="block">

@@ -21,14 +21,13 @@ import java.util.List;
 public class FindAuthor extends HttpServlet {
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = 0;
         String ids = req.getParameter("id");
 
-
         if (ids == null) { //TODO проверка на число
-            RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("authors");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
@@ -51,12 +50,12 @@ public class FindAuthor extends HttpServlet {
                     //req.setAttribute("list", entity.getBooksList());
                     req.setAttribute("ref", "/findbook?id=");
                     dispatcher.forward(req, resp);
-//
+
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
-                }//
+                }
             }
         }
     }
