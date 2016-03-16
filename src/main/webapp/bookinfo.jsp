@@ -30,7 +30,7 @@
     <p class="centred">${entity.genereId}</p>
     <p class="topspace"><h3 class="centred">Авторы</h3></p>
     <p class="centred">
-        <c:forEach var="item" items="${list}">
+        <c:forEach var="item" items="${entity.authorsList}">
     <p class="centred">
         <a href="${ref}${item.id}" class="content">${item.firstName} ${item.middleName} ${item.secondName}</a>
     </p>

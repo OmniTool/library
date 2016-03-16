@@ -1,9 +1,7 @@
 package library.servlets.crud;
 
+import library.dao.*;
 import library.dao.DBManagerBook;
-import library.dao.DBManagerBook;
-import library.dao.DBManagerBookAuthor;
-import library.dao.ManagerDAO;
 import library.dao.entities.Author;
 import library.dao.entities.Book;
 
@@ -32,20 +30,18 @@ public class FindBook extends HttpServlet {
 
         if (isValid && id != 0) {
             ManagerDAO dao = new DBManagerBook();
-            DBManagerBookAuthor subDao = new DBManagerBookAuthor();
+            DBManagerBookAuthor subDao1 = new DBManagerBookAuthor();
+            ManagerDAO subDao2 = new DBManagerGenre();
             try {
                 Book entity = (Book) dao.getEntityById(id);
 
-                entity.setAuthorsList(subDao.searchAuthorsByBook(entity));
-
-                for (Author a : entity.getAuthorsList())
-                    System.out.println(a);
+                entity.setAuthorsList(subDao1.searchAuthorsByBook(entity));
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("bookinfo.jsp");
                 req.setAttribute("entity", entity);
                 req.setAttribute("pageName", entity.getTitle());
                 req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
-                req.setAttribute("list", entity.getAuthorsList());
+                //req.setAttribute("list", entity.getAuthorsList());
                 req.setAttribute("ref", "/findauthor?id=");
                 dispatcher.forward(req, resp);
 //

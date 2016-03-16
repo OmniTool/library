@@ -42,7 +42,7 @@ public class FindAuthor extends HttpServlet {
                 req.setAttribute("entity", entity);
                 req.setAttribute("pageName", entity.getFirstName() + entity.getSecondName() + entity.getMiddleName());
                 req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
-                req.setAttribute("list", entity.getBooksList());
+                //req.setAttribute("list", entity.getBooksList());
                 req.setAttribute("ref", "/findbook?id=");
                 dispatcher.forward(req, resp);
 //
