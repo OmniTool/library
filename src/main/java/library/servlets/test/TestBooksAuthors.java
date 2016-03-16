@@ -1,16 +1,11 @@
 package library.servlets.test;
 
-import library.dao.DBManagerBook;
 import library.dao.DBManagerBookAuthor;
 import library.dao.ManagerDAO;
-import library.dao.entities.Book;
 import library.dao.entities.BookAuthor;
-import library.utils.validation.BookAuthorValidator;
-import library.utils.validation.BookValidator;
 import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,10 +36,8 @@ public class TestBooksAuthors extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        BookAuthor book_author = new BookAuthor();
-        Validator validator = new BookAuthorValidator();
+        BookAuthor book_author = new BookAuthor();       
 
-        //if (validator.canBeCreated(book_author)) {
             ManagerDAO dao = new DBManagerBookAuthor();
             try {
 
