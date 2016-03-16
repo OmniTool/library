@@ -64,12 +64,12 @@ public class AddAuthor extends HttpServlet {
         Validator validator = new AuthorValidator();
         validator.trim(author);
 
-
-        //if (validator.canBeCreated(author)) {}
-
             ManagerDAO dao = new DBManagerAuthor();
             try {
-                dao.create(author);
+                if (!validator.isNameExists(author))
+                    dao.create(author);
+                else
+                    System.out.println("Существует!"); //// TODO существует
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                 dispatcher.forward(req, resp);

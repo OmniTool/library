@@ -10,26 +10,29 @@ import java.util.List;
 
 public class GenreValidator implements Validator<Genre> {
 
-    private static ManagerDAO dao = new DBManagerGenre();
-
     @Override
-    public boolean isNameExists(Genre entity) {
+    public boolean isNameExists(Genre entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerGenre();
-        try {
-            List<Genre> list = dao.searchEntityByName(entity);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
 
-        return true;
+            List<Genre> list = dao.searchEntityByName(entity);
+
+
+            if (list != null)
+                return true;
+
+        return false;
     }
 
     @Override
     public void trim(Genre entity) {
-        if (entity.getTitle() != null) entity.setTitle(entity.getTitle().trim());
-        if (entity.getDescription() != null) entity.setDescription(entity.getDescription().trim());
+        if (entity.getTitle() != null)
+            entity.setTitle(entity.getTitle().trim());
+        else
+            entity.setTitle("");
+        if (entity.getDescription() != null)
+            entity.setDescription(entity.getDescription().trim());
+        else
+            entity.setDescription("");
     }
 
     @Override

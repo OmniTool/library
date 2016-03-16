@@ -137,6 +137,10 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
 
     @Override
     public List<Genre> searchEntityByName(Genre entity) throws SQLException, NamingException {
+//        List<Genre> list = getAll();
+
+
+
         String statementSQL = "SELECT * FROM genres WHERE title LIKE ?";
         List<Genre> list = new ArrayList<>();
 

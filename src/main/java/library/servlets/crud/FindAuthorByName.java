@@ -55,7 +55,6 @@ public class FindAuthorByName extends HttpServlet {
             try {
                 List<Author> list = dao.searchEntityByName(author);
 
-
                 req.setAttribute("list", list);
                 req.setAttribute("pageName", author.getFirstName() + " " + author.getMiddleName() + " " + author.getSecondName());
                 req.setAttribute("action", "addauthor");

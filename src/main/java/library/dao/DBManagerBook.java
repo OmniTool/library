@@ -145,6 +145,8 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
 
     @Override
     public List<Book> searchEntityByName(Book entity) throws SQLException, NamingException {
+//        List<Book> list = getAll();
+
 
         String statementSQL = "SELECT * FROM books WHERE title LIKE ?";
         List<Book> list = new ArrayList<>();

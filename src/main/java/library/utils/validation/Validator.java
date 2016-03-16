@@ -3,9 +3,12 @@ package library.utils.validation;
 import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 
+import javax.naming.NamingException;
+import java.sql.SQLException;
+
 public interface Validator <E> {
 
-    boolean isNameExists(E entity);
+    boolean isNameExists(E entity) throws SQLException, NamingException;
 
     void trim(E entity);
 
@@ -13,23 +16,6 @@ public interface Validator <E> {
 
     boolean isEmptyString(String str);
 
-//    protected abstract boolean isUsed(E entity);
-
-//    private boolean isNumber(String str) { //число, +число, -число
-//        if (str == null)
-//            return false;
-//        return str.matches("-?\\+?\\d+");
-//    }
-//
-//    private boolean isEmptyString(String str) {
-//        if(str == null || str.equals("") || str.matches("\\s+")) {
-//            return true;
-//        }
-//        return false;
-//    }
-
-
-
-
+    //boolean isUsed(E entity);
 
 }

@@ -1,22 +1,34 @@
 package library.utils.validation;
 
 import library.dao.DBManagerBook;
+import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 import library.dao.entities.Book;
+import library.dao.entities.Genre;
+
+import javax.naming.NamingException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class BookValidator implements Validator<Book> {
 
-    private static ManagerDAO dao = new DBManagerBook();
-
     @Override
-    public boolean isNameExists(Book entity) {
+    public boolean isNameExists(Book entity) throws SQLException, NamingException {
+        ManagerDAO dao = new DBManagerBook();
 
-        return true;
+            List<Book> list = dao.searchEntityByName(entity);
+            if (list != null)
+                return true;
+
+        return false;
     }
 
     @Override
     public void trim(Book entity) {
-        if (entity.getTitle() != null) entity.setTitle(entity.getTitle().trim());
+        if (entity.getTitle() != null)
+            entity.setTitle(entity.getTitle().trim());
+        else
+            entity.setTitle("");
     }
 
     @Override
