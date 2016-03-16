@@ -9,11 +9,6 @@ public class BookValidator extends Validator<Book> {
     private static ManagerDAO dao = new DBManagerBook();
 
     @Override
-    public boolean isIdExists(Book entity) {
-        return true;
-    }
-
-    @Override
     public boolean isNameExists(Book entity) {
         return true;
     }
@@ -21,21 +16,6 @@ public class BookValidator extends Validator<Book> {
     @Override
     public void trim(Book entity) {
         entity.setTitle(entity.getTitle().trim());
-    }
-
-    @Override
-    public boolean canBeUpdated(Book entity) {
-        return true;
-    }
-
-    @Override
-    public boolean canBeCreated(Book entity) {
-        return true;
-    }
-
-    @Override
-    public boolean canBeDeleted(Book entity) {
-        return true;
     }
 
     @Override

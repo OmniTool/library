@@ -69,23 +69,23 @@ public class EditGenre extends HttpServlet {
 
             genre.setDescription(descriptions);
 
-
         Validator validator = new GenreValidator();
+        validator.trim(genre);
 
-        if (validator.canBeUpdated(genre)) {
+
+        if (validator.canBeUpdated(genre)) {}
+
             ManagerDAO dao = new DBManagerGenre();
             try {
-                validator.trim(genre);
                 dao.update(genre);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre?id=" + genre.getId());
                 dispatcher.forward(req, resp);
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
-        }
+
     }
 }

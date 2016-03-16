@@ -37,33 +37,27 @@ public class AddGenre extends HttpServlet {
         Genre genre = new Genre();
 
         String  titles = req.getParameter("title");
-
             genre.setTitle(titles );
-
         String  descriptions = req.getParameter("description");
-
             genre.setDescription(descriptions );
 
-
-
         Validator validator = new GenreValidator();
+        validator.trim(genre);
 
-        if (validator.canBeCreated(genre)) {
+
+        if (validator.canBeCreated(genre)) {}
+
             ManagerDAO dao = new DBManagerGenre();
             try {
-                validator.trim(genre);
                 dao.create(genre);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
-                //req.setAttribute("pageName", "Жанры");
                 dispatcher.forward(req, resp);
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
 
-        }
     }
 }

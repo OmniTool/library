@@ -47,7 +47,6 @@ public class RemoveAuthor extends HttpServlet {
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                     dispatcher.forward(req, resp);
-
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
                 } catch (NamingException e) {

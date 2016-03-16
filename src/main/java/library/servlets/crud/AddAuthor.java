@@ -50,47 +50,34 @@ public class AddAuthor extends HttpServlet {
 //
         Author author = new Author();
 
-        String secondNames = req.getParameter("secondName"); // поменять
-
+        String secondNames = req.getParameter("secondName");
             author.setSecondName(secondNames);
-
         String firstNames = req.getParameter("firstName");
-
             author.setFirstName(firstNames);
-
         String middleNames = req.getParameter("middleName");
-
             author.setMiddleName(middleNames);
-
         String birthYears = req.getParameter("birthYear");
-
             author.setBirthYear(Integer.parseInt(birthYears));
-
         String biographys = req.getParameter("biography");
-
             author.setBiography(biographys);
 
-
         Validator validator = new AuthorValidator();
+        validator.trim(author);
 
-        if (validator.canBeCreated(author)) {
+
+        if (validator.canBeCreated(author)) {}
+
             ManagerDAO dao = new DBManagerAuthor();
             try {
-                validator.trim(author);
                 dao.create(author);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
-                //req.setAttribute("pageName", "Авторы");
                 dispatcher.forward(req, resp);
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
 
-
-
-        }
     }
 }

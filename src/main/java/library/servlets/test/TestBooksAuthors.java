@@ -1,4 +1,4 @@
-package library.servlets.crud;
+package library.servlets.test;
 
 import library.dao.DBManagerBook;
 import library.dao.DBManagerBookAuthor;

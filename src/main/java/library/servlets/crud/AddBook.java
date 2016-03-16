@@ -54,34 +54,29 @@ public class AddBook extends HttpServlet {
         Book book = new Book();
 
         String  titles = req.getParameter("title");
-
             book.setTitle(titles );
-
         String  pubYears = req.getParameter("pubYear");
-
             book.setPubYear(Integer.parseInt(pubYears ));
-
         String  genereIds = req.getParameter("genereId");
-
             book.setGenereId(Integer.parseInt(genereIds ));
 
         Validator validator = new BookValidator();
+        validator.trim(book);
 
-        if (validator.canBeCreated(book)) {
+
+        if (validator.canBeCreated(book)) {}
+
             ManagerDAO dao = new DBManagerBook();
             try {
-                validator.trim(book);
                 dao.create(book);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("books");
                 dispatcher.forward(req, resp);
-
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
-        }
+
     }
 }

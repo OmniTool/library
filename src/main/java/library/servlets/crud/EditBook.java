@@ -96,23 +96,22 @@ public class EditBook extends HttpServlet {
 
 
         Validator validator = new BookValidator();
+        validator.trim(book);
 
-        if (validator.canBeUpdated(book)) {
+
+        if (validator.canBeUpdated(book)) {}
+
             ManagerDAO dao = new DBManagerBook();
             try {
-                validator.trim(book);
                 dao.update(book);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findbook?id=" + book.getId());
                 dispatcher.forward(req, resp);
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
 
-
-        }
     }
 }

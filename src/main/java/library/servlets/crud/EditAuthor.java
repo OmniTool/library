@@ -101,23 +101,22 @@ public class EditAuthor extends HttpServlet {
             author.setBiography(biographys);
 
         Validator validator = new AuthorValidator();
+        validator.trim(author);
 
-        if (validator.canBeUpdated(author)) {
+
+        if (validator.canBeUpdated(author)) {}
+
             ManagerDAO dao = new DBManagerAuthor();
             try {
-                validator.trim(author);
                 dao.update(author);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor?id=" + author.getId());
                 dispatcher.forward(req, resp);
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
 
-
-        }
     }
 }

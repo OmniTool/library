@@ -5,14 +5,9 @@ import library.dao.ManagerDAO;
 
 public abstract class Validator <E> {
 
-    public abstract boolean isIdExists(E entity);
     public abstract boolean isNameExists(E entity);
 
     public abstract void trim(E entity);
-
-    public abstract boolean canBeUpdated(E entity);
-    public abstract boolean canBeCreated(E entity);
-    public abstract boolean canBeDeleted(E entity);
 
     protected abstract boolean isUsed(E entity);
 
@@ -23,7 +18,7 @@ public abstract class Validator <E> {
     }
 
     private boolean isEmptyString(String str) {
-        if(str == null || str.equals("")) {
+        if(str == null || str.equals("") || str.matches("\\s+")) {
             return true;
         }
         return false;

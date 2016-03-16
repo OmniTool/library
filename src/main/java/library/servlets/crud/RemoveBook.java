@@ -47,7 +47,6 @@ public class RemoveBook extends HttpServlet {
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("books");
                     dispatcher.forward(req, resp);
-
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
                 } catch (NamingException e) {
