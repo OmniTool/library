@@ -41,7 +41,7 @@ public class FindGenre extends HttpServlet {
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
                     req.setAttribute("entity", entity);
-                    req.setAttribute("pageName", entity.getTitle());
+                    //req.setAttribute("pageName", entity.getTitle());
                     req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
                     dispatcher.forward(req, resp);
 //

@@ -45,7 +45,7 @@ public class FindBook extends HttpServlet {
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("bookinfo.jsp");
                     req.setAttribute("entity", entity);
-                    req.setAttribute("pageName", entity.getTitle());
+                    //req.setAttribute("pageName", entity.getTitle());
                     req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
                     req.setAttribute("genre", subDao2.getEntityById(entity.getGenereId()));
                     req.setAttribute("ref", "/findauthor?id=");
