@@ -34,11 +34,20 @@ public class EditGenre extends HttpServlet {
         } else {
             id = Integer.parseInt(ids);
 
+            ManagerDAO daoGenre = new DBManagerGenre();
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
-            req.setAttribute("bread", "<a href=\"/genres\">Книги</a>");
-            //req.setAttribute("entity", entity);
-            dispatcher.forward(req, resp);
+            try {
+                Genre entity = (Genre) daoGenre.getEntityById(id);
+
+                RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
+                req.setAttribute("bread", "<a href=\"/genres\">Книги</a>");
+                req.setAttribute("entity", entity);
+                dispatcher.forward(req, resp);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -66,6 +75,9 @@ public class EditGenre extends HttpServlet {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 dao.update(genre);
+
+                RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre?id=" + genre.getId());
+                dispatcher.forward(req, resp);
 
 
             } catch (SQLException e) {

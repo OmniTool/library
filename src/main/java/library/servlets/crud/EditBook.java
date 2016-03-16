@@ -38,15 +38,15 @@ public class EditBook extends HttpServlet {
 
 
 
-            ManagerDAO dao = new DBManagerBook();
-            DBManagerBookAuthor subDao1 = new DBManagerBookAuthor();
+            ManagerDAO daoBook = new DBManagerBook();
+            DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             ManagerDAO daoGenre = new DBManagerGenre();
             ManagerDAO daoAuthor = new DBManagerAuthor();
 
             try {
-                Book entity = (Book) dao.getEntityById(id);
+                Book entity = (Book) daoBook.getEntityById(id);
 
-                entity.setAuthorsList(subDao1.searchAuthorsByBook(entity));
+                entity.setAuthorsList(daoBookAuthor.searchAuthorsByBook(entity));
 
                 List<Author> listAuthor = daoAuthor.getAll();
                 req.setAttribute("sourceListAuthor", listAuthor);
@@ -61,12 +61,12 @@ public class EditBook extends HttpServlet {
                 req.setAttribute("ref", "/findauthor?id=");
                 req.setAttribute("refGenre", "/findgenre?id=");
                 dispatcher.forward(req, resp);
-//
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
-            }//
+            }
 
         }
 

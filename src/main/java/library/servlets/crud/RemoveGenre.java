@@ -21,24 +21,17 @@ import java.util.Enumeration;
 @WebServlet("/removegenre")
 public class RemoveGenre extends HttpServlet {
 
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("deletegenre.jsp");
+//        req.setAttribute("pageName", "");
+//        dispatcher.forward(req, resp);
+//    }
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("deletegenre.jsp");
-        req.setAttribute("pageName", "");
-        dispatcher.forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
 
         Genre genre = new Genre();
 
@@ -55,21 +48,16 @@ public class RemoveGenre extends HttpServlet {
             try {
                 dao.delete(genre);
 
-                out.print("Delete:<br>");
-                out.print("id = " + genre.getId() + "<br>");
-            } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
-            } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+                dispatcher.forward(req, resp);
 
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
             }
 
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
 
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
         }
     }
 }
