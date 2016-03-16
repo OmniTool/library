@@ -167,7 +167,7 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("book_id");
                 list.add(dao.getEntityById(id));
             }
             return list;
@@ -198,7 +198,8 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("author_id");
+                System.out.println("id=" + id + "getEntityById" + dao.getEntityById(id));
                 list.add(dao.getEntityById(id));
             }
             return list;

@@ -4,6 +4,7 @@ import library.dao.DBManagerBook;
 import library.dao.DBManagerBook;
 import library.dao.DBManagerBookAuthor;
 import library.dao.ManagerDAO;
+import library.dao.entities.Author;
 import library.dao.entities.Book;
 
 import javax.naming.NamingException;
@@ -34,13 +35,18 @@ public class FindBook extends HttpServlet {
             DBManagerBookAuthor subDao = new DBManagerBookAuthor();
             try {
                 Book entity = (Book) dao.getEntityById(id);
+
                 entity.setAuthorsList(subDao.searchAuthorsByBook(entity));
+
+                for (Author a : entity.getAuthorsList())
+                    System.out.println(a);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("bookinfo.jsp");
                 req.setAttribute("entity", entity);
                 req.setAttribute("pageName", entity.getTitle());
                 req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
                 req.setAttribute("list", entity.getAuthorsList());
+                req.setAttribute("ref", "/findauthor?id=");
                 dispatcher.forward(req, resp);
 //
             } catch (SQLException e) {
