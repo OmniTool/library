@@ -40,7 +40,7 @@ public class RemoveAuthor extends HttpServlet {
 
             Validator validator = new AuthorValidator();
 
-            if (validator.canBeDeleted(author)) {
+            //if (validator.canBeDeleted(author)) {
                 ManagerDAO dao = new DBManagerAuthor();
                 try {
                     dao.delete(author);
@@ -53,8 +53,6 @@ public class RemoveAuthor extends HttpServlet {
                     System.out.println(e.getMessage());
                 }
 
-
-            }
         }
     }
 }

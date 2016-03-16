@@ -40,7 +40,7 @@ public class RemoveGenre extends HttpServlet {
 
             Validator validator = new GenreValidator();
 
-            if (validator.canBeDeleted(genre)) {
+            //if (validator.canBeDeleted(genre)) {
                 ManagerDAO dao = new DBManagerGenre();
                 try {
                     dao.delete(genre);
@@ -53,8 +53,6 @@ public class RemoveGenre extends HttpServlet {
                     System.out.println(e.getMessage());
                 }
 
-
-            }
         }
     }
 }

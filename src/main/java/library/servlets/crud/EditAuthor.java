@@ -104,7 +104,7 @@ public class EditAuthor extends HttpServlet {
         validator.trim(author);
 
 
-        if (validator.canBeUpdated(author)) {}
+        //if (validator.canBeUpdated(author)) {}
 
             ManagerDAO dao = new DBManagerAuthor();
             try {

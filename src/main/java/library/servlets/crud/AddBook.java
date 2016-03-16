@@ -64,7 +64,7 @@ public class AddBook extends HttpServlet {
         validator.trim(book);
 
 
-        if (validator.canBeCreated(book)) {}
+        //if (validator.canBeCreated(book)) {}
 
             ManagerDAO dao = new DBManagerBook();
             try {

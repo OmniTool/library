@@ -65,7 +65,7 @@ public class AddAuthor extends HttpServlet {
         validator.trim(author);
 
 
-        if (validator.canBeCreated(author)) {}
+        //if (validator.canBeCreated(author)) {}
 
             ManagerDAO dao = new DBManagerAuthor();
             try {

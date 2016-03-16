@@ -73,7 +73,7 @@ public class EditGenre extends HttpServlet {
         validator.trim(genre);
 
 
-        if (validator.canBeUpdated(genre)) {}
+        //if (validator.canBeUpdated(genre)) {}
 
             ManagerDAO dao = new DBManagerGenre();
             try {

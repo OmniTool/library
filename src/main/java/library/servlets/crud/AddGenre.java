@@ -45,7 +45,7 @@ public class AddGenre extends HttpServlet {
         validator.trim(genre);
 
 
-        if (validator.canBeCreated(genre)) {}
+        //if (validator.canBeCreated(genre)) {}
 
             ManagerDAO dao = new DBManagerGenre();
             try {

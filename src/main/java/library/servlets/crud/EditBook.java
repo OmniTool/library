@@ -99,7 +99,7 @@ public class EditBook extends HttpServlet {
         validator.trim(book);
 
 
-        if (validator.canBeUpdated(book)) {}
+        //if (validator.canBeUpdated(book)) {}
 
             ManagerDAO dao = new DBManagerBook();
             try {

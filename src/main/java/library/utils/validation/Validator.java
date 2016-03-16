@@ -14,7 +14,7 @@ public abstract class Validator <E> {
     private boolean isIntegerNumber(String str) { //число, +число, -число
         if (str == null)
             return false;
-        return str.matches("^-?\\+?\\d+$");
+        return str.matches("-?\\+?\\d+");
     }
 
     private boolean isEmptyString(String str) {

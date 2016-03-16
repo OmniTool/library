@@ -40,7 +40,7 @@ public class RemoveBook extends HttpServlet {
 
             Validator validator = new BookValidator();
 
-            if (validator.canBeDeleted(book)) {
+            //if (validator.canBeDeleted(book)) {
                 ManagerDAO dao = new DBManagerBook();
                 try {
                     dao.delete(book);
@@ -53,8 +53,6 @@ public class RemoveBook extends HttpServlet {
                     System.out.println(e.getMessage());
                 }
 
-
-            }
         }
     }
 }

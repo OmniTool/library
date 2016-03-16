@@ -44,7 +44,7 @@ public class TestBooksAuthors extends HttpServlet {
         BookAuthor book_author = new BookAuthor();
         Validator validator = new BookAuthorValidator();
 
-        if (validator.canBeCreated(book_author)) {
+        //if (validator.canBeCreated(book_author)) {
             ManagerDAO dao = new DBManagerBookAuthor();
             try {
 
@@ -99,6 +99,6 @@ public class TestBooksAuthors extends HttpServlet {
             out.print("</html>");
 
             out.close();
-        }
+
     }
 }
