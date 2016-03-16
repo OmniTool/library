@@ -26,6 +26,18 @@
 <div class="parent big_topspace">
 
     <p>
+    <form method="GET">
+        <p><input TYPE="button" VALUE="Изменить"
+                  onclick="window.location.href='/editgenre?id=${entity.id}'"></p>
+    </form>
+
+    <form method="GET">
+        <p><input TYPE="button" VALUE="Удалить"
+                  onclick="window.location.href='/removegenre?id=${entity.id}'"></p>
+    </form>
+    </p>
+
+    <p>
         <div class="block">
     <p ><h3 class="centred">Описание</h3></p>
     <p class="centred content">${entity.description}</p>

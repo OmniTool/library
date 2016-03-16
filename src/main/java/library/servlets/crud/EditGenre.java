@@ -24,21 +24,26 @@ public class EditGenre extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
-        req.setAttribute("pageName", "");
-        dispatcher.forward(req, resp);
+        int id = 0;
+        String ids = req.getParameter("id");
+
+
+        if (ids == null) { //TODO проверка на число
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
+            dispatcher1.forward(req, resp);
+        } else {
+            id = Integer.parseInt(ids);
+
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
+            req.setAttribute("bread", "<a href=\"/genres\">Книги</a>");
+            //req.setAttribute("entity", entity);
+            dispatcher.forward(req, resp);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("<body>");
-        out.print("<h1></h1>");
 
         Genre genre = new Genre();
 
@@ -62,23 +67,12 @@ public class EditGenre extends HttpServlet {
             try {
                 dao.update(genre);
 
-                out.print("Edit:<br>");
-                out.print("id = " + genre.getId() + "<br>");
-                out.print("title = " + genre.getTitle() + "<br>");
-                out.print("description = " + genre.getDescription() + "<br>");
+
             } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
+                System.out.println(e.getMessage());
             } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
-
+                System.out.println(e.getMessage());
             }
-
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
-
-            out.print("</body>");
-            out.print("</html>");
-
-            out.close();
         }
     }
 }

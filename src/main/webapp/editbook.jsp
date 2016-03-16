@@ -13,15 +13,14 @@
 <div class="parent topspace">
     <div class="block">
         <p><h1 class="centred"><a href="/index.jsp">Библиотека</a></h1></p>
-        <p><h2 class="centred">${bread} > ${pageName}</h2></p>
+        <p><h2 class="centred">${bread} > <a href="/findbook?id=${entity.id}">${entity.title}</a> > Редактирование</h2></p>
     </div>
 </div>
 
 <div class="parent big_topspace">
-    <p><h2>Добавление книги</h2></p>
     <p>
     <div class="block">
-        <form method="POST">
+        <form method="POST" class="centred">
             <p><input value="${entity.id}" hidden name="id"></p>
             <p><input type="text" value="${entity.title}" maxlength="64" placeholder="Название книги" name="title" required pattern=".*" title="Введите название книги"></p>
             <p><input type="text" value="${entity.pubYear}" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>

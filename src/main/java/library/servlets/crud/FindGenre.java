@@ -24,26 +24,33 @@ public class FindGenre extends HttpServlet {
 
         int id = 0;
         String ids = req.getParameter("id");
+
+
+        if (ids == null) { //TODO проверка на число
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
+            dispatcher1.forward(req, resp);
+        } else {
             id = Integer.parseInt(ids);
 
-        boolean isValid = true;
+            boolean isValid = true;
 
-        if (isValid && id != 0) {
-            ManagerDAO dao = new DBManagerGenre();
-            try {
-                Genre entity = (Genre) dao.getEntityById(id);
+            if (isValid && id != 0) {
+                ManagerDAO dao = new DBManagerGenre();
+                try {
+                    Genre entity = (Genre) dao.getEntityById(id);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
-                req.setAttribute("entity", entity);
-                req.setAttribute("pageName", entity.getTitle());
-                req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
-                dispatcher.forward(req, resp);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
+                    req.setAttribute("entity", entity);
+                    req.setAttribute("pageName", entity.getTitle());
+                    req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
+                    dispatcher.forward(req, resp);
 //
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
-            }//
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                } catch (NamingException e) {
+                    System.out.println(e.getMessage());
+                }//
+            }
         }
     }
 }

@@ -26,8 +26,6 @@ public class EditBook extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-
         int id = 0;
         String ids = req.getParameter("id");
 
@@ -57,7 +55,7 @@ public class EditBook extends HttpServlet {
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editbook.jsp");
                 req.setAttribute("entity", entity);
-                req.setAttribute("pageName", "Редактирование");
+                //req.setAttribute("pageName", "Редактирование");
                 req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
                 req.setAttribute("genre", daoGenre.getEntityById(entity.getGenereId()));
                 req.setAttribute("ref", "/findauthor?id=");

@@ -18,10 +18,9 @@
 </div>
 
 <div class="parent big_topspace">
-    <p><h2>Добавление книги</h2></p>
     <p>
     <div class="block">
-        <form method="POST">
+        <form class="centred" method="POST">
             <p><input type="text" value="" maxlength="64" placeholder="Название книги" name="title" required pattern=".*" title="Введите название книги"></p>
             <p><input type="text" value="" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <%--<p><input placeholder="Жанр id" name="genereId" required></p>--%>
