@@ -18,6 +18,8 @@
 </div>
 
 <div class="parent big_topspace">
+    <p class="message">${message}<p>
+
     <p>
     <div class="block">
         <form method="POST" class="centred">

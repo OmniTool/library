@@ -16,6 +16,7 @@ public class AuthorValidator implements Validator<Author> {
     @Override
     public boolean exists(Author entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerAuthor();
+        trim(entity);
 
         List<Author> list = dao.searchEntityByName(entity);
         String firstName = entity.getFirstName().toUpperCase();
@@ -24,10 +25,15 @@ public class AuthorValidator implements Validator<Author> {
         int birthYear = entity.getBirthYear();
 
         for (Author e : list) {
-                if (e.getMiddleName().toUpperCase().equals(middleName)
-                        && e.getFirstName().toUpperCase().equals(firstName)
-                        && e.getSecondName().toUpperCase().equals(secondName)
-                        && e.getBirthYear()==birthYear)
+            trim(e);
+            String firstNameE = e.getFirstName().toUpperCase();
+            String middleNameE = e.getMiddleName().toUpperCase();
+            String secondNameE = e.getSecondName().toUpperCase();
+            int birthYearE = e.getBirthYear();
+                if (middleNameE.equals(middleName)
+                        && firstNameE.equals(firstName)
+                        && secondNameE.equals(secondName)
+                        && birthYearE==birthYear)
                     return true;
         }
         return false;

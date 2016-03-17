@@ -13,11 +13,13 @@ public class GenreValidator implements Validator<Genre> {
     @Override
     public boolean exists(Genre entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerGenre();
+        trim(entity);
 
         List<Genre> list = dao.searchEntityByName(entity);
         String title = entity.getTitle().toUpperCase();
 
         for (Genre e : list) {
+            trim(e);
             if (e.getTitle().toUpperCase().equals(title))
                 return true;
         }

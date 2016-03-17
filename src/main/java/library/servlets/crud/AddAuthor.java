@@ -42,6 +42,7 @@ public class AddAuthor extends HttpServlet {
 
         req.setAttribute("pageName", "Добавление");
         req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
+
         dispatcher.forward(req, resp);
     }
 
@@ -66,13 +67,17 @@ public class AddAuthor extends HttpServlet {
 
             ManagerDAO dao = new DBManagerAuthor();
             try {
-                if (!validator.exists(author))
+                if (!validator.exists(author)) {
                     dao.create(author);
-                else
-                    System.out.println("Существует!"); //// TODO существует
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+                    dispatcher.forward(req, resp);
+                } else {
+                    req.setAttribute("message", "Уже существует");
+                    req.setAttribute("entity", author);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
-                dispatcher.forward(req, resp);
+                    doGet(req, resp);
+                }
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {

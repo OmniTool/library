@@ -21,12 +21,13 @@
 </div>
 
 <div class="parent big_topspace">
+    <p class="message">${message}<p>
 
     <p>
     <div class="block">
         <form method="POST" class="centred">
-            <p><input type="text" value="" maxlength="64" placeholder="Название жанра" name="title" required pattern=".*\S.*" title="Введите название жанра"></p>
-            <p><textarea name="description" placeholder="Описание жанра"></textarea></p>
+            <p><input type="text" value="${entity.title}" maxlength="64" placeholder="Название жанра" name="title" required pattern=".*\S.*" title="Введите название жанра"></p>
+            <p><textarea name="description" placeholder="Описание жанра">${entity.description}</textarea></p>
             <p><button formaction="addgenre">Добавить</button></p>
         </form>
     </div>

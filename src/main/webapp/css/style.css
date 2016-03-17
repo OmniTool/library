@@ -110,12 +110,10 @@ a:active {
     color:#000000;
     /*display: block;*/
     /*text-align:  center;*/
+}
 
-
-
-
-
-
+.message {
+    color:#CC0033;
 }
 
 .centred {

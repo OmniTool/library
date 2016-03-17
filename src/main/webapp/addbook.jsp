@@ -18,12 +18,13 @@
 </div>
 
 <div class="parent big_topspace">
+    <p class="message">${message}<p>
 
     <p>
     <div class="block">
         <form class="centred" method="POST">
-            <p><input type="text" value="" maxlength="64" placeholder="Название книги" name="title" required pattern=".*\S.*" title="Введите название книги"></p>
-            <p><input type="text" value="" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
+            <p><input type="text" value="${entity.title}" maxlength="64" placeholder="Название книги" name="title" required pattern=".*\S.*" title="Введите название книги"></p>
+            <p><input type="text" value="${entity.pubYear}" placeholder="Год публикации" name="pubYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <%--<p><input placeholder="Жанр id" name="genereId" required></p>--%>
 
             <p><select class="listMulticatch" size="1" name="genereId">

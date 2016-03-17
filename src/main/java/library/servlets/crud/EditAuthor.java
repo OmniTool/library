@@ -54,8 +54,12 @@ public class EditAuthor extends HttpServlet {
                     req.setAttribute("sourceListBook", listBook);
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
-                    req.setAttribute("entity", entity);
-                    //req.setAttribute("pageName", entity.getFirstName() + entity.getSecondName() + entity.getMiddleName());
+
+                    if (req.getAttribute("entityCurrent") == null)
+                        req.setAttribute("entity", entity);
+                    else
+                        req.setAttribute("entity", req.getAttribute("entityCurrent"));
+
                     req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
                     //req.setAttribute("list", entity.getBooksList());
                     //req.setAttribute("ref", "/findbook?id=");
@@ -103,15 +107,18 @@ public class EditAuthor extends HttpServlet {
         Validator validator = new AuthorValidator();
         validator.trim(author);
 
-
-        //if (validator.canBeUpdated(author)) {}
-
             ManagerDAO dao = new DBManagerAuthor();
             try {
-                dao.update(author);
+                if (!validator.exists(author)) {
+                    dao.update(author);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor?id=" + author.getId());
+                    dispatcher.forward(req, resp);
+                } else {
+                    req.setAttribute("message", "Уже существует");
+                    req.setAttribute("entityCurrent", author);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor?id=" + author.getId());
-                dispatcher.forward(req, resp);
+                    doGet(req, resp);
+                }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {

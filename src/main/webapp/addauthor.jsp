@@ -14,6 +14,7 @@
 <body>
 
 <div class="parent topspace">
+
     <div class="block">
         <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred"><span class="marked">${bread}</span> > ${pageName}</h2></p>
@@ -22,14 +23,16 @@
 
 <div class="parent big_topspace">
 
+    <p class="message">${message}<p>
+
     <p>
         <div class="block">
             <form method="POST" class="centred">
-                <p><input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" required pattern=".*\S.*" title="Введите фамилию"></p>
-                <p><input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" required pattern=".*\S.*" title="Введите имя"></p>
-                <p><input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*\S.*" title="Введите отчество"></p>
-                <p><input type="text" value="" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
-                <p><textarea name="biography" value="" placeholder="Биография"></textarea></p>
+                <p><input type="text" value="${entity.secondName}" maxlength="64" placeholder="Фамилия" name="secondName" required pattern=".*\S.*" title="Введите фамилию"></p>
+                <p><input type="text" value="${entity.firstName}" maxlength="64" placeholder="Имя" name="firstName" required pattern=".*\S.*" title="Введите имя"></p>
+                <p><input type="text" value="${entity.middleName}" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*\S.*" title="Введите отчество"></p>
+                <p><input type="text" value="${entity.birthYear}" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
+                <p><textarea name="biography" placeholder="Биография">${entity.biography}</textarea></p>
                 <p><button formaction="addauthor">Добавить</button></p>
             </form>
         </div>
