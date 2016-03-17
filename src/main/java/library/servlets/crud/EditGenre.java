@@ -42,7 +42,12 @@ public class EditGenre extends HttpServlet {
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
                 req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
-                req.setAttribute("entity", entity);
+
+                if (req.getAttribute("entityCurrent") == null)
+                    req.setAttribute("entity", entity);
+                else
+                    req.setAttribute("entity", req.getAttribute("entityCurrent"));
+
                 dispatcher.forward(req, resp);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
@@ -72,16 +77,18 @@ public class EditGenre extends HttpServlet {
         Validator validator = new GenreValidator();
         validator.trim(genre);
 
-
-        //if (validator.canBeUpdated(genre)) {}
-
             ManagerDAO dao = new DBManagerGenre();
-            try {
+        try {
+            if (!validator.exists(genre)) {
                 dao.update(genre);
-
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre?id=" + genre.getId());
                 dispatcher.forward(req, resp);
-            } catch (SQLException e) {
+            } else {
+                req.setAttribute("message", "Уже существует");
+                req.setAttribute("entityCurrent", genre);
+                doGet(req, resp);
+            }
+        } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());

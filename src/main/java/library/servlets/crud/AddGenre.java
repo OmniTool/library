@@ -42,17 +42,18 @@ public class AddGenre extends HttpServlet {
             genre.setDescription(descriptions );
 
         Validator validator = new GenreValidator();
-        validator.trim(genre);
-
-
-        //if (validator.canBeCreated(genre)) {}
 
             ManagerDAO dao = new DBManagerGenre();
             try {
-                dao.create(genre);
-
-                RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
-                dispatcher.forward(req, resp);
+                if (!validator.exists(genre)) {
+                    dao.create(genre);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+                    dispatcher.forward(req, resp);
+                } else {
+                    req.setAttribute("message", "Уже существует");
+                    req.setAttribute("entity", genre);
+                    doGet(req, resp);
+                }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {

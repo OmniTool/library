@@ -36,9 +36,6 @@ public class EditAuthor extends HttpServlet {
         } else {
             id = Integer.parseInt(ids);
 
-            boolean isValid = true;
-
-            if (isValid && id != 0) {
                 ManagerDAO daoAuthor = new DBManagerAuthor();
                 ManagerDAO daoBook = new DBManagerBook();
                 DBManagerBookAuthor subDao = new DBManagerBookAuthor();
@@ -52,7 +49,6 @@ public class EditAuthor extends HttpServlet {
 
                     List<Book> listBook = daoBook.getAll();
                     req.setAttribute("sourceListBook", listBook);
-
                     RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
 
                     if (req.getAttribute("entityCurrent") == null)
@@ -70,7 +66,7 @@ public class EditAuthor extends HttpServlet {
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
                 }
-            }
+
         }
     }
 
@@ -105,7 +101,6 @@ public class EditAuthor extends HttpServlet {
             author.setBiography(biographys);
 
         Validator validator = new AuthorValidator();
-        validator.trim(author);
 
             ManagerDAO dao = new DBManagerAuthor();
             try {

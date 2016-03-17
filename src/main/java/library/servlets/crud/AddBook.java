@@ -61,17 +61,18 @@ public class AddBook extends HttpServlet {
             book.setGenereId(Integer.parseInt(genereIds ));
 
         Validator validator = new BookValidator();
-        validator.trim(book);
 
-
-        //if (validator.canBeCreated(book)) {}
-
-            ManagerDAO dao = new DBManagerBook();
+        ManagerDAO dao = new DBManagerBook();
             try {
-                dao.create(book);
-
-                RequestDispatcher dispatcher = req.getRequestDispatcher("books");
-                dispatcher.forward(req, resp);
+                if (!validator.exists(book)) {
+                    dao.create(book);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("books");
+                    dispatcher.forward(req, resp);;
+                } else {
+                    req.setAttribute("message", "Уже существует");
+                    req.setAttribute("entity", book);
+                    doGet(req, resp);
+                }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {

@@ -20,11 +20,13 @@ public class BookValidator implements Validator<Book> {
         List<Book> list = dao.searchEntityByName(entity);
         String title = entity.getTitle().toUpperCase();
         int pubYear = entity.getPubYear();
+        int genreId = entity.getGenereId();
 
         for (Book e : list) {
             trim(e);
             if (e.getTitle().toUpperCase().equals(title)
-                    && e.getPubYear()==pubYear)
+                    && e.getPubYear()==pubYear
+                    && e.getGenereId()==genreId)
                 return true;
         }
         return false;

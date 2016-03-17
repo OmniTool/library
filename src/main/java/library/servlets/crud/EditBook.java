@@ -52,10 +52,13 @@ public class EditBook extends HttpServlet {
                 req.setAttribute("sourceListAuthor", listAuthor);
                 List<Genre> listGenre = daoGenre.getAll();
                 req.setAttribute("sourceListGenre", listGenre);
-
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editbook.jsp");
-                req.setAttribute("entity", entity);
-                //req.setAttribute("pageName", "Редактирование");
+
+                if (req.getAttribute("entityCurrent") == null)
+                    req.setAttribute("entity", entity);
+                else
+                    req.setAttribute("entity", req.getAttribute("entityCurrent"));
+
                 req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
                 req.setAttribute("genre", daoGenre.getEntityById(entity.getGenereId()));
                 req.setAttribute("ref", "/findauthor?id=");
@@ -96,17 +99,19 @@ public class EditBook extends HttpServlet {
 
 
         Validator validator = new BookValidator();
-        validator.trim(book);
 
-
-        //if (validator.canBeUpdated(book)) {}
-
-            ManagerDAO dao = new DBManagerBook();
+        ManagerDAO dao = new DBManagerBook();
             try {
-                dao.update(book);
+                if (!validator.exists(book)) {
+                    dao.update(book);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("findbook?id=" + book.getId());
+                    dispatcher.forward(req, resp);
+                } else {
+                    req.setAttribute("message", "Уже существует");
+                    req.setAttribute("entityCurrent", book);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("findbook?id=" + book.getId());
-                dispatcher.forward(req, resp);
+                    doGet(req, resp);
+                }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
             } catch (NamingException e) {

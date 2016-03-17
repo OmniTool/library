@@ -63,7 +63,6 @@ public class AddAuthor extends HttpServlet {
             author.setBiography(biographys);
 
         Validator validator = new AuthorValidator();
-        validator.trim(author);
 
             ManagerDAO dao = new DBManagerAuthor();
             try {
@@ -74,10 +73,8 @@ public class AddAuthor extends HttpServlet {
                 } else {
                     req.setAttribute("message", "Уже существует");
                     req.setAttribute("entity", author);
-
                     doGet(req, resp);
                 }
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
