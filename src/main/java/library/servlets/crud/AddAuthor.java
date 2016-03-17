@@ -3,6 +3,7 @@ package library.servlets.crud;
 import library.dao.*;
 import library.dao.DBManagerAuthor;
 import library.dao.entities.Author;
+import library.dao.entities.Book;
 import library.dao.entities.Genre;
 import library.utils.validation.AuthorValidator;
 import library.utils.validation.Validator;
@@ -61,6 +62,9 @@ public class AddAuthor extends HttpServlet {
             author.setBirthYear(Integer.parseInt(birthYears));
         String biographys = req.getParameter("biography");
             author.setBiography(biographys);
+        String[] listBook = req.getParameterValues("listBook");
+//            for (String s : listBook) System.out.println(s);
+
 
         Validator validator = new AuthorValidator();
 
