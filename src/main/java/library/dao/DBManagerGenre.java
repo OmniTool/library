@@ -141,7 +141,7 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
 
 
 
-        String statementSQL = "SELECT * FROM genres WHERE title LIKE ?";
+        String statementSQL = "SELECT * FROM genres WHERE upper(title) LIKE upper(?)";
         List<Genre> list = new ArrayList<>();
 
         Connection connection = null;

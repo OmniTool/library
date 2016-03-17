@@ -170,3 +170,8 @@ a:active {
 .marked {
     color:#666666;
 }
+
+.searchfield {
+    width: 100px;
+}
+

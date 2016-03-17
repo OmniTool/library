@@ -20,15 +20,15 @@
 <div class="parent big_topspace">
 
     <p>
-    <form>
-        <p><button formaction="${action}">Добавить</button></p>
+    <form method="POST">
+        <p><input type="text" value="" maxlength="64" placeholder="Название" name="title" required pattern=".*\S.*" title="Введите название">
+            <button formaction="${actionSearch}">Найти</button>
     </form>
     </p>
 
     <p class="topspace">
     <form>
-        <p><input type="text" value="" maxlength="64" placeholder="Поиск" name="title" required pattern=".*\S.*" title="Введите название"></p>
-        <p><button formaction="${actionSearch}">Найти</button></p>
+        <p><button formaction="${action}">Добавить</button></p>
     </form>
     </p>
 

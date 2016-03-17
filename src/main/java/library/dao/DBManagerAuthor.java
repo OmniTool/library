@@ -168,7 +168,7 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
 //                }
 //            }
 
-        String statementSQL = "SELECT * FROM authors WHERE first_name LIKE ? AND second_name LIKE ? AND middle_name LIKE ?";
+        String statementSQL = "SELECT * FROM authors WHERE upper(first_name) LIKE upper(?) AND upper(second_name) LIKE upper(?) AND upper(middle_name) LIKE upper(?)";
         List<Author> list = new ArrayList<>();
 
         Connection connection = null;

@@ -148,7 +148,7 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
 //        List<Book> list = getAll();
 
 
-        String statementSQL = "SELECT * FROM books WHERE title LIKE ?";
+        String statementSQL = "SELECT * FROM books WHERE upper(title) LIKE upper(?)";
         List<Book> list = new ArrayList<>();
 
         Connection connection = null;
