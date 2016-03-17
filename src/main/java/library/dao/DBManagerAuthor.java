@@ -168,7 +168,7 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
 //                }
 //            }
 
-        String statementSQL = "SELECT * FROM authors WHERE first_name LIKE ? AND second_name LIKE ?";
+        String statementSQL = "SELECT * FROM authors WHERE first_name LIKE ? AND second_name LIKE ? AND middle_name LIKE ?";
         List<Author> list = new ArrayList<>();
 
         Connection connection = null;
@@ -178,8 +178,9 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
 
-            preparedStatement.setString(1, entity.getFirstName() + "%");
-            preparedStatement.setString(2, entity.getSecondName() + "%");
+            preparedStatement.setString(1, "%" + entity.getFirstName() + "%");
+            preparedStatement.setString(2, "%" + entity.getSecondName() + "%");
+            preparedStatement.setString(3, "%" + entity.getMiddleName() + "%");
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -193,14 +194,14 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
                 list.add(author);
             }
 
-            if (entity.getMiddleName() != null) {
-                Iterator<Author> iterator = list.iterator();
-                while (iterator.hasNext()) {
-                    Author a = iterator.next();
-                    if (!a.getMiddleName().toUpperCase().contains(entity.getMiddleName().toUpperCase()))
-                        iterator.remove();
-                }
-            }
+//            if (entity.getMiddleName() != null) {
+//                Iterator<Author> iterator = list.iterator();
+//                while (iterator.hasNext()) {
+//                    Author a = iterator.next();
+//                    if (!a.getMiddleName().toUpperCase().contains(entity.getMiddleName().toUpperCase()))
+//                        iterator.remove();
+//                }
+//            }
 
             return list;
         } finally {

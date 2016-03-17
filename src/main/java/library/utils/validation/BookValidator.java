@@ -13,13 +13,18 @@ import java.util.List;
 public class BookValidator implements Validator<Book> {
 
     @Override
-    public boolean isNameExists(Book entity) throws SQLException, NamingException {
+    public boolean exists(Book entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerBook();
 
-            List<Book> list = dao.searchEntityByName(entity);
-            if (list != null)
-                return true;
+        List<Book> list = dao.searchEntityByName(entity);
+        String title = entity.getTitle().toUpperCase();
+        int pubYear = entity.getPubYear();
 
+        for (Book e : list) {
+            if (e.getTitle().toUpperCase().equals(title)
+                    && e.getPubYear()==pubYear)
+                return true;
+        }
         return false;
     }
 

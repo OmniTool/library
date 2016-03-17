@@ -30,6 +30,7 @@ public class ShowAllAuthors extends HttpServlet {
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Авторы");
             req.setAttribute("action", "addauthor");
+            req.setAttribute("actionSearch", "findauthorbyname");
             req.setAttribute("ref", "/findauthor?id=");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");

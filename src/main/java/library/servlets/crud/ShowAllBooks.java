@@ -30,6 +30,7 @@ public class ShowAllBooks extends HttpServlet {
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Книги");
             req.setAttribute("action", "addbook");
+            req.setAttribute("actionSearch", "findbookbyname");
             req.setAttribute("ref", "/findbook?id=");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");

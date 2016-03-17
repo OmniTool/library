@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public interface Validator <E> {
 
-    boolean isNameExists(E entity) throws SQLException, NamingException;
+    boolean exists(E entity) throws SQLException, NamingException;
 
     void trim(E entity);
 

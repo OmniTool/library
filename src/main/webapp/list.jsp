@@ -26,6 +26,13 @@
     </p>
 
     <p class="topspace">
+    <form>
+        <p><input type="text" value="" maxlength="64" placeholder="Поиск" name="title" required pattern=".*\S.*" title="Введите название"></p>
+        <p><button formaction="${actionSearch}">Найти</button></p>
+    </form>
+    </p>
+
+    <p class="topspace">
         <c:forEach var="item" items="${list}">
     <p>
         <a href="${ref}${item.id}" class="content">${item.title}</a>

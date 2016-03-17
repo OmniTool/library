@@ -12,6 +12,9 @@ function dataSelectAdd() {
     var form2 = document.forms["resultForm"];
     var resultSelect = form2.elements.result;
     resultSelect.add(selectedItem);
+
+
+
 }
 function dataSelectDelete() {
     var form2 = document.forms["resultForm"];

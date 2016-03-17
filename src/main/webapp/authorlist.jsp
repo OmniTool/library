@@ -26,6 +26,15 @@
     </p>
 
     <p class="topspace">
+    <form>
+        <p><input type="text" value="" maxlength="64" placeholder="Поиск фамилии" name="secondName" required pattern=".*\S.*" title="Введите фамилию"></p>
+        <p><input type="text" value="" maxlength="64" placeholder="Поиск имени" name="firstName" required pattern=".*\S.*" title="Введите имя"></p>
+        <p><input type="text" value="" maxlength="64" placeholder="Поиск отчества" name="middleName" pattern=".*\S.*" title="Введите отчество"></p>
+        <p><button formaction="${actionSearch}">Найти</button></p>
+    </form>
+    </p>
+
+    <p class="topspace">
         <c:forEach var="item" items="${list}">
     <p>
         <a href="${ref}${item.id}" class="content">${item.firstName} ${item.middleName} ${item.secondName}</a>

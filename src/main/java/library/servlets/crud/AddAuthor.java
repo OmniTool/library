@@ -66,7 +66,7 @@ public class AddAuthor extends HttpServlet {
 
             ManagerDAO dao = new DBManagerAuthor();
             try {
-                if (!validator.isNameExists(author))
+                if (!validator.exists(author))
                     dao.create(author);
                 else
                     System.out.println("Существует!"); //// TODO существует

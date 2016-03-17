@@ -14,26 +14,22 @@ import java.util.List;
 public class AuthorValidator implements Validator<Author> {
 
     @Override
-    public boolean isNameExists(Author entity) throws SQLException, NamingException {
+    public boolean exists(Author entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerAuthor();
 
-            List<Author> list = dao.searchEntityByName(entity);
+        List<Author> list = dao.searchEntityByName(entity);
+        String firstName = entity.getFirstName().toUpperCase();
+        String middleName = entity.getMiddleName().toUpperCase();
+        String secondName = entity.getSecondName().toUpperCase();
+        int birthYear = entity.getBirthYear();
 
-        if (entity.getMiddleName() != null) {
-            Iterator<Author> iterator = list.iterator();
-            while (iterator.hasNext()) {
-                Author e = iterator.next();
-                trim(e);
-                if (!e.getFirstName().toUpperCase().equals(entity.getFirstName().toUpperCase())
-                        && !e.getMiddleName().toUpperCase().equals(entity.getMiddleName().toUpperCase())
-                        && !e.getSecondName().toUpperCase().equals(entity.getSecondName().toUpperCase()))
-                    iterator.remove();
-            }
+        for (Author e : list) {
+                if (e.getMiddleName().toUpperCase().equals(middleName)
+                        && e.getFirstName().toUpperCase().equals(firstName)
+                        && e.getSecondName().toUpperCase().equals(secondName)
+                        && e.getBirthYear()==birthYear)
+                    return true;
         }
-
-            if (list != null)
-                return true;
-
         return false;
     }
 

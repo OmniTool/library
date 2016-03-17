@@ -11,15 +11,16 @@ import java.util.List;
 public class GenreValidator implements Validator<Genre> {
 
     @Override
-    public boolean isNameExists(Genre entity) throws SQLException, NamingException {
+    public boolean exists(Genre entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerGenre();
 
-            List<Genre> list = dao.searchEntityByName(entity);
+        List<Genre> list = dao.searchEntityByName(entity);
+        String title = entity.getTitle().toUpperCase();
 
-
-            if (list != null)
+        for (Genre e : list) {
+            if (e.getTitle().toUpperCase().equals(title))
                 return true;
-
+        }
         return false;
     }
 

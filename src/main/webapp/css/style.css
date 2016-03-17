@@ -80,6 +80,10 @@ input[type=button] {
     width: 100px;
 }
 
+button {
+    width: 100px;
+}
+
 a {
 
     color:#000000;

@@ -38,7 +38,7 @@
     <p>
     <div class="block">
         <form id="resultForm">
-            <p><select size="5" name="result" class="listMulticatch" multiple>
+            <p><select size="5" name="result" class="listMulticatch" multiple id="res">
                 <option disabled>Выбранные книги</option>
 
 
@@ -53,7 +53,7 @@
 
     <div class="block">
         <form id="sourceForm">
-            <p><select size="5" name="source" class="listMulticatch" multiple>
+            <p><select size="5" name="source" class="listMulticatch" multiple id="sou">
                 <option disabled>Выберите книги</option>
                 <c:forEach var="item" items="${sourceListBook}">
                     <option value="${item.id}">${item.title}</option>
