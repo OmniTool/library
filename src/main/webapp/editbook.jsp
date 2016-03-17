@@ -37,13 +37,6 @@
                     <c:set var="optionId" scope="session" value="${opt.id}"/>
                     <c:set var="targetId" scope="session" value="${genre.id}"/>
 
-                    <%--<c:if test="${optionId==targetId}">--%>
-                        <%--<option selected value="${opt.id}">${opt.title}</option>--%>
-                    <%--</c:if>--%>
-                    <%--<c:if test="${targetId!=entityId}">--%>
-                        <%--<option value="${opt.id}">${opt.title}</option>--%>
-                    <%--</c:if>--%>
-
                         <c:choose>
                             <c:when test="${optionId==targetId}">
                                 <option selected value="${opt.id}">${opt.title}</option>

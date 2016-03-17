@@ -29,11 +29,29 @@
 
             <p><select class="listMulticatch" size="1" name="genereId">
                 <option disabled>Жанр</option>
-                <c:forEach var="genre" items="${sourceListGenre}">
+                <c:forEach var="opt" items="${sourceListGenre}">
                     <p>
-                        <option value="${genre.id}">${genre.title}</option>
+
+                        <c:set var="optionId" scope="session" value="${opt.id}"/>
+                        <c:set var="targetId" scope="session" value="${entity.genereId}"/>
+
+                        <c:choose>
+                            <c:when test="${optionId==targetId}">
+                                <option selected value="${opt.id}">${opt.title}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${opt.id}">${opt.title}</option>
+                            </c:otherwise>
+                        </c:choose>
+
                     </p>
                 </c:forEach>
+
+                <%--<c:forEach var="genre" items="${sourceListGenre}">--%>
+                    <%--<p>--%>
+                        <%--<option value="${genre.id}">${genre.title}</option>--%>
+                    <%--</p>--%>
+                <%--</c:forEach>--%>
                 
             </select></p>
 
