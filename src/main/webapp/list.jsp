@@ -21,7 +21,7 @@
 
     <p>
     <form method="POST">
-        <p><input type="text" value="" maxlength="64" placeholder="Название" name="title" required pattern=".*\S.*" title="Введите название">
+        <p><input type="text" value="" maxlength="64" placeholder="Название" name="title" pattern=".*\S.*" title="Введите название">
             <button formaction="${actionSearch}">Найти</button>
     </form>
     </p>

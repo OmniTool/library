@@ -21,8 +21,8 @@
 
     <p>
     <form method="POST">
-        <input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" required pattern=".*\S.*" title="Введите фамилию" class="searchfield">
-        <input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" required pattern=".*\S.*" title="Введите имя" class="searchfield">
+        <input type="text" value="" maxlength="64" placeholder="Фамилия" name="secondName" pattern=".*\S.*" title="Введите фамилию" class="searchfield">
+        <input type="text" value="" maxlength="64" placeholder="Имя" name="firstName" pattern=".*\S.*" title="Введите имя" class="searchfield">
         <input type="text" value="" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*\S.*" title="Введите отчество" class="searchfield">
         <button formaction="${actionSearch}">Найти</button>
     </form>
