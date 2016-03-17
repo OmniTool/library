@@ -59,6 +59,8 @@ public class EditAuthor extends HttpServlet {
                     req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
                     //req.setAttribute("list", entity.getBooksList());
                     //req.setAttribute("ref", "/findbook?id=");
+
+
                     dispatcher.forward(req, resp);
 
                 } catch (SQLException e) {

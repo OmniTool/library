@@ -14,7 +14,6 @@
 <body>
 
 <div class="parent topspace">
-
     <div class="block">
         <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred"><span class="marked">${bread}</span> > ${pageName}</h2></p>
@@ -45,77 +44,11 @@
             </form>
         </div>
     </p>
-
-    <p>
-    <%--<div class="block">--%>
-        <%--<form id="resultForm">--%>
-            <%--<p><select size="5" name="result" class="listMulticatch" multiple id="res">--%>
-                <%--<option disabled>Выбранные книги</option>--%>
-
-
-            <%--</select></p>--%>
-        <%--</form>--%>
-    <%--</div>--%>
-
-    <%--<div class="block">--%>
-        <%--<p><button form="sourceForm" onclick="dataSelectAdd()"><<</button></p>--%>
-        <%--<p><button form="resultForm" onclick="dataSelectDelete()">>></button></p>--%>
-    <%--</div>--%>
-
-    <%--<div class="block">--%>
-        <%--<form id="sourceForm">--%>
-            <%--<p><select size="5" name="source" class="listMulticatch" multiple id="sou">--%>
-                <%--<option disabled>Выберите книги</option>--%>
-                <%--<c:forEach var="item" items="${sourceListBook}">--%>
-                    <%--<option value="${item.id}">${item.title}</option>--%>
-                <%--</c:forEach>--%>
-            <%--</select></p>--%>
-        <%--</form>--%>
-    <%--</div>--%>
-
-    </p>
-
-    <p>
-
-    <%--<div class="block">--%>
-        <%--<form id="sourceForm">--%>
-            <%--<p><select id="my-select" size="5" name="source" class="listMulticatch" multiple='multiple'>--%>
-                <%--<option disabled>Выберите книги</option>--%>
-                <%--<c:forEach var="item" items="${sourceListBook}">--%>
-                    <%--<option value="${item.id}">${item.title}</option>--%>
-                <%--</c:forEach>--%>
-            <%--</select></p>--%>
-        <%--</form>--%>
-    <%--</div>--%>
-
-
-
-        <%--<select id="my-select" multiple='multiple'>--%>
-            <%--<option value='elem_1'>elem 1</option>--%>
-            <%--<option value='elem_2'>elem 2</option>--%>
-            <%--<option value='elem_3'>elem 3</option>--%>
-            <%--<option value='elem_4'>elem 4</option>--%>
-            <%--<option value='elem_100'>elem 100</option>--%>
-        <%--</select>--%>
-
-
-        <script type="text/javascript">
-            $('#my-select').multiSelect();
-        </script>
-
-    </p>
-
 </div>
 
-
-
-
-
-
-
-
-
-
+<script>
+    $('#my-select').multiSelect();
+</script>
 </body>
 </html>
 
