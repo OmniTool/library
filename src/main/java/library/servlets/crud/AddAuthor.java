@@ -4,8 +4,10 @@ import library.dao.*;
 import library.dao.DBManagerAuthor;
 import library.dao.entities.Author;
 import library.dao.entities.Book;
+import library.dao.entities.BookAuthor;
 import library.dao.entities.Genre;
 import library.utils.validation.AuthorValidator;
+import library.utils.validation.BookValidator;
 import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
@@ -67,11 +69,21 @@ public class AddAuthor extends HttpServlet {
 
 
         Validator validator = new AuthorValidator();
+        Validator validatorBook = new BookValidator();
 
-            ManagerDAO dao = new DBManagerAuthor();
+        ManagerDAO dao = new DBManagerAuthor();
+        ManagerDAO daoBookAuthor = new DBManagerBookAuthor();
             try {
                 if (!validator.exists(author)) {
-                    dao.create(author);
+                    int futureId = dao.create(author);
+
+                    for (String s : listBook) {
+                        BookAuthor ba = new BookAuthor();
+                        ba.setAuthorId(futureId);
+                        ba.setBookId(Integer.parseInt(s));
+                        daoBookAuthor.create(ba);
+                    }
+
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                     dispatcher.forward(req, resp);
                 } else {

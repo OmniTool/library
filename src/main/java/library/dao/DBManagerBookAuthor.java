@@ -120,10 +120,11 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     @Override
-    public void create(BookAuthor entity) throws SQLException, NamingException {
+    public int create(BookAuthor entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO books_authors (book_id, author_id) VALUES (?, ?)";
         //String statementSQL = "INSERT INTO books_authors (title, pub_year, genere_id) VALUES ('русская книга из запроса eeeeeelllkkkkk', 1234, 55)";
+        String nextval = "SELECT nextval('books_authors_id')";
 
         Connection connection = null;
 
@@ -139,6 +140,7 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
             if (connection != null)
                 connection.close();
         }
+        return 0;
     }
 
     @Override

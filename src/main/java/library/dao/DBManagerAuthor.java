@@ -133,27 +133,34 @@ public class DBManagerAuthor implements ManagerDAO <Author, Integer> {
     }
 
     @Override
-    public void create(Author entity) throws SQLException, NamingException {
+    public int create(Author entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO authors (second_name, first_name, middle_name, birth_year, biography) VALUES (?, ?, ?, ?, ?)";
+        String nextvalSQL = "SELECT nextval('authors_id')";
+        int futureId = 0;
 
         Connection connection = null;
 
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setString(1, entity.getSecondName());
             preparedStatement.setString(2, entity.getFirstName());
             preparedStatement.setString(3, entity.getMiddleName());
             preparedStatement.setInt(4, entity.getBirthYear());
             preparedStatement.setString(5, entity.getBiography());
-
             preparedStatement.executeUpdate();
+
+            PreparedStatement preparedStatementNextval = connection.prepareStatement(nextvalSQL);
+            ResultSet rs = preparedStatementNextval.executeQuery();
+            if (rs.next()) {
+                futureId = rs.getInt("nextval");
+            }
         } finally {
         if (connection != null)
             connection.close();
         }
+        return --futureId;
     }
 
     @Override

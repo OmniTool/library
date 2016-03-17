@@ -115,9 +115,10 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
     }
 
     @Override
-    public void create(Genre entity) throws SQLException, NamingException {
+    public int create(Genre entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO genres (title, description) VALUES (?, ?)";
+        String nextval = "SELECT nextval('genres_id')";
 
         Connection connection = null;
 
@@ -133,6 +134,7 @@ public class DBManagerGenre implements ManagerDAO <Genre, Integer> {
         if (connection != null)
             connection.close();
         }
+        return 0;
     }
 
     @Override
