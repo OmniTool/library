@@ -39,14 +39,7 @@ public class AddAuthor extends HttpServlet {
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
-        //req.setAttribute("resultListBook", new ArrayList<Author>());
-//        if (req.getAttribute("entityCurrent") == null)
-//            req.setAttribute("entity", entity);
-//        else
-//            req.setAttribute("entity", req.getAttribute("entityCurrent"));
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
-        //req.setAttribute("pageName", "Добавление");
         req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
         dispatcher.forward(req, resp);
     }

@@ -34,7 +34,7 @@
                 <p><textarea name="biography" placeholder="Биография">${entity.biography}</textarea></p>
 
                 <p><select id="my-select" size="5" name="listBook" class="listMulticatch" multiple>
-                    <option disabled>Выбранные книги</option>
+                    <option disabled>Выберете книги</option>
                     <c:forEach var="opt" items="${sourceListBook}">
                         <p>
                             <c:set var="optionId" scope="session" value="${opt.id}"/>

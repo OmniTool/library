@@ -52,7 +52,7 @@
             </select></p>
 
             <p><select id="my-select" size="5" name="listAuthor" class="listMulticatch" multiple>
-                <option disabled>Выбранные книги</option>
+                <option disabled>Выберете авторов</option>
                 <c:forEach var="opt" items="${sourceListAuthor}">
                     <p>
                         <c:set var="optionId" scope="session" value="${opt.id}"/>
