@@ -39,7 +39,11 @@ public class AddAuthor extends HttpServlet {
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
-        req.setAttribute("resultListBook", new ArrayList<Author>());
+        //req.setAttribute("resultListBook", new ArrayList<Author>());
+//        if (req.getAttribute("entityCurrent") == null)
+//            req.setAttribute("entity", entity);
+//        else
+            req.setAttribute("entity", req.getAttribute("entityCurrent"));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
 
@@ -65,8 +69,6 @@ public class AddAuthor extends HttpServlet {
         String biographys = req.getParameter("biography");
             author.setBiography(biographys);
         String[] listBook = req.getParameterValues("listBook");
-//            for (String s : listBook) System.out.println(s);
-
 
         Validator validator = new AuthorValidator();
         //Validator validatorBook = new BookValidator();
@@ -87,8 +89,13 @@ public class AddAuthor extends HttpServlet {
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                     dispatcher.forward(req, resp);
                 } else {
+                    //booksList
+                    ManagerDAO daoBook = new DBManagerBook();
+
+                    req.setAttribute("booksList", );
+
                     req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entity", author);
+                    req.setAttribute("entityCurrent", author);
                     doGet(req, resp);
                 }
             } catch (SQLException e) {

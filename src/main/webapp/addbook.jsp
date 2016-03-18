@@ -43,16 +43,8 @@
                                 <option value="${opt.id}">${opt.title}</option>
                             </c:otherwise>
                         </c:choose>
-
                     </p>
                 </c:forEach>
-
-                <%--<c:forEach var="genre" items="${sourceListGenre}">--%>
-                    <%--<p>--%>
-                        <%--<option value="${genre.id}">${genre.title}</option>--%>
-                    <%--</p>--%>
-                <%--</c:forEach>--%>
-                
             </select></p>
 
             <p><button formaction="addbook">Добавить</button></p>

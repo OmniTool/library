@@ -39,7 +39,11 @@ public class AddBook extends HttpServlet {
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
-        req.setAttribute("resultListAuthor", new ArrayList<Author>());
+        //req.setAttribute("resultListAuthor", new ArrayList<Author>());
+//        if (req.getAttribute("entityCurrent") == null)
+//            req.setAttribute("entity", entity);
+//        else
+            req.setAttribute("entity", req.getAttribute("entityCurrent"));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
 
@@ -70,7 +74,7 @@ public class AddBook extends HttpServlet {
                     dispatcher.forward(req, resp);;
                 } else {
                     req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entity", book);
+                    req.setAttribute("entityCurrent", book);
                     doGet(req, resp);
                 }
             } catch (SQLException e) {

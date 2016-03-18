@@ -158,9 +158,12 @@ public class EditAuthor extends HttpServlet {
                     RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor?id=" + author.getId());
                     dispatcher.forward(req, resp);
                 } else {
+                    //booksList
+
+                    req.setAttribute("booksList", );
+
                     req.setAttribute("message", "Уже существует");
                     req.setAttribute("entityCurrent", author);
-
                     doGet(req, resp);
                 }
 

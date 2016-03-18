@@ -30,12 +30,11 @@
 
             <p><select class="listMulticatch" size="1" name="genereId">
                 <option disabled>Жанр</option>
-
                 <c:forEach var="opt" items="${sourceListGenre}">
                     <p>
 
-                    <c:set var="optionId" scope="session" value="${opt.id}"/>
-                    <c:set var="targetId" scope="session" value="${genre.id}"/>
+                        <c:set var="optionId" scope="session" value="${opt.id}"/>
+                        <c:set var="targetId" scope="session" value="${genre.id}"/>
 
                         <c:choose>
                             <c:when test="${optionId==targetId}">
@@ -45,14 +44,9 @@
                                 <option value="${opt.id}">${opt.title}</option>
                             </c:otherwise>
                         </c:choose>
-
                     </p>
                 </c:forEach>
-
             </select></p>
-
-            <%--<p class="topspace"><h3 class="centred">Жанр</h3></p>--%>
-            <%--<p class="centred"><a href="${refGenre}${genre.id}" class="content">${genre.title}</a></p>--%>
 
             <p><button formaction="editbook">Изменить</button></p>
         </form>
