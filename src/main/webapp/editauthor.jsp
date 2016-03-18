@@ -33,12 +33,10 @@
             <p><input type="text" value="${entity.birthYear}" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
             <p><textarea name="biography" placeholder="Биография">${entity.biography}</textarea></p>
 
-
-            <p><select id="my-select" size="5" name="source" class="listMulticatch" multiple>
-                <option disabled>Выбранные книги</option>
+            <p><select id="my-select" size="5" name="listBook" class="listMulticatch" multiple>
+                <option disabled>Выберете книги</option>
                 <c:forEach var="opt" items="${sourceListBook}">
                     <p>
-
                         <c:set var="optionId" scope="session" value="${opt.id}"/>
                         <c:set var="isSelected" scope="session" value='false'/>
 
@@ -49,7 +47,6 @@
                                     <c:set var="isSelected" scope="session" value='true'/>
                                 </c:when>
                             </c:choose>
-
                         </c:forEach>
 
                         <c:choose>
@@ -62,29 +59,6 @@
                         </c:choose>
                     </p>
                 </c:forEach>
-
-
-                <%--<c:forEach var="selected" items="${entity.booksList}" >--%>
-                    <%--<p>--%>
-
-                        <%--<c:set var="targetId" scope="session" value="${selected.id}"/>--%>
-
-                        <%--<c:forEach var="opt" items="${sourceListBook}">--%>
-                            <%--<c:set var="optionId" scope="session" value="${opt.id}"/>--%>
-                            <%--<c:choose>--%>
-                                <%--<c:when test="${optionId==targetId}">--%>
-                                    <%--<option selected value="${opt.id}">${opt.title}</option>--%>
-                                <%--</c:when>--%>
-
-                                <%--<c:otherwise>--%>
-                                    <%--<option value="${opt.id}">${opt.title}</option>--%>
-                                <%--</c:otherwise>--%>
-                            <%--</c:choose>--%>
-                        <%--</c:forEach>--%>
-                    <%--</p>--%>
-                <%--</c:forEach>--%>
-
-
             </select></p>
             <%--<p><select id="my-select" size="5" name="listBook" class="listMulticatch" multiple>--%>
                 <%--<option disabled>Выберите книги</option>--%>
@@ -93,7 +67,7 @@
                 <%--</c:forEach>--%>
             <%--</select></p>--%>
 
-            <%--<p><button formaction="editauthor">Изменить</button></p>--%>
+            <p><button formaction="editauthor">Изменить</button></p>
 
 
         </form>

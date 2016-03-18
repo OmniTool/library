@@ -69,7 +69,7 @@ public class AddAuthor extends HttpServlet {
 
 
         Validator validator = new AuthorValidator();
-        Validator validatorBook = new BookValidator();
+        //Validator validatorBook = new BookValidator();
 
         ManagerDAO dao = new DBManagerAuthor();
         ManagerDAO daoBookAuthor = new DBManagerBookAuthor();

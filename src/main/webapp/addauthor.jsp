@@ -34,11 +34,39 @@
                 <p><textarea name="biography" placeholder="Биография">${entity.biography}</textarea></p>
 
                 <p><select id="my-select" size="5" name="listBook" class="listMulticatch" multiple>
-                    <option disabled>Выберите книги</option>
-                    <c:forEach var="item" items="${sourceListBook}">
-                        <option value="${item.id}">${item.title}</option>
+                    <option disabled>Выбранные книги</option>
+                    <c:forEach var="opt" items="${sourceListBook}">
+                        <p>
+                            <c:set var="optionId" scope="session" value="${opt.id}"/>
+                            <c:set var="isSelected" scope="session" value='false'/>
+
+                            <c:forEach var="selected" items="${entity.booksList}" >
+                                <c:set var="targetId" scope="session" value="${selected.id}"/>
+                                <c:choose>
+                                    <c:when test="${optionId==targetId}">
+                                        <c:set var="isSelected" scope="session" value='true'/>
+                                    </c:when>
+                                </c:choose>
+                            </c:forEach>
+
+                            <c:choose>
+                                <c:when test="${isSelected=='true'}">
+                                    <option selected value="${opt.id}">${opt.title}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${opt.id}">${opt.title}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
                     </c:forEach>
                 </select></p>
+
+                <%--<p><select id="my-select" size="5" name="listBook" class="listMulticatch" multiple>--%>
+                    <%--<option disabled>Выберите книги</option>--%>
+                    <%--<c:forEach var="item" items="${sourceListBook}">--%>
+                        <%--<option value="${item.id}">${item.title}</option>--%>
+                    <%--</c:forEach>--%>
+                <%--</select></p>--%>
 
                 <p><button formaction="addauthor">Добавить</button></p>
             </form>

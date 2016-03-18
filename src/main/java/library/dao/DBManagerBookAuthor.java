@@ -145,28 +145,44 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
 
     @Override
     public List<BookAuthor> searchEntityByName(BookAuthor entity) throws SQLException, NamingException {
-
-//
-
-        return null;
-    }
-
-    public List<Book> searchBooksByAuthor(Author entity) throws SQLException, NamingException {
-        List<Integer> listId = new ArrayList<>();
-        List<Book> list = new ArrayList<>();
-        DBManagerBook dao = new DBManagerBook();
-
-        String statementSQL = "SELECT * FROM books_authors WHERE author_id = ?";
-
+        List<BookAuthor> list = new ArrayList<>();
+        //DBManagerBook dao = new DBManagerBook();
+        String statementSQL = "SELECT * FROM books_authors WHERE author_id = ? AND book_id = ?";
         Connection connection = null;
         ResultSet rs = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
+            preparedStatement.setInt(1, entity.getAuthorId());
+            preparedStatement.setInt(2, entity.getBookId());
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                BookAuthor ba = new BookAuthor();
+                ba.setId(rs.getInt("id"));
+                ba.setBookId(rs.getInt("book_id"));
+                ba.setAuthorId(rs.getInt("author_id"));
+                list.add(ba);
+            }
+            return list;
+        } finally {
+            if (connection != null)
+                connection.close();
+            if (rs != null)
+                rs.close();
+        }
+    }
 
+    public List<Book> searchBooksByAuthor(Author entity) throws SQLException, NamingException {
+        //List<Integer> listId = new ArrayList<>();
+        List<Book> list = new ArrayList<>();
+        DBManagerBook dao = new DBManagerBook();
+        String statementSQL = "SELECT * FROM books_authors WHERE author_id = ?";
+        Connection connection = null;
+        ResultSet rs = null;
+        try {
+            connection = connector.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             preparedStatement.setInt(1, entity.getId());
-
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("book_id");
@@ -183,21 +199,16 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     public List<Author> searchAuthorsByBook(Book entity) throws SQLException, NamingException {
-        List<Integer> listId = new ArrayList<>();
+        //List<Integer> listId = new ArrayList<>();
         List<Author> list = new ArrayList<>();
         DBManagerAuthor dao = new DBManagerAuthor();
-
         String statementSQL = "SELECT * FROM books_authors WHERE book_id = ?";
-
         Connection connection = null;
         ResultSet rs = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setInt(1, entity.getId());
-
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("author_id");
@@ -211,6 +222,8 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
                 rs.close();
         }
     }
+
+
 
 
 }

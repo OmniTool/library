@@ -1,14 +1,11 @@
 package library.utils.validation;
 
 import library.dao.DBManagerAuthor;
-import library.dao.DBManagerGenre;
 import library.dao.ManagerDAO;
 import library.dao.entities.Author;
-import library.dao.entities.Genre;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 
 public class AuthorValidator implements Validator<Author> {
