@@ -43,7 +43,7 @@ public class AddAuthor extends HttpServlet {
 //        if (req.getAttribute("entityCurrent") == null)
 //            req.setAttribute("entity", entity);
 //        else
-            req.setAttribute("entity", req.getAttribute("entityCurrent"));
+//            req.setAttribute("entity", req.getAttribute("entityCurrent"));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
 
@@ -68,18 +68,23 @@ public class AddAuthor extends HttpServlet {
             author.setBirthYear(Integer.parseInt(birthYears));
         String biographys = req.getParameter("biography");
             author.setBiography(biographys);
-        String[] listBook = req.getParameterValues("listBook");
+        String[] arrBooks = req.getParameterValues("listBook");
+        List<Integer> selectedBooksId = new ArrayList<>();
+
+        for (String s : arrBooks) {
+            int id = Integer.parseInt(s);
+            selectedBooksId.add(id);
+        }
 
         Validator validator = new AuthorValidator();
-        //Validator validatorBook = new BookValidator();
-
-        ManagerDAO dao = new DBManagerAuthor();
-        ManagerDAO daoBookAuthor = new DBManagerBookAuthor();
+        ManagerDAO daoAuthor = new DBManagerAuthor();
+        ManagerDAO daoBook = new DBManagerBook();
+        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             try {
                 if (!validator.exists(author)) {
-                    int futureId = dao.create(author);
+                    int futureId = daoAuthor.create(author);
 
-                    for (String s : listBook) {
+                    for (String s : arrBooks) {
                         BookAuthor ba = new BookAuthor();
                         ba.setAuthorId(futureId);
                         ba.setBookId(Integer.parseInt(s));
@@ -89,13 +94,13 @@ public class AddAuthor extends HttpServlet {
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                     dispatcher.forward(req, resp);
                 } else {
-                    //booksList
-                    ManagerDAO daoBook = new DBManagerBook();
-
-                    req.setAttribute("booksList", );
-
+                    List<Book> l = new ArrayList<>();
+                    for (int id : selectedBooksId) {
+                        l.add((Book) daoBook.getEntityById(id));
+                    }
+                    author.setBooksList(l);
                     req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entityCurrent", author);
+                    req.setAttribute("entity", author);
                     doGet(req, resp);
                 }
             } catch (SQLException e) {

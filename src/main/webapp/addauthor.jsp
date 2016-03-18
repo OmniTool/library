@@ -40,7 +40,7 @@
                             <c:set var="optionId" scope="session" value="${opt.id}"/>
                             <c:set var="isSelected" scope="session" value='false'/>
 
-                            <c:forEach var="selected" items="${booksList}" >
+                            <c:forEach var="selected" items="${entity.booksList}" >
                                 <c:set var="targetId" scope="session" value="${selected.id}"/>
                                 <c:choose>
                                     <c:when test="${optionId==targetId}">

@@ -44,20 +44,19 @@ public class EditAuthor extends HttpServlet {
                 DBManagerBookAuthor subDao = new DBManagerBookAuthor();
 
                 try {
-                    Author entity = (Author) daoAuthor.getEntityById(id);
-                    Validator validator = new AuthorValidator();
-                    validator.trim(entity);
-
-                    entity.setBooksList(subDao.searchBooksByAuthor(entity));
 
                     List<Book> listBook = daoBook.getAll();
                     req.setAttribute("sourceListBook", listBook);
                     RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
 
-                    if (req.getAttribute("entityCurrent") == null)
+                    if (req.getAttribute("entity") == null) {
+                        Author entity = (Author) daoAuthor.getEntityById(id);
+                        Validator validator = new AuthorValidator();
+                        validator.trim(entity);
+                        entity.setBooksList(subDao.searchBooksByAuthor(entity));
                         req.setAttribute("entity", entity);
-                    else
-                        req.setAttribute("entity", req.getAttribute("entityCurrent"));
+                    }
+
 
                     req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
                     //req.setAttribute("list", entity.getBooksList());
@@ -93,22 +92,26 @@ public class EditAuthor extends HttpServlet {
         String biographys = req.getParameter("biography");
             author.setBiography(biographys);
         String[] arrBooks = req.getParameterValues("listBook");
-
+            List<Integer> selectedBooksId = new ArrayList<>();
             List<Integer> forAddListId = new ArrayList<>();
             //List<BookAuthor> forAddList = new ArrayList<>();
             for (String s : arrBooks) {
-                forAddListId.add(Integer.parseInt(s));
+                int id = Integer.parseInt(s);
+                forAddListId.add(id);
+                selectedBooksId.add(id);
             }
             List<Integer> forDelListId = new ArrayList<>();
             //List<BookAuthor> forDelList = new ArrayList<>();
 
         Validator validator = new AuthorValidator();
-        ManagerDAO dao = new DBManagerAuthor();
+        ManagerDAO daoAuthor = new DBManagerAuthor();
+        ManagerDAO daoBook = new DBManagerBook();
         DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
 
             try {
+
                 boolean isValid;
-                Author forUpdAuthor = (Author) dao.getEntityById(author.getId());
+                Author forUpdAuthor = (Author) daoAuthor.getEntityById(author.getId());
                 validator.trim(forUpdAuthor);
                 if (author.getFirstName().equals(forUpdAuthor.getFirstName())
                         && author.getMiddleName().equals(forUpdAuthor.getMiddleName())
@@ -153,20 +156,20 @@ public class EditAuthor extends HttpServlet {
                             daoBookAuthor.delete(baFromDB);
                     }
 
-                    dao.update(author);
+                    daoAuthor.update(author);
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("findauthor?id=" + author.getId());
                     dispatcher.forward(req, resp);
                 } else {
-                    //booksList
-
-                    req.setAttribute("booksList", );
-
+                    List<Book> l = new ArrayList<>();
+                    for (int id : selectedBooksId) {
+                        l.add((Book) daoBook.getEntityById(id));
+                    }
+                    author.setBooksList(l);
                     req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entityCurrent", author);
+                    req.setAttribute("entity", author);
                     doGet(req, resp);
                 }
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
