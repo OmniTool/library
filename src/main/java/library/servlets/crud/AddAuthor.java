@@ -46,10 +46,8 @@ public class AddAuthor extends HttpServlet {
 //            req.setAttribute("entity", req.getAttribute("entityCurrent"));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
-
-        req.setAttribute("pageName", "Добавление");
+        //req.setAttribute("pageName", "Добавление");
         req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
-
         dispatcher.forward(req, resp);
     }
 

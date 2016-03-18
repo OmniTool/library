@@ -42,25 +42,21 @@ public class EditBook extends HttpServlet {
             ManagerDAO daoAuthor = new DBManagerAuthor();
 
             try {
-                Book entity = (Book) daoBook.getEntityById(id);
-                Validator validator = new BookValidator();
-                validator.trim(entity);
-
-                entity.setAuthorsList(daoBookAuthor.searchAuthorsByBook(entity));
-
                 List<Author> listAuthor = daoAuthor.getAll();
                 req.setAttribute("sourceListAuthor", listAuthor);
                 List<Genre> listGenre = daoGenre.getAll();
                 req.setAttribute("sourceListGenre", listGenre);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editbook.jsp");
 
-                if (req.getAttribute("entityCurrent") == null)
+                if (req.getAttribute("entity") == null) {
+                    Book entity = (Book) daoBook.getEntityById(id);
+                    Validator validator = new BookValidator();
+                    validator.trim(entity);
+                    entity.setAuthorsList(daoBookAuthor.searchAuthorsByBook(entity));
                     req.setAttribute("entity", entity);
-                else
-                    req.setAttribute("entity", req.getAttribute("entityCurrent"));
-
+                    req.setAttribute("genre", daoGenre.getEntityById(entity.getGenereId()));
+                }
                 req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
-                req.setAttribute("genre", daoGenre.getEntityById(entity.getGenereId()));
                 req.setAttribute("ref", "/findauthor?id=");
                 req.setAttribute("refGenre", "/findgenre?id=");
                 dispatcher.forward(req, resp);
@@ -108,7 +104,7 @@ public class EditBook extends HttpServlet {
                     dispatcher.forward(req, resp);
                 } else {
                     req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entityCurrent", book);
+                    req.setAttribute("entity", book);
 
                     doGet(req, resp);
                 }

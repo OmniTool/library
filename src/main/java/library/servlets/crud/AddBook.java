@@ -43,11 +43,10 @@ public class AddBook extends HttpServlet {
 //        if (req.getAttribute("entityCurrent") == null)
 //            req.setAttribute("entity", entity);
 //        else
-            req.setAttribute("entity", req.getAttribute("entityCurrent"));
+            //req.setAttribute("entity", req.getAttribute("entityCurrent"));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
-
-        req.setAttribute("pageName", "Добавление");
+        //req.setAttribute("pageName", "Добавление");
         req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
         dispatcher.forward(req, resp);
     }
@@ -63,6 +62,13 @@ public class AddBook extends HttpServlet {
             book.setPubYear(Integer.parseInt(pubYears ));
         String  genereIds = req.getParameter("genereId");
             book.setGenereId(Integer.parseInt(genereIds ));
+        String[] arrBooks = req.getParameterValues("listBook");
+        List<Integer> selectedBooksId = new ArrayList<>();
+
+        for (String s : arrBooks) {
+            int id = Integer.parseInt(s);
+            selectedBooksId.add(id);
+        }
 
         Validator validator = new BookValidator();
 
@@ -74,7 +80,7 @@ public class AddBook extends HttpServlet {
                     dispatcher.forward(req, resp);;
                 } else {
                     req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entityCurrent", book);
+                    req.setAttribute("entity", book);
                     doGet(req, resp);
                 }
             } catch (SQLException e) {

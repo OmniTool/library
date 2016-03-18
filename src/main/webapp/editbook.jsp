@@ -6,7 +6,10 @@
     <title></title>
     <style>
         <%@include file='css/style.css' %>
+        <%@include file='css/multi-select.css' %>
     </style>
+    <script src="js/jquery-2.1.0.js" type="text/javascript"></script>
+    <script src="js/jquery.multi-select.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -48,78 +51,41 @@
                 </c:forEach>
             </select></p>
 
+            <p><select id="my-select" size="5" name="listAuthor" class="listMulticatch" multiple>
+                <option disabled>Выбранные книги</option>
+                <c:forEach var="opt" items="${sourceListAuthor}">
+                    <p>
+                        <c:set var="optionId" scope="session" value="${opt.id}"/>
+                        <c:set var="isSelected" scope="session" value='false'/>
+
+                        <c:forEach var="selected" items="${entity.authorsList}" >
+                            <c:set var="targetId" scope="session" value="${selected.id}"/>
+                            <c:choose>
+                                <c:when test="${optionId==targetId}">
+                                    <c:set var="isSelected" scope="session" value='true'/>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+
+                        <c:choose>
+                            <c:when test="${isSelected=='true'}">
+                                <option selected value="${opt.id}">${opt.firstName} ${opt.middleName} ${opt.secondName}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${opt.id}">${opt.firstName} ${opt.middleName} ${opt.secondName}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </p>
+                </c:forEach>
+            </select></p>
+
             <p><button formaction="editbook">Изменить</button></p>
         </form>
     </div>
-    </p>
 
-
-    <p>
-    <div class="block">
-        <form id="resultForm">
-            <p><select size="5" name="result" class="listMulticatch" multiple>
-                <option disabled>Выбранные авторы</option>
-
-
-            </select></p>
-        </form>
-    </div>
-
-    <div class="block">
-        <p><button form="sourceForm" onclick="dataSelectAdd()"><<</button></p>
-        <p><button form="resultForm" onclick="dataSelectDelete()">>></button></p>
-    </div>
-
-    <div class="block">
-        <form id="sourceForm">
-            <p><select size="5" name="source" class="listMulticatch" multiple>
-                <option disabled>Выберите авторов</option>
-                <c:forEach var="item" items="${sourceListAuthor}">
-                    <option value="${item.id}">${item.secondName} ${item.firstName} ${item.middleName}</option>
-                </c:forEach>
-            </select></p>
-        </form>
-    </div>
-
-    </p>
 </div>
-
-
-
-
-<script src="js/twoselect.js">
-//    function dataSelectAdd() {
-//        var form1 = document.forms["sourceForm"];
-//        var selectedItem = form1.elements.source;
-//
-//        for (var i = 0; i < selectedItem.options.length; i++) {
-//            var option = selectedItem.options[i];
-//            if(option.selected) {
-//                alert( option.value );
-//            }
-//        }
-//
-////        var option = new Option("Текст", "value", true, true);
-//
-//        var form2 = document.forms["resultForm"];
-//        var resultSelect = form2.elements.result;
-//        resultSelect.add(selectedItem);
-//    }
-//    function dataSelectDelete() {
-//
-//
-//
-//        var form2 = document.forms["resultForm"];
-//        var select = form2.elements.result;
-//        for (var i = 0; i < select.options.length; i++) {
-//            var option = select.options[i];
-//            if(option.selected) {
-//                alert( option.value );
-//            }
-//        }
-//
-//
-//    }
+<script>
+    $('#my-select').multiSelect();
 </script>
 
 </body>

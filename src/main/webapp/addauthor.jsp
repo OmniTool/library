@@ -16,7 +16,7 @@
 <div class="parent topspace">
     <div class="block">
         <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
-        <p><h2 class="centred"><span class="marked">${bread}</span> > ${pageName}</h2></p>
+        <p><h2 class="centred"><span class="marked">${bread}</span> > Добавление</h2></p>
     </div>
 </div>
 
@@ -60,13 +60,6 @@
                         </p>
                     </c:forEach>
                 </select></p>
-
-                <%--<p><select id="my-select" size="5" name="listBook" class="listMulticatch" multiple>--%>
-                    <%--<option disabled>Выберите книги</option>--%>
-                    <%--<c:forEach var="item" items="${sourceListBook}">--%>
-                        <%--<option value="${item.id}">${item.title}</option>--%>
-                    <%--</c:forEach>--%>
-                <%--</select></p>--%>
 
                 <p><button formaction="addauthor">Добавить</button></p>
             </form>

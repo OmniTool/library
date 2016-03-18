@@ -5,9 +5,7 @@ import library.dao.DBManagerAuthor;
 import library.dao.entities.Author;
 import library.dao.entities.Book;
 import library.dao.entities.BookAuthor;
-import library.dao.entities.Genre;
 import library.utils.validation.AuthorValidator;
-import library.utils.validation.GenreValidator;
 import library.utils.validation.Validator;
 
 import javax.naming.NamingException;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -95,11 +92,14 @@ public class EditAuthor extends HttpServlet {
             List<Integer> selectedBooksId = new ArrayList<>();
             List<Integer> forAddListId = new ArrayList<>();
             //List<BookAuthor> forAddList = new ArrayList<>();
+        if (arrBooks != null) {
             for (String s : arrBooks) {
                 int id = Integer.parseInt(s);
                 forAddListId.add(id);
                 selectedBooksId.add(id);
             }
+        }
+
             List<Integer> forDelListId = new ArrayList<>();
             //List<BookAuthor> forDelList = new ArrayList<>();
 
