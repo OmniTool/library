@@ -30,44 +30,33 @@ public class EditAuthor extends HttpServlet {
         int id = 0;
         String ids = req.getParameter("id");
 
-        if (ids == null) { //TODO проверка на число
+        if (ids == null) {
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("authors");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
+            ManagerDAO daoAuthor = new DBManagerAuthor();
+            ManagerDAO daoBook = new DBManagerBook();
+            DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
+            try {
+                List<Book> listBook = daoBook.getAll();
+                req.setAttribute("sourceListBook", listBook);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
 
-                ManagerDAO daoAuthor = new DBManagerAuthor();
-                ManagerDAO daoBook = new DBManagerBook();
-                DBManagerBookAuthor subDao = new DBManagerBookAuthor();
-
-                try {
-
-                    List<Book> listBook = daoBook.getAll();
-                    req.setAttribute("sourceListBook", listBook);
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
-
-                    if (req.getAttribute("entity") == null) {
-                        Author entity = (Author) daoAuthor.getEntityById(id);
-                        Validator validator = new AuthorValidator();
-                        validator.trim(entity);
-                        entity.setBooksList(subDao.searchBooksByAuthor(entity));
-                        req.setAttribute("entity", entity);
-                    }
-
-
-                    req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
-                    //req.setAttribute("list", entity.getBooksList());
-                    //req.setAttribute("ref", "/findbook?id=");
-
-
-                    dispatcher.forward(req, resp);
-
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
-                } catch (NamingException e) {
-                    System.out.println(e.getMessage());
+                if (req.getAttribute("entity") == null) {
+                    Author entity = (Author) daoAuthor.getEntityById(id);
+                    Validator validator = new AuthorValidator();
+                    validator.trim(entity);
+                    entity.setBooksList(daoBookAuthor.searchBooksByAuthor(entity));
+                    req.setAttribute("entity", entity);
                 }
-
+                req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
+                dispatcher.forward(req, resp);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -99,14 +88,11 @@ public class EditAuthor extends HttpServlet {
                 selectedBooksId.add(id);
             }
         }
-
         Validator validator = new AuthorValidator();
         ManagerDAO daoAuthor = new DBManagerAuthor();
         ManagerDAO daoBook = new DBManagerBook();
         DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
-
             try {
-
                 boolean isValid;
                 Author forUpdAuthor = (Author) daoAuthor.getEntityById(author.getId());
                 validator.trim(forUpdAuthor);
@@ -118,12 +104,10 @@ public class EditAuthor extends HttpServlet {
                 } else {
                     isValid = !validator.exists(author);
                 }
-
                 if (isValid) {
                     for (Book b : daoBookAuthor.searchBooksByAuthor(author)) {
                         forDelListId.add(b.getId());
                     }
-
                     Iterator<Integer> iteratorAddList = forAddListId.iterator();
                     while (iteratorAddList.hasNext()) {
                         int idForAdd = iteratorAddList.next();
