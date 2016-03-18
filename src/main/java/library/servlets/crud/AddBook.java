@@ -4,6 +4,7 @@ import library.dao.*;
 import library.dao.DBManagerBook;
 import library.dao.entities.Author;
 import library.dao.entities.Book;
+import library.dao.entities.BookAuthor;
 import library.dao.entities.Genre;
 import library.utils.validation.BookValidator;
 import library.utils.validation.Validator;
@@ -55,23 +56,37 @@ public class AddBook extends HttpServlet {
             book.setPubYear(Integer.parseInt(pubYears ));
         String  genereIds = req.getParameter("genereId");
             book.setGenereId(Integer.parseInt(genereIds ));
-        String[] arrBooks = req.getParameterValues("listBook");
-        List<Integer> selectedBooksId = new ArrayList<>();
-
-        for (String s : arrBooks) {
-            int id = Integer.parseInt(s);
-            selectedBooksId.add(id);
+        String[] arrAuthors = req.getParameterValues("listAuthor");
+            List<Integer> selectedIds = new ArrayList<>();
+        if (arrAuthors != null) {
+            for (String s : arrAuthors) {
+                int id = Integer.parseInt(s);
+                selectedIds.add(id);
+            }
         }
 
         Validator validator = new BookValidator();
-
-        ManagerDAO dao = new DBManagerBook();
+        ManagerDAO daoBook = new DBManagerBook();
+        ManagerDAO daoAuthor = new DBManagerAuthor();
+        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             try {
                 if (!validator.exists(book)) {
-                    dao.create(book);
+                    int futureId = daoBook.create(book);
+
+                    for (int id : selectedIds) {
+                        BookAuthor ba = new BookAuthor();
+                        ba.setAuthorId(id);
+                        ba.setBookId(futureId);
+                        daoBookAuthor.create(ba);
+                    }
                     RequestDispatcher dispatcher = req.getRequestDispatcher("books");
                     dispatcher.forward(req, resp);;
                 } else {
+                    List<Author> list = new ArrayList<>();
+                    for (int id : selectedIds) {
+                        list.add((Author) daoAuthor.getEntityById(id));
+                    }
+                    book.setAuthorsList(list);
                     req.setAttribute("message", "Уже существует");
                     req.setAttribute("entity", book);
                     doGet(req, resp);

@@ -124,25 +124,29 @@ public class DBManagerBook implements ManagerDAO <Book, Integer> {
     public int create(Book entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO books (title, pub_year, genere_id) VALUES (?, ?, ?)";
-        //String statementSQL = "INSERT INTO books (title, pub_year, genere_id) VALUES ('русская книга из запроса eeeeeelllkkkkk', 1234, 55)";
-        String nextval = "SELECT nextval('books_id')";
+        String nextvalSQL = "SELECT nextval('books_id')";
+        int futureId = 0;
 
         Connection connection = null;
 
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setInt(2, entity.getPubYear());
             preparedStatement.setInt(3, entity.getGenereId());
-
             preparedStatement.executeUpdate();
+
+            PreparedStatement preparedStatementNextval = connection.prepareStatement(nextvalSQL);
+            ResultSet rs = preparedStatementNextval.executeQuery();
+            if (rs.next()) {
+                futureId = rs.getInt("nextval");
+            }
         } finally {
         if (connection != null)
             connection.close();
         }
-        return 0;
+        return --futureId;
     }
 
     @Override

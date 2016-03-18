@@ -60,11 +60,12 @@ public class AddAuthor extends HttpServlet {
         String biographys = req.getParameter("biography");
             author.setBiography(biographys);
         String[] arrBooks = req.getParameterValues("listBook");
-        List<Integer> selectedBooksId = new ArrayList<>();
-
-        for (String s : arrBooks) {
-            int id = Integer.parseInt(s);
-            selectedBooksId.add(id);
+            List<Integer> selectedIds = new ArrayList<>();
+        if (arrBooks != null) {
+            for (String s : arrBooks) {
+                int id = Integer.parseInt(s);
+                selectedIds.add(id);
+            }
         }
 
         Validator validator = new AuthorValidator();
@@ -75,21 +76,20 @@ public class AddAuthor extends HttpServlet {
                 if (!validator.exists(author)) {
                     int futureId = daoAuthor.create(author);
 
-                    for (String s : arrBooks) {
+                    for (int id : selectedIds) {
                         BookAuthor ba = new BookAuthor();
                         ba.setAuthorId(futureId);
-                        ba.setBookId(Integer.parseInt(s));
+                        ba.setBookId(id);
                         daoBookAuthor.create(ba);
                     }
-
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                     dispatcher.forward(req, resp);
                 } else {
-                    List<Book> l = new ArrayList<>();
-                    for (int id : selectedBooksId) {
-                        l.add((Book) daoBook.getEntityById(id));
+                    List<Book> list = new ArrayList<>();
+                    for (int id : selectedIds) {
+                        list.add((Book) daoBook.getEntityById(id));
                     }
-                    author.setBooksList(l);
+                    author.setBooksList(list);
                     req.setAttribute("message", "Уже существует");
                     req.setAttribute("entity", author);
                     doGet(req, resp);

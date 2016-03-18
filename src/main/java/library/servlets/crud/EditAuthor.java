@@ -90,8 +90,8 @@ public class EditAuthor extends HttpServlet {
             author.setBiography(biographys);
         String[] arrBooks = req.getParameterValues("listBook");
             List<Integer> selectedBooksId = new ArrayList<>();
+            List<Integer> forDelListId = new ArrayList<>();
             List<Integer> forAddListId = new ArrayList<>();
-            //List<BookAuthor> forAddList = new ArrayList<>();
         if (arrBooks != null) {
             for (String s : arrBooks) {
                 int id = Integer.parseInt(s);
@@ -99,9 +99,6 @@ public class EditAuthor extends HttpServlet {
                 selectedBooksId.add(id);
             }
         }
-
-            List<Integer> forDelListId = new ArrayList<>();
-            //List<BookAuthor> forDelList = new ArrayList<>();
 
         Validator validator = new AuthorValidator();
         ManagerDAO daoAuthor = new DBManagerAuthor();

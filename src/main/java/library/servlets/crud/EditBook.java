@@ -76,22 +76,16 @@ public class EditBook extends HttpServlet {
 
 
         Book book = new Book();
-
         String ids = req.getParameter("id");
-
             book.setId(Integer.parseInt(ids));
-
         String titles = req.getParameter("title");
-
             book.setTitle(titles);
-
         String pubYears = req.getParameter("pubYear");
-
             book.setPubYear(Integer.parseInt(pubYears));
-
         String genereIds = req.getParameter("genereId");
-
             book.setGenereId(Integer.parseInt(genereIds));
+
+
 
 
         Validator validator = new BookValidator();
