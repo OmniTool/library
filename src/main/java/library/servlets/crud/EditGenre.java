@@ -61,26 +61,28 @@ public class EditGenre extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Genre genre = new Genre();
-
         String ids = req.getParameter("id");
-
-            genre.setId(Integer.parseInt(ids)); 
-
+            genre.setId(Integer.parseInt(ids));
         String titles = req.getParameter("title");
-
             genre.setTitle(titles);
-
         String descriptions = req.getParameter("description");
-
             genre.setDescription(descriptions);
-
         Validator validator = new GenreValidator();
         validator.trim(genre);
 
-            ManagerDAO dao = new DBManagerGenre();
+            ManagerDAO daoGenre = new DBManagerGenre();
+
         try {
-            if (!validator.exists(genre)) {
-                dao.update(genre);
+            boolean isValid;
+            Genre forUpdGenre = (Genre) daoGenre.getEntityById(genre.getId());
+            validator.trim(forUpdGenre);
+            if (genre.getTitle().equals(forUpdGenre.getTitle())) {
+                isValid = true;
+            } else {
+                isValid = !validator.exists(genre);
+            }
+            if (isValid) {
+                daoGenre.update(genre);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre?id=" + genre.getId());
                 dispatcher.forward(req, resp);
             } else {
