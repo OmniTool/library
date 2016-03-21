@@ -14,7 +14,6 @@ public class Author {
     private List<Book> booksList;
 
 
-
     public int getId() {
         return id;
     }
