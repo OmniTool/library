@@ -1,26 +1,23 @@
 package library.hibernate.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "genres", schema = "public", catalog = "library_test")
 public class Genre extends EntityBase {
-    //private int id;
+    private int id;
     private String title;
     private String description;
 
-//    @Id
-//    @Column(name = "id")
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    @Id
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Basic
     @Column(name = "title")

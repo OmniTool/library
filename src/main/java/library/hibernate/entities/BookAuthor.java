@@ -1,22 +1,24 @@
 package library.hibernate.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "books_authors", schema = "public", catalog = "library_test")
 public class BookAuthor extends EntityBase {
-    //private int id;
+    private int id;
 
-//    @Id
-//    @Column(name = "id")
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    @Id
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
