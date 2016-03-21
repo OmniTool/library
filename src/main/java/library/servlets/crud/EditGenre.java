@@ -73,7 +73,7 @@ public class EditGenre extends HttpServlet {
             ManagerDAO daoGenre = new DBManagerGenre();
 
         try {
-            boolean isValid;
+            boolean isValid; //
             Genre forUpdGenre = (Genre) daoGenre.getEntityById(genre.getId());
             validator.trim(forUpdGenre);
             if (genre.getTitle().equals(forUpdGenre.getTitle())) {
