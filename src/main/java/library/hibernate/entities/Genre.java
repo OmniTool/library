@@ -11,13 +11,13 @@ public class Genre extends EntityBase {
     private String title;
     private String description;
 
-//    public Genre() {
-//    }
+    public Genre() {
+    }
 
-//    public Genre(String title, String description) {
-//        this.title = title;
-//        this.description = description;
-//    }
+    public Genre(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 
     //    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = false)
 //    @OneToMany(mappedBy="genre")

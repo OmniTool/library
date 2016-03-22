@@ -1,9 +1,10 @@
 package library.servlets.test;
 
+
 import library.hibernate.dao.BaseDAO;
 import library.hibernate.dao.impl.DAOAuthor;
-import library.hibernate.entities.Author;
-import library.hibernate.entities.BookAuthor;
+import library.hibernate.dao.impl.DAOBook;
+import library.hibernate.entities.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,18 +39,23 @@ public class TestHibernateAuthor extends HttpServlet {
         Author entity = new Author();
 
         BaseDAO dao = new DAOAuthor();
+        BaseDAO daoBook = new DAOBook();
 
         List<Author> list = null;
 
 
             //create
+        Book book1 = (Book) daoBook.getEntityById(20);
+        Book book2 = (Book) daoBook.getEntityById(22);
+
         entity.setFirstName("test author fname");
         entity.setMiddleName("test author mname");
         entity.setSecondName("test author sname");
         entity.setBiography("test bio");
         entity.setBirthYear(1111);
         entity.setBooksList(new ArrayList<BookAuthor>());
-//        entity.getBooksList().add(new BookAuthor().setAuthor(entity));
+        entity.getBooksList().add(new BookAuthor(book1, entity));
+        entity.getBooksList().add(new BookAuthor(book2, entity));
 
         out.print("<br> List:");
         out.print("getId = " + entity.getId() + "<br>");
@@ -85,11 +91,16 @@ public class TestHibernateAuthor extends HttpServlet {
             out.print("<p>" + e.getFirstName() + " " + e.getSecondName() + " " + e.getBirthYear() + " " + e.getBooksList() + "</p>");
 
             //update
+        Book book3 = (Book) daoBook.getEntityById(21);
+
         entity1.setFirstName("new test author fname");
         entity1.setMiddleName("new test author mname");
         entity1.setSecondName("new test author sname");
         entity1.setBiography("new test bio");
         entity1.setBirthYear(2222);
+        entity.setBooksList(new ArrayList<BookAuthor>());
+        entity.getBooksList().add(new BookAuthor(book3, entity));
+
             dao.update(entity1);
 
             Author entity2 = (Author) dao.getEntityById(futureId);

@@ -17,15 +17,15 @@ public class Book extends EntityBase {
 
     private List<BookAuthor> authorsList = new ArrayList<>();
 
-//    public Book() {
-//    }
+    public Book() {
+    }
 
-//    public Book(String title, Integer pubYear, Genre genre, List<BookAuthor> authorsList) {
-//        this.title = title;
-//        this.pubYear = pubYear;
-//        this.genre = genre;
-//        this.authorsList = authorsList;
-//    }
+    public Book(String title, Integer pubYear, Genre genre, List<BookAuthor> authorsList) {
+        this.title = title;
+        this.pubYear = pubYear;
+        this.genre = genre;
+        this.authorsList = authorsList;
+    }
 
     @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<BookAuthor> getAuthorsList() {

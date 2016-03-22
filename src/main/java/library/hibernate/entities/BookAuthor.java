@@ -9,13 +9,13 @@ public class BookAuthor extends EntityBase {
     Book book;
     Author author;
 
-//    public BookAuthor() {
-//    }
+    public BookAuthor() {
+    }
 
-//    public BookAuthor(Book book, Author author) {
-//        this.book = book;
-//        this.author = author;
-//    }
+    public BookAuthor(Book book, Author author) {
+        this.book = book;
+        this.author = author;
+    }
 
     //@Access(AccessType.PROPERTY)
     //@Access(AccessType.PROPERTY)

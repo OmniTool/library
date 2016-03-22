@@ -20,17 +20,17 @@ public class Author extends EntityBase{
 
     private List<BookAuthor> booksList = new ArrayList<>();
 
-//    public Author() {
-//    }
+    public Author() {
+    }
 
-//    public Author(String secondName, String firstName, String middleName, Integer birthYear, String biography, List<BookAuthor> booksList) {
-//        this.secondName = secondName;
-//        this.firstName = firstName;
-//        this.middleName = middleName;
-//        this.birthYear = birthYear;
-//        this.biography = biography;
-//        this.booksList = booksList;
-//    }
+    public Author(String secondName, String firstName, String middleName, Integer birthYear, String biography, List<BookAuthor> booksList) {
+        this.secondName = secondName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.birthYear = birthYear;
+        this.biography = biography;
+        this.booksList = booksList;
+    }
 
     @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
     public List<BookAuthor> getBooksList() {
