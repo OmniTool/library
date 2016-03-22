@@ -52,8 +52,8 @@ public class TestHibernateGenre extends HttpServlet {
 
             out.print("<br> Add:");
             out.print("getId = " + entity.getId() + "<br>");
-            out.print("getBookId = " + entity.getTitle() + "<br>");
-            out.print("getAuthorId = " + entity.getDescription() + "<br>");
+            out.print("getTitle = " + entity.getTitle() + "<br>");
+            out.print("getDescription = " + entity.getDescription() + "<br>");
 
             int futureId = dao.create(entity);
 
@@ -66,8 +66,8 @@ public class TestHibernateGenre extends HttpServlet {
             Genre entity1 = (Genre) dao.getEntityById(futureId);
             out.print("<br> Read:");
             out.print("getId = " + entity1.getId() + "<br>");
-            out.print("getBookId = " + entity1.getTitle() + "<br>");
-            out.print("getAuthorId = " + entity1.getDescription() + "<br>");
+            out.print("getTitle = " + entity1.getTitle() + "<br>");
+            out.print("getDescription = " + entity1.getDescription() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
@@ -82,8 +82,8 @@ public class TestHibernateGenre extends HttpServlet {
             Genre entity2 = (Genre) dao.getEntityById(futureId);
             out.print("<br> Update:");
             out.print("getId = " + entity2.getId() + "<br>");
-            out.print("getBookId = " + entity2.getTitle() + "<br>");
-            out.print("getAuthorId = " + entity2.getDescription() + "<br>");
+            out.print("getTitle = " + entity2.getTitle() + "<br>");
+            out.print("getDescription = " + entity2.getDescription() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();

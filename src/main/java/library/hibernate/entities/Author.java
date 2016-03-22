@@ -2,6 +2,8 @@ package library.hibernate.entities;
 
 import javax.persistence.*;
 import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.Cascade;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class Author extends EntityBase{
     private String biography;
 
     @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+
     private List<BookAuthor> booksList = new ArrayList<>();
 
 

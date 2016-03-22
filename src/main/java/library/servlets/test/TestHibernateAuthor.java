@@ -98,8 +98,8 @@ public class TestHibernateAuthor extends HttpServlet {
         entity1.setSecondName("new test author sname");
         entity1.setBiography("new test bio");
         entity1.setBirthYear(2222);
-        entity.setBooksList(new ArrayList<BookAuthor>());
-        entity.getBooksList().add(new BookAuthor(book3, entity));
+        entity1.setBooksList(new ArrayList<BookAuthor>());
+        entity1.getBooksList().add(new BookAuthor(book3, entity1));
 
             dao.update(entity1);
 

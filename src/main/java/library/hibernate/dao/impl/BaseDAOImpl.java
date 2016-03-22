@@ -59,7 +59,9 @@ public class BaseDAOImpl<T extends EntityBase> implements BaseDAO<EntityBase, In
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
+
             session.update(entity);
+            //session.flush();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null)

@@ -85,4 +85,12 @@ public class BookAuthor extends EntityBase {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "BookAuthor{" +
+                "book=" + book.getTitle() +
+                ", author=" + author.getFirstName() + " " + author.getSecondName() +
+                '}';
+    }
 }
