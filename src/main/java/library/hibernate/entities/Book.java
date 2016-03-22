@@ -8,14 +8,23 @@ import java.util.List;
 @Table(name = "books", schema = "public", catalog = "library_test")
 public class Book extends EntityBase {
     //private int id;
+    @Basic
+    @Column(name = "title")
     private String title;
+
+    @Basic
+    @Column(name = "pub_year")
     private Integer pubYear;
 
+    @ManyToOne(targetEntity = Genre.class)
+    @JoinColumn(name = "genere_id",
+            foreignKey = @ForeignKey(name = "books_genre_id_fkey")
+    )
     private Genre genre;
 
-
-
+    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookAuthor> authorsList = new ArrayList<>();
+
 
     public Book() {
     }
@@ -27,7 +36,8 @@ public class Book extends EntityBase {
         this.authorsList = authorsList;
     }
 
-    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+
+//    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<BookAuthor> getAuthorsList() {
         return authorsList;
     }
@@ -62,8 +72,8 @@ public class Book extends EntityBase {
 //        this.id = id;
 //    }
 
-    @Basic
-    @Column(name = "title")
+//    @Basic
+//    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -72,8 +82,8 @@ public class Book extends EntityBase {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "pub_year")
+//    @Basic
+//    @Column(name = "pub_year")
     public Integer getPubYear() {
         return pubYear;
     }
@@ -89,10 +99,10 @@ public class Book extends EntityBase {
     //@MapsId
     //@PrimaryKeyJoinColumn
 
-    @ManyToOne(targetEntity = Genre.class)
-    @JoinColumn(name = "genere_id",
-            foreignKey = @ForeignKey(name = "books_genre_id_fkey")
-    )
+//    @ManyToOne(targetEntity = Genre.class)
+//    @JoinColumn(name = "genere_id",
+//            foreignKey = @ForeignKey(name = "books_genre_id_fkey")
+//    )
     public Genre getGenre() {
         return genre;
     }

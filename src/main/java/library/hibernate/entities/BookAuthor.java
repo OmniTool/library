@@ -6,8 +6,18 @@ import javax.persistence.*;
 @Table(name = "books_authors", schema = "public", catalog = "library_test")
 public class BookAuthor extends EntityBase {
     //private int id;
+    @ManyToOne(targetEntity=Book.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id"//,
+//            foreignKey = @ForeignKey(name = "")
+    )
     Book book;
+
+    @ManyToOne(targetEntity=Author.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id",
+            foreignKey = @ForeignKey(name = "books_authors_author_id_fkey")
+    )
     Author author;
+
 
     public BookAuthor() {
     }
@@ -17,13 +27,14 @@ public class BookAuthor extends EntityBase {
         this.author = author;
     }
 
+
     //@Access(AccessType.PROPERTY)
     //@Access(AccessType.PROPERTY)
 
-    @ManyToOne(targetEntity=Book.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id"//,
-//            foreignKey = @ForeignKey(name = "")
-    )
+//    @ManyToOne(targetEntity=Book.class, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "book_id"//,
+////            foreignKey = @ForeignKey(name = "")
+//    )
 
     public Book getBook() {
         return book;
@@ -33,10 +44,10 @@ public class BookAuthor extends EntityBase {
         this.book = book;
     }
 
-    @ManyToOne(targetEntity=Author.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id",
-            foreignKey = @ForeignKey(name = "books_authors_author_id_fkey")
-    )
+//    @ManyToOne(targetEntity=Author.class, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "author_id",
+//            foreignKey = @ForeignKey(name = "books_authors_author_id_fkey")
+//    )
     public Author getAuthor() {
         return author;
     }

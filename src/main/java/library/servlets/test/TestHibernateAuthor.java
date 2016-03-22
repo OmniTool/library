@@ -64,7 +64,7 @@ public class TestHibernateAuthor extends HttpServlet {
         out.print("getSecondName = " + entity.getSecondName() + "<br>");
         out.print("getBirthYear = " + entity.getBirthYear() + "<br>");
         out.print("getBiography = " + entity.getBiography() + "<br>");
-        out.print("getBiography = " + entity.getBooksList() + "<br>");
+        out.print("getBooksList = " + entity.getBooksList() + "<br>");
 
 
             int futureId = dao.create(entity);
@@ -83,7 +83,7 @@ public class TestHibernateAuthor extends HttpServlet {
         out.print("getSecondName = " + entity1.getSecondName() + "<br>");
         out.print("getBirthYear = " + entity1.getBirthYear() + "<br>");
         out.print("getBiography = " + entity1.getBiography() + "<br>");
-        out.print("getBiography = " + entity1.getBooksList() + "<br>");
+        out.print("getBooksList = " + entity1.getBooksList() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
@@ -111,7 +111,7 @@ public class TestHibernateAuthor extends HttpServlet {
         out.print("getSecondName = " + entity2.getSecondName() + "<br>");
         out.print("getBirthYear = " + entity2.getBirthYear() + "<br>");
         out.print("getBiography = " + entity2.getBiography() + "<br>");
-        out.print("getBiography = " + entity2.getBooksList() + "<br>");
+        out.print("getBooksList = " + entity2.getBooksList() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();

@@ -11,14 +11,29 @@ import java.util.List;
 @Table(name = "authors", schema = "public", catalog = "library_test")
 public class Author extends EntityBase{
     //private int id;
+    @Basic
+    @Column(name = "second_name")
     private String secondName;
+
+    @Basic
+    @Column(name = "first_name")
     private String firstName;
+
+    @Basic
+    @Column(name = "middle_name")
     private String middleName;
+
+    @Basic
+    @Column(name = "birth_year")
     private Integer birthYear;
+
+    @Basic
+    @Column(name = "biography")
     private String biography;
 
-
+    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookAuthor> booksList = new ArrayList<>();
+
 
     public Author() {
     }
@@ -32,7 +47,8 @@ public class Author extends EntityBase{
         this.booksList = booksList;
     }
 
-    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
+
+//    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
     public List<BookAuthor> getBooksList() {
         return booksList;
     }
@@ -65,8 +81,8 @@ public class Author extends EntityBase{
 //        this.id = id;
 //    }
 
-    @Basic
-    @Column(name = "second_name")
+//    @Basic
+//    @Column(name = "second_name")
     public String getSecondName() {
         return secondName;
     }
@@ -75,8 +91,8 @@ public class Author extends EntityBase{
         this.secondName = secondName;
     }
 
-    @Basic
-    @Column(name = "first_name")
+//    @Basic
+//    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -85,8 +101,8 @@ public class Author extends EntityBase{
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "middle_name")
+//    @Basic
+//    @Column(name = "middle_name")
     public String getMiddleName() {
         return middleName;
     }
@@ -95,8 +111,8 @@ public class Author extends EntityBase{
         this.middleName = middleName;
     }
 
-    @Basic
-    @Column(name = "birth_year")
+//    @Basic
+//    @Column(name = "birth_year")
     public Integer getBirthYear() {
         return birthYear;
     }
@@ -105,8 +121,8 @@ public class Author extends EntityBase{
         this.birthYear = birthYear;
     }
 
-    @Basic
-    @Column(name = "biography")
+//    @Basic
+//    @Column(name = "biography")
     public String getBiography() {
         return biography;
     }

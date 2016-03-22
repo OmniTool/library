@@ -8,8 +8,14 @@ import java.util.List;
 @Table(name = "genres", schema = "public", catalog = "library_test")
 public class Genre extends EntityBase {
     //private int id;
+    @Basic
+    @Column(name = "title")
     private String title;
+
+    @Basic
+    @Column(name = "description")
     private String description;
+
 
     public Genre() {
     }
@@ -18,6 +24,7 @@ public class Genre extends EntityBase {
         this.title = title;
         this.description = description;
     }
+
 
     //    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = false)
 //    @OneToMany(mappedBy="genre")
@@ -44,8 +51,8 @@ public class Genre extends EntityBase {
 //        this.id = id;
 //    }
 
-    @Basic
-    @Column(name = "title")
+//    @Basic
+//    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -54,8 +61,8 @@ public class Genre extends EntityBase {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "description")
+//    @Basic
+//    @Column(name = "description")
     public String getDescription() {
         return description;
     }
