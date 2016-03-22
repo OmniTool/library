@@ -19,8 +19,8 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/testHibernate")
-public class TestHibernate extends HttpServlet {
+@WebServlet("/testHibernateGenre")
+public class TestHibernateGenre extends HttpServlet {
 
 //    @Override
 //    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

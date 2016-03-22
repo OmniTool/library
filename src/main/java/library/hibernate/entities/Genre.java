@@ -7,10 +7,19 @@ import java.util.List;
 @Entity
 @Table(name = "genres", schema = "public", catalog = "library_test")
 public class Genre extends EntityBase {
-    private int id;
+    //private int id;
     private String title;
     private String description;
-//    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = false)
+
+//    public Genre() {
+//    }
+
+//    public Genre(String title, String description) {
+//        this.title = title;
+//        this.description = description;
+//    }
+
+    //    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = false)
 //    @OneToMany(mappedBy="genre")
 //    private List<Book> booksList = new ArrayList<>();
 //
@@ -22,18 +31,18 @@ public class Genre extends EntityBase {
 //        this.booksList = booksList;
 //    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genres_id")
-    //@SequenceGenerator( name = "genres_id", schema = "public", allocationSize = 1)
-    @SequenceGenerator(name = "genres_id", sequenceName = "genres_id", allocationSize = 1)
-    @Column(name = "id", insertable = false)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genres_id")
+//    //@SequenceGenerator( name = "genres_id", schema = "public", allocationSize = 1)
+//    @SequenceGenerator(name = "genres_id", sequenceName = "genres_id", allocationSize = 1)
+//    @Column(name = "id", insertable = false)
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "title")

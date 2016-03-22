@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "books", schema = "public", catalog = "library_test")
 public class Book extends EntityBase {
-    private int id;
+    //private int id;
     private String title;
     private Integer pubYear;
 
@@ -16,6 +16,17 @@ public class Book extends EntityBase {
 
 
     private List<BookAuthor> authorsList = new ArrayList<>();
+
+//    public Book() {
+//    }
+
+//    public Book(String title, Integer pubYear, Genre genre, List<BookAuthor> authorsList) {
+//        this.title = title;
+//        this.pubYear = pubYear;
+//        this.genre = genre;
+//        this.authorsList = authorsList;
+//    }
+
     @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<BookAuthor> getAuthorsList() {
         return authorsList;
@@ -38,18 +49,18 @@ public class Book extends EntityBase {
 //    }
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_id")
-    //@SequenceGenerator( name = "books_id", schema = "public", allocationSize = 1)
-    @SequenceGenerator(name = "books_id", sequenceName = "books_id", allocationSize = 1)
-    @Column(name = "id", insertable = false)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_id")
+//    //@SequenceGenerator( name = "books_id", schema = "public", allocationSize = 1)
+//    @SequenceGenerator(name = "books_id", sequenceName = "books_id", allocationSize = 1)
+//    @Column(name = "id", insertable = false)
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "title")

@@ -5,9 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "books_authors", schema = "public", catalog = "library_test")
 public class BookAuthor extends EntityBase {
-    private int id;
+    //private int id;
     Book book;
     Author author;
+
+//    public BookAuthor() {
+//    }
+
+//    public BookAuthor(Book book, Author author) {
+//        this.book = book;
+//        this.author = author;
+//    }
 
     //@Access(AccessType.PROPERTY)
     //@Access(AccessType.PROPERTY)
@@ -37,18 +45,18 @@ public class BookAuthor extends EntityBase {
         this.author = author;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_authors_id")
-    //@SequenceGenerator( name = "books_authors_id", schema = "public", allocationSize = 1)
-    @SequenceGenerator(name = "books_authors_id", sequenceName = "books_authors_id", allocationSize = 1)
-    @Column(name = "id", insertable = false)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_authors_id")
+//    //@SequenceGenerator( name = "books_authors_id", schema = "public", allocationSize = 1)
+//    @SequenceGenerator(name = "books_authors_id", sequenceName = "books_authors_id", allocationSize = 1)
+//    @Column(name = "id", insertable = false)
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     @Override
     public boolean equals(Object o) {

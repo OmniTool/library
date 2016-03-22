@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "authors", schema = "public", catalog = "library_test")
 public class Author extends EntityBase{
-    private int id;
+    //private int id;
     private String secondName;
     private String firstName;
     private String middleName;
@@ -19,6 +19,19 @@ public class Author extends EntityBase{
 
 
     private List<BookAuthor> booksList = new ArrayList<>();
+
+//    public Author() {
+//    }
+
+//    public Author(String secondName, String firstName, String middleName, Integer birthYear, String biography, List<BookAuthor> booksList) {
+//        this.secondName = secondName;
+//        this.firstName = firstName;
+//        this.middleName = middleName;
+//        this.birthYear = birthYear;
+//        this.biography = biography;
+//        this.booksList = booksList;
+//    }
+
     @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
     public List<BookAuthor> getBooksList() {
         return booksList;
@@ -39,18 +52,18 @@ public class Author extends EntityBase{
 //        this.booksList = booksList;
 //    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authors_id")
-    @SequenceGenerator(name = "authors_id", sequenceName = "authors_id", allocationSize = 1)
-    //@SequenceGenerator( name = "authors_id", schema = "public", allocationSize = 1)
-    @Column(name = "id", insertable = false)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authors_id")
+//    @SequenceGenerator(name = "authors_id", sequenceName = "authors_id", allocationSize = 1)
+//    //@SequenceGenerator( name = "authors_id", schema = "public", allocationSize = 1)
+//    @Column(name = "id", insertable = false)
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "second_name")
