@@ -1,20 +1,42 @@
 package library.hibernate.util;
 
-import org.hibernate.cfg.Configuration;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
-    private static SessionFactory sessionFactory;
-    static {
+
+    private static SessionFactory sessionFactory = buildSessionFactory();
+
+    protected static SessionFactory buildSessionFactory() {
+        // A SessionFactory is set up once for an application!
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure() // configures settings from hibernate.cfg.xml
+                .build();
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
+            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+            //System.out.println("package library.hibernate.util;");
         }
+        catch (Exception e) {
+            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
+            // so destroy it manually.
+            StandardServiceRegistryBuilder.destroy( registry );
+
+            throw new ExceptionInInitializerError("Initial SessionFactory failed" + e);
+        }
+        return sessionFactory;
     }
+
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
+    public static void shutdown() {
+        // Close caches and connection pools
+        getSessionFactory().close();
+    }
+
 }
+

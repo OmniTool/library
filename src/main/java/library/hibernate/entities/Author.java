@@ -1,6 +1,11 @@
 package library.hibernate.entities;
 
 import javax.persistence.*;
+import javax.persistence.SequenceGenerator;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "authors", schema = "public", catalog = "library_test")
@@ -12,8 +17,33 @@ public class Author extends EntityBase{
     private Integer birthYear;
     private String biography;
 
+
+    private List<BookAuthor> booksList = new ArrayList<>();
+    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
+    public List<BookAuthor> getBooksList() {
+        return booksList;
+    }
+
+    public void setBooksList(List<BookAuthor> booksList) {
+        this.booksList = booksList;
+    }
+
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private List<Book> booksList = new ArrayList<>();
+//
+//    public List<Book> getBooksList() {
+//        return booksList;
+//    }
+//
+//    public void setBooksList(List<Book> booksList) {
+//        this.booksList = booksList;
+//    }
+
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authors_id")
+    @SequenceGenerator(name = "authors_id", sequenceName = "authors_id", allocationSize = 1)
+    //@SequenceGenerator( name = "authors_id", schema = "public", allocationSize = 1)
+    @Column(name = "id", insertable = false)
     public int getId() {
         return id;
     }

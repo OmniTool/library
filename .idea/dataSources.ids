@@ -1486,8 +1486,8 @@
       <column name="book_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="author_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="books_authors_pkey" columns="id"/>
-      <foreign-key name="books_authors_author_id_fkey" columns="author_id" ref-table="authors" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="books_authors_book_id_fkey" columns="book_id" ref-table="books" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="books_authors_author_id_fkey" columns="author_id" ref-table="authors" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="books_authors_book_id_fkey" columns="book_id" ref-table="books" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
     </table>
     <table name="books_authors_id" schema="public" catalog="library_test" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>

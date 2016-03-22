@@ -1,6 +1,8 @@
 package library.hibernate.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books", schema = "public", catalog = "library_test")
@@ -9,8 +11,38 @@ public class Book extends EntityBase {
     private String title;
     private Integer pubYear;
 
+    private Genre genre;
+
+
+
+    private List<BookAuthor> authorsList = new ArrayList<>();
+    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<BookAuthor> getAuthorsList() {
+        return authorsList;
+    }
+
+    public void setAuthorsList(List<BookAuthor> authorsList) {
+        this.authorsList = authorsList;
+    }
+
+
+//    @ManyToMany(mappedBy = "booksList")
+//    private List<Author> authorsList = new ArrayList<>();
+//
+//    public List<Author> getAuthorsList() {
+//        return authorsList;
+//    }
+//
+//    public void setAuthorsList(List<Author> authorsList) {
+//        this.authorsList = authorsList;
+//    }
+
+
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_id")
+    //@SequenceGenerator( name = "books_id", schema = "public", allocationSize = 1)
+    @SequenceGenerator(name = "books_id", sequenceName = "books_id", allocationSize = 1)
+    @Column(name = "id", insertable = false)
     public int getId() {
         return id;
     }
@@ -37,6 +69,25 @@ public class Book extends EntityBase {
 
     public void setPubYear(Integer pubYear) {
         this.pubYear = pubYear;
+    }
+
+//    @ManyToOne
+//    @JoinColumn(name = "genre_id",
+//            foreignKey = @ForeignKey(name = "books_genre_id_fkey")
+//    )
+    //@MapsId
+    //@PrimaryKeyJoinColumn
+
+    @ManyToOne(targetEntity = Genre.class)
+    @JoinColumn(name = "genere_id",
+            foreignKey = @ForeignKey(name = "books_genre_id_fkey")
+    )
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override

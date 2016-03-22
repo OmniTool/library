@@ -1,17 +1,47 @@
 package library.hibernate.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "books_authors", schema = "public", catalog = "library_test")
 public class BookAuthor extends EntityBase {
     private int id;
+    Book book;
+    Author author;
+
+    //@Access(AccessType.PROPERTY)
+    //@Access(AccessType.PROPERTY)
+
+    @ManyToOne(targetEntity=Book.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id"//,
+//            foreignKey = @ForeignKey(name = "")
+    )
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    @ManyToOne(targetEntity=Author.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id",
+            foreignKey = @ForeignKey(name = "books_authors_author_id_fkey")
+    )
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_authors_id")
+    //@SequenceGenerator( name = "books_authors_id", schema = "public", allocationSize = 1)
+    @SequenceGenerator(name = "books_authors_id", sequenceName = "books_authors_id", allocationSize = 1)
+    @Column(name = "id", insertable = false)
     public int getId() {
         return id;
     }
