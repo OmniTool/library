@@ -1,6 +1,6 @@
-package library.dataAccess.entities;
+package library.dataAccess.jdbc.entities;
 
-public class Genre {
+public class GenreJdbc {
 
     private int id;
     private String title;

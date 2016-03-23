@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "books", schema = "public", catalog = "library_test")
-public class Book extends EntityBase {
+public class BookHiber extends EntityBaseHiber {
     //private int id;
     @Basic
     @Column(name = "title")
@@ -16,20 +16,20 @@ public class Book extends EntityBase {
     @Column(name = "pub_year")
     private Integer pubYear;
 
-    @ManyToOne(targetEntity = Genre.class)
+    @ManyToOne(targetEntity = GenreHiber.class)
     @JoinColumn(name = "genere_id",
             foreignKey = @ForeignKey(name = "books_genre_id_fkey")
     )
-    private Genre genre;
+    private GenreHiber genre;
 
-    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookAuthor> authorsList = new ArrayList<>();
+    @OneToMany(targetEntity=BookAuthorHiber.class, mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookAuthorHiber> authorsList = new ArrayList<>();
 
 
-    public Book() {
+    public BookHiber() {
     }
 
-    public Book(String title, Integer pubYear, Genre genre, List<BookAuthor> authorsList) {
+    public BookHiber(String title, Integer pubYear, GenreHiber genre, List<BookAuthorHiber> authorsList) {
         this.title = title;
         this.pubYear = pubYear;
         this.genre = genre;
@@ -38,11 +38,11 @@ public class Book extends EntityBase {
 
 
 //    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<BookAuthor> getAuthorsList() {
+    public List<BookAuthorHiber> getAuthorsList() {
         return authorsList;
     }
 
-    public void setAuthorsList(List<BookAuthor> authorsList) {
+    public void setAuthorsList(List<BookAuthorHiber> authorsList) {
         this.authorsList = authorsList;
     }
 
@@ -103,11 +103,11 @@ public class Book extends EntityBase {
 //    @JoinColumn(name = "genere_id",
 //            foreignKey = @ForeignKey(name = "books_genre_id_fkey")
 //    )
-    public Genre getGenre() {
+    public GenreHiber getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(GenreHiber genre) {
         this.genre = genre;
     }
 
@@ -116,7 +116,7 @@ public class Book extends EntityBase {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Book books = (Book) o;
+        BookHiber books = (BookHiber) o;
 
         if (id != books.id) return false;
         if (title != null ? !title.equals(books.title) : books.title != null) return false;

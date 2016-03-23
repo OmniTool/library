@@ -1,4 +1,4 @@
-package library.dataAccess.dao;
+package library.dataAccess.accessPoint.dao;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;

@@ -33,11 +33,11 @@ public class TestHibernateGenre extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        Genre entity = new Genre();
+        GenreHiber entity = new GenreHiber();
 
         BaseDAO dao = new DAOGenre();
 
-        List<Genre> list = null;
+        List<GenreHiber> list = null;
 
 
             //create
@@ -53,11 +53,11 @@ public class TestHibernateGenre extends HttpServlet {
 
         out.print("<br> List:");
         list = dao.getAll();
-        for (Genre e : list)
+        for (GenreHiber e : list)
             out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
 
             //read
-            Genre entity1 = (Genre) dao.getEntityById(futureId);
+            GenreHiber entity1 = (GenreHiber) dao.getEntityById(futureId);
             out.print("<br> Read:");
             out.print("getId = " + entity1.getId() + "<br>");
             out.print("getTitle = " + entity1.getTitle() + "<br>");
@@ -65,7 +65,7 @@ public class TestHibernateGenre extends HttpServlet {
 
         out.print("<br> List:");
         list = dao.getAll();
-        for (Genre e : list)
+        for (GenreHiber e : list)
             out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
 
             //update
@@ -73,7 +73,7 @@ public class TestHibernateGenre extends HttpServlet {
             entity1.setDescription("new test descr");
             dao.update(entity1);
 
-            Genre entity2 = (Genre) dao.getEntityById(futureId);
+            GenreHiber entity2 = (GenreHiber) dao.getEntityById(futureId);
             out.print("<br> Update:");
             out.print("getId = " + entity2.getId() + "<br>");
             out.print("getTitle = " + entity2.getTitle() + "<br>");
@@ -81,7 +81,7 @@ public class TestHibernateGenre extends HttpServlet {
 
         out.print("<br> List:");
         list = dao.getAll();
-        for (Genre e : list)
+        for (GenreHiber e : list)
             out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
 
             //delete
@@ -90,7 +90,7 @@ public class TestHibernateGenre extends HttpServlet {
 
         out.print("<br> List:");
         list = dao.getAll();
-        for (Genre e : list)
+        for (GenreHiber e : list)
             out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
 
 

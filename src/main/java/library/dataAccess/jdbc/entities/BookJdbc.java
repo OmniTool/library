@@ -1,14 +1,16 @@
 package library.dataAccess.jdbc.entities;
 
+import library.dataAccess.accessPoint.entities.Author;
+
 import java.util.List;
 
-public class Book extends EntityBase {
+public class BookJdbc {
 
     private int id;
     private String title;
     private int pubYear;
     private int genereId;
-    private List<library.dataAccess.jdbc.entities.Author> authorsList;
+    private List<Author> authorsList;
 
 
     public String getTitle() {
@@ -35,12 +37,12 @@ public class Book extends EntityBase {
         this.genereId = genereId;
     }
 
-    public List<library.dataAccess.jdbc.entities.Author> getAuthorsList() {
+    public List<Author> getAuthorsList() {
         return authorsList;
     }
 
-    public void setAuthorsList(List<library.dataAccess.jdbc.entities.Author> authorsIdList) {
-        this.authorsList = authorsIdList;
+    public void setAuthorsList(List<Author> authorsList) {
+        this.authorsList = authorsList;
     }
 
     public int getId() {

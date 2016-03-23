@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "authors", schema = "public", catalog = "library_test")
-public class Author extends EntityBase{
+public class AuthorHiber extends EntityBaseHiber {
     //private int id;
     @Basic
     @Column(name = "second_name")
@@ -29,15 +29,15 @@ public class Author extends EntityBase{
     @Column(name = "biography")
     private String biography;
 
-    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity=BookAuthorHiber.class, mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 
-    private List<BookAuthor> booksList = new ArrayList<>();
+    private List<BookAuthorHiber> booksList = new ArrayList<>();
 
 
-    public Author() {
+    public AuthorHiber() {
     }
 
-    public Author(String secondName, String firstName, String middleName, Integer birthYear, String biography, List<BookAuthor> booksList) {
+    public AuthorHiber(String secondName, String firstName, String middleName, Integer birthYear, String biography, List<BookAuthorHiber> booksList) {
         this.secondName = secondName;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -48,11 +48,11 @@ public class Author extends EntityBase{
 
 
 //    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
-    public List<BookAuthor> getBooksList() {
+    public List<BookAuthorHiber> getBooksList() {
         return booksList;
     }
 
-    public void setBooksList(List<BookAuthor> booksList) {
+    public void setBooksList(List<BookAuthorHiber> booksList) {
         this.booksList = booksList;
     }
 
@@ -135,7 +135,7 @@ public class Author extends EntityBase{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Author authors = (Author) o;
+        AuthorHiber authors = (AuthorHiber) o;
 
         if (id != authors.id) return false;
         if (secondName != null ? !secondName.equals(authors.secondName) : authors.secondName != null) return false;

@@ -4,25 +4,25 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "books_authors", schema = "public", catalog = "library_test")
-public class BookAuthor extends EntityBase {
+public class BookAuthorHiber extends EntityBaseHiber {
     //private int id;
-    @ManyToOne(targetEntity=Book.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity=BookHiber.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id"//,
 //            foreignKey = @ForeignKey(name = "")
     )
-    Book book;
+    BookHiber book;
 
-    @ManyToOne(targetEntity=Author.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity=AuthorHiber.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id",
             foreignKey = @ForeignKey(name = "books_authors_author_id_fkey")
     )
-    Author author;
+    AuthorHiber author;
 
 
-    public BookAuthor() {
+    public BookAuthorHiber() {
     }
 
-    public BookAuthor(Book book, Author author) {
+    public BookAuthorHiber(BookHiber book, AuthorHiber author) {
         this.book = book;
         this.author = author;
     }
@@ -36,11 +36,11 @@ public class BookAuthor extends EntityBase {
 ////            foreignKey = @ForeignKey(name = "")
 //    )
 
-    public Book getBook() {
+    public BookHiber getBook() {
         return book;
     }
 
-    public void setBook(Book book) {
+    public void setBook(BookHiber book) {
         this.book = book;
     }
 
@@ -48,11 +48,11 @@ public class BookAuthor extends EntityBase {
 //    @JoinColumn(name = "author_id",
 //            foreignKey = @ForeignKey(name = "books_authors_author_id_fkey")
 //    )
-    public Author getAuthor() {
+    public AuthorHiber getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(AuthorHiber author) {
         this.author = author;
     }
 
@@ -74,7 +74,7 @@ public class BookAuthor extends EntityBase {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BookAuthor that = (BookAuthor) o;
+        BookAuthorHiber that = (BookAuthorHiber) o;
 
         if (id != that.id) return false;
 

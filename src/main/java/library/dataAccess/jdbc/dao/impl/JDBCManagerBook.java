@@ -1,24 +1,27 @@
-package library.dataAccess.dao.impl;
+package library.dataAccess.jdbc.dao.impl;
 
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
-import library.dataAccess.dao.ManagerDAO;
-import library.dataAccess.entities.Genre;
+import library.dataAccess.jdbc.dao.DAOJDBC;
+import library.dataAccess.accessPoint.entities.*;
 
 import javax.naming.NamingException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
+public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
 
-    private static DBConnector connector = new DBConnectorPool();
+    DBConnector connector = new DBConnectorPool();
 
     @Override
-    public List<Genre> getAll() throws SQLException, NamingException {
+    public List<Book> getAll() throws SQLException, NamingException {
 
-        String statementSQL = "SELECT * FROM genres";
-        List<Genre> list = new ArrayList<>();
+        String statementSQL = "SELECT * FROM books";
+        List<Book> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -28,10 +31,11 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Genre entity = new Genre();
+                Book entity = new Book();
                 entity.setId(rs.getInt("id"));
                 entity.setTitle(rs.getString("title"));
-                entity.setDescription(rs.getString("description"));
+                entity.setPubYear(rs.getInt("pub_year"));
+                entity.setGenereId(rs.getInt("genere_id"));
                 list.add(entity);
             }
             return list;
@@ -44,10 +48,10 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public Genre getEntityById(Integer id) throws SQLException, NamingException {
+    public Book getEntityById(Integer id) throws SQLException, NamingException {
 
-        String statementSQL = "SELECT * FROM genres WHERE id = ?";
-        Genre entity = new Genre();
+        String statementSQL = "SELECT * FROM books WHERE id = ?";
+        Book entity = new Book();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -62,7 +66,8 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
             if (rs.next()) {
                 entity.setId(rs.getInt("id"));
                 entity.setTitle(rs.getString("title"));
-                entity.setDescription(rs.getString("description"));
+                entity.setPubYear(rs.getInt("pub_year"));
+                entity.setGenereId(rs.getInt("genere_id"));
             }
             return entity;
         } finally {
@@ -74,9 +79,9 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public void update(Genre entity) throws SQLException, NamingException {
+    public void update(Book entity) throws SQLException, NamingException {
 
-        String statementSQL = "UPDATE genres SET title = ?, description = ? WHERE id = ?";
+        String statementSQL = "UPDATE books SET title = ?, pub_year = ?, genere_id = ? WHERE id = ?";
 
         Connection connection = null;
 
@@ -85,8 +90,9 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
 
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setString(2, entity.getDescription());
-            preparedStatement.setInt(3, entity.getId());
+            preparedStatement.setInt(2, entity.getPubYear());
+            preparedStatement.setInt(3, entity.getGenereId());
+            preparedStatement.setInt(4, entity.getId());
 
             preparedStatement.executeUpdate();
         } finally {
@@ -96,9 +102,9 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public void delete(Genre entity) throws SQLException, NamingException {
+    public void delete(Book entity) throws SQLException, NamingException {
 
-        String statementSQL = "DELETE FROM genres WHERE id = ?";
+        String statementSQL = "DELETE FROM books WHERE id = ?";
 
         Connection connection = null;
 
@@ -116,36 +122,41 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public int create(Genre entity) throws SQLException, NamingException {
+    public int create(Book entity) throws SQLException, NamingException {
 
-        String statementSQL = "INSERT INTO genres (title, description) VALUES (?, ?)";
-        String nextval = "SELECT nextval('genres_id')";
+        String statementSQL = "INSERT INTO books (title, pub_year, genere_id) VALUES (?, ?, ?)";
+        String nextvalSQL = "SELECT nextval('books_id')";
+        int futureId = 0;
 
         Connection connection = null;
 
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setString(2, entity.getDescription());
-
+            preparedStatement.setInt(2, entity.getPubYear());
+            preparedStatement.setInt(3, entity.getGenereId());
             preparedStatement.executeUpdate();
+
+            PreparedStatement preparedStatementNextval = connection.prepareStatement(nextvalSQL);
+            ResultSet rs = preparedStatementNextval.executeQuery();
+            if (rs.next()) {
+                futureId = rs.getInt("nextval");
+            }
         } finally {
         if (connection != null)
             connection.close();
         }
-        return 0;
+        return --futureId;
     }
 
     @Override
-    public List<Genre> searchEntityByName(Genre entity) throws SQLException, NamingException {
-//        List<Genre> list = getAll();
+    public List<Book> searchEntityByName(Book entity) throws SQLException, NamingException {
+//        List<Book> list = getAll();
 
 
-
-        String statementSQL = "SELECT * FROM genres WHERE upper(title) LIKE upper(?)";
-        List<Genre> list = new ArrayList<>();
+        String statementSQL = "SELECT * FROM books WHERE upper(title) LIKE upper(?)";
+        List<Book> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -158,11 +169,12 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Genre genre = new Genre();
-                genre.setId(rs.getInt("id"));
-                genre.setTitle(rs.getString("title"));
-                genre.setDescription(rs.getString("description"));
-                list.add(genre);
+                Book book = new Book();
+                book.setId(rs.getInt("id"));
+                book.setTitle(rs.getString("title"));
+                book.setPubYear(rs.getInt("pub_year"));
+                book.setGenereId(rs.getInt("genere_id"));
+                list.add(book);
             }
             return list;
         } finally {

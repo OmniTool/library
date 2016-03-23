@@ -1,9 +1,9 @@
-package library.dataAccess.dao.impl;
+package library.dataAccess.jdbc.dao.impl;
 
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
-import library.dataAccess.dao.ManagerDAO;
-import library.dataAccess.entities.Author;
+import library.dataAccess.jdbc.dao.DAOJDBC;
+import library.dataAccess.accessPoint.entities.*;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
+public class JDBCManagerAuthor implements DAOJDBC<Author, Integer> {
 
     private static DBConnector connector = new DBConnectorPool();
 

@@ -1,8 +1,8 @@
 package library.servlets.crud;
 
-import library.dataAccess.dao.impl.DBManagerAuthor;
-import library.dataAccess.dao.ManagerDAO;
-import library.dataAccess.entities.Author;
+import library.dataAccess.accessPoint.dao.impl.DBManagerAuthor;
+import library.dataAccess.accessPoint.dao.ManagerDAO;
+import library.dataAccess.accessPoint.entities.Author;
 import library.dataAccess.jdbc.validators.impl.AuthorValidator;
 import library.dataAccess.jdbc.validators.Validator;
 

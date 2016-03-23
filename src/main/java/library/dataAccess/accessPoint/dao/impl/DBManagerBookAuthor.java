@@ -1,11 +1,11 @@
-package library.dataAccess.dao.impl;
+package library.dataAccess.accessPoint.dao.impl;
 
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
-import library.dataAccess.dao.ManagerDAO;
-import library.dataAccess.entities.Author;
-import library.dataAccess.entities.Book;
-import library.dataAccess.entities.BookAuthor;
+import library.dataAccess.accessPoint.dao.ManagerDAO;
+import library.dataAccess.accessPoint.entities.Author;
+import library.dataAccess.accessPoint.entities.Book;
+import library.dataAccess.accessPoint.entities.BookAuthor;
 
 import javax.naming.NamingException;
 import java.sql.Connection;

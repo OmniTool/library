@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "genres", schema = "public", catalog = "library_test")
-public class Genre extends EntityBase {
+public class GenreHiber extends EntityBaseHiber {
     //private int id;
     @Basic
     @Column(name = "title")
@@ -15,10 +15,10 @@ public class Genre extends EntityBase {
     private String description;
 
 
-    public Genre() {
+    public GenreHiber() {
     }
 
-    public Genre(String title, String description) {
+    public GenreHiber(String title, String description) {
         this.title = title;
         this.description = description;
     }
@@ -74,7 +74,7 @@ public class Genre extends EntityBase {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Genre genres = (Genre) o;
+        GenreHiber genres = (GenreHiber) o;
 
         if (id != genres.id) return false;
         if (title != null ? !title.equals(genres.title) : genres.title != null) return false;

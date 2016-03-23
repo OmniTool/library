@@ -1,7 +1,7 @@
 package library.dataAccess.hibernate.dao.impl;
 
-import library.dataAccess.hibernate.entities.Book;
-import library.dataAccess.hibernate.entities.EntityBase;
+import library.dataAccess.hibernate.entities.BookHiber;
+import library.dataAccess.hibernate.entities.EntityBaseHiber;
 import library.dataAccess.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -10,14 +10,14 @@ import java.util.List;
 
 public class DAOBook extends BaseDAOImpl {
     public DAOBook() {
-        super(Book.class);
+        super(BookHiber.class);
     }
 
     @Override
-    public List<EntityBase> searchEntityByName(EntityBase entity) {
-        Book book = (Book) entity;
+    public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
+        BookHiber book = (BookHiber) entity;
         Session session = null;
-        List<EntityBase> entities = new ArrayList<>();
+        List<EntityBaseHiber> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +

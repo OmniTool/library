@@ -3,7 +3,7 @@ package library.dataAccess.hibernate.entities;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class EntityBase {
+public abstract class EntityBaseHiber {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "increment_id")
     @SequenceGenerator(name = "increment_id", sequenceName = "increment_id", allocationSize = 1)
