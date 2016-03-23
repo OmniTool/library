@@ -2,7 +2,7 @@ package library.dataAccess.jdbc.dao.impl;
 
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
-import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.dao.DAOJDBC;
 import library.dataAccess.jdbc.entities.Genre;
 
 import javax.naming.NamingException;
@@ -10,15 +10,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
+public class DBManagerGenre implements DAOJDBC<Genre, Integer> {
 
     private static DBConnector connector = new DBConnectorPool();
 
     @Override
-    public List<Genre> getAll() throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Genre> getAll() throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM genres";
-        List<Genre> list = new ArrayList<>();
+        List<library.dataAccess.jdbc.entities.Genre> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -28,7 +28,7 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Genre entity = new Genre();
+                library.dataAccess.jdbc.entities.Genre entity = new library.dataAccess.jdbc.entities.Genre();
                 entity.setId(rs.getInt("id"));
                 entity.setTitle(rs.getString("title"));
                 entity.setDescription(rs.getString("description"));
@@ -44,10 +44,10 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public Genre getEntityById(Integer id) throws SQLException, NamingException {
+    public library.dataAccess.jdbc.entities.Genre getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM genres WHERE id = ?";
-        Genre entity = new Genre();
+        library.dataAccess.jdbc.entities.Genre entity = new library.dataAccess.jdbc.entities.Genre();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -74,7 +74,7 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public void update(Genre entity) throws SQLException, NamingException {
+    public void update(library.dataAccess.jdbc.entities.Genre entity) throws SQLException, NamingException {
 
         String statementSQL = "UPDATE genres SET title = ?, description = ? WHERE id = ?";
 
@@ -96,7 +96,7 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public void delete(Genre entity) throws SQLException, NamingException {
+    public void delete(library.dataAccess.jdbc.entities.Genre entity) throws SQLException, NamingException {
 
         String statementSQL = "DELETE FROM genres WHERE id = ?";
 
@@ -116,7 +116,7 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public int create(Genre entity) throws SQLException, NamingException {
+    public int create(library.dataAccess.jdbc.entities.Genre entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO genres (title, description) VALUES (?, ?)";
         String nextval = "SELECT nextval('genres_id')";
@@ -139,7 +139,7 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     }
 
     @Override
-    public List<Genre> searchEntityByName(Genre entity) throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Genre> searchEntityByName(library.dataAccess.jdbc.entities.Genre entity) throws SQLException, NamingException {
 //        List<Genre> list = getAll();
 
 
@@ -158,7 +158,7 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Genre genre = new Genre();
+                library.dataAccess.jdbc.entities.Genre genre = new library.dataAccess.jdbc.entities.Genre();
                 genre.setId(rs.getInt("id"));
                 genre.setTitle(rs.getString("title"));
                 genre.setDescription(rs.getString("description"));

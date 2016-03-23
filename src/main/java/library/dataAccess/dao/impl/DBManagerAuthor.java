@@ -1,8 +1,9 @@
 package library.dataAccess.dao.impl;
 
-import library.dataAccess.entities.Author;
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
+import library.dataAccess.dao.ManagerDAO;
+import library.dataAccess.entities.Author;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -12,15 +13,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerAuthor implements library.dataAccess.dao.ManagerDAO<library.dataAccess.entities.Author, Integer> {
+public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
 
     private static DBConnector connector = new DBConnectorPool();
 
     @Override
-    public List<library.dataAccess.entities.Author> getAll() throws SQLException, NamingException {
+    public List<Author> getAll() throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM authors";
-        List<library.dataAccess.entities.Author> list = new ArrayList<>();
+        List<Author> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -30,7 +31,7 @@ public class DBManagerAuthor implements library.dataAccess.dao.ManagerDAO<librar
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                library.dataAccess.entities.Author entity = new library.dataAccess.entities.Author();
+                Author entity = new Author();
                 entity.setId(rs.getInt("id"));
                 entity.setSecondName(rs.getString("second_name"));
                 entity.setFirstName(rs.getString("first_name"));
@@ -50,10 +51,10 @@ public class DBManagerAuthor implements library.dataAccess.dao.ManagerDAO<librar
     }
 
     @Override
-    public library.dataAccess.entities.Author getEntityById(Integer id) throws SQLException, NamingException {
+    public Author getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM authors WHERE id = ?";
-        library.dataAccess.entities.Author entity = new library.dataAccess.entities.Author();
+        Author entity = new Author();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -108,7 +109,7 @@ public class DBManagerAuthor implements library.dataAccess.dao.ManagerDAO<librar
     }
 
     @Override
-    public void delete(library.dataAccess.entities.Author entity) throws SQLException, NamingException {
+    public void delete(Author entity) throws SQLException, NamingException {
 
         String statementSQL = "DELETE FROM authors WHERE id = ?";
 
@@ -159,7 +160,7 @@ public class DBManagerAuthor implements library.dataAccess.dao.ManagerDAO<librar
     }
 
     @Override
-    public List<Author> searchEntityByName(library.dataAccess.entities.Author entity) throws SQLException, NamingException {
+    public List<Author> searchEntityByName(Author entity) throws SQLException, NamingException {
 //        List<Author> list = getAll();
 //        if (list != null) {
 //                Iterator<Author> iterator = list.iterator();
@@ -171,7 +172,7 @@ public class DBManagerAuthor implements library.dataAccess.dao.ManagerDAO<librar
 //            }
 
         String statementSQL = "SELECT * FROM authors WHERE upper(first_name) LIKE upper(?) AND upper(second_name) LIKE upper(?) AND upper(middle_name) LIKE upper(?)";
-        List<library.dataAccess.entities.Author> list = new ArrayList<>();
+        List<Author> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -186,7 +187,7 @@ public class DBManagerAuthor implements library.dataAccess.dao.ManagerDAO<librar
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                library.dataAccess.entities.Author author = new library.dataAccess.entities.Author();
+                Author author = new Author();
                 author.setId(rs.getInt("id"));
                 author.setSecondName(rs.getString("second_name"));
                 author.setFirstName(rs.getString("first_name"));

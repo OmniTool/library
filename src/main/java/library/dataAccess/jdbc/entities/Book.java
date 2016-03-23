@@ -2,13 +2,13 @@ package library.dataAccess.jdbc.entities;
 
 import java.util.List;
 
-public class Book {
+public class Book extends EntityBase {
 
     private int id;
     private String title;
     private int pubYear;
     private int genereId;
-    private List<Author> authorsList;
+    private List<library.dataAccess.jdbc.entities.Author> authorsList;
 
 
     public String getTitle() {
@@ -35,11 +35,11 @@ public class Book {
         this.genereId = genereId;
     }
 
-    public List<Author> getAuthorsList() {
+    public List<library.dataAccess.jdbc.entities.Author> getAuthorsList() {
         return authorsList;
     }
 
-    public void setAuthorsList(List<Author> authorsIdList) {
+    public void setAuthorsList(List<library.dataAccess.jdbc.entities.Author> authorsIdList) {
         this.authorsList = authorsIdList;
     }
 

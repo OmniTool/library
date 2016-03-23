@@ -2,9 +2,7 @@ package library.dataAccess.jdbc.dao.impl;
 
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
-import library.dataAccess.jdbc.dao.ManagerDAO;
-import library.dataAccess.jdbc.entities.Author;
-import library.dataAccess.jdbc.entities.Book;
+import library.dataAccess.jdbc.dao.DAOJDBC;
 import library.dataAccess.jdbc.entities.BookAuthor;
 
 import javax.naming.NamingException;
@@ -15,15 +13,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
+public class DBManagerBookAuthor implements DAOJDBC<BookAuthor, Integer> {
 
     DBConnector connector = new DBConnectorPool();
     
     @Override
-    public List<BookAuthor> getAll() throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.BookAuthor> getAll() throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM books_authors";
-        List<BookAuthor> list = new ArrayList<>();
+        List<library.dataAccess.jdbc.entities.BookAuthor> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -33,7 +31,7 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                BookAuthor entity = new BookAuthor();
+                library.dataAccess.jdbc.entities.BookAuthor entity = new library.dataAccess.jdbc.entities.BookAuthor();
                 entity.setId(rs.getInt("id"));
                 entity.setBookId(rs.getInt("book_id"));
                 entity.setAuthorId(rs.getInt("author_id"));
@@ -49,10 +47,10 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     @Override
-    public BookAuthor getEntityById(Integer id) throws SQLException, NamingException {
+    public library.dataAccess.jdbc.entities.BookAuthor getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM books_authors WHERE id = ?";
-        BookAuthor entity = new BookAuthor();
+        library.dataAccess.jdbc.entities.BookAuthor entity = new library.dataAccess.jdbc.entities.BookAuthor();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -79,7 +77,7 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     @Override
-    public void update(BookAuthor entity) throws SQLException, NamingException {
+    public void update(library.dataAccess.jdbc.entities.BookAuthor entity) throws SQLException, NamingException {
 
         String statementSQL = "UPDATE books_authors SET book_id = ?, author_id = ? WHERE id = ?";
 
@@ -101,7 +99,7 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     @Override
-    public void delete(BookAuthor entity) throws SQLException, NamingException {
+    public void delete(library.dataAccess.jdbc.entities.BookAuthor entity) throws SQLException, NamingException {
 
         String statementSQL = "DELETE FROM books_authors WHERE id = ?";
 
@@ -121,7 +119,7 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     @Override
-    public int create(BookAuthor entity) throws SQLException, NamingException {
+    public int create(library.dataAccess.jdbc.entities.BookAuthor entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO books_authors (book_id, author_id) VALUES (?, ?)";
         //String statementSQL = "INSERT INTO books_authors (title, pub_year, genere_id) VALUES ('русская книга из запроса eeeeeelllkkkkk', 1234, 55)";
@@ -145,8 +143,8 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     }
 
     @Override
-    public List<BookAuthor> searchEntityByName(BookAuthor entity) throws SQLException, NamingException {
-        List<BookAuthor> list = new ArrayList<>();
+    public List<library.dataAccess.jdbc.entities.BookAuthor> searchEntityByName(library.dataAccess.jdbc.entities.BookAuthor entity) throws SQLException, NamingException {
+        List<library.dataAccess.jdbc.entities.BookAuthor> list = new ArrayList<>();
 
         String statementSQL = "SELECT * FROM books_authors WHERE author_id = ? AND book_id = ?";
         Connection connection = null;
@@ -158,7 +156,7 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
             preparedStatement.setInt(2, entity.getBookId());
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                BookAuthor ba = new BookAuthor();
+                library.dataAccess.jdbc.entities.BookAuthor ba = new library.dataAccess.jdbc.entities.BookAuthor();
                 ba.setId(rs.getInt("id"));
                 ba.setBookId(rs.getInt("book_id"));
                 ba.setAuthorId(rs.getInt("author_id"));
@@ -173,10 +171,10 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
         }
     }
 
-    public List<Book> searchBooksByAuthor(Author entity) throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Book> searchBooksByAuthor(library.dataAccess.jdbc.entities.Author entity) throws SQLException, NamingException {
         //List<Integer> listId = new ArrayList<>();
-        List<Book> list = new ArrayList<>();
-        DBManagerBook dao = new DBManagerBook();
+        List<library.dataAccess.jdbc.entities.Book> list = new ArrayList<>();
+        library.dataAccess.jdbc.dao.impl.DBManagerBook dao = new library.dataAccess.jdbc.dao.impl.DBManagerBook();
         String statementSQL = "SELECT * FROM books_authors WHERE author_id = ?";
         Connection connection = null;
         ResultSet rs = null;
@@ -199,10 +197,10 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
 
     }
 
-    public List<Author> searchAuthorsByBook(Book entity) throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Author> searchAuthorsByBook(library.dataAccess.jdbc.entities.Book entity) throws SQLException, NamingException {
         //List<Integer> listId = new ArrayList<>();
-        List<Author> list = new ArrayList<>();
-        DBManagerAuthor dao = new DBManagerAuthor();
+        List<library.dataAccess.jdbc.entities.Author> list = new ArrayList<>();
+        library.dataAccess.jdbc.dao.impl.DBManagerAuthor dao = new library.dataAccess.jdbc.dao.impl.DBManagerAuthor();
         String statementSQL = "SELECT * FROM books_authors WHERE book_id = ?";
         Connection connection = null;
         ResultSet rs = null;

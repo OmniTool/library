@@ -1,6 +1,6 @@
 package library.dataAccess.jdbc.entities;
 
-public class BookAuthor {
+public class BookAuthor extends EntityBase {
 
     private int id;
     private int bookId;

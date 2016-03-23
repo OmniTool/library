@@ -2,7 +2,7 @@ package library.dataAccess.jdbc.dao.impl;
 
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
-import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.dao.DAOJDBC;
 import library.dataAccess.jdbc.entities.Author;
 
 import javax.naming.NamingException;
@@ -13,15 +13,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
+public class DBManagerAuthor implements DAOJDBC<Author, Integer> {
 
     private static DBConnector connector = new DBConnectorPool();
 
     @Override
-    public List<Author> getAll() throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Author> getAll() throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM authors";
-        List<Author> list = new ArrayList<>();
+        List<library.dataAccess.jdbc.entities.Author> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -31,7 +31,7 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Author entity = new Author();
+                library.dataAccess.jdbc.entities.Author entity = new library.dataAccess.jdbc.entities.Author();
                 entity.setId(rs.getInt("id"));
                 entity.setSecondName(rs.getString("second_name"));
                 entity.setFirstName(rs.getString("first_name"));
@@ -51,10 +51,10 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
     }
 
     @Override
-    public Author getEntityById(Integer id) throws SQLException, NamingException {
+    public library.dataAccess.jdbc.entities.Author getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM authors WHERE id = ?";
-        Author entity = new Author();
+        library.dataAccess.jdbc.entities.Author entity = new library.dataAccess.jdbc.entities.Author();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -84,7 +84,7 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
     }
 
     @Override
-    public void update(Author entity) throws SQLException, NamingException {
+    public void update(library.dataAccess.jdbc.entities.Author entity) throws SQLException, NamingException {
 
         String statementSQL = "UPDATE authors SET second_name = ?, first_name = ?, middle_name = ?, birth_year = ?, biography = ? WHERE id = ?";
 
@@ -109,7 +109,7 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
     }
 
     @Override
-    public void delete(Author entity) throws SQLException, NamingException {
+    public void delete(library.dataAccess.jdbc.entities.Author entity) throws SQLException, NamingException {
 
         String statementSQL = "DELETE FROM authors WHERE id = ?";
 
@@ -129,7 +129,7 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
     }
 
     @Override
-    public int create(Author entity) throws SQLException, NamingException {
+    public int create(library.dataAccess.jdbc.entities.Author entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO authors (second_name, first_name, middle_name, birth_year, biography) VALUES (?, ?, ?, ?, ?)";
         String nextvalSQL = "SELECT nextval('authors_id')";
@@ -160,7 +160,7 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
     }
 
     @Override
-    public List<Author> searchEntityByName(Author entity) throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Author> searchEntityByName(library.dataAccess.jdbc.entities.Author entity) throws SQLException, NamingException {
 //        List<Author> list = getAll();
 //        if (list != null) {
 //                Iterator<Author> iterator = list.iterator();
@@ -172,7 +172,7 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
 //            }
 
         String statementSQL = "SELECT * FROM authors WHERE upper(first_name) LIKE upper(?) AND upper(second_name) LIKE upper(?) AND upper(middle_name) LIKE upper(?)";
-        List<Author> list = new ArrayList<>();
+        List<library.dataAccess.jdbc.entities.Author> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -187,7 +187,7 @@ public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Author author = new Author();
+                library.dataAccess.jdbc.entities.Author author = new library.dataAccess.jdbc.entities.Author();
                 author.setId(rs.getInt("id"));
                 author.setSecondName(rs.getString("second_name"));
                 author.setFirstName(rs.getString("first_name"));

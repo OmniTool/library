@@ -1,8 +1,8 @@
 package library.dataAccess.jdbc.validators.impl;
 
-import library.dataAccess.jdbc.dao.impl.DBManagerGenre;
-import library.dataAccess.jdbc.dao.ManagerDAO;
-import library.dataAccess.jdbc.entities.Genre;
+import library.dataAccess.dao.impl.DBManagerGenre;
+import library.dataAccess.dao.ManagerDAO;
+import library.dataAccess.entities.Genre;
 import library.dataAccess.jdbc.validators.Validator;
 
 import javax.naming.NamingException;

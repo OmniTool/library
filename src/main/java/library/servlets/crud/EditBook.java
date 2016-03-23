@@ -1,14 +1,14 @@
 package library.servlets.crud;
 
-import library.dataAccess.jdbc.dao.impl.DBManagerAuthor;
-import library.dataAccess.jdbc.dao.impl.DBManagerBook;
-import library.dataAccess.jdbc.dao.ManagerDAO;
-import library.dataAccess.jdbc.dao.impl.DBManagerBookAuthor;
-import library.dataAccess.jdbc.dao.impl.DBManagerGenre;
-import library.dataAccess.jdbc.entities.Author;
-import library.dataAccess.jdbc.entities.Book;
-import library.dataAccess.jdbc.entities.BookAuthor;
-import library.dataAccess.jdbc.entities.Genre;
+import library.dataAccess.dao.impl.DBManagerAuthor;
+import library.dataAccess.dao.impl.DBManagerBook;
+import library.dataAccess.dao.ManagerDAO;
+import library.dataAccess.dao.impl.DBManagerBookAuthor;
+import library.dataAccess.dao.impl.DBManagerGenre;
+import library.dataAccess.entities.Author;
+import library.dataAccess.entities.Book;
+import library.dataAccess.entities.BookAuthor;
+import library.dataAccess.entities.Genre;
 import library.dataAccess.jdbc.validators.impl.BookValidator;
 import library.dataAccess.jdbc.validators.Validator;
 

@@ -35,7 +35,7 @@ public class Book {
         this.genereId = genereId;
     }
 
-    public List<library.dataAccess.entities.Author> getAuthorsList() {
+    public List<Author> getAuthorsList() {
         return authorsList;
     }
 

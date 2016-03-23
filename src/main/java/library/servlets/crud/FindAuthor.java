@@ -1,9 +1,9 @@
 package library.servlets.crud;
 
-import library.dataAccess.jdbc.dao.impl.DBManagerAuthor;
-import library.dataAccess.jdbc.dao.ManagerDAO;
-import library.dataAccess.jdbc.dao.impl.DBManagerBookAuthor;
-import library.dataAccess.jdbc.entities.Author;
+import library.dataAccess.dao.impl.DBManagerAuthor;
+import library.dataAccess.dao.ManagerDAO;
+import library.dataAccess.dao.impl.DBManagerBookAuthor;
+import library.dataAccess.entities.Author;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;

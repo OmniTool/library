@@ -2,7 +2,7 @@ package library.dataAccess.jdbc.dao.impl;
 
 import library.dataAccess.jdbc.connectors.DBConnector;
 import library.dataAccess.jdbc.connectors.DBConnectorPool;
-import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.dao.DAOJDBC;
 import library.dataAccess.jdbc.entities.Book;
 
 import javax.naming.NamingException;
@@ -13,15 +13,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManagerBook implements ManagerDAO<Book, Integer> {
+public class DBManagerBook implements DAOJDBC<Book, Integer> {
 
     DBConnector connector = new DBConnectorPool();
 
     @Override
-    public List<Book> getAll() throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Book> getAll() throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM books";
-        List<Book> list = new ArrayList<>();
+        List<library.dataAccess.jdbc.entities.Book> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -31,7 +31,7 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Book entity = new Book();
+                library.dataAccess.jdbc.entities.Book entity = new library.dataAccess.jdbc.entities.Book();
                 entity.setId(rs.getInt("id"));
                 entity.setTitle(rs.getString("title"));
                 entity.setPubYear(rs.getInt("pub_year"));
@@ -48,10 +48,10 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
     }
 
     @Override
-    public Book getEntityById(Integer id) throws SQLException, NamingException {
+    public library.dataAccess.jdbc.entities.Book getEntityById(Integer id) throws SQLException, NamingException {
 
         String statementSQL = "SELECT * FROM books WHERE id = ?";
-        Book entity = new Book();
+        library.dataAccess.jdbc.entities.Book entity = new library.dataAccess.jdbc.entities.Book();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -79,7 +79,7 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
     }
 
     @Override
-    public void update(Book entity) throws SQLException, NamingException {
+    public void update(library.dataAccess.jdbc.entities.Book entity) throws SQLException, NamingException {
 
         String statementSQL = "UPDATE books SET title = ?, pub_year = ?, genere_id = ? WHERE id = ?";
 
@@ -102,7 +102,7 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
     }
 
     @Override
-    public void delete(Book entity) throws SQLException, NamingException {
+    public void delete(library.dataAccess.jdbc.entities.Book entity) throws SQLException, NamingException {
 
         String statementSQL = "DELETE FROM books WHERE id = ?";
 
@@ -122,7 +122,7 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
     }
 
     @Override
-    public int create(Book entity) throws SQLException, NamingException {
+    public int create(library.dataAccess.jdbc.entities.Book entity) throws SQLException, NamingException {
 
         String statementSQL = "INSERT INTO books (title, pub_year, genere_id) VALUES (?, ?, ?)";
         String nextvalSQL = "SELECT nextval('books_id')";
@@ -151,12 +151,12 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
     }
 
     @Override
-    public List<Book> searchEntityByName(Book entity) throws SQLException, NamingException {
+    public List<library.dataAccess.jdbc.entities.Book> searchEntityByName(library.dataAccess.jdbc.entities.Book entity) throws SQLException, NamingException {
 //        List<Book> list = getAll();
 
 
         String statementSQL = "SELECT * FROM books WHERE upper(title) LIKE upper(?)";
-        List<Book> list = new ArrayList<>();
+        List<library.dataAccess.jdbc.entities.Book> list = new ArrayList<>();
 
         Connection connection = null;
         ResultSet rs = null;
@@ -169,7 +169,7 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
 
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Book book = new Book();
+                library.dataAccess.jdbc.entities.Book book = new library.dataAccess.jdbc.entities.Book();
                 book.setId(rs.getInt("id"));
                 book.setTitle(rs.getString("title"));
                 book.setPubYear(rs.getInt("pub_year"));

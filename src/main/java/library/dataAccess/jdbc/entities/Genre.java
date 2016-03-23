@@ -1,6 +1,6 @@
 package library.dataAccess.jdbc.entities;
 
-public class Genre {
+public class Genre extends EntityBase {
 
     private int id;
     private String title;

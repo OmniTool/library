@@ -61,11 +61,11 @@ public class Author {
         this.biography = biography;
     }
 
-    public List<library.dataAccess.entities.Book> getBooksList() {
+    public List<Book> getBooksList() {
         return booksList;
     }
 
-    public void setBooksList(List<library.dataAccess.entities.Book> booksIdList) {
+    public void setBooksList(List<Book> booksIdList) {
         this.booksList = booksIdList;
     }
 
