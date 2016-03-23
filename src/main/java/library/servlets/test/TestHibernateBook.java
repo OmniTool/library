@@ -59,9 +59,7 @@ public class TestHibernateBook extends HttpServlet {
 
         out.print("<br> List:");
         out.print("getId = " + entity.getId() + "<br>");
-        out.print("getFirstName = " + entity.getTitle() + "<br>");
-        out.print("getMiddleName = " + entity.getPubYear() + "<br>");
-        out.print("getSecondName = " + entity.getGenre() + "<br>");
+        out.print("getFirstName = " + entity + "<br>");
         out.print("getBirthYear = " + entity.getAuthorsList() + "<br>");
 
 
@@ -70,21 +68,18 @@ public class TestHibernateBook extends HttpServlet {
         out.print("<br> Add:");
         list = dao.getAll();
         for (BookHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
         //read
         BookHiber entity1 = (BookHiber) dao.getEntityById(futureId);
         out.print("<br> Read:");
         out.print("<br> List:");
-        out.print("getId = " + entity1.getId() + "<br>");
-        out.print("getFirstName = " + entity1.getTitle() + "<br>");
-        out.print("getMiddleName = " + entity1.getPubYear() + "<br>");
-        out.print("getSecondName = " + entity1.getGenre() + "<br>");
+        out.print("getId = " + entity1 + "<br>");
         out.print("getBirthYear = " + entity1.getAuthorsList() + "<br>");
         out.print("<br> List:");
         list = dao.getAll();
         for (BookHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
         //update
         AuthorHiber author3 = (AuthorHiber) daoAuthor.getEntityById(21);
@@ -101,25 +96,22 @@ public class TestHibernateBook extends HttpServlet {
         BookHiber entity2 = (BookHiber) dao.getEntityById(futureId);
         out.print("<br> Update:");
         out.print("<br> List:");
-        out.print("getId = " + entity1.getId() + "<br>");
-        out.print("getTitle = " + entity1.getTitle() + "<br>");
-        out.print("getPubYear = " + entity1.getPubYear() + "<br>");
-        out.print("getGenre = " + entity1.getGenre() + "<br>");
+        out.print("getId = " + entity1 + "<br>");
         out.print("getAuthorsList = " + entity1.getAuthorsList() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
         for (BookHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
         //delete
         dao.delete(entity2);
 
-
+        out.print("<br> Delete:");
         out.print("<br> List:");
         list = dao.getAll();
         for (BookHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
 
 

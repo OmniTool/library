@@ -58,12 +58,7 @@ public class TestHibernateAuthor extends HttpServlet {
         entity.getBooksList().add(new BookAuthorHiber(book2, entity));
 
         out.print("<br> List:");
-        out.print("getId = " + entity.getId() + "<br>");
-        out.print("getFirstName = " + entity.getFirstName() + "<br>");
-        out.print("getMiddleName = " + entity.getMiddleName() + "<br>");
-        out.print("getSecondName = " + entity.getSecondName() + "<br>");
-        out.print("getBirthYear = " + entity.getBirthYear() + "<br>");
-        out.print("getBiography = " + entity.getBiography() + "<br>");
+        out.print("getId = " + entity + "<br>");
         out.print("getBooksList = " + entity.getBooksList() + "<br>");
 
 
@@ -72,23 +67,18 @@ public class TestHibernateAuthor extends HttpServlet {
         out.print("<br> Add:");
         list = dao.getAll();
         for (AuthorHiber e : list)
-            out.print("<p>" + e.getFirstName() + " " + e.getSecondName() + " " + e.getBirthYear() + " " + e.getBooksList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
             //read
             AuthorHiber entity1 = (AuthorHiber) dao.getEntityById(futureId);
             out.print("<br> Read:");
-        out.print("getId = " + entity1.getId() + "<br>");
-        out.print("getFirstName = " + entity1.getFirstName() + "<br>");
-        out.print("getMiddleName = " + entity1.getMiddleName() + "<br>");
-        out.print("getSecondName = " + entity1.getSecondName() + "<br>");
-        out.print("getBirthYear = " + entity1.getBirthYear() + "<br>");
-        out.print("getBiography = " + entity1.getBiography() + "<br>");
+        out.print("getId = " + entity1 + "<br>");
         out.print("getBooksList = " + entity1.getBooksList() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
         for (AuthorHiber e : list)
-            out.print("<p>" + e.getFirstName() + " " + e.getSecondName() + " " + e.getBirthYear() + " " + e.getBooksList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
             //update
         BookHiber book3 = (BookHiber) daoBook.getEntityById(21);
@@ -105,27 +95,22 @@ public class TestHibernateAuthor extends HttpServlet {
 
             AuthorHiber entity2 = (AuthorHiber) dao.getEntityById(futureId);
             out.print("<br> Update:");
-        out.print("getId = " + entity2.getId() + "<br>");
-        out.print("getFirstName = " + entity2.getFirstName() + "<br>");
-        out.print("getMiddleName = " + entity2.getMiddleName() + "<br>");
-        out.print("getSecondName = " + entity2.getSecondName() + "<br>");
-        out.print("getBirthYear = " + entity2.getBirthYear() + "<br>");
-        out.print("getBiography = " + entity2.getBiography() + "<br>");
+        out.print("getId = " + entity2 + "<br>");
         out.print("getBooksList = " + entity2.getBooksList() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
         for (AuthorHiber e : list)
-            out.print("<p>" + e.getFirstName() + " " + e.getSecondName() + " " + e.getBirthYear() + " " + e.getBooksList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
             //delete
             dao.delete(entity2);
 
-
+        out.print("<br> Delete:");
         out.print("<br> List:");
         list = dao.getAll();
         for (AuthorHiber e : list)
-            out.print("<p>" + e.getFirstName() + " " + e.getSecondName() + " " + e.getBirthYear() + " " + e.getBooksList() + "</p>");
+            out.print("<p>" + e + "</p>");
 
 
 
