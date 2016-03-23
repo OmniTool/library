@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/src/main/java/library/dao/DBManagerAuthor.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/library/dao/DBManagerBook.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/library/dao/DBManagerGenre.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/library/dao/ManagerDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/library/dataAccess/jdbc/dao/ManagerDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/library/dataAccess/jdbc/dao/impl/DBManagerAuthor.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/library/dataAccess/jdbc/dao/impl/DBManagerBook.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/library/dataAccess/jdbc/dao/impl/DBManagerGenre.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/library/servlets/crud/AddAuthor.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/library/servlets/crud/AddBook.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/library/servlets/crud/RemoveGenre.java" charset="UTF-8" />

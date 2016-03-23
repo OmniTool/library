@@ -1,9 +1,9 @@
 package library.servlets.crud;
 
-import library.dao.*;
-import library.dao.DBManagerAuthor;
-import library.dao.entities.Author;
-import library.dao.entities.Book;
+import library.dataAccess.jdbc.dao.impl.DBManagerAuthor;
+import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.dao.impl.DBManagerBookAuthor;
+import library.dataAccess.jdbc.entities.Author;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet("/findauthor")
 public class FindAuthor extends HttpServlet {

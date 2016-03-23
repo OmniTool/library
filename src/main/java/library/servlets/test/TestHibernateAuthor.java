@@ -1,10 +1,10 @@
 package library.servlets.test;
 
 
-import library.hibernate.dao.BaseDAO;
-import library.hibernate.dao.impl.DAOAuthor;
-import library.hibernate.dao.impl.DAOBook;
-import library.hibernate.entities.*;
+import library.dataAccess.hibernate.dao.BaseDAO;
+import library.dataAccess.hibernate.dao.impl.DAOAuthor;
+import library.dataAccess.hibernate.dao.impl.DAOBook;
+import library.dataAccess.hibernate.entities.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

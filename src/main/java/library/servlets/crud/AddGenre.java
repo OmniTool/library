@@ -1,10 +1,10 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerGenre;
-import library.dao.ManagerDAO;
-import library.dao.entities.Genre;
-import library.utils.validation.GenreValidator;
-import library.utils.validation.Validator;
+import library.dataAccess.jdbc.dao.impl.DBManagerGenre;
+import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.entities.Genre;
+import library.dataAccess.jdbc.validators.impl.GenreValidator;
+import library.dataAccess.jdbc.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
 @WebServlet("/addgenre")
 public class AddGenre extends HttpServlet {

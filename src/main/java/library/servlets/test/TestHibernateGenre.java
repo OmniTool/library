@@ -1,14 +1,9 @@
 package library.servlets.test;
 
-import library.hibernate.dao.BaseDAO;
-import library.hibernate.dao.impl.DAOGenre;
-import library.hibernate.entities.*;
-import library.dao.DBManagerBookAuthor;
-import library.dao.ManagerDAO;
-import library.dao.entities.BookAuthor;
-import library.utils.validation.Validator;
+import library.dataAccess.hibernate.dao.BaseDAO;
+import library.dataAccess.hibernate.dao.impl.DAOGenre;
+import library.dataAccess.hibernate.entities.*;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/testHibernateGenre")

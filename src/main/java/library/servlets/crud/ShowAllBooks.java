@@ -1,9 +1,8 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerBook;
-import library.dao.DBManagerBook;
-import library.dao.ManagerDAO;
-import library.dao.entities.Book;
+import library.dataAccess.jdbc.dao.impl.DBManagerBook;
+import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.entities.Book;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 

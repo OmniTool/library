@@ -1,10 +1,10 @@
 package library.servlets.crud;
 
-import library.dao.DBManagerAuthor;
-import library.dao.ManagerDAO;
-import library.dao.entities.Author;
-import library.utils.validation.AuthorValidator;
-import library.utils.validation.Validator;
+import library.dataAccess.jdbc.dao.impl.DBManagerAuthor;
+import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.entities.Author;
+import library.dataAccess.jdbc.validators.impl.AuthorValidator;
+import library.dataAccess.jdbc.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 
 @WebServlet("/findauthorbyname")

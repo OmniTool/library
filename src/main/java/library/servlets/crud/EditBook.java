@@ -1,13 +1,16 @@
 package library.servlets.crud;
 
-import library.dao.*;
-import library.dao.DBManagerBook;
-import library.dao.entities.Author;
-import library.dao.entities.Book;
-import library.dao.entities.BookAuthor;
-import library.dao.entities.Genre;
-import library.utils.validation.BookValidator;
-import library.utils.validation.Validator;
+import library.dataAccess.jdbc.dao.impl.DBManagerAuthor;
+import library.dataAccess.jdbc.dao.impl.DBManagerBook;
+import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.dao.impl.DBManagerBookAuthor;
+import library.dataAccess.jdbc.dao.impl.DBManagerGenre;
+import library.dataAccess.jdbc.entities.Author;
+import library.dataAccess.jdbc.entities.Book;
+import library.dataAccess.jdbc.entities.BookAuthor;
+import library.dataAccess.jdbc.entities.Genre;
+import library.dataAccess.jdbc.validators.impl.BookValidator;
+import library.dataAccess.jdbc.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -99,7 +102,8 @@ public class EditBook extends HttpServlet {
             Book forUpdBook = (Book) daoBook.getEntityById(book.getId());
             validator.trim(forUpdBook);
             if (book.getTitle().equals(forUpdBook.getTitle())
-                    && book.getPubYear() == forUpdBook.getPubYear()) {
+                    && book.getPubYear() == forUpdBook.getPubYear()
+                    && book.getGenereId() == forUpdBook.getGenereId()) {
                 isValid = true;
             } else {
                 isValid = !validator.exists(book);

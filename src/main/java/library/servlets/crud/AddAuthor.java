@@ -1,14 +1,14 @@
 package library.servlets.crud;
 
-import library.dao.*;
-import library.dao.DBManagerAuthor;
-import library.dao.entities.Author;
-import library.dao.entities.Book;
-import library.dao.entities.BookAuthor;
-import library.dao.entities.Genre;
-import library.utils.validation.AuthorValidator;
-import library.utils.validation.BookValidator;
-import library.utils.validation.Validator;
+import library.dataAccess.jdbc.dao.impl.DBManagerAuthor;
+import library.dataAccess.jdbc.dao.ManagerDAO;
+import library.dataAccess.jdbc.dao.impl.DBManagerBook;
+import library.dataAccess.jdbc.dao.impl.DBManagerBookAuthor;
+import library.dataAccess.jdbc.entities.Author;
+import library.dataAccess.jdbc.entities.Book;
+import library.dataAccess.jdbc.entities.BookAuthor;
+import library.dataAccess.jdbc.validators.impl.AuthorValidator;
+import library.dataAccess.jdbc.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
