@@ -1,13 +1,18 @@
-package library.dataAccess.accessPoint.entities;
+package library.dataAccess.accessPoint.active.hibernate.entities;
 
-import library.dataAccess.jdbc.entities.GenreJdbc;
+import library.dataAccess.hibernate.entities.GenreHiber;
 
-public class Genre {
 
-    private GenreJdbc entity;
+public class Genre implements EntityBase {
+
+    private GenreHiber entity;
 
     public Genre() {
-        this.entity = new GenreJdbc();
+        this.entity = new GenreHiber();
+    }
+
+    public Genre(GenreHiber entity) {
+        this.entity = entity;
     }
 
     public int getId() {
@@ -37,5 +42,13 @@ public class Genre {
     @Override
     public String toString() {
         return entity.toString();
+    }
+
+    public GenreHiber getEntity() {
+        return entity;
+    }
+
+    public void setEntity(GenreHiber entity) {
+        this.entity = entity;
     }
 }

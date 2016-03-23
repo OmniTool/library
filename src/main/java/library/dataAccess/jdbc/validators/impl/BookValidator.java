@@ -1,8 +1,8 @@
 package library.dataAccess.jdbc.validators.impl;
 
-import library.dataAccess.accessPoint.dao.impl.DBManagerBook;
-import library.dataAccess.accessPoint.dao.ManagerDAO;
-import library.dataAccess.accessPoint.entities.Book;
+import library.dataAccess.accessPoint.active.hibernate.dao.impl.DBManagerBook;
+import library.dataAccess.accessPoint.active.hibernate.dao.ManagerDAO;
+import library.dataAccess.accessPoint.active.hibernate.entities.Book;
 import library.dataAccess.jdbc.validators.Validator;
 
 import javax.naming.NamingException;

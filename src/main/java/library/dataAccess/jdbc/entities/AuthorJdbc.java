@@ -1,6 +1,6 @@
 package library.dataAccess.jdbc.entities;
 
-import library.dataAccess.accessPoint.entities.Book;
+import library.dataAccess.accessPoint.active.hibernate.entities.Book;
 
 import java.util.List;
 
