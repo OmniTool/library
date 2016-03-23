@@ -5,10 +5,13 @@ import library.dataAccess.accessPoint.active.hibernate.entities.Author;
 import library.dataAccess.accessPoint.active.hibernate.entities.Book;
 import library.dataAccess.accessPoint.active.hibernate.entities.BookAuthor;
 import library.dataAccess.hibernate.dao.impl.DAOBookAuthor;
+import library.dataAccess.hibernate.entities.BookAuthorHiber;
+import library.dataAccess.hibernate.entities.EntityBaseHiber;
 import library.dataAccess.jdbc.dao.impl.JDBCManagerBookAuthor;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
@@ -22,27 +25,32 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
 
     @Override
     public BookAuthor getEntityById(Integer id) {
-        return dao.getEntityById(id);
+        return new BookAuthor((BookAuthorHiber) dao.getEntityById(id));
     }
 
     @Override
     public void update(BookAuthor entity) {
-        dao.update(entity);
+        dao.update(entity.getEntity());
     }
 
     @Override
     public void delete(BookAuthor entity) {
-        dao.delete(entity);
+        dao.delete(entity.getEntity());
     }
 
     @Override
     public int create(BookAuthor entity) {
-        return dao.create(entity);
+        return dao.create(entity.getEntity());
     }
 
     @Override
     public List<BookAuthor> searchEntityByName(BookAuthor entity) {
-        return dao.searchEntityByName(entity);
+        List<EntityBaseHiber> list = dao.searchEntityByName(entity.getEntity());
+        List<BookAuthor> booksAuthors = new ArrayList<>();
+        for (EntityBaseHiber ebh : list) {
+            booksAuthors.add(new BookAuthor((BookAuthorHiber) ebh));
+        }
+        return booksAuthors;
     }
 
     public List<Book> searchBooksByAuthor(Author entity) {
