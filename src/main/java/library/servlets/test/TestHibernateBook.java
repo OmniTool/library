@@ -1,8 +1,12 @@
 package library.servlets.test;
 
+
 import library.hibernate.dao.BaseDAO;
+import library.hibernate.dao.impl.DAOAuthor;
+import library.hibernate.dao.impl.DAOBook;
+import library.hibernate.dao.impl.DAOBook;
 import library.hibernate.dao.impl.DAOGenre;
-import library.hibernate.entities.Genre;
+import library.hibernate.entities.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/testHibernateBook")
@@ -33,65 +38,89 @@ public class TestHibernateBook extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        Genre entity = new Genre();
+        Book entity = new Book();
 
-        BaseDAO dao = new DAOGenre();
+        BaseDAO dao = new DAOBook();
+        BaseDAO daoAuthor = new DAOAuthor();
+        BaseDAO daoGenre = new DAOGenre();
 
-        List<Genre> list = null;
+        List<Book> list = null;
 
 
-            //create
-            entity.setTitle("test genre");
-            entity.setDescription("test descr");
+        //create
+        Author author1 = (Author) daoAuthor.getEntityById(23);
+        Author author2 = (Author) daoAuthor.getEntityById(24);
 
-            out.print("<br> Add:");
-            out.print("getId = " + entity.getId() + "<br>");
-            out.print("getBookId = " + entity.getTitle() + "<br>");
-            out.print("getAuthorId = " + entity.getDescription() + "<br>");
+        entity.setTitle("test book title");
+        entity.setPubYear(1234);
+        entity.setGenre((Genre)daoGenre.getEntityById(70));
+        entity.setAuthorsList(new ArrayList<BookAuthor>());
+        entity.getAuthorsList().add(new BookAuthor(entity, author1));
+        entity.getAuthorsList().add(new BookAuthor(entity, author2));
 
-            int futureId = dao.create(entity);
+        out.print("<br> List:");
+        out.print("getId = " + entity.getId() + "<br>");
+        out.print("getFirstName = " + entity.getTitle() + "<br>");
+        out.print("getMiddleName = " + entity.getPubYear() + "<br>");
+        out.print("getSecondName = " + entity.getGenre() + "<br>");
+        out.print("getBirthYear = " + entity.getAuthorsList() + "<br>");
+
+
+        int futureId = dao.create(entity);
+
+        out.print("<br> Add:");
+        list = dao.getAll();
+        for (Book e : list)
+            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
+
+        //read
+        Book entity1 = (Book) dao.getEntityById(futureId);
+        out.print("<br> Read:");
+        out.print("<br> List:");
+        out.print("getId = " + entity1.getId() + "<br>");
+        out.print("getFirstName = " + entity1.getTitle() + "<br>");
+        out.print("getMiddleName = " + entity1.getPubYear() + "<br>");
+        out.print("getSecondName = " + entity1.getGenre() + "<br>");
+        out.print("getBirthYear = " + entity1.getAuthorsList() + "<br>");
+        out.print("<br> List:");
+        list = dao.getAll();
+        for (Book e : list)
+            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
+
+        //update
+        Author author3 = (Author) daoAuthor.getEntityById(21);
+
+        entity1.setTitle("new test book title");
+        entity1.setPubYear(4321);
+        entity1.setGenre((Genre) daoGenre.getEntityById(69));
+        entity1.getAuthorsList().clear();
+        entity1.getAuthorsList().add(new BookAuthor(entity1, author3));
+
+
+        dao.update(entity1);
+
+        Book entity2 = (Book) dao.getEntityById(futureId);
+        out.print("<br> Update:");
+        out.print("<br> List:");
+        out.print("getId = " + entity1.getId() + "<br>");
+        out.print("getTitle = " + entity1.getTitle() + "<br>");
+        out.print("getPubYear = " + entity1.getPubYear() + "<br>");
+        out.print("getGenre = " + entity1.getGenre() + "<br>");
+        out.print("getAuthorsList = " + entity1.getAuthorsList() + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
-        for (Genre e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
+        for (Book e : list)
+            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
 
-            //read
-            Genre entity1 = (Genre) dao.getEntityById(futureId);
-            out.print("<br> Read:");
-            out.print("getId = " + entity1.getId() + "<br>");
-            out.print("getBookId = " + entity1.getTitle() + "<br>");
-            out.print("getAuthorId = " + entity1.getDescription() + "<br>");
-
-        out.print("<br> List:");
-        list = dao.getAll();
-        for (Genre e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
-
-            //update
-            entity1.setTitle("new test title");
-            entity1.setDescription("new test descr");
-            dao.update(entity1);
-
-            Genre entity2 = (Genre) dao.getEntityById(futureId);
-            out.print("<br> Update:");
-            out.print("getId = " + entity2.getId() + "<br>");
-            out.print("getBookId = " + entity2.getTitle() + "<br>");
-            out.print("getAuthorId = " + entity2.getDescription() + "<br>");
-
-        out.print("<br> List:");
-        list = dao.getAll();
-        for (Genre e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
-
-            //delete
-            dao.delete(entity2);
+        //delete
+        dao.delete(entity2);
 
 
         out.print("<br> List:");
         list = dao.getAll();
-        for (Genre e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
+        for (Book e : list)
+            out.print("<p>" + e.getTitle() + " " + e.getPubYear() + " " + e.getGenre() + " " + e.getAuthorsList() + "</p>");
 
 
 

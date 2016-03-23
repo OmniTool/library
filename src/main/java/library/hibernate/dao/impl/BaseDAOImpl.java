@@ -60,6 +60,7 @@ public class BaseDAOImpl<T extends EntityBase> implements BaseDAO<EntityBase, In
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
+            //session.refresh(entity);
             session.update(entity);
             //session.flush();
             transaction.commit();
