@@ -76,7 +76,7 @@ public class GenreHiber extends EntityBaseHiber {
 
         GenreHiber genres = (GenreHiber) o;
 
-        if (id != genres.id) return false;
+        //if (id != genres.id) return false;
         if (title != null ? !title.equals(genres.title) : genres.title != null) return false;
         if (description != null ? !description.equals(genres.description) : genres.description != null) return false;
 
@@ -85,7 +85,8 @@ public class GenreHiber extends EntityBaseHiber {
 
     @Override
     public int hashCode() {
-        int result = id;
+        //int result = id;
+        int result = 31;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
@@ -93,8 +94,10 @@ public class GenreHiber extends EntityBaseHiber {
 
     @Override
     public String toString() {
-        return "Genre{" +
+        return "GenreHiber{" +
+                "id='" + id + '\'' +
                 "title='" + title + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
