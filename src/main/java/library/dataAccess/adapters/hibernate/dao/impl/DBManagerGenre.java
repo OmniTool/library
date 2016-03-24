@@ -17,27 +17,22 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
     public List<Genre> getAll() {
     return dao.getAll();
     }
-
     @Override
     public Genre getEntityById(Integer id) {
         return new Genre((GenreHiber) dao.getEntityById(id));
     }
-
     @Override
     public void update(Genre entity) {
         dao.update(entity.getEntity());
     }
-
     @Override
     public void delete(Genre entity) {
         dao.delete(entity.getEntity());
     }
-
     @Override
     public int create(Genre entity) {
         return dao.create(entity.getEntity());
     }
-
     @Override
     public List<Genre> searchEntityByName(Genre entity) {
         List<EntityBaseHiber> list = dao.searchEntityByName(entity.getEntity());
@@ -47,6 +42,4 @@ public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
         }
         return books;
     }
-
-
 }

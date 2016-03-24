@@ -23,13 +23,9 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         Session session = null;
         List<EntityBaseHiber> entities = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName()).list();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return entities;
     }
 
@@ -40,13 +36,9 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         List<EntityBaseHiber> entities = new ArrayList();
         T entity = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entity = session.byId(type).load(id);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return entity;
     }
 
@@ -55,7 +47,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             transaction = session.beginTransaction();
 
             //session.refresh(entity);
@@ -66,11 +58,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
     }
 
     @Override
@@ -78,7 +66,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();
@@ -86,11 +74,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
     }
 
     @Override
@@ -99,7 +83,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         Transaction transaction = null;
         Integer idSaved = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             transaction = session.beginTransaction();
             idSaved = (Integer) session.save(entity);
             transaction.commit();
@@ -107,11 +91,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return idSaved;
     }
 

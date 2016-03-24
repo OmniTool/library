@@ -16,30 +16,24 @@ public class DBManagerBook implements ManagerDAOJDBC<Book, Integer> {
     public List<Book> getAll() throws SQLException, NamingException {
         return dao.getAll();
     }
-
     @Override
     public Book getEntityById(Integer id) throws SQLException, NamingException {
         return dao.getEntityById(id);
     }
-
     @Override
     public void update(Book entity) throws SQLException, NamingException {
         dao.update(entity);
     }
-
     @Override
     public void delete(Book entity) throws SQLException, NamingException {
         dao.delete(entity);
     }
-
     @Override
     public int create(Book entity) throws SQLException, NamingException {
         return dao.create(entity);
     }
-
     @Override
     public List<Book> searchEntityByName(Book entity) throws SQLException, NamingException {
         return dao.searchEntityByName(entity);
     }
-
 }

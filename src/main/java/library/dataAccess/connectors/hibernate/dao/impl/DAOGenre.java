@@ -19,7 +19,7 @@ public class DAOGenre extends BaseDAOImpl {
         Session session = null;
         List<EntityBaseHiber> entities = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE upper(e.title) LIKE upper(:title)")
                     .setParameter("title", "%" + genre.getTitle() + "%")
@@ -28,11 +28,7 @@ public class DAOGenre extends BaseDAOImpl {
 //            entities = query
 //                    .setString( "title", genre.getTitle())
 //                    .list();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return entities;
     }
 

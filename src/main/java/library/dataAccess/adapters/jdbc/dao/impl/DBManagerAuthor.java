@@ -16,31 +16,24 @@ public class DBManagerAuthor implements ManagerDAOJDBC<Author, Integer> {
     public List<Author> getAll() throws SQLException, NamingException {
         return dao.getAll();
     }
-
     @Override
     public Author getEntityById(Integer id) throws SQLException, NamingException {
         return dao.getEntityById(id);
     }
-
     @Override
     public void update(Author entity) throws SQLException, NamingException {
         dao.update(entity);
     }
-
     @Override
     public void delete(Author entity) throws SQLException, NamingException {
         dao.delete(entity);
     }
-
     @Override
     public int create(Author entity) throws SQLException, NamingException {
         return dao.create(entity);
     }
-
     @Override
     public List<Author> searchEntityByName(Author entity) throws SQLException, NamingException {
         return dao.searchEntityByName(entity);
     }
-
-
 }

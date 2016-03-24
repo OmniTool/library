@@ -21,18 +21,14 @@ public class DAOBookAuthor extends BaseDAOImpl {
         Session session = null;
         List<EntityBaseHiber> entities = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             //FROM books_authors WHERE author_id = ? AND book_id = ?
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE e.author.id = :author_id AND e.book.id = :book_id")
                     .setParameter("author_id", bookAuthor.getAuthor().getId())
                     .setParameter("book_id", bookAuthor.getBook().getId())
                     .list();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return entities;
     }
 
@@ -41,15 +37,13 @@ public class DAOBookAuthor extends BaseDAOImpl {
         List<BookAuthorHiber> entities = new ArrayList<>();
         List<Book> books = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE e.author.id = :author_id")
                     .setParameter("author_id", entity.getId())
                     .list();
         } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+            HibernateUtil.close(session);
         }
         for (BookAuthorHiber bah : entities) {
             books.add(new Book(bah.getBook()));
@@ -62,7 +56,7 @@ public class DAOBookAuthor extends BaseDAOImpl {
         List<BookAuthorHiber> entities = new ArrayList<>();
         List<Author> authors = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE e.book.id = :book_id")
                     .setParameter("book_id", entity.getId())

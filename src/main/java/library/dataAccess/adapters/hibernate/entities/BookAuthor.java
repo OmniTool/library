@@ -15,7 +15,6 @@ public class BookAuthor implements EntityBase {
     public BookAuthor() {
         this.entity = new BookAuthorHiber();
     }
-
     public BookAuthor(BookAuthorHiber entity) {
         this.entity = entity;
     }
@@ -23,38 +22,30 @@ public class BookAuthor implements EntityBase {
     public int getId() {
         return entity.getId();
     }
-
     public void setId(int id) {
         entity.setId(id);
     }
-
     public int getBookId() {
         return entity.getBook().getId();
     }
-
     public void setBookId(int bookId) {
         BaseDAO daoBook = new DAOBook();
         entity.setBook((BookHiber)daoBook.getEntityById(bookId));
     }
-
     public int getAuthorId() {
         return entity.getAuthor().getId();
     }
-
     public void setAuthorId(int authorId) {
         BaseDAO daoAuthor = new DAOAuthor();
         entity.setAuthor((AuthorHiber)daoAuthor.getEntityById(authorId));
     }
-
     @Override
     public String toString() {
         return entity.toString();
     }
-
     public BookAuthorHiber getEntity() {
         return entity;
     }
-
     public void setEntity(BookAuthorHiber entity) {
         this.entity = entity;
     }

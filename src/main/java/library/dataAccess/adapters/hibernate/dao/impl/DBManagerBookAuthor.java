@@ -19,27 +19,22 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
     public List<BookAuthor> getAll() {
         return dao.getAll();
     }
-
     @Override
     public BookAuthor getEntityById(Integer id) {
         return new BookAuthor((BookAuthorHiber) dao.getEntityById(id));
     }
-
     @Override
     public void update(BookAuthor entity) {
         dao.update(entity.getEntity());
     }
-
     @Override
     public void delete(BookAuthor entity) {
         dao.delete(entity.getEntity());
     }
-
     @Override
     public int create(BookAuthor entity) {
         return dao.create(entity.getEntity());
     }
-
     @Override
     public List<BookAuthor> searchEntityByName(BookAuthor entity) {
         List<EntityBaseHiber> list = dao.searchEntityByName(entity.getEntity());
@@ -49,13 +44,10 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
         }
         return booksAuthors;
     }
-
     public List<Book> searchBooksByAuthor(Author entity) {
         return dao.searchBooksByAuthor(entity);
     }
-
     public List<Author> searchAuthorsByBook(Book entity) {
         return dao.searchAuthorsByBook(entity);
     }
-
 }

@@ -1,5 +1,6 @@
 package library.servlets.crud;
 
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.Book;
@@ -21,9 +22,10 @@ public class ShowAllBooks extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ManagerDAO dao = new DBManagerBook();
+//        ManagerDAO dao = new DBManagerBook();
+        DAO dao = new DAO();
         try {
-            List<Book> list = dao.getAll();
+            List<Book> list = dao.getAllBook();
 
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Книги");

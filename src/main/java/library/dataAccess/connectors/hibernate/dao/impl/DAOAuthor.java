@@ -19,7 +19,7 @@ public class DAOAuthor extends BaseDAOImpl {
         Session session = null;
         List<EntityBaseHiber> entities = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE upper(e.firstName) LIKE upper(:first_name) " +
                     "AND upper(e.secondName) LIKE upper(:second_name) " +
@@ -28,11 +28,7 @@ public class DAOAuthor extends BaseDAOImpl {
                     .setParameter("second_name", "%" + author.getSecondName()+ "%")
                     .setParameter("middle_name", "%" + author.getMiddleName() + "%")
                     .list();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return entities;
     }
 }

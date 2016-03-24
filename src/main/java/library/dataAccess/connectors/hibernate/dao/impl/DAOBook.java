@@ -20,16 +20,12 @@ public class DAOBook extends BaseDAOImpl {
         Session session = null;
         List<EntityBaseHiber> entities = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE upper(e.title) LIKE upper(:title)")
                     .setParameter("title", "%" + book.getTitle() + "%")
                     .list();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return entities;
     }
 
@@ -37,16 +33,12 @@ public class DAOBook extends BaseDAOImpl {
         Session session = null;
         List<BookHiber> entities = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE e.genre.id = :genre_id")
                     .setParameter("genre_id", genre.getId())
                     .list();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        } finally {HibernateUtil.close(session);}
         return entities;
     }
 

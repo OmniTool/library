@@ -1,5 +1,6 @@
 package library.servlets.crud;
 
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.Author;
@@ -21,9 +22,10 @@ public class ShowAllAuthors extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ManagerDAO dao = new DBManagerAuthor();
+//        ManagerDAO dao = new DBManagerAuthor();
+        DAO dao = new DAO();
         try {
-            List<Author> list = dao.getAll();
+            List<Author> list = dao.getAllAuthor();
 
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Авторы");

@@ -1,5 +1,6 @@
 package library.servlets.crud;
 
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.Genre;
@@ -24,9 +25,10 @@ public class ShowAllGenres extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ManagerDAO dao = new DBManagerGenre();
+//        ManagerDAO dao = new DBManagerGenre();
+        DAO dao = new DAO();
         try {
-            List<Genre> list = dao.getAll();
+            List<Genre> list = dao.getAllGenre();
 
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Жанры");
