@@ -1,16 +1,13 @@
 package library.dataAccess.hibernate.dao.impl;
 
-import library.dataAccess.accessPoint.active.hibernate.entities.Author;
-import library.dataAccess.accessPoint.active.hibernate.entities.Book;
-import library.dataAccess.hibernate.entities.AuthorHiber;
+import library.dataAccess.accessPoint.active.entities.Author;
+import library.dataAccess.accessPoint.active.entities.Book;
 import library.dataAccess.hibernate.entities.BookAuthorHiber;
-import library.dataAccess.hibernate.entities.BookHiber;
 import library.dataAccess.hibernate.entities.EntityBaseHiber;
 import library.dataAccess.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DAOBookAuthor extends BaseDAOImpl {

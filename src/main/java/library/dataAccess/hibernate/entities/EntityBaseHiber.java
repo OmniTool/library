@@ -1,6 +1,6 @@
 package library.dataAccess.hibernate.entities;
 
-import library.dataAccess.accessPoint.active.hibernate.entities.EntityBase;
+import library.dataAccess.accessPoint.active.entities.EntityBase;
 
 import javax.persistence.*;
 

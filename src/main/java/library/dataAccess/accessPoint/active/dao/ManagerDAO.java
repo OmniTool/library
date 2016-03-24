@@ -1,12 +1,10 @@
-package library.dataAccess.jdbc.dao;
-
-import library.dataAccess.accessPoint.active.dao.ManagerDAO;
+package library.dataAccess.accessPoint.active.dao;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface DAOJDBC<E, K> extends ManagerDAO<E, K> {
+public interface ManagerDAO <E, K> {
 
     List<E> getAll() throws SQLException, NamingException;
     E getEntityById(K id) throws SQLException, NamingException;
