@@ -1,42 +1,42 @@
-package library.dataAccess.accessPoint.active.validators.impl;
+package library.dataAccess.accessPoint.validators.impl;
 
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerGenre;
+import library.dataAccess.accessPoint.active.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
-import library.dataAccess.accessPoint.active.entities.Genre;
-import library.dataAccess.accessPoint.active.validators.Validator;
+import library.dataAccess.accessPoint.active.entities.Book;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class GenreValidator implements Validator<Genre> {
+public class BookValidator implements Validator<Book> {
 
     @Override
-    public boolean exists(Genre entity) throws SQLException, NamingException {
-        ManagerDAO dao = new DBManagerGenre();
+    public boolean exists(Book entity) throws SQLException, NamingException {
+        ManagerDAO dao = new DBManagerBook();
         trim(entity);
 
-        List<Genre> list = dao.searchEntityByName(entity);
+        List<Book> list = dao.searchEntityByName(entity);
         String title = entity.getTitle().toUpperCase();
+        int pubYear = entity.getPubYear();
+        int genreId = entity.getGenereId();
 
-        for (Genre e : list) {
+        for (Book e : list) {
             trim(e);
-            if (e.getTitle().toUpperCase().equals(title))
+            if (e.getTitle().toUpperCase().equals(title)
+                    && e.getPubYear()==pubYear
+                    && e.getGenereId()==genreId)
                 return true;
         }
         return false;
     }
 
     @Override
-    public void trim(Genre entity) {
+    public void trim(Book entity) {
         if (entity.getTitle() != null)
             entity.setTitle(entity.getTitle().trim());
         else
             entity.setTitle("");
-        if (entity.getDescription() != null)
-            entity.setDescription(entity.getDescription().trim());
-        else
-            entity.setDescription("");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class GenreValidator implements Validator<Genre> {
     }
 
 //    @Override
-//    protected boolean isUsed(Genre entity) {
+//    protected boolean isUsed(Book entity) {
 //        return true;
 //    }
 }

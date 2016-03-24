@@ -9,8 +9,8 @@ import library.dataAccess.accessPoint.active.entities.Author;
 import library.dataAccess.accessPoint.active.entities.Book;
 import library.dataAccess.accessPoint.active.entities.BookAuthor;
 import library.dataAccess.accessPoint.active.entities.Genre;
-import library.dataAccess.accessPoint.active.validators.impl.BookValidator;
-import library.dataAccess.accessPoint.active.validators.Validator;
+import library.dataAccess.accessPoint.validators.impl.BookValidator;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -53,7 +53,13 @@ public class EditBook extends HttpServlet {
                     Book entity = (Book) daoBook.getEntityById(id);
                     Validator validator = new BookValidator();
                     validator.trim(entity);
-                    entity.setAuthorsList(daoBookAuthor.searchAuthorsByBook(entity));
+
+//                    //jdbc
+//                    entity.setAuthorsList(daoBookAuthor.searchAuthorsByBook(entity));
+
+                    //hibernate
+                    req.setAttribute("currentListAuthor", entity.getAuthorsList());
+
                     req.setAttribute("entity", entity);
                     req.setAttribute("genre", daoGenre.getEntityById(entity.getGenereId()));
                 }
@@ -72,10 +78,15 @@ public class EditBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Book book = new Book();
+//        //jdbc
+//        Book book = new Book();
+//        String ids = req.getParameter("id");
+//        book.setId(Integer.parseInt(ids));
 
+        //hibernate
         String ids = req.getParameter("id");
-        book.setId(Integer.parseInt(ids));
+        Book book = new Book(Integer.parseInt(ids));
+
         String titles = req.getParameter("title");
         book.setTitle(titles);
         String pubYears = req.getParameter("pubYear");
@@ -108,52 +119,56 @@ public class EditBook extends HttpServlet {
             } else {
                 isValid = !validator.exists(book);
             }
+
+            List<Author> listA = new ArrayList<>();
+            for (int id : selectedIds) {
+                listA.add((Author) daoAuthor.getEntityById(id));
+            }
+            book.setAuthorsList(listA);
+
             if (isValid) {
-                for (Author b : daoBookAuthor.searchAuthorsByBook(book)) {
-                    forDelListId.add(b.getId());
-                }
-                Iterator<Integer> iteratorAddList = forAddListId.iterator();
-                while (iteratorAddList.hasNext()) {
-                    int idForAdd = iteratorAddList.next();
-                    Iterator<Integer> iteratorDelList = forDelListId.iterator();
-                    while (iteratorDelList.hasNext()) {
-                        int idForDel = iteratorDelList.next();
-                        if (idForAdd == idForDel) {
-                            iteratorDelList.remove();
-                            iteratorAddList.remove();
-                        }
-                    }
-                }
 
-                for (int id : forAddListId) {
-                    BookAuthor ba = new BookAuthor();
-                    ba.setBookId(book.getId());
-                    ba.setAuthorId(id);
-                    daoBookAuthor.create(ba);
-                }
-
-                for (int id : forDelListId) {
-                    BookAuthor ba = new BookAuthor();
-                    ba.setBookId(book.getId());
-                    ba.setAuthorId(id);
-                    BookAuthor baFromDB = daoBookAuthor.searchEntityByName(ba).get(0);
-                    if (baFromDB != null)
-                        daoBookAuthor.delete(baFromDB);
-                }
+//                //jdbc
+//                for (Author b : daoBookAuthor.searchAuthorsByBook(book)) {
+//                    forDelListId.add(b.getId());
+//                }
+//                Iterator<Integer> iteratorAddList = forAddListId.iterator();
+//                while (iteratorAddList.hasNext()) {
+//                    int idForAdd = iteratorAddList.next();
+//                    Iterator<Integer> iteratorDelList = forDelListId.iterator();
+//                    while (iteratorDelList.hasNext()) {
+//                        int idForDel = iteratorDelList.next();
+//                        if (idForAdd == idForDel) {
+//                            iteratorDelList.remove();
+//                            iteratorAddList.remove();
+//                        }
+//                    }
+//                }
+//
+//                for (int id : forAddListId) {
+//                    BookAuthor ba = new BookAuthor();
+//                    ba.setBookId(book.getId());
+//                    ba.setAuthorId(id);
+//                    daoBookAuthor.create(ba);
+//                }
+//
+//                for (int id : forDelListId) {
+//                    BookAuthor ba = new BookAuthor();
+//                    ba.setBookId(book.getId());
+//                    ba.setAuthorId(id);
+//                    BookAuthor baFromDB = daoBookAuthor.searchEntityByName(ba).get(0);
+//                    if (baFromDB != null)
+//                        daoBookAuthor.delete(baFromDB);
+//                }
 
                 daoBook.update(book);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findbook?id=" + book.getId());
                 dispatcher.forward(req, resp);
 
             } else {
-                List<Author> list = new ArrayList<>();
-                for (int id : selectedIds) {
-                    list.add((Author) daoAuthor.getEntityById(id));
-                }
-                book.setAuthorsList(list);
                 req.setAttribute("message", "Уже существует");
                 req.setAttribute("entity", book);
-
+                req.setAttribute("currentListAuthor", listA);
                 doGet(req, resp);
             }
         } catch (SQLException e) {

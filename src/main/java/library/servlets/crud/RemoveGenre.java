@@ -1,8 +1,10 @@
-package library.servlets.crud.active;
+package library.servlets.crud;
 
 import library.dataAccess.accessPoint.active.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
 import library.dataAccess.accessPoint.active.entities.Genre;
+import library.dataAccess.accessPoint.validators.impl.GenreValidator;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -14,15 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/findgenre")
-public class FindGenre extends HttpServlet {
+@WebServlet("/removegenre")
+public class RemoveGenre extends HttpServlet {
+
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = 0;
         String ids = req.getParameter("id");
-
 
         if (ids == null) { //TODO проверка на число
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
@@ -30,25 +32,25 @@ public class FindGenre extends HttpServlet {
         } else {
             id = Integer.parseInt(ids);
 
-            boolean isValid = true;
+            Genre genre = new Genre();
 
-            if (isValid && id != 0) {
+            genre.setId(id);
+
+            Validator validator = new GenreValidator();
+
+            //if (validator.canBeDeleted(genre)) {
                 ManagerDAO dao = new DBManagerGenre();
                 try {
-                    Genre entity = (Genre) dao.getEntityById(id);
+                    dao.delete(genre);
 
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
-                    req.setAttribute("entity", entity);
-                    //req.setAttribute("pageName", entity.getTitle());
-                    req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
                     dispatcher.forward(req, resp);
-//
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
-                }//
-            }
+                }
+
         }
     }
 }

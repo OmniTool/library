@@ -62,11 +62,14 @@ public class Book implements EntityBase {
     }
 
     public void setAuthorsList(List<Author> authorsList) {
-        List<BookAuthorHiber> list = new ArrayList<>();
-        //BaseDAO daoGenre = new DAOGenre();
-        for (Author a : authorsList)
-            list.add(new BookAuthorHiber(entity, a.getEntity()));
-        entity.setAuthorsList(list);
+//        List<BookAuthorHiber> list = new ArrayList<>();
+//        //BaseDAO daoGenre = new DAOGenre();
+//        for (Author a : authorsList)
+//            list.add(new BookAuthorHiber(entity, a.getEntity()));
+//        entity.setAuthorsList(list);
+        entity.getAuthorsList().clear();
+        for (Author e : authorsList)
+            entity.getAuthorsList().add(new BookAuthorHiber(entity, e.getEntity()));
     }
 
     public int getId() {

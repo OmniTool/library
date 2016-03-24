@@ -1,4 +1,4 @@
-package library.dataAccess.accessPoint.active.validators;
+package library.dataAccess.accessPoint.validators;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;

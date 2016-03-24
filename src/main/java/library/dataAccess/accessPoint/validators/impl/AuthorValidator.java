@@ -1,9 +1,9 @@
-package library.dataAccess.accessPoint.active.validators.impl;
+package library.dataAccess.accessPoint.validators.impl;
 
 import library.dataAccess.accessPoint.active.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
 import library.dataAccess.accessPoint.active.entities.Author;
-import library.dataAccess.accessPoint.active.validators.Validator;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;

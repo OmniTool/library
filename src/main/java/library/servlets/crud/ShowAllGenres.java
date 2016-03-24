@@ -1,8 +1,8 @@
-package library.servlets.crud.active;
+package library.servlets.crud;
 
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerAuthor;
+import library.dataAccess.accessPoint.active.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
-import library.dataAccess.accessPoint.active.entities.Author;
+import library.dataAccess.accessPoint.active.entities.Genre;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -15,31 +15,36 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/authors")
-public class ShowAllAuthors extends HttpServlet {
+@WebServlet("/genres")
+public class ShowAllGenres extends HttpServlet {
+
+
+
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ManagerDAO dao = new DBManagerAuthor();
+        ManagerDAO dao = new DBManagerGenre();
         try {
-            List<Author> list = dao.getAll();
+            List<Genre> list = dao.getAll();
 
             req.setAttribute("list", list);
-            req.setAttribute("pageName", "Авторы");
-            req.setAttribute("action", "addauthor");
-            req.setAttribute("actionSearch", "findauthorbyname");
-            req.setAttribute("ref", "/findauthor?id=");
+            req.setAttribute("pageName", "Жанры");
+            req.setAttribute("action", "addgenre");
+            req.setAttribute("actionSearch", "findgenrebyname");
+            req.setAttribute("ref", "/findgenre?id=");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
 
             dispatcher.forward(req, resp);
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой -->
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
+
+
     }
 
 

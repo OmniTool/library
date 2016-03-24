@@ -1,4 +1,4 @@
-package library.servlets.crud.active;
+package library.servlets.crud;
 
 import library.dataAccess.accessPoint.active.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;

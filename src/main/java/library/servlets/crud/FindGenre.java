@@ -1,10 +1,8 @@
-package library.servlets.crud.active;
+package library.servlets.crud;
 
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerAuthor;
+import library.dataAccess.accessPoint.active.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
-import library.dataAccess.accessPoint.active.entities.Author;
-import library.dataAccess.accessPoint.active.validators.impl.AuthorValidator;
-import library.dataAccess.accessPoint.active.validators.Validator;
+import library.dataAccess.accessPoint.active.entities.Genre;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -16,41 +14,41 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/removeauthor")
-public class RemoveAuthor extends HttpServlet {
-
+@WebServlet("/findgenre")
+public class FindGenre extends HttpServlet {
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//
 
         int id = 0;
         String ids = req.getParameter("id");
 
+
         if (ids == null) { //TODO проверка на число
-            RequestDispatcher dispatcher1 = req.getRequestDispatcher("authors");
+            RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
 
-            Author author = new Author();
+            boolean isValid = true;
 
-            author.setId(id);
-
-            Validator validator = new AuthorValidator();
-
-            //if (validator.canBeDeleted(author)) {
-                ManagerDAO dao = new DBManagerAuthor();
+            if (isValid && id != 0) {
+                ManagerDAO dao = new DBManagerGenre();
                 try {
-                    dao.delete(author);
+                    Genre entity = (Genre) dao.getEntityById(id);
 
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
+                    req.setAttribute("entity", entity);
+                    //req.setAttribute("pageName", entity.getTitle());
+                    req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
                     dispatcher.forward(req, resp);
+//
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
-                }
-
+                }//
+            }
         }
     }
 }

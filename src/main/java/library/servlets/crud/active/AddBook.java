@@ -9,8 +9,8 @@ import library.dataAccess.accessPoint.active.entities.Author;
 import library.dataAccess.accessPoint.active.entities.Book;
 import library.dataAccess.accessPoint.active.entities.BookAuthor;
 import library.dataAccess.accessPoint.active.entities.Genre;
-import library.dataAccess.accessPoint.active.validators.impl.BookValidator;
-import library.dataAccess.accessPoint.active.validators.Validator;
+import library.dataAccess.accessPoint.validators.impl.BookValidator;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -72,26 +72,28 @@ public class AddBook extends HttpServlet {
         ManagerDAO daoAuthor = new DBManagerAuthor();
         DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             try {
+                List<Author> listA = new ArrayList<>();
+                for (int id : selectedIds) {
+                    listA.add((Author) daoAuthor.getEntityById(id));
+                }
+                book.setAuthorsList(listA);
                 if (!validator.exists(book)) {
                     int futureId = daoBook.create(book);
 
-                    for (int id : selectedIds) {
-                        BookAuthor ba = new BookAuthor();
-                        ba.setAuthorId(id);
-                        ba.setBookId(futureId);
-                        daoBookAuthor.create(ba);
-                    }
+//                    //jdbc
+//                    for (int id : selectedIds) {
+//                        BookAuthor ba = new BookAuthor();
+//                        ba.setAuthorId(id);
+//                        ba.setBookId(futureId);
+//                        daoBookAuthor.create(ba);
+//                    }
+
                     RequestDispatcher dispatcher = req.getRequestDispatcher("books");
                     dispatcher.forward(req, resp);;
                 } else {
-                    List<Author> list = new ArrayList<>();
-                    for (int id : selectedIds) {
-                        list.add((Author) daoAuthor.getEntityById(id));
-                    }
-//                    book.setAuthorsList(list);
-                    book.setAuthorsList(list);
                     req.setAttribute("message", "Уже существует");
                     req.setAttribute("entity", book);
+                    req.setAttribute("currentListAuthor", listA);
                     doGet(req, resp);
                 }
             } catch (SQLException e) {

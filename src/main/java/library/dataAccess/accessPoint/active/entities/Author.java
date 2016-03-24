@@ -102,8 +102,8 @@ public class Author implements EntityBase {
 //            list.add(new BookAuthorHiber(b.getEntity(), entity));
 //        entity.setBooksList(list);
         entity.getBooksList().clear();
-        for (Book b : booksList)
-            entity.getBooksList().add(new BookAuthorHiber(b.getEntity(), entity));
+        for (Book e : booksList)
+            entity.getBooksList().add(new BookAuthorHiber(e.getEntity(), entity));
     }
 
     @Override

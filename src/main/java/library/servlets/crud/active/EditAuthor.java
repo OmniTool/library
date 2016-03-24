@@ -6,9 +6,8 @@ import library.dataAccess.accessPoint.active.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.active.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.accessPoint.active.entities.Author;
 import library.dataAccess.accessPoint.active.entities.Book;
-import library.dataAccess.accessPoint.active.entities.BookAuthor;
-import library.dataAccess.accessPoint.active.validators.impl.AuthorValidator;
-import library.dataAccess.accessPoint.active.validators.Validator;
+import library.dataAccess.accessPoint.validators.impl.AuthorValidator;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @WebServlet("/editauthor")
@@ -52,7 +50,10 @@ public class EditAuthor extends HttpServlet {
 
 //                    //jdbc
 //                    entity.setBooksList(daoBookAuthor.searchBooksByAuthor(entity));
+
+                    //hibernate
                     req.setAttribute("currentListBook", entity.getBooksList());
+
                     req.setAttribute("entity", entity);
                 }
                 req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");

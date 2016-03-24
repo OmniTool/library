@@ -1,10 +1,10 @@
-package library.servlets.crud.active;
+package library.servlets.crud;
 
 import library.dataAccess.accessPoint.active.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
 import library.dataAccess.accessPoint.active.entities.Genre;
-import library.dataAccess.accessPoint.active.validators.impl.GenreValidator;
-import library.dataAccess.accessPoint.active.validators.Validator;
+import library.dataAccess.accessPoint.validators.impl.GenreValidator;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;

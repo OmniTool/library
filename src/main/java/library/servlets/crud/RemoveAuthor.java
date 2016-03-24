@@ -1,9 +1,10 @@
-package library.servlets.crud.active;
+package library.servlets.crud;
 
 import library.dataAccess.accessPoint.active.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.accessPoint.active.entities.Author;
+import library.dataAccess.accessPoint.validators.impl.AuthorValidator;
+import library.dataAccess.accessPoint.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -15,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/findauthor")
-public class FindAuthor extends HttpServlet {
+@WebServlet("/removeauthor")
+public class RemoveAuthor extends HttpServlet {
+
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,31 +32,25 @@ public class FindAuthor extends HttpServlet {
         } else {
             id = Integer.parseInt(ids);
 
-            boolean isValid = true;
+            Author author = new Author();
 
-            if (isValid && id != 0) {
+            author.setId(id);
+
+            Validator validator = new AuthorValidator();
+
+            //if (validator.canBeDeleted(author)) {
                 ManagerDAO dao = new DBManagerAuthor();
-                DBManagerBookAuthor subDao = new DBManagerBookAuthor();
-
                 try {
-                    Author entity = (Author) dao.getEntityById(id);
+                    dao.delete(author);
 
-                    entity.setBooksList(subDao.searchBooksByAuthor(entity));
-
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
-                    req.setAttribute("entity", entity);
-                    //req.setAttribute("pageName", entity.getFirstName() + entity.getSecondName() + entity.getMiddleName());
-                    req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
-                    //req.setAttribute("list", entity.getBooksList());
-                    req.setAttribute("ref", "/findbook?id=");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                     dispatcher.forward(req, resp);
-
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
                 }
-            }
+
         }
     }
 }
