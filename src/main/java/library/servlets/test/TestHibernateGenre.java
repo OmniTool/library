@@ -45,28 +45,25 @@ public class TestHibernateGenre extends HttpServlet {
             entity.setDescription("test descr");
 
             out.print("<br> Add:");
-            out.print("getId = " + entity.getId() + "<br>");
-            out.print("getTitle = " + entity.getTitle() + "<br>");
-            out.print("getDescription = " + entity.getDescription() + "<br>");
+            out.print("getId = " + entity + "<br>");
+
 
             int futureId = dao.create(entity);
 
         out.print("<br> List:");
         list = dao.getAll();
         for (GenreHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
+            out.print("<p>" + e + "</p>");
 
             //read
             GenreHiber entity1 = (GenreHiber) dao.getEntityById(futureId);
             out.print("<br> Read:");
-            out.print("getId = " + entity1.getId() + "<br>");
-            out.print("getTitle = " + entity1.getTitle() + "<br>");
-            out.print("getDescription = " + entity1.getDescription() + "<br>");
+            out.print("getId = " + entity1 + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
         for (GenreHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
+            out.print("<p>" + e + "</p>");
 
             //update
             entity1.setTitle("new test title");
@@ -75,23 +72,21 @@ public class TestHibernateGenre extends HttpServlet {
 
             GenreHiber entity2 = (GenreHiber) dao.getEntityById(futureId);
             out.print("<br> Update:");
-            out.print("getId = " + entity2.getId() + "<br>");
-            out.print("getTitle = " + entity2.getTitle() + "<br>");
-            out.print("getDescription = " + entity2.getDescription() + "<br>");
+            out.print("getId = " + entity2 + "<br>");
 
         out.print("<br> List:");
         list = dao.getAll();
         for (GenreHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
+            out.print("<p>" + e + "</p>");
 
             //delete
             dao.delete(entity2);
 
-
+        out.print("<br> Delete:");
         out.print("<br> List:");
         list = dao.getAll();
         for (GenreHiber e : list)
-            out.print("<p>" + e.getTitle() + " " + e.getDescription() + "</p>");
+            out.print("<p>" + e + "</p>");
 
 
 

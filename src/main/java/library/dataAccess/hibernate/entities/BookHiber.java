@@ -118,7 +118,7 @@ public class BookHiber extends EntityBaseHiber {
 
         BookHiber books = (BookHiber) o;
 
-        if (id != books.id) return false;
+        //if (id != books.id) return false;
         if (title != null ? !title.equals(books.title) : books.title != null) return false;
         if (pubYear != null ? !pubYear.equals(books.pubYear) : books.pubYear != null) return false;
 
@@ -127,9 +127,20 @@ public class BookHiber extends EntityBaseHiber {
 
     @Override
     public int hashCode() {
-        int result = id;
+        //int result = id;
+        int result = 31;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (pubYear != null ? pubYear.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "BookHiber{" +
+                "id='" + id + '\'' +
+                "title='" + title + '\'' +
+                ", pubYear=" + pubYear +
+                ", genre=" + genre +
+                '}';
     }
 }
