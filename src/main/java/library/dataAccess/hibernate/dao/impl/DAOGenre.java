@@ -3,6 +3,7 @@ package library.dataAccess.hibernate.dao.impl;
 import library.dataAccess.hibernate.entities.EntityBaseHiber;
 import library.dataAccess.hibernate.entities.GenreHiber;
 import library.dataAccess.hibernate.util.HibernateUtil;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
@@ -21,8 +22,13 @@ public class DAOGenre extends BaseDAOImpl {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
-                    "WHERE upper(title) LIKE upper(" + genre.getTitle() + ")")
+                    " e WHERE upper(e.title) LIKE upper(:title)")
+                    .setParameter("title", "%" + genre.getTitle() + "%")
                     .list();
+//            SQLQuery query = session.createSQLQuery("SELECT * FROM genres WHERE upper(title) LIKE upper(:title)");
+//            entities = query
+//                    .setString( "title", genre.getTitle())
+//                    .list();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

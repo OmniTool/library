@@ -21,7 +21,8 @@ public class DAOBook extends BaseDAOImpl {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
-                    "WHERE upper(title) LIKE upper(" + book.getTitle() + ")")
+                    " e WHERE upper(e.title) LIKE upper(:title)")
+                    .setParameter("title", "%" + book.getTitle() + "%")
                     .list();
         } finally {
             if (session != null && session.isOpen()) {

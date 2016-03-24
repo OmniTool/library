@@ -21,9 +21,12 @@ public class DAOAuthor extends BaseDAOImpl {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
-                    "WHERE upper(first_name) LIKE upper(" + author.getFirstName() + ") " +
-                    "AND upper(second_name) LIKE upper(" + author.getSecondName() + ") " +
-                    "AND upper(middle_name) LIKE upper(" + author.getMiddleName() + ")")
+                    " e WHERE upper(e.firstName) LIKE upper(:first_name) " +
+                    "AND upper(e.secondName) LIKE upper(:second_name) " +
+                    "AND upper(e.middleName) LIKE upper(:middle_name)")
+                    .setParameter("first_name", "%" + author.getFirstName() + "%")
+                    .setParameter("second_name", "%" + author.getSecondName()+ "%")
+                    .setParameter("middle_name", "%" + author.getMiddleName() + "%")
                     .list();
         } finally {
             if (session != null && session.isOpen()) {
