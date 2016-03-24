@@ -26,7 +26,7 @@ public class RemoveBook extends HttpServlet {
         int id = 0;
         String ids = req.getParameter("id");
 
-        if (ids == null) { //TODO проверка на число
+        if (ids == null) {
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
             dispatcher1.forward(req, resp);
         } else {
@@ -46,7 +46,7 @@ public class RemoveBook extends HttpServlet {
                     RequestDispatcher dispatcher = req.getRequestDispatcher("books");
                     dispatcher.forward(req, resp);
                 } catch (SQLException e) {
-                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                    System.out.println(e.getMessage());
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
                 }

@@ -66,7 +66,7 @@ public class EditBook extends HttpServlet {
                 req.setAttribute("refGenre", "/findgenre?id=");
                 dispatcher.forward(req, resp);
             } catch (SQLException e) {
-                System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                System.out.println(e.getMessage());
             } catch (NamingException e) {
                 System.out.println(e.getMessage());
             }
@@ -170,7 +170,7 @@ public class EditBook extends HttpServlet {
                 doGet(req, resp);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+            System.out.println(e.getMessage());
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }

@@ -37,7 +37,7 @@ public class AddBook extends HttpServlet {
             List<Genre> listGenre = daoGenre.getAll();
             req.setAttribute("sourceListGenre", listGenre);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+            System.out.println(e.getMessage());
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }

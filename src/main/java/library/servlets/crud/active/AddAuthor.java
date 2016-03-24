@@ -33,7 +33,7 @@ public class AddAuthor extends HttpServlet {
             List<Author> list = dao.getAll();
             req.setAttribute("sourceListBook", list);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+            System.out.println(e.getMessage());
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
