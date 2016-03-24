@@ -1,7 +1,10 @@
 package library.dataAccess.hibernate.dao.impl;
 
+import library.dataAccess.accessPoint.active.entities.Book;
+import library.dataAccess.accessPoint.active.entities.Genre;
 import library.dataAccess.hibernate.entities.BookHiber;
 import library.dataAccess.hibernate.entities.EntityBaseHiber;
+import library.dataAccess.hibernate.entities.GenreHiber;
 import library.dataAccess.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -31,4 +34,22 @@ public class DAOBook extends BaseDAOImpl {
         }
         return entities;
     }
+
+    public List<BookHiber> searchBooksByGenre(GenreHiber genre) {
+        Session session = null;
+        List<BookHiber> entities = new ArrayList<>();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            entities = session.createQuery("FROM " + type.getSimpleName() +
+                    " e WHERE e.genre.id = :genre_id")
+                    .setParameter("genre_id", genre.getId())
+                    .list();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return entities;
+    }
+
 }

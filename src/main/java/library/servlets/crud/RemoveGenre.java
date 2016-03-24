@@ -1,7 +1,9 @@
 package library.servlets.crud;
 
+import library.dataAccess.accessPoint.active.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.active.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
+import library.dataAccess.accessPoint.active.entities.Book;
 import library.dataAccess.accessPoint.active.entities.Genre;
 import library.dataAccess.accessPoint.validators.impl.GenreValidator;
 import library.dataAccess.accessPoint.validators.Validator;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/removegenre")
 public class RemoveGenre extends HttpServlet {
@@ -26,27 +29,36 @@ public class RemoveGenre extends HttpServlet {
         int id = 0;
         String ids = req.getParameter("id");
 
-        if (ids == null) { //TODO проверка на число
+        if (ids == null) {
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
 
             Genre genre = new Genre();
-
             genre.setId(id);
 
             Validator validator = new GenreValidator();
 
             //if (validator.canBeDeleted(genre)) {
-                ManagerDAO dao = new DBManagerGenre();
+            ManagerDAO dao = new DBManagerGenre();
+            DBManagerBook daoBook = new DBManagerBook();
                 try {
-                    dao.delete(genre);
 
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
-                    dispatcher.forward(req, resp);
+                    List<Book> listBooks = daoBook.searchBooksByGenre(genre);
+                    if (listBooks.size() != 0) {
+                        req.setAttribute("message", "Используется в книгах");
+                        req.setAttribute("listBooks", listBooks); //вывести список связанных книг
+                        req.setAttribute("ref", "/findbook?id=");
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre");
+                        dispatcher.forward(req, resp);
+                    } else {
+                        dao.delete(genre);
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+                        dispatcher.forward(req, resp);
+                    }
                 } catch (SQLException e) {
-                    System.out.println(e.getMessage());//TODO отправить на страницу с ошибкой
+                    System.out.println(e.getMessage());
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
                 }

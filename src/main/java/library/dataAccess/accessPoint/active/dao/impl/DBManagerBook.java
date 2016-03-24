@@ -2,6 +2,7 @@ package library.dataAccess.accessPoint.active.dao.impl;
 
 import library.dataAccess.accessPoint.active.dao.ManagerDAO;
 import library.dataAccess.accessPoint.active.entities.Book;
+import library.dataAccess.accessPoint.active.entities.Genre;
 import library.dataAccess.hibernate.dao.impl.DAOBook;
 import library.dataAccess.hibernate.entities.BookHiber;
 import library.dataAccess.hibernate.entities.EntityBaseHiber;
@@ -46,6 +47,13 @@ public class DBManagerBook implements ManagerDAO<Book, Integer> {
             books.add(new Book((BookHiber) ebh));
         }
         return books;
+    }
+
+    public List<Book> searchBooksByGenre(Genre genre) {
+        List<Book> entities = new ArrayList<>();
+        for (BookHiber book : dao.searchBooksByGenre(genre.getEntity()))
+            entities.add(new Book(book));
+        return entities;
     }
 
 }

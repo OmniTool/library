@@ -41,6 +41,7 @@ public class RemoveAuthor extends HttpServlet {
             //if (validator.canBeDeleted(author)) {
                 ManagerDAO dao = new DBManagerAuthor();
                 try {
+
                     dao.delete(author);
 
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
