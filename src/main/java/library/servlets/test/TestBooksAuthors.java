@@ -1,8 +1,8 @@
 package library.servlets.test;
 
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerBookAuthor;
-import library.dataAccess.accessPoint.active.dao.ManagerDAO;
-import library.dataAccess.accessPoint.active.entities.BookAuthor;
+import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
+import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.adapters.hibernate.entities.BookAuthor;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;

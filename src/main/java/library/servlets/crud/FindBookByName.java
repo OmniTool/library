@@ -1,10 +1,10 @@
 package library.servlets.crud;
 
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerBook;
-import library.dataAccess.accessPoint.active.dao.ManagerDAO;
-import library.dataAccess.accessPoint.active.entities.Book;
-import library.dataAccess.accessPoint.validators.impl.BookValidator;
-import library.dataAccess.accessPoint.validators.Validator;
+import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
+import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.validators.impl.BookValidator;
+import library.dataAccess.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;

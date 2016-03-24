@@ -12,10 +12,10 @@
     <!--<property name="hbm2ddl.auto">validate</property>-->
     <property name="show_sql">true</property>
     <!--<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>-->
-    <mapping class="library.dataAccess.hibernate.entities.AuthorHiber"/>
-    <mapping class="library.dataAccess.hibernate.entities.BookHiber"/>
-    <mapping class="library.dataAccess.hibernate.entities.BookAuthorHiber"/>
-    <mapping class="library.dataAccess.hibernate.entities.GenreHiber"/>
+    <mapping class="library.dataAccess.connectors.hibernate.entities.AuthorHiber"/>
+    <mapping class="library.dataAccess.connectors.hibernate.entities.BookHiber"/>
+    <mapping class="library.dataAccess.connectors.hibernate.entities.BookAuthorHiber"/>
+    <mapping class="library.dataAccess.connectors.hibernate.entities.GenreHiber"/>
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>

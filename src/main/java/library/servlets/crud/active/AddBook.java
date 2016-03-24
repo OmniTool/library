@@ -1,16 +1,15 @@
 package library.servlets.crud.active;
 
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerAuthor;
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerBook;
-import library.dataAccess.accessPoint.active.dao.ManagerDAO;
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerBookAuthor;
-import library.dataAccess.accessPoint.active.dao.impl.DBManagerGenre;
-import library.dataAccess.accessPoint.active.entities.Author;
-import library.dataAccess.accessPoint.active.entities.Book;
-import library.dataAccess.accessPoint.active.entities.BookAuthor;
-import library.dataAccess.accessPoint.active.entities.Genre;
-import library.dataAccess.accessPoint.validators.impl.BookValidator;
-import library.dataAccess.accessPoint.validators.Validator;
+import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
+import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
+import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
+import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
+import library.dataAccess.adapters.hibernate.entities.Author;
+import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.validators.impl.BookValidator;
+import library.dataAccess.validators.Validator;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;

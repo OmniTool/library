@@ -1,8 +1,8 @@
 package library.servlets.test;
 
-import library.dataAccess.hibernate.dao.BaseDAO;
-import library.dataAccess.hibernate.dao.impl.DAOGenre;
-import library.dataAccess.hibernate.entities.*;
+import library.dataAccess.connectors.hibernate.dao.BaseDAO;
+import library.dataAccess.connectors.hibernate.dao.impl.DAOGenre;
+import library.dataAccess.connectors.hibernate.entities.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
