@@ -1,10 +1,8 @@
 package library.servlets.crud;
 
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
-import library.dataAccess.accessPoint.ManagerDAO;
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/removebook")
 public class RemoveBook extends HttpServlet {
@@ -29,7 +26,7 @@ public class RemoveBook extends HttpServlet {
             id = Integer.parseInt(ids);
             BookAdapter book = new BookAdapter();
             book.setId(id);
-            ManagerDAO dao = new DBManagerBook();
+            DAO dao = new DAO();
             dao.delete(book);
             RequestDispatcher dispatcher = req.getRequestDispatcher("books");
             dispatcher.forward(req, resp);

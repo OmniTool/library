@@ -1,10 +1,8 @@
 package library.servlets.crud;
 
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
-import library.dataAccess.accessPoint.ManagerDAO;
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/removeauthor")
 public class RemoveAuthor extends HttpServlet {
@@ -28,7 +25,7 @@ public class RemoveAuthor extends HttpServlet {
             id = Integer.parseInt(ids);
             AuthorAdapter author = new AuthorAdapter();
             author.setId(id);
-            ManagerDAO dao = new DBManagerAuthor();
+            DAO dao = new DAO();
             dao.delete(author);
             RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
             dispatcher.forward(req, resp);

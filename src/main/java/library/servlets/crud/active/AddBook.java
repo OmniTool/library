@@ -1,17 +1,12 @@
 package library.servlets.crud.active;
 
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
-import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
+import library.dataAccess.accessPoint.DAO;
+import library.dataAccess.accessPoint.manageEntities.impl.BookBuilder;
 import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.impl.BookValidator;
-import library.dataAccess.validators.Validator;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/addbook")
@@ -28,11 +21,10 @@ public class AddBook extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ManagerDAO dao = new DBManagerAuthor();
-        ManagerDAO daoGenre = new DBManagerGenre();
-        List<AuthorAdapter> listAuthor = dao.getAll();
+        DAO dao = new DAO();
+        List<AuthorAdapter> listAuthor = dao.getAllAuthor();
         req.setAttribute("sourceListAuthor", listAuthor);
-        List<GenreAdapter> listGenre = daoGenre.getAll();
+        List<GenreAdapter> listGenre = dao.getAllGenre();
         req.setAttribute("sourceListGenre", listGenre);
         RequestDispatcher dispatcher = req.getRequestDispatcher("addbook.jsp");
         req.setAttribute("bread", "<a href=\"/books\">Книги</a>");
@@ -41,37 +33,20 @@ public class AddBook extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        BookBuilder entityBuilder = new BookBuilder();
         BookAdapter book = new BookAdapter();
-        String titles = req.getParameter("title");
-        book.setTitle(titles);
-        String pubYears = req.getParameter("pubYear");
-        book.setPubYear(Integer.parseInt(pubYears));
-        String genereIds = req.getParameter("genereId");
-        book.setGenereId(Integer.parseInt(genereIds));
-        String[] arrAuthors = req.getParameterValues("listAuthor");
-        List<Integer> selectedIds = new ArrayList<>();
-        if (arrAuthors != null) {
-            for (String s : arrAuthors) {
-                int id = Integer.parseInt(s);
-                selectedIds.add(id);
-            }
-        }
-        Validator validator = new BookValidator();
-        ManagerDAO daoBook = new DBManagerBook();
-        ManagerDAO daoAuthor = new DBManagerAuthor();
-        List<AuthorAdapter> authors = new ArrayList<>();
-        for (int id : selectedIds) {
-            authors.add((AuthorAdapter) daoAuthor.getEntityById(id));
-        }
-        book.setAuthorsList(authors);
+        entityBuilder.buildEntityFromRequest(book, req);
+        List<AuthorAdapter> currentListAuthor = book.getAuthorsList();
+        BookValidator validator = new BookValidator();
         if (!validator.exists(book)) {
-            daoBook.create(book);
+            DAO dao = new DAO();
+            dao.create(book);
             RequestDispatcher dispatcher = req.getRequestDispatcher("books");
             dispatcher.forward(req, resp);
         } else {
             req.setAttribute("message", "Уже существует");
             req.setAttribute("entity", book);
-            req.setAttribute("currentListAuthor", authors);
+            req.setAttribute("currentListAuthor", currentListAuthor);
             doGet(req, resp);
         }
     }

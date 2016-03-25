@@ -1,12 +1,10 @@
 package library.servlets.crud;
 
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
-import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/removegenre")
@@ -31,7 +28,7 @@ public class RemoveGenre extends HttpServlet {
             id = Integer.parseInt(ids);
             GenreAdapter genre = new GenreAdapter();
             genre.setId(id);
-            ManagerDAO dao = new DBManagerGenre();
+            DAO dao = new DAO();
             DBManagerBook daoBook = new DBManagerBook();
             List<BookAdapter> listBooks = daoBook.searchBooksByGenre(genre);
             if (listBooks.size() != 0) {

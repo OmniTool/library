@@ -49,4 +49,5 @@ public class BookAuthorAdapter {
     public void setEntity(BookAuthor entity) {
         this.entity = entity;
     }
+
 }

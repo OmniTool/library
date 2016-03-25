@@ -1,5 +1,7 @@
 package library.dataAccess.adapters.hibernate.entities;
 
+import library.dataAccess.connectors.hibernate.dao.BaseDAO;
+import library.dataAccess.connectors.hibernate.dao.impl.DAOGenre;
 import library.dataAccess.connectors.hibernate.entities.Genre;
 
 
@@ -10,7 +12,10 @@ public class GenreAdapter {
     public GenreAdapter() {
         this.entity = new Genre();
     }
-
+    public GenreAdapter(int id) {
+        BaseDAO dao = new DAOGenre();
+        this.entity = (Genre) dao.getEntityById(id);
+    }
     public GenreAdapter(Genre entity) {
         this.entity = entity;
     }
@@ -50,5 +55,18 @@ public class GenreAdapter {
 
     public void setEntity(Genre entity) {
         this.entity = entity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GenreAdapter that = (GenreAdapter) o;
+        return !(entity != null ? !entity.equals(that.entity) : that.entity != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return entity != null ? entity.hashCode() : 0;
     }
 }

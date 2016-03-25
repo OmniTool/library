@@ -1,5 +1,8 @@
 package library.servlets.crud;
 
+import library.dataAccess.accessPoint.DAO;
+import library.dataAccess.accessPoint.manageEntities.EntityBuilder;
+import library.dataAccess.accessPoint.manageEntities.impl.GenreBuilder;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
@@ -29,13 +32,11 @@ public class AddGenre extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        GenreBuilder entityBuilder = new GenreBuilder();
         GenreAdapter genre = new GenreAdapter();
-        String titles = req.getParameter("title");
-        genre.setTitle(titles);
-        String descriptions = req.getParameter("description");
-        genre.setDescription(descriptions);
-        Validator validator = new GenreValidator();
-        ManagerDAO dao = new DBManagerGenre();
+        entityBuilder.buildEntityFromRequest(genre, req);
+        GenreValidator validator = new GenreValidator();
+        DAO dao = new DAO();
         if (!validator.exists(genre)) {
             dao.create(genre);
             RequestDispatcher dispatcher = req.getRequestDispatcher("genres");

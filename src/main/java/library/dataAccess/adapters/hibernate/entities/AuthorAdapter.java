@@ -82,4 +82,17 @@ public class AuthorAdapter {
     public String toString() {
         return entity.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuthorAdapter that = (AuthorAdapter) o;
+        return !(entity != null ? !entity.equals(that.entity) : that.entity != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return entity != null ? entity.hashCode() : 0;
+    }
 }

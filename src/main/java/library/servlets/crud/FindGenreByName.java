@@ -1,12 +1,10 @@
 package library.servlets.crud;
 
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
-import library.dataAccess.accessPoint.ManagerDAO;
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.impl.GenreValidator;
 import library.dataAccess.validators.Validator;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/findgenrebyname")
@@ -34,7 +31,7 @@ public class FindGenreByName extends HttpServlet {
         Validator validator = new GenreValidator();
         validator.trim(genre);
         if (!validator.isEmptyString(genre.getTitle())) {
-            ManagerDAO dao = new DBManagerGenre();
+            DAO dao = new DAO();
             List<GenreAdapter> list = dao.searchEntityByName(genre);
             req.setAttribute("list", list);
             req.setAttribute("pageName", genre.getTitle());

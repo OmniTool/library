@@ -1,11 +1,9 @@
 package library.servlets.crud;
 
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
-import library.dataAccess.accessPoint.ManagerDAO;
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/findauthor")
 public class FindAuthor extends HttpServlet {
@@ -28,9 +25,9 @@ public class FindAuthor extends HttpServlet {
         } else {
             id = Integer.parseInt(ids);
             if (id != 0) {
-                ManagerDAO dao = new DBManagerAuthor();
+                DAO dao = new DAO();
                 DBManagerBookAuthor subDao = new DBManagerBookAuthor();
-                AuthorAdapter entity = (AuthorAdapter) dao.getEntityById(id);
+                AuthorAdapter entity = dao.getEntityByIdAuthor(id);
                 entity.setBooksList(subDao.searchBooksByAuthor(entity));
                 RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
                 req.setAttribute("entity", entity);

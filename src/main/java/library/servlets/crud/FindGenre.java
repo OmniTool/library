@@ -1,10 +1,8 @@
 package library.servlets.crud;
 
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
-import library.dataAccess.accessPoint.ManagerDAO;
+import library.dataAccess.accessPoint.DAO;
 import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/findgenre")
 public class FindGenre extends HttpServlet {
@@ -27,8 +24,8 @@ public class FindGenre extends HttpServlet {
         } else {
             id = Integer.parseInt(ids);
             if (id != 0) {
-                ManagerDAO dao = new DBManagerGenre();
-                GenreAdapter entity = (GenreAdapter) dao.getEntityById(id);
+                DAO dao = new DAO();
+                GenreAdapter entity = dao.getEntityByIdGenre(id);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
                 req.setAttribute("entity", entity);
                 req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
