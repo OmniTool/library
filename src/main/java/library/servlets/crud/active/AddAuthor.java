@@ -3,8 +3,8 @@ package library.servlets.crud.active;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
-import library.dataAccess.adapters.hibernate.entities.Author;
-import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.validators.impl.AuthorValidator;
 import library.dataAccess.validators.Validator;
 
@@ -27,7 +27,7 @@ public class AddAuthor extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ManagerDAO dao = new DBManagerBook();
         try {
-            List<Author> list = dao.getAll();
+            List<AuthorAdapter> list = dao.getAll();
             req.setAttribute("sourceListBook", list);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -40,7 +40,7 @@ public class AddAuthor extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Author author = new Author();
+        AuthorAdapter author = new AuthorAdapter();
         String secondNames = req.getParameter("secondName");
             author.setSecondName(secondNames);
         String firstNames = req.getParameter("firstName");
@@ -64,9 +64,9 @@ public class AddAuthor extends HttpServlet {
         ManagerDAO daoBook = new DBManagerBook();
 //        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             try {
-                List<Book> listB = new ArrayList<>();
+                List<BookAdapter> listB = new ArrayList<>();
                 for (int id : selectedIds) {
-                    listB.add((Book) daoBook.getEntityById(id));
+                    listB.add((BookAdapter) daoBook.getEntityById(id));
                 }
                 author.setBooksList(listB);
                 if (!validator.exists(author)) {

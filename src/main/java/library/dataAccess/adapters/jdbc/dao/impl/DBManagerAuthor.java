@@ -2,7 +2,7 @@ package library.dataAccess.adapters.jdbc.dao.impl;
 
 
 import library.dataAccess.adapters.jdbc.entities.Author;
-import library.dataAccess.connectors.jdbc.dao.impl.JDBCManagerAuthor;
+import library.dataAccess.connectors.jdbc.dao.impl.DAOAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
 
-    private JDBCManagerAuthor dao = new JDBCManagerAuthor();
+    private DAOAuthor dao = new DAOAuthor();
 
     @Override
     public List<Author> getAll() throws SQLException, NamingException {

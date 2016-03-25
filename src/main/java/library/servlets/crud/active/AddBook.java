@@ -5,9 +5,9 @@ import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
-import library.dataAccess.adapters.hibernate.entities.Author;
-import library.dataAccess.adapters.hibernate.entities.Book;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.impl.BookValidator;
 import library.dataAccess.validators.Validator;
 
@@ -32,9 +32,9 @@ public class AddBook extends HttpServlet {
         ManagerDAO dao = new DBManagerAuthor();
         ManagerDAO daoGenre = new DBManagerGenre();
         try {
-            List<Author> listAuthor = dao.getAll();
+            List<AuthorAdapter> listAuthor = dao.getAll();
             req.setAttribute("sourceListAuthor", listAuthor);
-            List<Genre> listGenre = daoGenre.getAll();
+            List<GenreAdapter> listGenre = daoGenre.getAll();
             req.setAttribute("sourceListGenre", listGenre);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -48,7 +48,7 @@ public class AddBook extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Book book = new Book();
+        BookAdapter book = new BookAdapter();
         String  titles = req.getParameter("title");
             book.setTitle(titles );
         String  pubYears = req.getParameter("pubYear");
@@ -68,9 +68,9 @@ public class AddBook extends HttpServlet {
         ManagerDAO daoAuthor = new DBManagerAuthor();
         DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             try {
-                List<Author> listA = new ArrayList<>();
+                List<AuthorAdapter> listA = new ArrayList<>();
                 for (int id : selectedIds) {
-                    listA.add((Author) daoAuthor.getEntityById(id));
+                    listA.add((AuthorAdapter) daoAuthor.getEntityById(id));
                 }
                 book.setAuthorsList(listA);
                 if (!validator.exists(book)) {

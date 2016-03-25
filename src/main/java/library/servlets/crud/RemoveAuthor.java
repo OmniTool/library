@@ -2,7 +2,7 @@ package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Author;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -26,7 +26,7 @@ public class RemoveAuthor extends HttpServlet {
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-            Author author = new Author();
+            AuthorAdapter author = new AuthorAdapter();
             author.setId(id);
                 ManagerDAO dao = new DBManagerAuthor();
                 try {

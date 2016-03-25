@@ -8,14 +8,14 @@ import library.dataAccess.connectors.hibernate.entities.BookAuthorHiber;
 import library.dataAccess.connectors.hibernate.entities.BookHiber;
 
 
-public class BookAuthor implements EntityBase {
+public class BookAuthorAdapter {
 
     private BookAuthorHiber entity;
 
-    public BookAuthor() {
+    public BookAuthorAdapter() {
         this.entity = new BookAuthorHiber();
     }
-    public BookAuthor(BookAuthorHiber entity) {
+    public BookAuthorAdapter(BookAuthorHiber entity) {
         this.entity = entity;
     }
 

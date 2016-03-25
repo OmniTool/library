@@ -2,7 +2,7 @@ package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Author;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 import library.dataAccess.validators.impl.AuthorValidator;
 import library.dataAccess.validators.Validator;
 
@@ -27,7 +27,7 @@ public class FindAuthorByName extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Author author = new Author();
+        AuthorAdapter author = new AuthorAdapter();
         String secondNames = req.getParameter("secondName");
         author.setSecondName(secondNames.trim());
         String firstNames = req.getParameter("firstName");
@@ -39,7 +39,7 @@ public class FindAuthorByName extends HttpServlet {
         if (!validator.isEmptyString(author.getSecondName()) || !validator.isEmptyString(author.getFirstName()) || !validator.isEmptyString(author.getMiddleName())) {
             ManagerDAO dao = new DBManagerAuthor();
             try {
-                List<Author> list = dao.searchEntityByName(author);
+                List<AuthorAdapter> list = dao.searchEntityByName(author);
                 req.setAttribute("list", list);
                 req.setAttribute("pageName", author.getFirstName() + " " + author.getMiddleName() + " " + author.getSecondName());
                 req.setAttribute("action", "addauthor");

@@ -2,7 +2,7 @@ package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.impl.GenreValidator;
 import library.dataAccess.validators.Validator;
 
@@ -27,7 +27,7 @@ public class FindGenreByName extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Genre genre = new Genre();
+        GenreAdapter genre = new GenreAdapter();
         String titles = req.getParameter("title");
             genre.setTitle(titles.trim());
         Validator validator = new GenreValidator();
@@ -35,7 +35,7 @@ public class FindGenreByName extends HttpServlet {
         if (!validator.isEmptyString(genre.getTitle())) {
             ManagerDAO dao = new DBManagerGenre();
             try {
-                List<Genre> list = dao.searchEntityByName(genre);
+                List<GenreAdapter> list = dao.searchEntityByName(genre);
                 req.setAttribute("list", list);
                 req.setAttribute("pageName", genre.getTitle());
                 req.setAttribute("action", "addgenre");

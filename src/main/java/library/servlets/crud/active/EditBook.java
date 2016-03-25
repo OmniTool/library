@@ -5,9 +5,9 @@ import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
-import library.dataAccess.adapters.hibernate.entities.Author;
-import library.dataAccess.adapters.hibernate.entities.Book;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.impl.BookValidator;
 import library.dataAccess.validators.Validator;
 
@@ -40,13 +40,13 @@ public class EditBook extends HttpServlet {
             ManagerDAO daoGenre = new DBManagerGenre();
             ManagerDAO daoAuthor = new DBManagerAuthor();
             try {
-                List<Author> listAuthor = daoAuthor.getAll();
+                List<AuthorAdapter> listAuthor = daoAuthor.getAll();
                 req.setAttribute("sourceListAuthor", listAuthor);
-                List<Genre> listGenre = daoGenre.getAll();
+                List<GenreAdapter> listGenre = daoGenre.getAll();
                 req.setAttribute("sourceListGenre", listGenre);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editbook.jsp");
                 if (req.getAttribute("entity") == null) {
-                    Book entity = (Book) daoBook.getEntityById(id);
+                    BookAdapter entity = (BookAdapter) daoBook.getEntityById(id);
                     Validator validator = new BookValidator();
                     validator.trim(entity);
 
@@ -80,7 +80,7 @@ public class EditBook extends HttpServlet {
 
         //hibernate
         String ids = req.getParameter("id");
-        Book book = new Book(Integer.parseInt(ids));
+        BookAdapter book = new BookAdapter(Integer.parseInt(ids));
 
         String titles = req.getParameter("title");
         book.setTitle(titles);
@@ -105,7 +105,7 @@ public class EditBook extends HttpServlet {
         DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
         try {
             boolean isValid;
-            Book forUpdBook = (Book) daoBook.getEntityById(book.getId());
+            BookAdapter forUpdBook = (BookAdapter) daoBook.getEntityById(book.getId());
             validator.trim(forUpdBook);
             if (book.getTitle().equals(forUpdBook.getTitle())
                     && book.getPubYear() == forUpdBook.getPubYear()
@@ -114,9 +114,9 @@ public class EditBook extends HttpServlet {
             } else {
                 isValid = !validator.exists(book);
             }
-            List<Author> listA = new ArrayList<>();
+            List<AuthorAdapter> listA = new ArrayList<>();
             for (int id : selectedIds) {
-                listA.add((Author) daoAuthor.getEntityById(id));
+                listA.add((AuthorAdapter) daoAuthor.getEntityById(id));
             }
             book.setAuthorsList(listA);
             if (isValid) {

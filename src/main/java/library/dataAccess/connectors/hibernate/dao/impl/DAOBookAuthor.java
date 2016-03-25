@@ -1,7 +1,7 @@
 package library.dataAccess.connectors.hibernate.dao.impl;
 
-import library.dataAccess.adapters.hibernate.entities.Author;
-import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.connectors.hibernate.entities.BookAuthorHiber;
 import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
 import library.dataAccess.connectors.hibernate.util.HibernateUtil;
@@ -30,10 +30,10 @@ public class DAOBookAuthor extends BaseDAOImpl {
         } finally {HibernateUtil.close(session);}
         return entities;
     }
-    public List<Book> searchBooksByAuthor(Author entity) {
+    public List<BookAdapter> searchBooksByAuthor(AuthorAdapter entity) {
         Session session = null;
         List<BookAuthorHiber> entities = new ArrayList<>();
-        List<Book> books = new ArrayList<>();
+        List<BookAdapter> books = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -44,14 +44,14 @@ public class DAOBookAuthor extends BaseDAOImpl {
             HibernateUtil.close(session);
         }
         for (BookAuthorHiber bah : entities) {
-            books.add(new Book(bah.getBook()));
+            books.add(new BookAdapter(bah.getBook()));
         }
         return books;
     }
-    public List<Author> searchAuthorsByBook(Book entity) {
+    public List<AuthorAdapter> searchAuthorsByBook(BookAdapter entity) {
         Session session = null;
         List<BookAuthorHiber> entities = new ArrayList<>();
-        List<Author> authors = new ArrayList<>();
+        List<AuthorAdapter> authors = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -64,7 +64,7 @@ public class DAOBookAuthor extends BaseDAOImpl {
             }
         }
         for (BookAuthorHiber bah : entities) {
-            authors.add(new Author(bah.getAuthor()));
+            authors.add(new AuthorAdapter(bah.getAuthor()));
         }
         return authors;
     }

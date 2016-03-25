@@ -1,7 +1,7 @@
 package library.servlets.crud;
 
 import library.dataAccess.accessPoint.DAO;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,7 @@ public class ShowAllGenres extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAO dao = new DAO();
         try {
-            List<Genre> list = dao.getAllGenre();
+            List<GenreAdapter> list = dao.getAllGenre();
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Жанры");
             req.setAttribute("action", "addgenre");

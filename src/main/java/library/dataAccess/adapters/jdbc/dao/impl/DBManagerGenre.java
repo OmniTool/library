@@ -2,7 +2,7 @@ package library.dataAccess.adapters.jdbc.dao.impl;
 
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.jdbc.entities.Genre;
-import library.dataAccess.connectors.jdbc.dao.impl.JDBCManagerGenre;
+import library.dataAccess.connectors.jdbc.dao.impl.DAOGenre;
 
 import javax.naming.NamingException;
 import java.sql.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
 
-    private JDBCManagerGenre dao = new JDBCManagerGenre();
+    private DAOGenre dao = new DAOGenre();
 
     @Override
     public List<Genre> getAll() throws SQLException, NamingException {

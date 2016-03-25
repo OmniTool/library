@@ -1,7 +1,7 @@
 package library.servlets.crud;
 
 import library.dataAccess.accessPoint.DAO;
-import library.dataAccess.adapters.hibernate.entities.Author;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,7 @@ public class ShowAllAuthors extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAO dao = new DAO();
         try {
-            List<Author> list = dao.getAllAuthor();
+            List<AuthorAdapter> list = dao.getAllAuthor();
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Авторы");
             req.setAttribute("action", "addauthor");

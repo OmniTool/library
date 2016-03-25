@@ -3,8 +3,8 @@ package library.servlets.crud;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Book;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -29,12 +29,12 @@ public class RemoveGenre extends HttpServlet {
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-            Genre genre = new Genre();
+            GenreAdapter genre = new GenreAdapter();
             genre.setId(id);
             ManagerDAO dao = new DBManagerGenre();
             DBManagerBook daoBook = new DBManagerBook();
                 try {
-                    List<Book> listBooks = daoBook.searchBooksByGenre(genre);
+                    List<BookAdapter> listBooks = daoBook.searchBooksByGenre(genre);
                     if (listBooks.size() != 0) {
                         req.setAttribute("message", "Используется в книгах");
                         req.setAttribute("listBooks", listBooks);

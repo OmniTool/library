@@ -2,7 +2,7 @@ package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -27,7 +27,7 @@ public class RemoveBook extends HttpServlet {
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-            Book book = new Book();
+            BookAdapter book = new BookAdapter();
             book.setId(id);
                 ManagerDAO dao = new DBManagerBook();
                 try {

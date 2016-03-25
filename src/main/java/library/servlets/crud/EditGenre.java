@@ -2,7 +2,7 @@ package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.impl.GenreValidator;
 import library.dataAccess.validators.Validator;
 
@@ -30,7 +30,7 @@ public class EditGenre extends HttpServlet {
             id = Integer.parseInt(ids);
             ManagerDAO daoGenre = new DBManagerGenre();
             try {
-                Genre entity = (Genre) daoGenre.getEntityById(id);
+                GenreAdapter entity = (GenreAdapter) daoGenre.getEntityById(id);
                 Validator validator = new GenreValidator();
                 validator.trim(entity);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
@@ -49,7 +49,7 @@ public class EditGenre extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Genre genre = new Genre();
+        GenreAdapter genre = new GenreAdapter();
         String ids = req.getParameter("id");
             genre.setId(Integer.parseInt(ids));
         String titles = req.getParameter("title");
@@ -61,7 +61,7 @@ public class EditGenre extends HttpServlet {
             ManagerDAO daoGenre = new DBManagerGenre();
         try {
             boolean isValid;
-            Genre forUpdGenre = (Genre) daoGenre.getEntityById(genre.getId());
+            GenreAdapter forUpdGenre = (GenreAdapter) daoGenre.getEntityById(genre.getId());
             validator.trim(forUpdGenre);
             if (genre.getTitle().equals(forUpdGenre.getTitle())) {
                 isValid = true;

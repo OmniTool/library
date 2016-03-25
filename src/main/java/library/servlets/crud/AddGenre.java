@@ -2,7 +2,7 @@ package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.impl.GenreValidator;
 import library.dataAccess.validators.Validator;
 
@@ -28,7 +28,7 @@ public class AddGenre extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Genre genre = new Genre();
+        GenreAdapter genre = new GenreAdapter();
         String  titles = req.getParameter("title");
             genre.setTitle(titles );
         String  descriptions = req.getParameter("description");

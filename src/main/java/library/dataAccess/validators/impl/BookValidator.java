@@ -2,26 +2,26 @@ package library.dataAccess.validators.impl;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.validators.Validator;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BookValidator implements Validator<Book> {
+public class BookValidator implements Validator<BookAdapter> {
 
     @Override
-    public boolean exists(Book entity) throws SQLException, NamingException {
+    public boolean exists(BookAdapter entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerBook();
         trim(entity);
 
-        List<Book> list = dao.searchEntityByName(entity);
+        List<BookAdapter> list = dao.searchEntityByName(entity);
         String title = entity.getTitle().toUpperCase();
         int pubYear = entity.getPubYear();
         int genreId = entity.getGenereId();
 
-        for (Book e : list) {
+        for (BookAdapter e : list) {
             trim(e);
             if (e.getTitle().toUpperCase().equals(title)
                     && e.getPubYear()==pubYear
@@ -31,7 +31,7 @@ public class BookValidator implements Validator<Book> {
         return false;
     }
     @Override
-    public void trim(Book entity) {
+    public void trim(BookAdapter entity) {
         if (entity.getTitle() != null)
             entity.setTitle(entity.getTitle().trim());
         else

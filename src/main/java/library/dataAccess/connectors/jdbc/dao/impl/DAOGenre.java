@@ -2,25 +2,22 @@ package library.dataAccess.connectors.jdbc.dao.impl;
 
 import library.dataAccess.connectors.jdbc.util.DBConnector;
 import library.dataAccess.connectors.jdbc.util.DBConnectorPool;
-import library.dataAccess.connectors.jdbc.dao.DAOJDBC;
+import library.dataAccess.connectors.jdbc.dao.BaseDAO;
 import library.dataAccess.adapters.jdbc.entities.*;
 
 import javax.naming.NamingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
+public class DAOGenre implements BaseDAO<Genre, Integer> {
 
-    DBConnector connector = new DBConnectorPool();
+    private static DBConnector connector = new DBConnectorPool();
 
     @Override
-    public List<Book> getAll() throws SQLException, NamingException {
-        String statementSQL = "SELECT * FROM books";
-        List<Book> list = new ArrayList<>();
+    public List<Genre> getAll() throws SQLException, NamingException {
+        String statementSQL = "SELECT * FROM genres";
+        List<Genre> list = new ArrayList<>();
         Connection connection = null;
         ResultSet rs = null;
         try {
@@ -28,11 +25,10 @@ public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Book entity = new Book();
+                Genre entity = new Genre();
                 entity.setId(rs.getInt("id"));
                 entity.setTitle(rs.getString("title"));
-                entity.setPubYear(rs.getInt("pub_year"));
-                entity.setGenereId(rs.getInt("genere_id"));
+                entity.setDescription(rs.getString("description"));
                 list.add(entity);
             }
             return list;
@@ -44,9 +40,9 @@ public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
         }
     }
     @Override
-    public Book getEntityById(Integer id) throws SQLException, NamingException {
-        String statementSQL = "SELECT * FROM books WHERE id = ?";
-        Book entity = new Book();
+    public Genre getEntityById(Integer id) throws SQLException, NamingException {
+        String statementSQL = "SELECT * FROM genres WHERE id = ?";
+        Genre entity = new Genre();
         Connection connection = null;
         ResultSet rs = null;
         try {
@@ -57,8 +53,7 @@ public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
             if (rs.next()) {
                 entity.setId(rs.getInt("id"));
                 entity.setTitle(rs.getString("title"));
-                entity.setPubYear(rs.getInt("pub_year"));
-                entity.setGenereId(rs.getInt("genere_id"));
+                entity.setDescription(rs.getString("description"));
             }
             return entity;
         } finally {
@@ -69,16 +64,15 @@ public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
         }
     }
     @Override
-    public void update(Book entity) throws SQLException, NamingException {
-        String statementSQL = "UPDATE books SET title = ?, pub_year = ?, genere_id = ? WHERE id = ?";
+    public void update(Genre entity) throws SQLException, NamingException {
+        String statementSQL = "UPDATE genres SET title = ?, description = ? WHERE id = ?";
         Connection connection = null;
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setInt(2, entity.getPubYear());
-            preparedStatement.setInt(3, entity.getGenereId());
-            preparedStatement.setInt(4, entity.getId());
+            preparedStatement.setString(2, entity.getDescription());
+            preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
         } finally {
             if (connection != null)
@@ -86,8 +80,8 @@ public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
         }
     }
     @Override
-    public void delete(Book entity) throws SQLException, NamingException {
-        String statementSQL = "DELETE FROM books WHERE id = ?";
+    public void delete(Genre entity) throws SQLException, NamingException {
+        String statementSQL = "DELETE FROM genres WHERE id = ?";
         Connection connection = null;
         try {
             connection = connector.getConnection();
@@ -100,33 +94,25 @@ public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
         }
     }
     @Override
-    public int create(Book entity) throws SQLException, NamingException {
-        String statementSQL = "INSERT INTO books (title, pub_year, genere_id) VALUES (?, ?, ?)";
-        String nextvalSQL = "SELECT nextval('increment_id')";
-        int futureId = 0;
+    public int create(Genre entity) throws SQLException, NamingException {
+        String statementSQL = "INSERT INTO genres (title, description) VALUES (?, ?)";
         Connection connection = null;
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setInt(2, entity.getPubYear());
-            preparedStatement.setInt(3, entity.getGenereId());
+            preparedStatement.setString(2, entity.getDescription());
             preparedStatement.executeUpdate();
-            PreparedStatement preparedStatementNextval = connection.prepareStatement(nextvalSQL);
-            ResultSet rs = preparedStatementNextval.executeQuery();
-            if (rs.next()) {
-                futureId = rs.getInt("nextval");
-            }
         } finally {
         if (connection != null)
             connection.close();
         }
-        return --futureId;
+        return 0;
     }
     @Override
-    public List<Book> searchEntityByName(Book entity) throws SQLException, NamingException {
-        String statementSQL = "SELECT * FROM books WHERE upper(title) LIKE upper(?)";
-        List<Book> list = new ArrayList<>();
+    public List<Genre> searchEntityByName(Genre entity) throws SQLException, NamingException {
+        String statementSQL = "SELECT * FROM genres WHERE upper(title) LIKE upper(?)";
+        List<Genre> list = new ArrayList<>();
         Connection connection = null;
         ResultSet rs = null;
         try {
@@ -135,12 +121,11 @@ public class JDBCManagerBook implements DAOJDBC<Book, Integer> {
             preparedStatement.setString(1, "%" + entity.getTitle() + "%");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Book book = new Book();
-                book.setId(rs.getInt("id"));
-                book.setTitle(rs.getString("title"));
-                book.setPubYear(rs.getInt("pub_year"));
-                book.setGenereId(rs.getInt("genere_id"));
-                list.add(book);
+                Genre genre = new Genre();
+                genre.setId(rs.getInt("id"));
+                genre.setTitle(rs.getString("title"));
+                genre.setDescription(rs.getString("description"));
+                list.add(genre);
             }
             return list;
         } finally {

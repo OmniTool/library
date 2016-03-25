@@ -2,7 +2,7 @@ package library.dataAccess.adapters.jdbc.dao.impl;
 
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.jdbc.entities.*;
-import library.dataAccess.connectors.jdbc.dao.impl.JDBCManagerBook;
+import library.dataAccess.connectors.jdbc.dao.impl.DAOBook;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DBManagerBook implements ManagerDAO<Book, Integer> {
 
-    private JDBCManagerBook dao = new JDBCManagerBook();
+    private DAOBook dao = new DAOBook();
 
     @Override
     public List<Book> getAll() throws SQLException, NamingException {

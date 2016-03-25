@@ -4,8 +4,8 @@ import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
-import library.dataAccess.adapters.hibernate.entities.Author;
-import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.validators.impl.AuthorValidator;
 import library.dataAccess.validators.Validator;
 
@@ -40,12 +40,12 @@ public class EditAuthor extends HttpServlet {
 //            DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
 
             try {
-                List<Book> listBook = daoBook.getAll();
+                List<BookAdapter> listBook = daoBook.getAll();
                 req.setAttribute("sourceListBook", listBook);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editauthor.jsp");
 
                 if (req.getAttribute("entity") == null) {
-                    Author entity = (Author) daoAuthor.getEntityById(id);
+                    AuthorAdapter entity = (AuthorAdapter) daoAuthor.getEntityById(id);
                     Validator validator = new AuthorValidator();
                     validator.trim(entity);
 
@@ -77,7 +77,7 @@ public class EditAuthor extends HttpServlet {
 
         //hibernate
         String ids = req.getParameter("id");
-        Author author = new Author(Integer.parseInt(ids));
+        AuthorAdapter author = new AuthorAdapter(Integer.parseInt(ids));
 
         String secondNames = req.getParameter("secondName");
             author.setSecondName(secondNames);
@@ -106,7 +106,7 @@ public class EditAuthor extends HttpServlet {
         DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             try {
                 boolean isValid;
-                Author forUpdAuthor = (Author) daoAuthor.getEntityById(author.getId());
+                AuthorAdapter forUpdAuthor = (AuthorAdapter) daoAuthor.getEntityById(author.getId());
                 validator.trim(forUpdAuthor);
                 if (author.getFirstName().equals(forUpdAuthor.getFirstName())
                         && author.getMiddleName().equals(forUpdAuthor.getMiddleName())
@@ -117,9 +117,9 @@ public class EditAuthor extends HttpServlet {
                     isValid = !validator.exists(author);
                 }
 
-                List<Book> listB = new ArrayList<>();
+                List<BookAdapter> listB = new ArrayList<>();
                 for (int id : selectedBooksId) {
-                    listB.add((Book) daoBook.getEntityById(id));
+                    listB.add((BookAdapter) daoBook.getEntityById(id));
                 }
                 author.setBooksList(listB);
 

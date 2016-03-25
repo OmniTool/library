@@ -1,7 +1,7 @@
 package library.servlets.crud;
 
 import library.dataAccess.accessPoint.DAO;
-import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,7 @@ public class ShowAllBooks extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAO dao = new DAO();
         try {
-            List<Book> list = dao.getAllBook();
+            List<BookAdapter> list = dao.getAllBook();
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Книги");
             req.setAttribute("action", "addbook");

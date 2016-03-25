@@ -11,18 +11,18 @@ import library.dataAccess.connectors.hibernate.entities.GenreHiber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book implements EntityBase {
+public class BookAdapter {
 
     private BookHiber entity;
 
-    public Book() {
+    public BookAdapter() {
         this.entity = new BookHiber();
     }
-    public Book(int id) {
+    public BookAdapter(int id) {
         BaseDAO dao = new DAOBook();
         this.entity = (BookHiber) dao.getEntityById(id);
     }
-    public Book(BookHiber entity) {
+    public BookAdapter(BookHiber entity) {
         this.entity = entity;
     }
 
@@ -45,16 +45,16 @@ public class Book implements EntityBase {
         BaseDAO daoGenre = new DAOGenre();
         entity.setGenre((GenreHiber)daoGenre.getEntityById(genereId));
     }
-    public List<Author> getAuthorsList() {
+    public List<AuthorAdapter> getAuthorsList() {
         List<BookAuthorHiber> list = entity.getAuthorsList();
-        List<Author> authorsList= new ArrayList<>();
+        List<AuthorAdapter> authorsList= new ArrayList<>();
         for (BookAuthorHiber bah : list)
-            authorsList.add(new Author(bah.getAuthor()));
+            authorsList.add(new AuthorAdapter(bah.getAuthor()));
         return authorsList;
     }
-    public void setAuthorsList(List<Author> authorsList) {
+    public void setAuthorsList(List<AuthorAdapter> authorsList) {
         entity.getAuthorsList().clear();
-        for (Author e : authorsList)
+        for (AuthorAdapter e : authorsList)
             entity.getAuthorsList().add(new BookAuthorHiber(entity, e.getEntity()));
     }
     public int getId() {

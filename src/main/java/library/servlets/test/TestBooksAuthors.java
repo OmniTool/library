@@ -2,7 +2,7 @@ package library.servlets.test;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.BookAuthor;
+import library.dataAccess.adapters.hibernate.entities.BookAuthorAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -35,7 +35,7 @@ public class TestBooksAuthors extends HttpServlet {
         out.print("<body>");
         out.print("<h1></h1>");
 
-        BookAuthor book_author = new BookAuthor();       
+        BookAuthorAdapter book_author = new BookAuthorAdapter();
 
             ManagerDAO dao = new DBManagerBookAuthor();
             try {
@@ -52,7 +52,7 @@ public class TestBooksAuthors extends HttpServlet {
                 dao.create(book_author);
 
                 //read
-                BookAuthor bookAuthor1 = (BookAuthor) dao.getEntityById(1);
+                BookAuthorAdapter bookAuthor1 = (BookAuthorAdapter) dao.getEntityById(1);
                 out.print("<br> Read:");
                 out.print("getId = " + bookAuthor1.getId() + "<br>");
                 out.print("getBookId = " + bookAuthor1.getBookId() + "<br>");
@@ -63,7 +63,7 @@ public class TestBooksAuthors extends HttpServlet {
                 bookAuthor1.setAuthorId(15);
                 dao.update(bookAuthor1);
 
-                BookAuthor bookAuthor2 = (BookAuthor) dao.getEntityById(1);
+                BookAuthorAdapter bookAuthor2 = (BookAuthorAdapter) dao.getEntityById(1);
                 out.print("<br> Update:");
                 out.print("getId = " + bookAuthor2.getId() + "<br>");
                 out.print("getBookId = " + bookAuthor2.getBookId() + "<br>");
@@ -74,8 +74,8 @@ public class TestBooksAuthors extends HttpServlet {
 
 
                 out.print("<br> Delete:");
-                List<BookAuthor> list = dao.getAll();
-                for (BookAuthor ba : list)
+                List<BookAuthorAdapter> list = dao.getAll();
+                for (BookAuthorAdapter ba : list)
                     out.print("<p>" + ba + "</p>");
             } catch (SQLException e) {
                 out.print("<p>SQLException caught: " + e.getMessage() + "</p>");

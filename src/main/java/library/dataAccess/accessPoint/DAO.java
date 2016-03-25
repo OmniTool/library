@@ -18,27 +18,27 @@ public class DAO {
     private static DBManagerAuthor daoAuthor = new DBManagerAuthor();
     private static DBManagerBook daoBook = new DBManagerBook();
 
-    public List<Genre> getAllGenre() throws SQLException, NamingException { return daoGenre.getAll(); }
-    public List<Author> getAllAuthor() throws SQLException, NamingException { return daoAuthor.getAll(); }
-    public List<Book> getAllBook() throws SQLException, NamingException { return daoBook.getAll(); }
+    public List<GenreAdapter> getAllGenre() throws SQLException, NamingException { return daoGenre.getAll(); }
+    public List<AuthorAdapter> getAllAuthor() throws SQLException, NamingException { return daoAuthor.getAll(); }
+    public List<BookAdapter> getAllBook() throws SQLException, NamingException { return daoBook.getAll(); }
 
-    public Genre getEntityByIdGenre(int id) throws SQLException, NamingException { return daoGenre.getEntityById(id); }
-    public Author getEntityByIdAuthor(int id) throws SQLException, NamingException { return daoAuthor.getEntityById(id); }
-    public Book getEntityByIdBook(int id) throws SQLException, NamingException { return daoBook.getEntityById(id); }
+    public GenreAdapter getEntityByIdGenre(int id) throws SQLException, NamingException { return daoGenre.getEntityById(id); }
+    public AuthorAdapter getEntityByIdAuthor(int id) throws SQLException, NamingException { return daoAuthor.getEntityById(id); }
+    public BookAdapter getEntityByIdBook(int id) throws SQLException, NamingException { return daoBook.getEntityById(id); }
 
-    public void update(Genre entity) throws SQLException, NamingException { daoGenre.update(entity); }
-    public void update(Author entity) throws SQLException, NamingException { daoAuthor.update(entity); }
-    public void update(Book entity) throws SQLException, NamingException { daoBook.update(entity); }
+    public void update(GenreAdapter entity) throws SQLException, NamingException { daoGenre.update(entity); }
+    public void update(AuthorAdapter entity) throws SQLException, NamingException { daoAuthor.update(entity); }
+    public void update(BookAdapter entity) throws SQLException, NamingException { daoBook.update(entity); }
 
-    public void delete(Genre entity) throws SQLException, NamingException { daoGenre.delete(entity); }
-    public void delete(Author entity) throws SQLException, NamingException { daoAuthor.delete(entity); }
-    public void delete(Book entity) throws SQLException, NamingException { daoBook.delete(entity); }
+    public void delete(GenreAdapter entity) throws SQLException, NamingException { daoGenre.delete(entity); }
+    public void delete(AuthorAdapter entity) throws SQLException, NamingException { daoAuthor.delete(entity); }
+    public void delete(BookAdapter entity) throws SQLException, NamingException { daoBook.delete(entity); }
 
-    public int create(Genre entity) throws SQLException, NamingException { return daoGenre.create(entity); }
-    public int create(Author entity) throws SQLException, NamingException { return daoAuthor.create(entity); }
-    public int create(Book entity) throws SQLException, NamingException { return daoBook.create(entity); }
+    public int create(GenreAdapter entity) throws SQLException, NamingException { return daoGenre.create(entity); }
+    public int create(AuthorAdapter entity) throws SQLException, NamingException { return daoAuthor.create(entity); }
+    public int create(BookAdapter entity) throws SQLException, NamingException { return daoBook.create(entity); }
 
-    public List<Genre> searchEntityByName(Genre entity) throws SQLException, NamingException { return daoGenre.searchEntityByName(entity); }
-    public List<Author> searchEntityByName(Author entity) throws SQLException, NamingException { return daoAuthor.searchEntityByName(entity); }
-    public List<Book> searchEntityByName(Book entity) throws SQLException, NamingException { return daoBook.searchEntityByName(entity); }
+    public List<GenreAdapter> searchEntityByName(GenreAdapter entity) throws SQLException, NamingException { return daoGenre.searchEntityByName(entity); }
+    public List<AuthorAdapter> searchEntityByName(AuthorAdapter entity) throws SQLException, NamingException { return daoAuthor.searchEntityByName(entity); }
+    public List<BookAdapter> searchEntityByName(BookAdapter entity) throws SQLException, NamingException { return daoBook.searchEntityByName(entity); }
 }

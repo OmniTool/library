@@ -2,27 +2,27 @@ package library.dataAccess.validators.impl;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Author;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 import library.dataAccess.validators.Validator;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AuthorValidator implements Validator<Author> {
+public class AuthorValidator implements Validator<AuthorAdapter> {
 
     @Override
-    public boolean exists(Author entity) throws SQLException, NamingException {
+    public boolean exists(AuthorAdapter entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerAuthor();
         trim(entity);
 
-        List<Author> list = dao.searchEntityByName(entity);
+        List<AuthorAdapter> list = dao.searchEntityByName(entity);
         String firstName = entity.getFirstName().toUpperCase();
         String middleName = entity.getMiddleName().toUpperCase();
         String secondName = entity.getSecondName().toUpperCase();
         int birthYear = entity.getBirthYear();
 
-        for (Author e : list) {
+        for (AuthorAdapter e : list) {
             trim(e);
             String firstNameE = e.getFirstName().toUpperCase();
             String middleNameE = e.getMiddleName().toUpperCase();
@@ -37,7 +37,7 @@ public class AuthorValidator implements Validator<Author> {
         return false;
     }
     @Override
-    public void trim(Author entity) {
+    public void trim(AuthorAdapter entity) {
         if (entity.getFirstName() != null)
             entity.setFirstName(entity.getFirstName().trim());
         else

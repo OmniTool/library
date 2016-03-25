@@ -2,7 +2,7 @@ package library.dataAccess.connectors.jdbc.dao.impl;
 
 import library.dataAccess.connectors.jdbc.util.DBConnector;
 import library.dataAccess.connectors.jdbc.util.DBConnectorPool;
-import library.dataAccess.connectors.jdbc.dao.DAOJDBC;
+import library.dataAccess.connectors.jdbc.dao.BaseDAO;
 import library.dataAccess.adapters.jdbc.entities.*;
 
 import javax.naming.NamingException;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCManagerBookAuthor implements DAOJDBC<BookAuthor, Integer> {
+public class DAOBookAuthor implements BaseDAO<BookAuthor, Integer> {
 
     DBConnector connector = new DBConnectorPool();
     
@@ -141,7 +141,7 @@ public class JDBCManagerBookAuthor implements DAOJDBC<BookAuthor, Integer> {
     }
     public List<Book> searchBooksByAuthor(Author entity) throws SQLException, NamingException {
         List<Book> list = new ArrayList<>();
-        JDBCManagerBook dao = new JDBCManagerBook();
+        DAOBook dao = new DAOBook();
         String statementSQL = "SELECT * FROM books_authors WHERE author_id = ?";
         Connection connection = null;
         ResultSet rs = null;
@@ -165,7 +165,7 @@ public class JDBCManagerBookAuthor implements DAOJDBC<BookAuthor, Integer> {
 
     public List<Author> searchAuthorsByBook(Book entity) throws SQLException, NamingException {
         List<Author> list = new ArrayList<>();
-        JDBCManagerAuthor dao = new JDBCManagerAuthor();
+        DAOAuthor dao = new DAOAuthor();
         String statementSQL = "SELECT * FROM books_authors WHERE book_id = ?";
         Connection connection = null;
         ResultSet rs = null;

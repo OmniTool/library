@@ -3,7 +3,7 @@ package library.servlets.crud;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
-import library.dataAccess.adapters.hibernate.entities.Author;
+import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -32,7 +32,7 @@ public class FindAuthor extends HttpServlet {
                 ManagerDAO dao = new DBManagerAuthor();
                 DBManagerBookAuthor subDao = new DBManagerBookAuthor();
                 try {
-                    Author entity = (Author) dao.getEntityById(id);
+                    AuthorAdapter entity = (AuthorAdapter) dao.getEntityById(id);
                     entity.setBooksList(subDao.searchBooksByAuthor(entity));
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
                     req.setAttribute("entity", entity);

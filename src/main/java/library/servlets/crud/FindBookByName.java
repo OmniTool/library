@@ -2,7 +2,7 @@ package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Book;
+import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.validators.impl.BookValidator;
 import library.dataAccess.validators.Validator;
 
@@ -27,7 +27,7 @@ public class FindBookByName extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Book book = new Book();
+        BookAdapter book = new BookAdapter();
         String titles = req.getParameter("title");
             book.setTitle(titles.trim());
         Validator validator = new BookValidator();
@@ -35,7 +35,7 @@ public class FindBookByName extends HttpServlet {
         if (!validator.isEmptyString(book.getTitle())) {
             ManagerDAO dao = new DBManagerBook();
             try {
-                List<Book> list = dao.searchEntityByName(book);
+                List<BookAdapter> list = dao.searchEntityByName(book);
                 req.setAttribute("list", list);
                 req.setAttribute("pageName", book.getTitle());
                 req.setAttribute("action", "addbook");

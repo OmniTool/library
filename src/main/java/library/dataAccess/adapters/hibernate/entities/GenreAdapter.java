@@ -3,15 +3,15 @@ package library.dataAccess.adapters.hibernate.entities;
 import library.dataAccess.connectors.hibernate.entities.GenreHiber;
 
 
-public class Genre implements EntityBase {
+public class GenreAdapter {
 
     private GenreHiber entity;
 
-    public Genre() {
+    public GenreAdapter() {
         this.entity = new GenreHiber();
     }
 
-    public Genre(GenreHiber entity) {
+    public GenreAdapter(GenreHiber entity) {
         this.entity = entity;
     }
 

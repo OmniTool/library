@@ -2,24 +2,24 @@ package library.dataAccess.validators.impl;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.entities.Genre;
+import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.validators.Validator;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class GenreValidator implements Validator<Genre> {
+public class GenreValidator implements Validator<GenreAdapter> {
 
     @Override
-    public boolean exists(Genre entity) throws SQLException, NamingException {
+    public boolean exists(GenreAdapter entity) throws SQLException, NamingException {
         ManagerDAO dao = new DBManagerGenre();
         trim(entity);
 
-        List<Genre> list = dao.searchEntityByName(entity);
+        List<GenreAdapter> list = dao.searchEntityByName(entity);
         String title = entity.getTitle().toUpperCase();
 
-        for (Genre e : list) {
+        for (GenreAdapter e : list) {
             trim(e);
             if (e.getTitle().toUpperCase().equals(title))
                 return true;
@@ -27,7 +27,7 @@ public class GenreValidator implements Validator<Genre> {
         return false;
     }
     @Override
-    public void trim(Genre entity) {
+    public void trim(GenreAdapter entity) {
         if (entity.getTitle() != null)
             entity.setTitle(entity.getTitle().trim());
         else
