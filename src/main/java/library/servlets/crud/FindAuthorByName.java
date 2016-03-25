@@ -22,45 +22,30 @@ public class FindAuthorByName extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
         dispatcher.forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Author author = new Author();
-
-        String secondNames = req.getParameter("secondName"); // поменять
-
+        String secondNames = req.getParameter("secondName");
         author.setSecondName(secondNames.trim());
-
         String firstNames = req.getParameter("firstName");
-
         author.setFirstName(firstNames.trim());
-
         String middleNames = req.getParameter("middleName");
-
         author.setMiddleName(middleNames.trim());
-
         Validator validator = new AuthorValidator();
         validator.trim(author);
-
         if (!validator.isEmptyString(author.getSecondName()) || !validator.isEmptyString(author.getFirstName()) || !validator.isEmptyString(author.getMiddleName())) {
             ManagerDAO dao = new DBManagerAuthor();
-
             try {
                 List<Author> list = dao.searchEntityByName(author);
-
                 req.setAttribute("list", list);
                 req.setAttribute("pageName", author.getFirstName() + " " + author.getMiddleName() + " " + author.getSecondName());
                 req.setAttribute("action", "addauthor");
                 req.setAttribute("ref", "/findauthor?id=");
                 RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
-
                 dispatcher.forward(req, resp);
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {
@@ -70,6 +55,5 @@ public class FindAuthorByName extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
             dispatcher.forward(req, resp);
         }
-
     }
 }

@@ -22,37 +22,26 @@ public class FindGenreByName extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
         dispatcher.forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Genre genre = new Genre();
-
         String titles = req.getParameter("title");
-
             genre.setTitle(titles.trim());
-
         Validator validator = new GenreValidator();
         validator.trim(genre);
-
         if (!validator.isEmptyString(genre.getTitle())) {
             ManagerDAO dao = new DBManagerGenre();
             try {
                 List<Genre> list = dao.searchEntityByName(genre);
-
                 req.setAttribute("list", list);
                 req.setAttribute("pageName", genre.getTitle());
                 req.setAttribute("action", "addgenre");
                 req.setAttribute("ref", "/findgenre?id=");
-
                 RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
-
                 dispatcher.forward(req, resp);
-
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } catch (NamingException e) {

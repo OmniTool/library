@@ -13,7 +13,6 @@ public class DAOBook extends BaseDAOImpl {
     public DAOBook() {
         super(BookHiber.class);
     }
-
     @Override
     public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
         BookHiber book = (BookHiber) entity;
@@ -28,7 +27,6 @@ public class DAOBook extends BaseDAOImpl {
         } finally {HibernateUtil.close(session);}
         return entities;
     }
-
     public List<BookHiber> searchBooksByGenre(GenreHiber genre) {
         Session session = null;
         List<BookHiber> entities = new ArrayList<>();

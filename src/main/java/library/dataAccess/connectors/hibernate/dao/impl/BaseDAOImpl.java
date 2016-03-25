@@ -28,12 +28,9 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         } finally {HibernateUtil.close(session);}
         return entities;
     }
-
     @Override
     public T getEntityById(Integer id) {
         Session session = null;
-        Transaction transaction = null;
-        List<EntityBaseHiber> entities = new ArrayList();
         T entity = null;
         try {
             session = HibernateUtil.getSession();
@@ -41,7 +38,6 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         } finally {HibernateUtil.close(session);}
         return entity;
     }
-
     @Override
     public void update(EntityBaseHiber entity) {
         Session session = null;
@@ -49,10 +45,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         try {
             session = HibernateUtil.getSession();
             transaction = session.beginTransaction();
-
-            //session.refresh(entity);
             session.update(entity);
-            //session.flush();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null)
@@ -60,7 +53,6 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
             e.printStackTrace();
         } finally {HibernateUtil.close(session);}
     }
-
     @Override
     public void delete(EntityBaseHiber entity) {
         Session session = null;
@@ -76,7 +68,6 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
             e.printStackTrace();
         } finally {HibernateUtil.close(session);}
     }
-
     @Override
     public int create(EntityBaseHiber entity){
         Session session = null;
@@ -94,24 +85,8 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         } finally {HibernateUtil.close(session);}
         return idSaved;
     }
-
     @Override
     public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
         return null;
     }
-
-
-//    @Override
-//    public List<EntityBase> searchEntityByName(EntityBase entity) throws SQLException, NamingException {
-//        return null;
-//    }
-
-//    @Autowired
-//    private SessionFactory sessionFactory;
-//
-//    private Session getCurrentSession() {
-//        return this.sessionFactory.getCurrentSession();
-//    }
-
-
 }

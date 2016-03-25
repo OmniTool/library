@@ -2,38 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <%--<meta charset="utf-8">--%>
     <title>${pageName}</title>
     <style>
         <%@include file='css/style.css' %>
     </style>
-    <style>
-
-    </style>
 </head>
 <body>
-
 <div class="parent topspace">
     <div class="block">
         <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred">${bread} > ${entity.firstName} ${entity.middleName} ${entity.secondName}</h2></p>
     </div>
 </div>
-
 <div class="parent big_topspace">
-
     <p>
     <form method="GET">
         <p><input TYPE="button" VALUE="Изменить"
                   onclick="window.location.href='/editauthor?id=${entity.id}'"></p>
     </form>
-
     <form method="GET">
         <p><input TYPE="button" VALUE="Удалить"
                   onclick="window.location.href='/removeauthor?id=${entity.id}'"></p>
     </form>
     </p>
-
     <p>
         <div class="block">
     <p ><h3 class="centred">Год рождения</h3></p>
@@ -50,12 +41,6 @@
     </p>
 </div>
 </p>
-
-
-
 </div>
-
-
-
 </body>
 </html>

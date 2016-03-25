@@ -22,27 +22,18 @@ public class RemoveBook extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        int id = 0;
+        int id;
         String ids = req.getParameter("id");
-
         if (ids == null) {
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-
             Book book = new Book();
-
             book.setId(id);
-
-            Validator validator = new BookValidator();
-
-            //if (validator.canBeDeleted(book)) {
                 ManagerDAO dao = new DBManagerBook();
                 try {
                     dao.delete(book);
-
                     RequestDispatcher dispatcher = req.getRequestDispatcher("books");
                     dispatcher.forward(req, resp);
                 } catch (SQLException e) {
@@ -50,7 +41,6 @@ public class RemoveBook extends HttpServlet {
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
                 }
-
         }
     }
 }

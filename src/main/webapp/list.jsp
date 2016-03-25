@@ -9,29 +9,24 @@
     </style>
 </head>
 <body>
-
 <div class="parent topspace">
     <div class="block">
         <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred">${pageName}</h2></p>
     </div>
 </div>
-
 <div class="parent big_topspace">
-
     <p>
     <form method="POST">
         <p><input type="text" value="" maxlength="64" placeholder="Название" name="title" pattern=".*\S.*" title="Введите название">
             <button formaction="${actionSearch}">Найти</button>
     </form>
     </p>
-
     <p class="topspace">
     <form>
         <p><button formaction="${action}">Добавить</button></p>
     </form>
     </p>
-
     <p class="topspace">
         <c:forEach var="item" items="${list}">
     <p>
@@ -39,13 +34,6 @@
     </p>
     </c:forEach>
     </p>
-
-
-
-
 </div>
-
-
-
 </body>
 </html>

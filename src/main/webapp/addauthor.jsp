@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <%--<meta charset="utf-8">--%>
     <title>${pageName}</title>
     <style>
         <%@include file='css/style.css' %>
@@ -12,18 +11,14 @@
         <script src="js/jquery.multi-select.js" type="text/javascript"></script>
 </head>
 <body>
-
 <div class="parent topspace">
     <div class="block">
         <p><h1 class="centred leftspace"><a href="/index.jsp">Библиотека</a></h1></p>
         <p><h2 class="centred"><span class="marked">${bread}</span> > Добавление</h2></p>
     </div>
 </div>
-
 <div class="parent big_topspace">
-
     <p class="message">${message}</p>
-
     <p>
         <div class="block">
             <form method="POST" class="centred">
@@ -32,7 +27,6 @@
                 <p><input type="text" value="${entity.middleName}" maxlength="64" placeholder="Отчество" name="middleName" pattern=".*\S.*" title="Введите отчество"></p>
                 <p><input type="text" value="${entity.birthYear}" placeholder="Год рождения" name="birthYear" pattern="-?\d{4}" title="Введите год в формате ГГГГ" required></p>
                 <p><textarea name="biography" placeholder="Биография">${entity.biography}</textarea></p>
-
                 <p><select id="my-select" size="5" name="listBook" class="listMulticatch" multiple>
                     <option disabled>Выберете книги</option>
                     <c:forEach var="opt" items="${sourceListBook}">
@@ -48,7 +42,6 @@
                                     </c:when>
                                 </c:choose>
                             </c:forEach>
-
                             <c:choose>
                                 <c:when test="${isSelected=='true'}">
                                     <option selected value="${opt.id}">${opt.title}</option>
@@ -60,13 +53,11 @@
                         </p>
                     </c:forEach>
                 </select></p>
-
                 <p><button formaction="addauthor">Добавить</button></p>
             </form>
         </div>
     </p>
 </div>
-
 <script>
     $('#my-select').multiSelect();
 </script>

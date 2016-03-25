@@ -12,7 +12,6 @@ public class DAOAuthor extends BaseDAOImpl {
     public DAOAuthor() {
         super(AuthorHiber.class);
     }
-
     @Override
     public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
         AuthorHiber author = (AuthorHiber) entity;

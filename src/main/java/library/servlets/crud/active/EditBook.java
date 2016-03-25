@@ -28,10 +28,8 @@ public class EditBook extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        int id = 0;
+        int id;
         String ids = req.getParameter("id");
-
         if (ids == null) {
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("books");
             dispatcher1.forward(req, resp);
@@ -57,7 +55,6 @@ public class EditBook extends HttpServlet {
 
                     //hibernate
                     req.setAttribute("currentListAuthor", entity.getAuthorsList());
-
                     req.setAttribute("entity", entity);
                     req.setAttribute("genre", daoGenre.getEntityById(entity.getGenereId()));
                 }
@@ -117,13 +114,11 @@ public class EditBook extends HttpServlet {
             } else {
                 isValid = !validator.exists(book);
             }
-
             List<Author> listA = new ArrayList<>();
             for (int id : selectedIds) {
                 listA.add((Author) daoAuthor.getEntityById(id));
             }
             book.setAuthorsList(listA);
-
             if (isValid) {
 
 //                //jdbc
@@ -162,7 +157,6 @@ public class EditBook extends HttpServlet {
                 daoBook.update(book);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("findbook?id=" + book.getId());
                 dispatcher.forward(req, resp);
-
             } else {
                 req.setAttribute("message", "Уже существует");
                 req.setAttribute("entity", book);
@@ -174,6 +168,5 @@ public class EditBook extends HttpServlet {
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
-
     }
 }

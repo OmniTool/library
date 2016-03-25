@@ -26,9 +26,7 @@ public class AddAuthor extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         ManagerDAO dao = new DBManagerBook();
-
         try {
             List<Author> list = dao.getAll();
             req.setAttribute("sourceListBook", list);
@@ -41,12 +39,9 @@ public class AddAuthor extends HttpServlet {
         req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
         dispatcher.forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
         Author author = new Author();
-
         String secondNames = req.getParameter("secondName");
             author.setSecondName(secondNames);
         String firstNames = req.getParameter("firstName");
@@ -65,11 +60,10 @@ public class AddAuthor extends HttpServlet {
                 selectedIds.add(id);
             }
         }
-
         Validator validator = new AuthorValidator();
         ManagerDAO daoAuthor = new DBManagerAuthor();
         ManagerDAO daoBook = new DBManagerBook();
-        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
+//        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
             try {
                 List<Book> listB = new ArrayList<>();
                 for (int id : selectedIds) {
@@ -77,8 +71,8 @@ public class AddAuthor extends HttpServlet {
                 }
                 author.setBooksList(listB);
                 if (!validator.exists(author)) {
-                    int futureId = daoAuthor.create(author);
-
+//                    int futureId =
+                            daoAuthor.create(author);
 //                    //jdbc
 //                    for (int id : selectedIds) {
 //                        BookAuthor ba = new BookAuthor();
@@ -86,7 +80,6 @@ public class AddAuthor extends HttpServlet {
 //                        ba.setBookId(id);
 //                        daoBookAuthor.create(ba);
 //                    }
-
                     RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
                     dispatcher.forward(req, resp);
                 } else {

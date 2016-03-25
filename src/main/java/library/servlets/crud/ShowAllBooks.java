@@ -21,29 +21,20 @@ public class ShowAllBooks extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-//        ManagerDAO dao = new DBManagerBook();
         DAO dao = new DAO();
         try {
             List<Book> list = dao.getAllBook();
-
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Книги");
             req.setAttribute("action", "addbook");
             req.setAttribute("actionSearch", "findbookbyname");
             req.setAttribute("ref", "/findbook?id=");
-
             RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
-
             dispatcher.forward(req, resp);
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
-
     }
-
-
 }

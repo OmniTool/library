@@ -48,9 +48,7 @@ public class AddBook extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Book book = new Book();
-
         String  titles = req.getParameter("title");
             book.setTitle(titles );
         String  pubYears = req.getParameter("pubYear");
@@ -65,7 +63,6 @@ public class AddBook extends HttpServlet {
                 selectedIds.add(id);
             }
         }
-
         Validator validator = new BookValidator();
         ManagerDAO daoBook = new DBManagerBook();
         ManagerDAO daoAuthor = new DBManagerAuthor();

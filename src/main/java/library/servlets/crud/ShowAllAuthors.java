@@ -21,28 +21,20 @@ public class ShowAllAuthors extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-//        ManagerDAO dao = new DBManagerAuthor();
         DAO dao = new DAO();
         try {
             List<Author> list = dao.getAllAuthor();
-
             req.setAttribute("list", list);
             req.setAttribute("pageName", "Авторы");
             req.setAttribute("action", "addauthor");
             req.setAttribute("actionSearch", "findauthorbyname");
             req.setAttribute("ref", "/findauthor?id=");
-
             RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
-
             dispatcher.forward(req, resp);
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (NamingException e) {
             System.out.println(e.getMessage());
         }
     }
-
-
 }

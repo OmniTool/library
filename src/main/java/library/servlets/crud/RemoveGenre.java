@@ -22,29 +22,20 @@ import java.util.List;
 @WebServlet("/removegenre")
 public class RemoveGenre extends HttpServlet {
 
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        int id = 0;
+        int id;
         String ids = req.getParameter("id");
-
         if (ids == null) {
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-
             Genre genre = new Genre();
             genre.setId(id);
-
-            Validator validator = new GenreValidator();
-
-            //if (validator.canBeDeleted(genre)) {
             ManagerDAO dao = new DBManagerGenre();
             DBManagerBook daoBook = new DBManagerBook();
                 try {
-
                     List<Book> listBooks = daoBook.searchBooksByGenre(genre);
                     if (listBooks.size() != 0) {
                         req.setAttribute("message", "Используется в книгах");
@@ -62,7 +53,6 @@ public class RemoveGenre extends HttpServlet {
                 } catch (NamingException e) {
                     System.out.println(e.getMessage());
                 }
-
         }
     }
 }

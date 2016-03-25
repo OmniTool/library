@@ -30,7 +30,6 @@ public class BookValidator implements Validator<Book> {
         }
         return false;
     }
-
     @Override
     public void trim(Book entity) {
         if (entity.getTitle() != null)
@@ -38,14 +37,12 @@ public class BookValidator implements Validator<Book> {
         else
             entity.setTitle("");
     }
-
     @Override
     public boolean isNumber(String str) {
         if (str == null)
             return false;
         return str.matches("-?\\+?\\d+");
     }
-
     @Override
     public boolean isEmptyString(String str) {
         if(str == null || str.equals("") || str.matches("\\s+")) {
@@ -53,9 +50,4 @@ public class BookValidator implements Validator<Book> {
         }
         return false;
     }
-
-//    @Override
-//    protected boolean isUsed(Book entity) {
-//        return true;
-//    }
 }

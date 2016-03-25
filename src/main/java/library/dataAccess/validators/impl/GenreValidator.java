@@ -26,7 +26,6 @@ public class GenreValidator implements Validator<Genre> {
         }
         return false;
     }
-
     @Override
     public void trim(Genre entity) {
         if (entity.getTitle() != null)
@@ -38,14 +37,12 @@ public class GenreValidator implements Validator<Genre> {
         else
             entity.setDescription("");
     }
-
     @Override
     public boolean isNumber(String str) {
         if (str == null)
             return false;
         return str.matches("-?\\+?\\d+");
     }
-
     @Override
     public boolean isEmptyString(String str) {
         if(str == null || str.equals("") || str.matches("\\s+")) {
@@ -53,9 +50,4 @@ public class GenreValidator implements Validator<Genre> {
         }
         return false;
     }
-
-//    @Override
-//    protected boolean isUsed(Genre entity) {
-//        return true;
-//    }
 }

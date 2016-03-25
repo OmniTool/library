@@ -21,31 +21,24 @@ public class EditGenre extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        int id = 0;
+        int id;
         String ids = req.getParameter("id");
-
         if (ids == null) {
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("genres");
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-
             ManagerDAO daoGenre = new DBManagerGenre();
-
             try {
                 Genre entity = (Genre) daoGenre.getEntityById(id);
                 Validator validator = new GenreValidator();
                 validator.trim(entity);
-
                 RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
                 req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
-
                 if (req.getAttribute("entityCurrent") == null)
                     req.setAttribute("entity", entity);
                 else
                     req.setAttribute("entity", req.getAttribute("entityCurrent"));
-
                 dispatcher.forward(req, resp);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -54,10 +47,8 @@ public class EditGenre extends HttpServlet {
             }
         }
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Genre genre = new Genre();
         String ids = req.getParameter("id");
             genre.setId(Integer.parseInt(ids));
@@ -67,11 +58,9 @@ public class EditGenre extends HttpServlet {
             genre.setDescription(descriptions);
         Validator validator = new GenreValidator();
         validator.trim(genre);
-
             ManagerDAO daoGenre = new DBManagerGenre();
-
         try {
-            boolean isValid; //
+            boolean isValid;
             Genre forUpdGenre = (Genre) daoGenre.getEntityById(genre.getId());
             validator.trim(forUpdGenre);
             if (genre.getTitle().equals(forUpdGenre.getTitle())) {

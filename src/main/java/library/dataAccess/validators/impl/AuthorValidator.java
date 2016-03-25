@@ -36,7 +36,6 @@ public class AuthorValidator implements Validator<Author> {
         }
         return false;
     }
-
     @Override
     public void trim(Author entity) {
         if (entity.getFirstName() != null)
@@ -56,14 +55,12 @@ public class AuthorValidator implements Validator<Author> {
         else
             entity.setBiography("");
     }
-
     @Override
     public boolean isNumber(String str) {
         if (str == null)
             return false;
         return str.matches("-?\\+?\\d+");
     }
-
     @Override
     public boolean isEmptyString(String str) {
         if(str == null || str.equals("") || str.matches("\\s+")) {
@@ -71,9 +68,4 @@ public class AuthorValidator implements Validator<Author> {
         }
         return false;
     }
-
-//    @Override
-//    protected boolean isUsed(Author entity) {
-//        return true;
-//    }
 }

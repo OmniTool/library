@@ -16,13 +16,10 @@ public class JDBCManagerGenre implements DAOJDBC<Genre, Integer> {
 
     @Override
     public List<Genre> getAll() throws SQLException, NamingException {
-
         String statementSQL = "SELECT * FROM genres";
         List<Genre> list = new ArrayList<>();
-
         Connection connection = null;
         ResultSet rs = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
@@ -42,22 +39,16 @@ public class JDBCManagerGenre implements DAOJDBC<Genre, Integer> {
                 rs.close();
         }
     }
-
     @Override
     public Genre getEntityById(Integer id) throws SQLException, NamingException {
-
         String statementSQL = "SELECT * FROM genres WHERE id = ?";
         Genre entity = new Genre();
-
         Connection connection = null;
         ResultSet rs = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setInt(1, id);
-
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 entity.setId(rs.getInt("id"));
@@ -72,64 +63,45 @@ public class JDBCManagerGenre implements DAOJDBC<Genre, Integer> {
                 rs.close();
         }
     }
-
     @Override
     public void update(Genre entity) throws SQLException, NamingException {
-
         String statementSQL = "UPDATE genres SET title = ?, description = ? WHERE id = ?";
-
         Connection connection = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setString(2, entity.getDescription());
             preparedStatement.setInt(3, entity.getId());
-
             preparedStatement.executeUpdate();
         } finally {
             if (connection != null)
                 connection.close();
         }
     }
-
     @Override
     public void delete(Genre entity) throws SQLException, NamingException {
-
         String statementSQL = "DELETE FROM genres WHERE id = ?";
-
         Connection connection = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setInt(1, entity.getId());
-
             preparedStatement.executeUpdate();
         } finally {
             if (connection != null)
                 connection.close();
         }
     }
-
     @Override
     public int create(Genre entity) throws SQLException, NamingException {
-
         String statementSQL = "INSERT INTO genres (title, description) VALUES (?, ?)";
-        String nextval = "SELECT nextval('genres_id')";
-
         Connection connection = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setString(2, entity.getDescription());
-
             preparedStatement.executeUpdate();
         } finally {
         if (connection != null)
@@ -137,25 +109,16 @@ public class JDBCManagerGenre implements DAOJDBC<Genre, Integer> {
         }
         return 0;
     }
-
     @Override
     public List<Genre> searchEntityByName(Genre entity) throws SQLException, NamingException {
-//        List<Genre> list = getAll();
-
-
-
         String statementSQL = "SELECT * FROM genres WHERE upper(title) LIKE upper(?)";
         List<Genre> list = new ArrayList<>();
-
         Connection connection = null;
         ResultSet rs = null;
-
         try {
             connection = connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(statementSQL);
-
             preparedStatement.setString(1, "%" + entity.getTitle() + "%");
-
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Genre genre = new Genre();
@@ -172,6 +135,4 @@ public class JDBCManagerGenre implements DAOJDBC<Genre, Integer> {
                 rs.close();
         }
     }
-
-
 }

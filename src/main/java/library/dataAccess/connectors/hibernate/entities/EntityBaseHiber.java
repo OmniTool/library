@@ -12,22 +12,11 @@ public abstract class EntityBaseHiber implements EntityBase {
     @Column(name = "id", insertable = false)
     protected int id;
 
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
-//    @Id
-//    @Column(name = "id")
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 }

@@ -12,7 +12,6 @@ public class DAOGenre extends BaseDAOImpl {
     public DAOGenre() {
         super(GenreHiber.class);
     }
-
     @Override
     public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
         GenreHiber genre = (GenreHiber) entity;
@@ -24,10 +23,6 @@ public class DAOGenre extends BaseDAOImpl {
                     " e WHERE upper(e.title) LIKE upper(:title)")
                     .setParameter("title", "%" + genre.getTitle() + "%")
                     .list();
-//            SQLQuery query = session.createSQLQuery("SELECT * FROM genres WHERE upper(title) LIKE upper(:title)");
-//            entities = query
-//                    .setString( "title", genre.getTitle())
-//                    .list();
         } finally {HibernateUtil.close(session);}
         return entities;
     }

@@ -22,7 +22,6 @@ public class DAOBookAuthor extends BaseDAOImpl {
         List<EntityBaseHiber> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
-            //FROM books_authors WHERE author_id = ? AND book_id = ?
             entities = session.createQuery("FROM " + type.getSimpleName() +
                     " e WHERE e.author.id = :author_id AND e.book.id = :book_id")
                     .setParameter("author_id", bookAuthor.getAuthor().getId())
@@ -31,7 +30,6 @@ public class DAOBookAuthor extends BaseDAOImpl {
         } finally {HibernateUtil.close(session);}
         return entities;
     }
-
     public List<Book> searchBooksByAuthor(Author entity) {
         Session session = null;
         List<BookAuthorHiber> entities = new ArrayList<>();
@@ -50,7 +48,6 @@ public class DAOBookAuthor extends BaseDAOImpl {
         }
         return books;
     }
-
     public List<Author> searchAuthorsByBook(Book entity) {
         Session session = null;
         List<BookAuthorHiber> entities = new ArrayList<>();
@@ -61,9 +58,6 @@ public class DAOBookAuthor extends BaseDAOImpl {
                     " e WHERE e.book.id = :book_id")
                     .setParameter("book_id", entity.getId())
                     .list();
-//            entities = session.createSQLQuery("SELECT * FROM books_authors WHERE book_id = :book_id")
-//                    .setParameter("book_id", entity.getId())
-//                    .list();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

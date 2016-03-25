@@ -1,5 +1,6 @@
 package library.dataAccess.connectors.hibernate.util;
 
+import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.SessionFactory;
 
@@ -13,8 +14,12 @@ public class HibernateUtilOld {
             throw new ExceptionInInitializerError(ex);
         }
     }
-
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+    public static Session getSession() {
+        return sessionFactory.openSession();
+    }
+    public static void close(Session session) {
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
     }
 }

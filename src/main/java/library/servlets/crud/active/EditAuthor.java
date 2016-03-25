@@ -26,8 +26,7 @@ public class EditAuthor extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        int id = 0;
+        int id;
         String ids = req.getParameter("id");
 
         if (ids == null) {
@@ -37,7 +36,9 @@ public class EditAuthor extends HttpServlet {
             id = Integer.parseInt(ids);
             ManagerDAO daoAuthor = new DBManagerAuthor();
             ManagerDAO daoBook = new DBManagerBook();
+
 //            DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
+
             try {
                 List<Book> listBook = daoBook.getAll();
                 req.setAttribute("sourceListBook", listBook);
