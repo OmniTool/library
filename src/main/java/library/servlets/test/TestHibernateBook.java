@@ -20,12 +20,6 @@ import java.util.List;
 @WebServlet("/testHibernateBook")
 public class TestHibernateBook extends HttpServlet {
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        doPost(req, resp);
-//    }
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");

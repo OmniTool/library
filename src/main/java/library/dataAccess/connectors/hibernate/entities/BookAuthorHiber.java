@@ -6,8 +6,7 @@ import javax.persistence.*;
 @Table(name = "books_authors", schema = "public", catalog = "library_test")
 public class BookAuthorHiber extends EntityBaseHiber {
     @ManyToOne(targetEntity=BookHiber.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id"//,
-    )
+    @JoinColumn(name = "book_id")
     BookHiber book;
     @ManyToOne(targetEntity=AuthorHiber.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id",
@@ -23,7 +22,6 @@ public class BookAuthorHiber extends EntityBaseHiber {
     public BookHiber getBook() {
         return book;
     }
-
     public void setBook(BookHiber book) {
         this.book = book;
     }

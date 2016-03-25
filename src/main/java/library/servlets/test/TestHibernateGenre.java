@@ -16,12 +16,6 @@ import java.util.List;
 @WebServlet("/testHibernateGenre")
 public class TestHibernateGenre extends HttpServlet {
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        doPost(req, resp);
-//    }
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -38,7 +32,6 @@ public class TestHibernateGenre extends HttpServlet {
         BaseDAO dao = new DAOGenre();
 
         List<GenreHiber> list = null;
-
 
             //create
             entity.setTitle("test genre");

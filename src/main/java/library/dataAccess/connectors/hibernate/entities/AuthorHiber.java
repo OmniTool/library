@@ -79,7 +79,6 @@ public class AuthorHiber extends EntityBaseHiber {
     }
     @Override
     public int hashCode() {
-        //int result = id;
         int result = 31;
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);

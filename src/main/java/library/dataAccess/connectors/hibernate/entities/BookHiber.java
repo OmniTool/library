@@ -7,21 +7,18 @@ import java.util.List;
 @Entity
 @Table(name = "books", schema = "public", catalog = "library_test")
 public class BookHiber extends EntityBaseHiber {
-    //private int id;
+
     @Basic
     @Column(name = "title")
     private String title;
-
     @Basic
     @Column(name = "pub_year")
     private Integer pubYear;
-
     @ManyToOne(targetEntity = GenreHiber.class)
     @JoinColumn(name = "genere_id",
             foreignKey = @ForeignKey(name = "books_genre_id_fkey")
     )
     private GenreHiber genre;
-
     @OneToMany(targetEntity=BookAuthorHiber.class, mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookAuthorHiber> authorsList = new ArrayList<>();
 

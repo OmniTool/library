@@ -39,7 +39,7 @@ public class RemoveGenre extends HttpServlet {
                     List<Book> listBooks = daoBook.searchBooksByGenre(genre);
                     if (listBooks.size() != 0) {
                         req.setAttribute("message", "Используется в книгах");
-                        req.setAttribute("listBooks", listBooks); //вывести список связанных книг
+                        req.setAttribute("listBooks", listBooks);
                         req.setAttribute("ref", "/findbook?id=");
                         RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre");
                         dispatcher.forward(req, resp);
