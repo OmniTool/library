@@ -1,6 +1,6 @@
 package library.dataAccess.connectors.jdbc.entities;
 
-public class BookAuthorJdbc {
+public class BookAuthor {
 
     private int id;
     private int bookId;

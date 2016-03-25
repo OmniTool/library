@@ -1,15 +1,19 @@
 package library.dataAccess.adapters.jdbc.entities;
 
-import library.dataAccess.connectors.jdbc.entities.BookJdbc;
+import library.dataAccess.connectors.jdbc.entities.Book;
 
 import java.util.List;
 
-public class Book {
+public class BookAdapter {
 
-    private BookJdbc entity;
+    private Book entity;
 
-    public Book() {
-        this.entity = new BookJdbc();
+    public BookAdapter() {
+        this.entity = new Book();
+    }
+
+    public BookAdapter(Book entity) {
+        this.entity = entity;
     }
 
     public String getTitle() {
@@ -30,11 +34,11 @@ public class Book {
     public void setGenereId(int genereId) {
         entity.setGenereId(genereId);
     }
-    public List<Author> getAuthorsList() {
-        List<Author> list = entity.getAuthorsList();
+    public List<AuthorAdapter> getAuthorsList() {
+        List<AuthorAdapter> list = entity.getAuthorsList();
         return list;
     }
-    public void setAuthorsList(List<Author> authorsList) {
+    public void setAuthorsList(List<AuthorAdapter> authorsList) {
         entity.setAuthorsList(authorsList);
     }
     public int getId() {

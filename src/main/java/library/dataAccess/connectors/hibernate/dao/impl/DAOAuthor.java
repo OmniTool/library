@@ -1,7 +1,7 @@
 package library.dataAccess.connectors.hibernate.dao.impl;
 
-import library.dataAccess.connectors.hibernate.entities.AuthorHiber;
-import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
+import library.dataAccess.connectors.hibernate.entities.Author;
+import library.dataAccess.connectors.hibernate.entities.EntityBase;
 import library.dataAccess.connectors.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -10,13 +10,13 @@ import java.util.List;
 
 public class DAOAuthor extends BaseDAOImpl {
     public DAOAuthor() {
-        super(AuthorHiber.class);
+        super(Author.class);
     }
     @Override
-    public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
-        AuthorHiber author = (AuthorHiber) entity;
+    public List<EntityBase> searchEntityByName(EntityBase entity) {
+        Author author = (Author) entity;
         Session session = null;
-        List<EntityBaseHiber> entities = new ArrayList<>();
+        List<EntityBase> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +

@@ -3,7 +3,7 @@ package library.dataAccess.connectors.jdbc.dao.impl;
 import library.dataAccess.connectors.jdbc.util.DBConnector;
 import library.dataAccess.connectors.jdbc.util.DBConnectorPool;
 import library.dataAccess.connectors.jdbc.dao.BaseDAO;
-import library.dataAccess.adapters.jdbc.entities.*;
+import library.dataAccess.connectors.jdbc.entities.*;
 
 import javax.naming.NamingException;
 import java.sql.Connection;

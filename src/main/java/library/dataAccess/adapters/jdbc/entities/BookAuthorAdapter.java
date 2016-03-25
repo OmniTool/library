@@ -1,13 +1,17 @@
 package library.dataAccess.adapters.jdbc.entities;
 
-import library.dataAccess.connectors.jdbc.entities.BookAuthorJdbc;
+import library.dataAccess.connectors.jdbc.entities.BookAuthor;
 
-public class BookAuthor {
+public class BookAuthorAdapter {
 
-    private BookAuthorJdbc entity;
+    private BookAuthor entity;
 
-    public BookAuthor() {
-        this.entity = new BookAuthorJdbc();
+    public BookAuthorAdapter() {
+        this.entity = new BookAuthor();
+    }
+
+    public BookAuthorAdapter(BookAuthor entity) {
+        this.entity = entity;
     }
 
     public int getId() {

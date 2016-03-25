@@ -1,14 +1,19 @@
 package library.dataAccess.adapters.jdbc.entities;
 
-import library.dataAccess.connectors.jdbc.entities.GenreJdbc;
+import library.dataAccess.connectors.jdbc.entities.Genre;
 
-public class Genre {
+public class GenreAdapter {
 
-    private GenreJdbc entity;
+    private Genre entity;
 
-    public Genre() {
-        this.entity = new GenreJdbc();
+    public GenreAdapter() {
+        this.entity = new Genre();
     }
+
+    public GenreAdapter(Genre entity) {
+        this.entity = entity;
+    }
+
     public int getId() {
         return entity.getId();
     }

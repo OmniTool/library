@@ -3,9 +3,9 @@ package library.dataAccess.adapters.hibernate.entities;
 import library.dataAccess.connectors.hibernate.dao.BaseDAO;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOBook;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOGenre;
-import library.dataAccess.connectors.hibernate.entities.BookAuthorHiber;
-import library.dataAccess.connectors.hibernate.entities.BookHiber;
-import library.dataAccess.connectors.hibernate.entities.GenreHiber;
+import library.dataAccess.connectors.hibernate.entities.BookAuthor;
+import library.dataAccess.connectors.hibernate.entities.Book;
+import library.dataAccess.connectors.hibernate.entities.Genre;
 
 
 import java.util.ArrayList;
@@ -13,16 +13,16 @@ import java.util.List;
 
 public class BookAdapter {
 
-    private BookHiber entity;
+    private Book entity;
 
     public BookAdapter() {
-        this.entity = new BookHiber();
+        this.entity = new Book();
     }
     public BookAdapter(int id) {
         BaseDAO dao = new DAOBook();
-        this.entity = (BookHiber) dao.getEntityById(id);
+        this.entity = (Book) dao.getEntityById(id);
     }
-    public BookAdapter(BookHiber entity) {
+    public BookAdapter(Book entity) {
         this.entity = entity;
     }
 
@@ -43,19 +43,19 @@ public class BookAdapter {
     }
     public void setGenereId(int genereId) {
         BaseDAO daoGenre = new DAOGenre();
-        entity.setGenre((GenreHiber)daoGenre.getEntityById(genereId));
+        entity.setGenre((Genre)daoGenre.getEntityById(genereId));
     }
     public List<AuthorAdapter> getAuthorsList() {
-        List<BookAuthorHiber> list = entity.getAuthorsList();
+        List<BookAuthor> list = entity.getAuthorsList();
         List<AuthorAdapter> authorsList= new ArrayList<>();
-        for (BookAuthorHiber bah : list)
+        for (BookAuthor bah : list)
             authorsList.add(new AuthorAdapter(bah.getAuthor()));
         return authorsList;
     }
     public void setAuthorsList(List<AuthorAdapter> authorsList) {
         entity.getAuthorsList().clear();
         for (AuthorAdapter e : authorsList)
-            entity.getAuthorsList().add(new BookAuthorHiber(entity, e.getEntity()));
+            entity.getAuthorsList().add(new BookAuthor(entity, e.getEntity()));
     }
     public int getId() {
         return entity.getId();
@@ -67,10 +67,10 @@ public class BookAdapter {
     public String toString() {
         return entity.toString();
     }
-    public BookHiber getEntity() {
+    public Book getEntity() {
         return entity;
     }
-    public void setEntity(BookHiber entity) {
+    public void setEntity(Book entity) {
         this.entity = entity;
     }
 }

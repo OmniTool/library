@@ -3,8 +3,8 @@ package library.dataAccess.adapters.hibernate.dao.impl;
 import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOAuthor;
-import library.dataAccess.connectors.hibernate.entities.AuthorHiber;
-import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
+import library.dataAccess.connectors.hibernate.entities.Author;
+import library.dataAccess.connectors.hibernate.entities.EntityBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class DBManagerAuthor implements ManagerDAO<AuthorAdapter, Integer> {
     }
     @Override
     public AuthorAdapter getEntityById(Integer id) {
-        return new AuthorAdapter((AuthorHiber) dao.getEntityById(id));
+        return new AuthorAdapter((Author) dao.getEntityById(id));
     }
     @Override
     public void update(AuthorAdapter entity) {
@@ -35,10 +35,10 @@ public class DBManagerAuthor implements ManagerDAO<AuthorAdapter, Integer> {
     }
     @Override
     public List<AuthorAdapter> searchEntityByName(AuthorAdapter entity) {
-        List<EntityBaseHiber> list = dao.searchEntityByName(entity.getEntity());
+        List<EntityBase> list = dao.searchEntityByName(entity.getEntity());
         List<AuthorAdapter> authors = new ArrayList<>();
-        for (EntityBaseHiber ebh : list) {
-            authors.add(new AuthorAdapter((AuthorHiber) ebh));
+        for (EntityBase ebh : list) {
+            authors.add(new AuthorAdapter((Author) ebh));
         }
         return authors;
     }

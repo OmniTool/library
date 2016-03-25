@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "books", schema = "public", catalog = "library_test")
-public class BookHiber extends EntityBaseHiber {
+public class Book extends EntityBase {
 
     @Basic
     @Column(name = "title")
@@ -14,20 +14,20 @@ public class BookHiber extends EntityBaseHiber {
     @Basic
     @Column(name = "pub_year")
     private Integer pubYear;
-    @ManyToOne(targetEntity = GenreHiber.class)
+    @ManyToOne(targetEntity = Genre.class)
     @JoinColumn(name = "genere_id",
             foreignKey = @ForeignKey(name = "books_genre_id_fkey")
     )
-    private GenreHiber genre;
-    @OneToMany(targetEntity=BookAuthorHiber.class, mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookAuthorHiber> authorsList = new ArrayList<>();
+    private Genre genre;
+    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookAuthor> authorsList = new ArrayList<>();
 
-    public BookHiber() {}
+    public Book() {}
 
-    public List<BookAuthorHiber> getAuthorsList() {
+    public List<BookAuthor> getAuthorsList() {
         return authorsList;
     }
-    public void setAuthorsList(List<BookAuthorHiber> authorsList) {
+    public void setAuthorsList(List<BookAuthor> authorsList) {
         this.authorsList = authorsList;
     }
     public String getTitle() {
@@ -42,17 +42,17 @@ public class BookHiber extends EntityBaseHiber {
     public void setPubYear(Integer pubYear) {
         this.pubYear = pubYear;
     }
-    public GenreHiber getGenre() {
+    public Genre getGenre() {
         return genre;
     }
-    public void setGenre(GenreHiber genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookHiber books = (BookHiber) o;
+        Book books = (Book) o;
         if (title != null ? !title.equals(books.title) : books.title != null) return false;
         if (pubYear != null ? !pubYear.equals(books.pubYear) : books.pubYear != null) return false;
         return true;

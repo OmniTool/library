@@ -1,7 +1,7 @@
 package library.dataAccess.connectors.hibernate.dao.impl;
 
-import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
-import library.dataAccess.connectors.hibernate.entities.GenreHiber;
+import library.dataAccess.connectors.hibernate.entities.EntityBase;
+import library.dataAccess.connectors.hibernate.entities.Genre;
 import library.dataAccess.connectors.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -10,13 +10,13 @@ import java.util.List;
 
 public class DAOGenre extends BaseDAOImpl {
     public DAOGenre() {
-        super(GenreHiber.class);
+        super(Genre.class);
     }
     @Override
-    public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
-        GenreHiber genre = (GenreHiber) entity;
+    public List<EntityBase> searchEntityByName(EntityBase entity) {
+        Genre genre = (Genre) entity;
         Session session = null;
-        List<EntityBaseHiber> entities = new ArrayList<>();
+        List<EntityBase> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +

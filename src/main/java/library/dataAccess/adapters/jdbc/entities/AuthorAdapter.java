@@ -1,15 +1,19 @@
 package library.dataAccess.adapters.jdbc.entities;
 
-import library.dataAccess.connectors.jdbc.entities.AuthorJdbc;
+import library.dataAccess.connectors.jdbc.entities.Author;
 
 import java.util.List;
 
-public class Author {
+public class AuthorAdapter {
 
-    private AuthorJdbc entity;
+    private Author entity;
 
-    public Author() {
-        this.entity = new AuthorJdbc();
+    public AuthorAdapter() {
+        this.entity = new Author();
+    }
+
+    public AuthorAdapter(Author entity) {
+        this.entity = entity;
     }
 
     public int getId() {
@@ -48,10 +52,10 @@ public class Author {
     public void setBiography(String biography) {
         entity.setBiography(biography);
     }
-    public List<Book> getBooksList() {
+    public List<BookAdapter> getBooksList() {
         return entity.getBooksList();
     }
-    public void setBooksList(List<Book> booksIdList) {
+    public void setBooksList(List<BookAdapter> booksIdList) {
         entity.setBooksList(booksIdList);
     }
     @Override

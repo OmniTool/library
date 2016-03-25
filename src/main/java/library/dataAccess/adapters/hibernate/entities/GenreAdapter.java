@@ -1,17 +1,17 @@
 package library.dataAccess.adapters.hibernate.entities;
 
-import library.dataAccess.connectors.hibernate.entities.GenreHiber;
+import library.dataAccess.connectors.hibernate.entities.Genre;
 
 
 public class GenreAdapter {
 
-    private GenreHiber entity;
+    private Genre entity;
 
     public GenreAdapter() {
-        this.entity = new GenreHiber();
+        this.entity = new Genre();
     }
 
-    public GenreAdapter(GenreHiber entity) {
+    public GenreAdapter(Genre entity) {
         this.entity = entity;
     }
 
@@ -44,11 +44,11 @@ public class GenreAdapter {
         return entity.toString();
     }
 
-    public GenreHiber getEntity() {
+    public Genre getEntity() {
         return entity;
     }
 
-    public void setEntity(GenreHiber entity) {
+    public void setEntity(Genre entity) {
         this.entity = entity;
     }
 }

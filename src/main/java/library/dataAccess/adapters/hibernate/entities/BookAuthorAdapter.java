@@ -3,19 +3,19 @@ package library.dataAccess.adapters.hibernate.entities;
 import library.dataAccess.connectors.hibernate.dao.BaseDAO;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOAuthor;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOBook;
-import library.dataAccess.connectors.hibernate.entities.AuthorHiber;
-import library.dataAccess.connectors.hibernate.entities.BookAuthorHiber;
-import library.dataAccess.connectors.hibernate.entities.BookHiber;
+import library.dataAccess.connectors.hibernate.entities.Author;
+import library.dataAccess.connectors.hibernate.entities.BookAuthor;
+import library.dataAccess.connectors.hibernate.entities.Book;
 
 
 public class BookAuthorAdapter {
 
-    private BookAuthorHiber entity;
+    private BookAuthor entity;
 
     public BookAuthorAdapter() {
-        this.entity = new BookAuthorHiber();
+        this.entity = new BookAuthor();
     }
-    public BookAuthorAdapter(BookAuthorHiber entity) {
+    public BookAuthorAdapter(BookAuthor entity) {
         this.entity = entity;
     }
 
@@ -30,23 +30,23 @@ public class BookAuthorAdapter {
     }
     public void setBookId(int bookId) {
         BaseDAO daoBook = new DAOBook();
-        entity.setBook((BookHiber)daoBook.getEntityById(bookId));
+        entity.setBook((Book)daoBook.getEntityById(bookId));
     }
     public int getAuthorId() {
         return entity.getAuthor().getId();
     }
     public void setAuthorId(int authorId) {
         BaseDAO daoAuthor = new DAOAuthor();
-        entity.setAuthor((AuthorHiber)daoAuthor.getEntityById(authorId));
+        entity.setAuthor((Author)daoAuthor.getEntityById(authorId));
     }
     @Override
     public String toString() {
         return entity.toString();
     }
-    public BookAuthorHiber getEntity() {
+    public BookAuthor getEntity() {
         return entity;
     }
-    public void setEntity(BookAuthorHiber entity) {
+    public void setEntity(BookAuthor entity) {
         this.entity = entity;
     }
 }

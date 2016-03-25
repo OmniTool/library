@@ -1,17 +1,14 @@
 package library.dataAccess.connectors.jdbc.entities;
 
-import library.dataAccess.adapters.jdbc.entities.Author;
-
 import java.util.List;
 
-public class BookJdbc {
+public class Book {
 
     private int id;
     private String title;
     private int pubYear;
     private int genereId;
     private List<Author> authorsList;
-
 
     public String getTitle() {
         return title;

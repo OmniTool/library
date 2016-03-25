@@ -1,10 +1,8 @@
 package library.dataAccess.connectors.jdbc.entities;
 
-import library.dataAccess.adapters.jdbc.entities.Book;
-
 import java.util.List;
 
-public class AuthorJdbc {
+public class Author {
 
     private int id;
     private String secondName;

@@ -1,8 +1,8 @@
 package library.dataAccess.connectors.hibernate.dao.impl;
 
-import library.dataAccess.connectors.hibernate.entities.BookHiber;
-import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
-import library.dataAccess.connectors.hibernate.entities.GenreHiber;
+import library.dataAccess.connectors.hibernate.entities.Book;
+import library.dataAccess.connectors.hibernate.entities.EntityBase;
+import library.dataAccess.connectors.hibernate.entities.Genre;
 import library.dataAccess.connectors.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -11,13 +11,13 @@ import java.util.List;
 
 public class DAOBook extends BaseDAOImpl {
     public DAOBook() {
-        super(BookHiber.class);
+        super(Book.class);
     }
     @Override
-    public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
-        BookHiber book = (BookHiber) entity;
+    public List<EntityBase> searchEntityByName(EntityBase entity) {
+        Book book = (Book) entity;
         Session session = null;
-        List<EntityBaseHiber> entities = new ArrayList<>();
+        List<EntityBase> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -27,9 +27,9 @@ public class DAOBook extends BaseDAOImpl {
         } finally {HibernateUtil.close(session);}
         return entities;
     }
-    public List<BookHiber> searchBooksByGenre(GenreHiber genre) {
+    public List<Book> searchBooksByGenre(Genre genre) {
         Session session = null;
-        List<BookHiber> entities = new ArrayList<>();
+        List<Book> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +

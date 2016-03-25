@@ -4,8 +4,8 @@ import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOBook;
-import library.dataAccess.connectors.hibernate.entities.BookHiber;
-import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
+import library.dataAccess.connectors.hibernate.entities.Book;
+import library.dataAccess.connectors.hibernate.entities.EntityBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class DBManagerBook implements ManagerDAO<BookAdapter, Integer> {
     }
     @Override
     public BookAdapter getEntityById(Integer id) {
-        return new BookAdapter((BookHiber) dao.getEntityById(id));
+        return new BookAdapter((Book) dao.getEntityById(id));
     }
     @Override
     public void update(BookAdapter entity) {
@@ -36,16 +36,16 @@ public class DBManagerBook implements ManagerDAO<BookAdapter, Integer> {
     }
     @Override
     public List<BookAdapter> searchEntityByName(BookAdapter entity) {
-        List<EntityBaseHiber> list = dao.searchEntityByName(entity.getEntity());
+        List<EntityBase> list = dao.searchEntityByName(entity.getEntity());
         List<BookAdapter> books = new ArrayList<>();
-        for (EntityBaseHiber ebh : list) {
-            books.add(new BookAdapter((BookHiber) ebh));
+        for (EntityBase ebh : list) {
+            books.add(new BookAdapter((Book) ebh));
         }
         return books;
     }
     public List<BookAdapter> searchBooksByGenre(GenreAdapter genre) {
         List<BookAdapter> entities = new ArrayList<>();
-        for (BookHiber book : dao.searchBooksByGenre(genre.getEntity()))
+        for (Book book : dao.searchBooksByGenre(genre.getEntity()))
             entities.add(new BookAdapter(book));
         return entities;
     }

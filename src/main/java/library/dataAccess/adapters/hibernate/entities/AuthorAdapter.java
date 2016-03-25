@@ -2,8 +2,8 @@ package library.dataAccess.adapters.hibernate.entities;
 
 import library.dataAccess.connectors.hibernate.dao.BaseDAO;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOAuthor;
-import library.dataAccess.connectors.hibernate.entities.AuthorHiber;
-import library.dataAccess.connectors.hibernate.entities.BookAuthorHiber;
+import library.dataAccess.connectors.hibernate.entities.Author;
+import library.dataAccess.connectors.hibernate.entities.BookAuthor;
 
 
 import java.util.ArrayList;
@@ -11,23 +11,23 @@ import java.util.List;
 
 public class AuthorAdapter {
 
-    private AuthorHiber entity;
+    private Author entity;
 
     public AuthorAdapter() {
-        this.entity = new AuthorHiber();
+        this.entity = new Author();
     }
     public AuthorAdapter(int id) {
         BaseDAO dao = new DAOAuthor();
-        this.entity = (AuthorHiber) dao.getEntityById(id);
+        this.entity = (Author) dao.getEntityById(id);
     }
-    public AuthorAdapter(AuthorHiber entity) {
+    public AuthorAdapter(Author entity) {
         this.entity = entity;
     }
 
-    public AuthorHiber getEntity() {
+    public Author getEntity() {
         return entity;
     }
-    public void setEntity(AuthorHiber entity) {
+    public void setEntity(Author entity) {
         this.entity = entity;
     }
     public int getId() {
@@ -67,16 +67,16 @@ public class AuthorAdapter {
         entity.setBiography(biography);
     }
     public List<BookAdapter> getBooksList() {
-        List<BookAuthorHiber> list = entity.getBooksList();
+        List<BookAuthor> list = entity.getBooksList();
         List<BookAdapter> booksList= new ArrayList<>();
-        for (BookAuthorHiber bah : list)
+        for (BookAuthor bah : list)
             booksList.add(new BookAdapter(bah.getBook()));
         return booksList;
     }
     public void setBooksList(List<BookAdapter> booksList) {
         entity.getBooksList().clear();
         for (BookAdapter e : booksList)
-            entity.getBooksList().add(new BookAuthorHiber(e.getEntity(), entity));
+            entity.getBooksList().add(new BookAuthor(e.getEntity(), entity));
     }
     @Override
     public String toString() {

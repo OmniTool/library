@@ -1,7 +1,7 @@
 package library.dataAccess.connectors.hibernate.dao.impl;
 
 import library.dataAccess.connectors.hibernate.dao.BaseDAO;
-import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
+import library.dataAccess.connectors.hibernate.entities.EntityBase;
 import library.dataAccess.connectors.hibernate.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBaseHiber, Integer> {
+public class BaseDAOImpl<T extends EntityBase> implements BaseDAO<EntityBase, Integer> {
 
     Class<T> type;
 
@@ -19,9 +19,9 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
     }
 
     @Override
-    public List<EntityBaseHiber> getAll() {
+    public List<EntityBase> getAll() {
         Session session = null;
-        List<EntityBaseHiber> entities = new ArrayList<>();
+        List<EntityBase> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName()).list();
@@ -39,7 +39,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         return entity;
     }
     @Override
-    public void update(EntityBaseHiber entity) {
+    public void update(EntityBase entity) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -54,7 +54,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         } finally {HibernateUtil.close(session);}
     }
     @Override
-    public void delete(EntityBaseHiber entity) {
+    public void delete(EntityBase entity) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -69,7 +69,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         } finally {HibernateUtil.close(session);}
     }
     @Override
-    public int create(EntityBaseHiber entity){
+    public int create(EntityBase entity){
         Session session = null;
         Transaction transaction = null;
         Integer idSaved = null;
@@ -86,7 +86,7 @@ public class BaseDAOImpl<T extends EntityBaseHiber> implements BaseDAO<EntityBas
         return idSaved;
     }
     @Override
-    public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
+    public List<EntityBase> searchEntityByName(EntityBase entity) {
         return null;
     }
 }

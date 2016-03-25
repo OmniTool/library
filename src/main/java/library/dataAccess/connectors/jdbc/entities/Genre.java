@@ -1,6 +1,6 @@
 package library.dataAccess.connectors.jdbc.entities;
 
-public class GenreJdbc {
+public class Genre {
 
     private int id;
     private String title;

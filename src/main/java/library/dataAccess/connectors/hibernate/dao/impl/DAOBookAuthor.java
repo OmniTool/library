@@ -1,9 +1,6 @@
 package library.dataAccess.connectors.hibernate.dao.impl;
 
-import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
-import library.dataAccess.adapters.hibernate.entities.BookAdapter;
-import library.dataAccess.connectors.hibernate.entities.BookAuthorHiber;
-import library.dataAccess.connectors.hibernate.entities.EntityBaseHiber;
+import library.dataAccess.connectors.hibernate.entities.*;
 import library.dataAccess.connectors.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -12,14 +9,14 @@ import java.util.List;
 
 public class DAOBookAuthor extends BaseDAOImpl {
     public DAOBookAuthor() {
-        super(BookAuthorHiber.class);
+        super(BookAuthor.class);
     }
 
     @Override
-    public List<EntityBaseHiber> searchEntityByName(EntityBaseHiber entity) {
-        BookAuthorHiber bookAuthor = (BookAuthorHiber) entity;
+    public List<EntityBase> searchEntityByName(EntityBase entity) {
+        BookAuthor bookAuthor = (BookAuthor) entity;
         Session session = null;
-        List<EntityBaseHiber> entities = new ArrayList<>();
+        List<EntityBase> entities = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -30,10 +27,10 @@ public class DAOBookAuthor extends BaseDAOImpl {
         } finally {HibernateUtil.close(session);}
         return entities;
     }
-    public List<BookAdapter> searchBooksByAuthor(AuthorAdapter entity) {
+    public List<Book> searchBooksByAuthor(Author entity) {
         Session session = null;
-        List<BookAuthorHiber> entities = new ArrayList<>();
-        List<BookAdapter> books = new ArrayList<>();
+        List<BookAuthor> entities = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -43,15 +40,15 @@ public class DAOBookAuthor extends BaseDAOImpl {
         } finally {
             HibernateUtil.close(session);
         }
-        for (BookAuthorHiber bah : entities) {
-            books.add(new BookAdapter(bah.getBook()));
+        for (BookAuthor bah : entities) {
+            books.add(bah.getBook());
         }
         return books;
     }
-    public List<AuthorAdapter> searchAuthorsByBook(BookAdapter entity) {
+    public List<Author> searchAuthorsByBook(Book entity) {
         Session session = null;
-        List<BookAuthorHiber> entities = new ArrayList<>();
-        List<AuthorAdapter> authors = new ArrayList<>();
+        List<BookAuthor> entities = new ArrayList<>();
+        List<Author> authors = new ArrayList<>();
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -63,8 +60,8 @@ public class DAOBookAuthor extends BaseDAOImpl {
                 session.close();
             }
         }
-        for (BookAuthorHiber bah : entities) {
-            authors.add(new AuthorAdapter(bah.getAuthor()));
+        for (BookAuthor bah : entities) {
+            authors.add(bah.getAuthor());
         }
         return authors;
     }

@@ -1,13 +1,12 @@
 package library.dataAccess.connectors.hibernate.entities;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "authors", schema = "public", catalog = "library_test")
-public class AuthorHiber extends EntityBaseHiber {
+public class Author extends EntityBase {
 
     @Basic
     @Column(name = "second_name")
@@ -24,15 +23,15 @@ public class AuthorHiber extends EntityBaseHiber {
     @Basic
     @Column(name = "biography")
     private String biography;
-    @OneToMany(targetEntity=BookAuthorHiber.class, mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookAuthorHiber> booksList = new ArrayList<>();
+    @OneToMany(targetEntity=BookAuthor.class, mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookAuthor> booksList = new ArrayList<>();
 
-    public AuthorHiber() {}
+    public Author() {}
 
-    public List<BookAuthorHiber> getBooksList() {
+    public List<BookAuthor> getBooksList() {
         return booksList;
     }
-    public void setBooksList(List<BookAuthorHiber> booksList) {
+    public void setBooksList(List<BookAuthor> booksList) {
         this.booksList = booksList;
     }
     public String getSecondName() {
@@ -69,7 +68,7 @@ public class AuthorHiber extends EntityBaseHiber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorHiber authors = (AuthorHiber) o;
+        Author authors = (Author) o;
         if (secondName != null ? !secondName.equals(authors.secondName) : authors.secondName != null) return false;
         if (firstName != null ? !firstName.equals(authors.firstName) : authors.firstName != null) return false;
         if (middleName != null ? !middleName.equals(authors.middleName) : authors.middleName != null) return false;
