@@ -69,8 +69,8 @@ public class AuthorAdapter {
     public List<BookAdapter> getBooksList() {
         List<BookAuthor> list = entity.getBooksList();
         List<BookAdapter> booksList= new ArrayList<>();
-        for (BookAuthor bah : list)
-            booksList.add(new BookAdapter(bah.getBook()));
+        for (BookAuthor bookAuthor : list)
+            booksList.add(new BookAdapter(bookAuthor.getBook()));
         return booksList;
     }
     public void setBooksList(List<BookAdapter> booksList) {

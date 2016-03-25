@@ -1,17 +1,15 @@
-package library.servlets.crud.active;
+package library.servlets.crud.reserved;
 
+import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
-import library.dataAccess.accessPoint.ManagerDAO;
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
 import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 import library.dataAccess.adapters.hibernate.entities.BookAdapter;
 import library.dataAccess.adapters.hibernate.entities.GenreAdapter;
-import library.dataAccess.validators.impl.BookValidator;
 import library.dataAccess.validators.Validator;
+import library.dataAccess.validators.impl.BookValidator;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +25,7 @@ public class AddBook extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         ManagerDAO dao = new DBManagerAuthor();
         ManagerDAO daoGenre = new DBManagerGenre();
         List<AuthorAdapter> listAuthor = dao.getAll();
@@ -59,19 +57,33 @@ public class AddBook extends HttpServlet {
         Validator validator = new BookValidator();
         ManagerDAO daoBook = new DBManagerBook();
         ManagerDAO daoAuthor = new DBManagerAuthor();
-        List<AuthorAdapter> authors = new ArrayList<>();
+
+//        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
+
+        List<AuthorAdapter> listA = new ArrayList<>();
         for (int id : selectedIds) {
-            authors.add((AuthorAdapter) daoAuthor.getEntityById(id));
+            listA.add((AuthorAdapter) daoAuthor.getEntityById(id));
         }
-        book.setAuthorsList(authors);
+        book.setAuthorsList(listA);
         if (!validator.exists(book)) {
-            daoBook.create(book);
+
+//            int futureId =
+                    daoBook.create(book);
+
+//                    //jdbc
+//                    for (int id : selectedIds) {
+//                        BookAuthor ba = new BookAuthor();
+//                        ba.setAuthorId(id);
+//                        ba.setBookId(futureId);
+//                        daoBookAuthor.create(ba);
+//                    }
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("books");
             dispatcher.forward(req, resp);
         } else {
             req.setAttribute("message", "Уже существует");
             req.setAttribute("entity", book);
-            req.setAttribute("currentListAuthor", authors);
+            req.setAttribute("currentListAuthor", listA);
             doGet(req, resp);
         }
     }

@@ -42,8 +42,8 @@ public class DAOBookAuthor extends BaseDAOImpl {
         } finally {
             HibernateUtil.close(session);
         }
-        for (BookAuthor bah : entities) {
-            books.add(bah.getBook());
+        for (BookAuthor bookAuthor : entities) {
+            books.add(bookAuthor.getBook());
         }
         return books;
     }
@@ -63,8 +63,8 @@ public class DAOBookAuthor extends BaseDAOImpl {
                 session.close();
             }
         }
-        for (BookAuthor bah : entities) {
-            authors.add(bah.getAuthor());
+        for (BookAuthor bookAuthor : entities) {
+            authors.add(bookAuthor.getAuthor());
         }
         return authors;
     }

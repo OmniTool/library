@@ -37,8 +37,8 @@ public class DBManagerGenre implements ManagerDAO<GenreAdapter, Integer> {
     public List<GenreAdapter> searchEntityByName(GenreAdapter entity) {
         List<EntityBase> list = dao.searchEntityByName(entity.getEntity());
         List<GenreAdapter> books = new ArrayList<>();
-        for (EntityBase ebh : list) {
-            books.add(new GenreAdapter((Genre) ebh));
+        for (EntityBase e : list) {
+            books.add(new GenreAdapter((Genre) e));
         }
         return books;
     }

@@ -38,8 +38,8 @@ public class DBManagerBook implements ManagerDAO<BookAdapter, Integer> {
     public List<BookAdapter> searchEntityByName(BookAdapter entity) {
         List<EntityBase> list = dao.searchEntityByName(entity.getEntity());
         List<BookAdapter> books = new ArrayList<>();
-        for (EntityBase ebh : list) {
-            books.add(new BookAdapter((Book) ebh));
+        for (EntityBase e : list) {
+            books.add(new BookAdapter((Book) e));
         }
         return books;
     }

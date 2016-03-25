@@ -41,6 +41,7 @@
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/library/dataAccess/adapters/jdbc" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/library/dataAccess/connectors/jdbc" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/library/servlets/crud/jdbc/backup" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/library/servlets/crud/reserved" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

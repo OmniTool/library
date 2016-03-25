@@ -1,15 +1,11 @@
 package library.dataAccess.accessPoint;
 
-//hibernate
 import library.dataAccess.adapters.hibernate.dao.impl.*;
 import library.dataAccess.adapters.hibernate.entities.*;
 
-////jdbc
 //import library.dataAccess.adapters.jdbc.dao.impl.*;
 //import library.dataAccess.adapters.jdbc.entities.*;
 
-import javax.naming.NamingException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class DAO {

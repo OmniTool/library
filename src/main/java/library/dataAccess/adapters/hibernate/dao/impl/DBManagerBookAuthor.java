@@ -41,8 +41,8 @@ public class DBManagerBookAuthor implements ManagerDAO<BookAuthorAdapter, Intege
     public List<BookAuthorAdapter> searchEntityByName(BookAuthorAdapter entity) {
         List<EntityBase> list = dao.searchEntityByName(entity.getEntity());
         List<BookAuthorAdapter> booksAuthors = new ArrayList<>();
-        for (EntityBase ebh : list) {
-            booksAuthors.add(new BookAuthorAdapter((BookAuthor) ebh));
+        for (EntityBase e : list) {
+            booksAuthors.add(new BookAuthorAdapter((BookAuthor) e));
         }
         return booksAuthors;
     }

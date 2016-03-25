@@ -1,14 +1,13 @@
-package library.servlets.crud.active;
+package library.servlets.crud.reserved;
 
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.accessPoint.ManagerDAO;
+import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
 import library.dataAccess.adapters.hibernate.entities.AuthorAdapter;
 import library.dataAccess.adapters.hibernate.entities.BookAdapter;
-import library.dataAccess.validators.impl.AuthorValidator;
 import library.dataAccess.validators.Validator;
+import library.dataAccess.validators.impl.AuthorValidator;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +24,8 @@ public class AddAuthor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ManagerDAO dao = new DBManagerBook();
-        List<AuthorAdapter> authors = dao.getAll();
-        req.setAttribute("sourceListBook", authors);
+        List<AuthorAdapter> list = dao.getAll();
+        req.setAttribute("sourceListBook", list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
         req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
         dispatcher.forward(req, resp);
@@ -57,19 +55,28 @@ public class AddAuthor extends HttpServlet {
         Validator validator = new AuthorValidator();
         ManagerDAO daoAuthor = new DBManagerAuthor();
         ManagerDAO daoBook = new DBManagerBook();
-        List<BookAdapter> books = new ArrayList<>();
+//        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
+        List<BookAdapter> listB = new ArrayList<>();
         for (int id : selectedIds) {
-            books.add((BookAdapter) daoBook.getEntityById(id));
+            listB.add((BookAdapter) daoBook.getEntityById(id));
         }
-        author.setBooksList(books);
+        author.setBooksList(listB);
         if (!validator.exists(author)) {
+//                    int futureId =
             daoAuthor.create(author);
+//                    //jdbc
+//                    for (int id : selectedIds) {
+//                        BookAuthor ba = new BookAuthor();
+//                        ba.setAuthorId(futureId);
+//                        ba.setBookId(id);
+//                        daoBookAuthor.create(ba);
+//                    }
             RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
             dispatcher.forward(req, resp);
         } else {
             req.setAttribute("message", "Уже существует");
             req.setAttribute("entity", author);
-            req.setAttribute("currentListBook", books);
+            req.setAttribute("currentListBook", listB);
             doGet(req, resp);
         }
     }
