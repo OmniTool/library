@@ -48,8 +48,8 @@ public class EditGenre extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GenreBuilder entityBuilder = new GenreBuilder();
-        String ids = req.getParameter("id");
-        GenreAdapter genre = new GenreAdapter(Integer.parseInt(ids));
+        String id = req.getParameter("id");
+        GenreAdapter genre = new GenreAdapter(Integer.parseInt(id));
         entityBuilder.buildEntityFromRequest(genre, req);
         GenreValidator validator = new GenreValidator();
         validator.trim(genre);

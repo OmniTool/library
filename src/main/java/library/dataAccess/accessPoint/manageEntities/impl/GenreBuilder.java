@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 public class GenreBuilder implements EntityBuilder<GenreAdapter> {
     @Override
     public void buildEntityFromRequest(GenreAdapter entity, HttpServletRequest req) {
-        String titles = req.getParameter("title");
-        entity.setTitle(titles);
-        String descriptions = req.getParameter("description");
-        entity.setDescription(descriptions);
+        String title = req.getParameter("title");
+        entity.setTitle(title);
+        String description = req.getParameter("description");
+        entity.setDescription(description);
     }
 }

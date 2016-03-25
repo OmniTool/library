@@ -16,16 +16,16 @@ import java.util.List;
 public class BookBuilder implements EntityBuilder<BookAdapter> {
     @Override
     public void buildEntityFromRequest(BookAdapter entity, HttpServletRequest req) {
-        String titles = req.getParameter("title");
-        entity.setTitle(titles);
-        String pubYears = req.getParameter("pubYear");
-        entity.setPubYear(Integer.parseInt(pubYears));
-        String genereIds = req.getParameter("genereId");
-        entity.setGenereId(Integer.parseInt(genereIds));
-        String[] arrAuthors = req.getParameterValues("listAuthor");
+        String title = req.getParameter("title");
+        entity.setTitle(title);
+        String pubYear = req.getParameter("pubYear");
+        entity.setPubYear(Integer.parseInt(pubYear));
+        String genereId = req.getParameter("genereId");
+        entity.setGenereId(Integer.parseInt(genereId));
+        String[] authorIds = req.getParameterValues("listAuthor");
         List<Integer> selectedIds = new ArrayList<>();
-        if (arrAuthors != null) {
-            for (String s : arrAuthors) {
+        if (authorIds != null) {
+            for (String s : authorIds) {
                 int id = Integer.parseInt(s);
                 selectedIds.add(id);
             }

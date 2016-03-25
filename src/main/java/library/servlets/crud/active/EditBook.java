@@ -54,8 +54,8 @@ public class EditBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EntityBuilder entityBuilder = new BookBuilder();
-        String ids = req.getParameter("id");
-        BookAdapter book = new BookAdapter(Integer.parseInt(ids));
+        String id = req.getParameter("id");
+        BookAdapter book = new BookAdapter(Integer.parseInt(id));
         entityBuilder.buildEntityFromRequest(book, req);
         List<AuthorAdapter> currentListAuthor = book.getAuthorsList();
         BookValidator validator = new BookValidator();

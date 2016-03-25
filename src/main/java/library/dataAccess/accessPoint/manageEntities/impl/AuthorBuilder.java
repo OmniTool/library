@@ -13,20 +13,20 @@ import java.util.List;
 public class AuthorBuilder implements EntityBuilder<AuthorAdapter> {
     @Override
     public void buildEntityFromRequest(AuthorAdapter entity, HttpServletRequest req) {
-        String secondNames = req.getParameter("secondName");
-        entity.setSecondName(secondNames);
-        String firstNames = req.getParameter("firstName");
-        entity.setFirstName(firstNames);
-        String middleNames = req.getParameter("middleName");
-        entity.setMiddleName(middleNames);
-        String birthYears = req.getParameter("birthYear");
-        entity.setBirthYear(Integer.parseInt(birthYears));
-        String biographys = req.getParameter("biography");
-        entity.setBiography(biographys);
-        String[] arrBooks = req.getParameterValues("listBook");
+        String secondName = req.getParameter("secondName");
+        entity.setSecondName(secondName);
+        String firstName = req.getParameter("firstName");
+        entity.setFirstName(firstName);
+        String middleName = req.getParameter("middleName");
+        entity.setMiddleName(middleName);
+        String birthYear = req.getParameter("birthYear");
+        entity.setBirthYear(Integer.parseInt(birthYear));
+        String biography = req.getParameter("biography");
+        entity.setBiography(biography);
+        String[] booksIds = req.getParameterValues("listBook");
         List<Integer> selectedIds = new ArrayList<>();
-        if (arrBooks != null) {
-            for (String s : arrBooks) {
+        if (booksIds != null) {
+            for (String s : booksIds) {
                 int id = Integer.parseInt(s);
                 selectedIds.add(id);
             }
