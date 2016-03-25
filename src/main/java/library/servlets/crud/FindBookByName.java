@@ -25,28 +25,23 @@ public class FindBookByName extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("books");
         dispatcher.forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BookAdapter book = new BookAdapter();
         String titles = req.getParameter("title");
-            book.setTitle(titles.trim());
+        book.setTitle(titles.trim());
         Validator validator = new BookValidator();
         validator.trim(book);
         if (!validator.isEmptyString(book.getTitle())) {
             ManagerDAO dao = new DBManagerBook();
-            try {
-                List<BookAdapter> list = dao.searchEntityByName(book);
-                req.setAttribute("list", list);
-                req.setAttribute("pageName", book.getTitle());
-                req.setAttribute("action", "addbook");
-                req.setAttribute("ref", "/findbook?id=");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
-                dispatcher.forward(req, resp);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
-            }
+            List<BookAdapter> list = dao.searchEntityByName(book);
+            req.setAttribute("list", list);
+            req.setAttribute("pageName", book.getTitle());
+            req.setAttribute("action", "addbook");
+            req.setAttribute("ref", "/findbook?id=");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
+            dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = req.getRequestDispatcher("books");
             dispatcher.forward(req, resp);

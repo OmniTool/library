@@ -39,7 +39,6 @@ public class TestHibernateBook extends HttpServlet {
 
         List<Book> list = null;
 
-
         //create
         Author author1 = (Author) daoAuthor.getEntityById(23);
         Author author2 = (Author) daoAuthor.getEntityById(24);

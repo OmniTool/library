@@ -39,6 +39,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/library/dataAccess/adapters/jdbc" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/library/dataAccess/connectors/jdbc" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/library/servlets/crud/jdbc/backup" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>

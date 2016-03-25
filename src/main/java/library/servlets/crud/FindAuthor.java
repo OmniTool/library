@@ -27,23 +27,16 @@ public class FindAuthor extends HttpServlet {
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-            boolean isValid = true;
-            if (isValid && id != 0) {
+            if (id != 0) {
                 ManagerDAO dao = new DBManagerAuthor();
                 DBManagerBookAuthor subDao = new DBManagerBookAuthor();
-                try {
-                    AuthorAdapter entity = (AuthorAdapter) dao.getEntityById(id);
-                    entity.setBooksList(subDao.searchBooksByAuthor(entity));
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
-                    req.setAttribute("entity", entity);
-                    req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
-                    req.setAttribute("ref", "/findbook?id=");
-                    dispatcher.forward(req, resp);
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } catch (NamingException e) {
-                    System.out.println(e.getMessage());
-                }
+                AuthorAdapter entity = (AuthorAdapter) dao.getEntityById(id);
+                entity.setBooksList(subDao.searchBooksByAuthor(entity));
+                RequestDispatcher dispatcher = req.getRequestDispatcher("authorinfo.jsp");
+                req.setAttribute("entity", entity);
+                req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
+                req.setAttribute("ref", "/findbook?id=");
+                dispatcher.forward(req, resp);
             }
         }
     }

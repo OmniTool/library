@@ -7,12 +7,12 @@ import javax.persistence.*;
 public class BookAuthor extends EntityBase {
     @ManyToOne(targetEntity=Book.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
-    Book book;
+    private Book book;
     @ManyToOne(targetEntity=Author.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id",
             foreignKey = @ForeignKey(name = "books_authors_author_id_fkey")
     )
-    Author author;
+    private Author author;
 
     public BookAuthor() {}
     public BookAuthor(Book book, Author author) {

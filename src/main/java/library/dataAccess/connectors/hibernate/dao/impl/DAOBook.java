@@ -18,6 +18,7 @@ public class DAOBook extends BaseDAOImpl {
         Book book = (Book) entity;
         Session session = null;
         List<EntityBase> entities = new ArrayList<>();
+        if (entity == null) return entities;
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -30,6 +31,7 @@ public class DAOBook extends BaseDAOImpl {
     public List<Book> searchBooksByGenre(Genre genre) {
         Session session = null;
         List<Book> entities = new ArrayList<>();
+        if (genre == null) return entities;
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +

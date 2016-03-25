@@ -26,29 +26,24 @@ public class AddGenre extends HttpServlet {
         req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
         dispatcher.forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GenreAdapter genre = new GenreAdapter();
-        String  titles = req.getParameter("title");
-            genre.setTitle(titles );
-        String  descriptions = req.getParameter("description");
-            genre.setDescription(descriptions );
+        String titles = req.getParameter("title");
+        genre.setTitle(titles);
+        String descriptions = req.getParameter("description");
+        genre.setDescription(descriptions);
         Validator validator = new GenreValidator();
-            ManagerDAO dao = new DBManagerGenre();
-            try {
-                if (!validator.exists(genre)) {
-                    dao.create(genre);
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
-                    dispatcher.forward(req, resp);
-                } else {
-                    req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entity", genre);
-                    doGet(req, resp);
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
-            }
+        ManagerDAO dao = new DBManagerGenre();
+        if (!validator.exists(genre)) {
+            dao.create(genre);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+            dispatcher.forward(req, resp);
+        } else {
+            req.setAttribute("message", "Уже существует");
+            req.setAttribute("entity", genre);
+            doGet(req, resp);
+        }
     }
 }

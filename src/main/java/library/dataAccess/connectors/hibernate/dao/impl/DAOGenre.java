@@ -17,6 +17,7 @@ public class DAOGenre extends BaseDAOImpl {
         Genre genre = (Genre) entity;
         Session session = null;
         List<EntityBase> entities = new ArrayList<>();
+        if (entity == null) return entities;
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +

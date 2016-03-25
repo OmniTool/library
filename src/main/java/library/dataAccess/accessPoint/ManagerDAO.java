@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface ManagerDAO <E, K> {
 
-    List<E> getAll() throws SQLException, NamingException;
-    E getEntityById(K id) throws SQLException, NamingException;
-    void update(E entity) throws SQLException, NamingException;
-    void delete(E entity) throws SQLException, NamingException;
-    int create(E entity) throws SQLException, NamingException;
-    List<E> searchEntityByName(E entity) throws SQLException, NamingException;
+    List<E> getAll();
+    E getEntityById(K id);
+    void update(E entity);
+    void delete(E entity);
+    int create(E entity);
+    List<E> searchEntityByName(E entity);
 
 }

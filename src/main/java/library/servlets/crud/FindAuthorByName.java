@@ -25,6 +25,7 @@ public class FindAuthorByName extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
         dispatcher.forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AuthorAdapter author = new AuthorAdapter();
@@ -38,19 +39,13 @@ public class FindAuthorByName extends HttpServlet {
         validator.trim(author);
         if (!validator.isEmptyString(author.getSecondName()) || !validator.isEmptyString(author.getFirstName()) || !validator.isEmptyString(author.getMiddleName())) {
             ManagerDAO dao = new DBManagerAuthor();
-            try {
-                List<AuthorAdapter> list = dao.searchEntityByName(author);
-                req.setAttribute("list", list);
-                req.setAttribute("pageName", author.getFirstName() + " " + author.getMiddleName() + " " + author.getSecondName());
-                req.setAttribute("action", "addauthor");
-                req.setAttribute("ref", "/findauthor?id=");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
-                dispatcher.forward(req, resp);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
-            }
+            List<AuthorAdapter> list = dao.searchEntityByName(author);
+            req.setAttribute("list", list);
+            req.setAttribute("pageName", author.getFirstName() + " " + author.getMiddleName() + " " + author.getSecondName());
+            req.setAttribute("action", "addauthor");
+            req.setAttribute("ref", "/findauthor?id=");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("authorlist.jsp");
+            dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
             dispatcher.forward(req, resp);

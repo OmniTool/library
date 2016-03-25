@@ -37,60 +37,52 @@ public class TestBooksAuthors extends HttpServlet {
 
         BookAuthorAdapter book_author = new BookAuthorAdapter();
 
-            ManagerDAO dao = new DBManagerBookAuthor();
-            try {
+        ManagerDAO dao = new DBManagerBookAuthor();
 
-                //create
-                book_author.setBookId(17);
-                book_author.setAuthorId(14);
+        //create
+        book_author.setBookId(17);
+        book_author.setAuthorId(14);
 
-                out.print("<br> Add:");
-                out.print("getId = " + book_author.getId() + "<br>");
-                out.print("getBookId = " + book_author.getBookId() + "<br>");
-                out.print("getAuthorId = " + book_author.getAuthorId() + "<br>");
+        out.print("<br> Add:");
+        out.print("getId = " + book_author.getId() + "<br>");
+        out.print("getBookId = " + book_author.getBookId() + "<br>");
+        out.print("getAuthorId = " + book_author.getAuthorId() + "<br>");
 
-                dao.create(book_author);
+        dao.create(book_author);
 
-                //read
-                BookAuthorAdapter bookAuthor1 = (BookAuthorAdapter) dao.getEntityById(1);
-                out.print("<br> Read:");
-                out.print("getId = " + bookAuthor1.getId() + "<br>");
-                out.print("getBookId = " + bookAuthor1.getBookId() + "<br>");
-                out.print("getAuthorId = " + bookAuthor1.getAuthorId() + "<br>");
+        //read
+        BookAuthorAdapter bookAuthor1 = (BookAuthorAdapter) dao.getEntityById(1);
+        out.print("<br> Read:");
+        out.print("getId = " + bookAuthor1.getId() + "<br>");
+        out.print("getBookId = " + bookAuthor1.getBookId() + "<br>");
+        out.print("getAuthorId = " + bookAuthor1.getAuthorId() + "<br>");
 
-                //update
-                bookAuthor1.setBookId(18);
-                bookAuthor1.setAuthorId(15);
-                dao.update(bookAuthor1);
+        //update
+        bookAuthor1.setBookId(18);
+        bookAuthor1.setAuthorId(15);
+        dao.update(bookAuthor1);
 
-                BookAuthorAdapter bookAuthor2 = (BookAuthorAdapter) dao.getEntityById(1);
-                out.print("<br> Update:");
-                out.print("getId = " + bookAuthor2.getId() + "<br>");
-                out.print("getBookId = " + bookAuthor2.getBookId() + "<br>");
-                out.print("getAuthorId = " + bookAuthor2.getAuthorId() + "<br>");
+        BookAuthorAdapter bookAuthor2 = (BookAuthorAdapter) dao.getEntityById(1);
+        out.print("<br> Update:");
+        out.print("getId = " + bookAuthor2.getId() + "<br>");
+        out.print("getBookId = " + bookAuthor2.getBookId() + "<br>");
+        out.print("getAuthorId = " + bookAuthor2.getAuthorId() + "<br>");
 
-                //delete
-                dao.delete(bookAuthor2);
-
-
-                out.print("<br> Delete:");
-                List<BookAuthorAdapter> list = dao.getAll();
-                for (BookAuthorAdapter ba : list)
-                    out.print("<p>" + ba + "</p>");
-            } catch (SQLException e) {
-                out.print("<p>SQLException caught: " + e.getMessage() + "</p>");
-            } catch (NamingException e) {
-                out.print("<p>NamingException caught: " + e.getMessage() + "</p>");
-
-            }
+        //delete
+        dao.delete(bookAuthor2);
 
 
-            out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
+        out.print("<br> Delete:");
+        List<BookAuthorAdapter> list = dao.getAll();
+        for (BookAuthorAdapter ba : list)
+            out.print("<p>" + ba + "</p>");
 
-            out.print("</body>");
-            out.print("</html>");
+        out.print("<form> <p><button formaction=\"index.jsp\">&lt;&lt;&lt;</button></p> </form>");
 
-            out.close();
+        out.print("</body>");
+        out.print("</html>");
+
+        out.close();
 
     }
 }

@@ -29,59 +29,47 @@ public class EditGenre extends HttpServlet {
         } else {
             id = Integer.parseInt(ids);
             ManagerDAO daoGenre = new DBManagerGenre();
-            try {
-                GenreAdapter entity = (GenreAdapter) daoGenre.getEntityById(id);
-                Validator validator = new GenreValidator();
-                validator.trim(entity);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
-                req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
-                if (req.getAttribute("entityCurrent") == null)
-                    req.setAttribute("entity", entity);
-                else
-                    req.setAttribute("entity", req.getAttribute("entityCurrent"));
-                dispatcher.forward(req, resp);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
-            }
+            GenreAdapter entity = (GenreAdapter) daoGenre.getEntityById(id);
+            Validator validator = new GenreValidator();
+            validator.trim(entity);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("editgenre.jsp");
+            req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
+            if (req.getAttribute("entityCurrent") == null)
+                req.setAttribute("entity", entity);
+            else
+                req.setAttribute("entity", req.getAttribute("entityCurrent"));
+            dispatcher.forward(req, resp);
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GenreAdapter genre = new GenreAdapter();
         String ids = req.getParameter("id");
-            genre.setId(Integer.parseInt(ids));
+        genre.setId(Integer.parseInt(ids));
         String titles = req.getParameter("title");
-            genre.setTitle(titles);
+        genre.setTitle(titles);
         String descriptions = req.getParameter("description");
-            genre.setDescription(descriptions);
+        genre.setDescription(descriptions);
         Validator validator = new GenreValidator();
         validator.trim(genre);
-            ManagerDAO daoGenre = new DBManagerGenre();
-        try {
-            boolean isValid;
-            GenreAdapter forUpdGenre = (GenreAdapter) daoGenre.getEntityById(genre.getId());
-            validator.trim(forUpdGenre);
-            if (genre.getTitle().equals(forUpdGenre.getTitle())) {
-                isValid = true;
-            } else {
-                isValid = !validator.exists(genre);
-            }
-            if (isValid) {
-                daoGenre.update(genre);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre?id=" + genre.getId());
-                dispatcher.forward(req, resp);
-            } else {
-                req.setAttribute("message", "Уже существует");
-                req.setAttribute("entityCurrent", genre);
-                doGet(req, resp);
-            }
-        } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
-            }
-
+        ManagerDAO daoGenre = new DBManagerGenre();
+        boolean isValid;
+        GenreAdapter forUpdGenre = (GenreAdapter) daoGenre.getEntityById(genre.getId());
+        validator.trim(forUpdGenre);
+        if (genre.getTitle().equals(forUpdGenre.getTitle())) {
+            isValid = true;
+        } else {
+            isValid = !validator.exists(genre);
+        }
+        if (isValid) {
+            daoGenre.update(genre);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre?id=" + genre.getId());
+            dispatcher.forward(req, resp);
+        } else {
+            req.setAttribute("message", "Уже существует");
+            req.setAttribute("entityCurrent", genre);
+            doGet(req, resp);
+        }
     }
 }

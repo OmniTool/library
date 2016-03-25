@@ -33,24 +33,18 @@ public class RemoveGenre extends HttpServlet {
             genre.setId(id);
             ManagerDAO dao = new DBManagerGenre();
             DBManagerBook daoBook = new DBManagerBook();
-                try {
-                    List<BookAdapter> listBooks = daoBook.searchBooksByGenre(genre);
-                    if (listBooks.size() != 0) {
-                        req.setAttribute("message", "Используется в книгах");
-                        req.setAttribute("listBooks", listBooks);
-                        req.setAttribute("ref", "/findbook?id=");
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre");
-                        dispatcher.forward(req, resp);
-                    } else {
-                        dao.delete(genre);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
-                        dispatcher.forward(req, resp);
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } catch (NamingException e) {
-                    System.out.println(e.getMessage());
-                }
+            List<BookAdapter> listBooks = daoBook.searchBooksByGenre(genre);
+            if (listBooks.size() != 0) {
+                req.setAttribute("message", "Используется в книгах");
+                req.setAttribute("listBooks", listBooks);
+                req.setAttribute("ref", "/findbook?id=");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("findgenre");
+                dispatcher.forward(req, resp);
+            } else {
+                dao.delete(genre);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("genres");
+                dispatcher.forward(req, resp);
+            }
         }
     }
 }

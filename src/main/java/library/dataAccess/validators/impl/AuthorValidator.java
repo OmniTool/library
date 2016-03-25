@@ -12,7 +12,7 @@ import java.util.List;
 public class AuthorValidator implements Validator<AuthorAdapter> {
 
     @Override
-    public boolean exists(AuthorAdapter entity) throws SQLException, NamingException {
+    public boolean exists(AuthorAdapter entity) {
         ManagerDAO dao = new DBManagerAuthor();
         trim(entity);
 
@@ -57,15 +57,10 @@ public class AuthorValidator implements Validator<AuthorAdapter> {
     }
     @Override
     public boolean isNumber(String str) {
-        if (str == null)
-            return false;
-        return str.matches("-?\\+?\\d+");
+        return str != null && str.matches("-?\\+?\\d+");
     }
     @Override
     public boolean isEmptyString(String str) {
-        if(str == null || str.equals("") || str.matches("\\s+")) {
-            return true;
-        }
-        return false;
+        return str == null || str.equals("") || str.matches("\\s+");
     }
 }

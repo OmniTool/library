@@ -72,7 +72,7 @@ public class BaseDAOImpl<T extends EntityBase> implements BaseDAO<EntityBase, In
     public int create(EntityBase entity){
         Session session = null;
         Transaction transaction = null;
-        Integer idSaved = null;
+        Integer idSaved = 0;
         try {
             session = HibernateUtil.getSession();
             transaction = session.beginTransaction();

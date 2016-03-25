@@ -26,33 +26,28 @@ public class AddAuthor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ManagerDAO dao = new DBManagerBook();
-        try {
-            List<AuthorAdapter> list = dao.getAll();
-            req.setAttribute("sourceListBook", list);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (NamingException e) {
-            System.out.println(e.getMessage());
-        }
+        List<AuthorAdapter> list = dao.getAll();
+        req.setAttribute("sourceListBook", list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
         req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
         dispatcher.forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AuthorAdapter author = new AuthorAdapter();
         String secondNames = req.getParameter("secondName");
-            author.setSecondName(secondNames);
+        author.setSecondName(secondNames);
         String firstNames = req.getParameter("firstName");
-            author.setFirstName(firstNames);
+        author.setFirstName(firstNames);
         String middleNames = req.getParameter("middleName");
-            author.setMiddleName(middleNames);
+        author.setMiddleName(middleNames);
         String birthYears = req.getParameter("birthYear");
-            author.setBirthYear(Integer.parseInt(birthYears));
+        author.setBirthYear(Integer.parseInt(birthYears));
         String biographys = req.getParameter("biography");
-            author.setBiography(biographys);
+        author.setBiography(biographys);
         String[] arrBooks = req.getParameterValues("listBook");
-            List<Integer> selectedIds = new ArrayList<>();
+        List<Integer> selectedIds = new ArrayList<>();
         if (arrBooks != null) {
             for (String s : arrBooks) {
                 int id = Integer.parseInt(s);
@@ -63,15 +58,14 @@ public class AddAuthor extends HttpServlet {
         ManagerDAO daoAuthor = new DBManagerAuthor();
         ManagerDAO daoBook = new DBManagerBook();
 //        DBManagerBookAuthor daoBookAuthor = new DBManagerBookAuthor();
-            try {
-                List<BookAdapter> listB = new ArrayList<>();
-                for (int id : selectedIds) {
-                    listB.add((BookAdapter) daoBook.getEntityById(id));
-                }
-                author.setBooksList(listB);
-                if (!validator.exists(author)) {
+        List<BookAdapter> listB = new ArrayList<>();
+        for (int id : selectedIds) {
+            listB.add((BookAdapter) daoBook.getEntityById(id));
+        }
+        author.setBooksList(listB);
+        if (!validator.exists(author)) {
 //                    int futureId =
-                            daoAuthor.create(author);
+            daoAuthor.create(author);
 //                    //jdbc
 //                    for (int id : selectedIds) {
 //                        BookAuthor ba = new BookAuthor();
@@ -79,19 +73,13 @@ public class AddAuthor extends HttpServlet {
 //                        ba.setBookId(id);
 //                        daoBookAuthor.create(ba);
 //                    }
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
-                    dispatcher.forward(req, resp);
-                } else {
-                    req.setAttribute("message", "Уже существует");
-                    req.setAttribute("entity", author);
-                    req.setAttribute("currentListBook", listB);
-                    doGet(req, resp);
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (NamingException e) {
-                System.out.println(e.getMessage());
-            }
-
+            RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+            dispatcher.forward(req, resp);
+        } else {
+            req.setAttribute("message", "Уже существует");
+            req.setAttribute("entity", author);
+            req.setAttribute("currentListBook", listB);
+            doGet(req, resp);
+        }
     }
 }

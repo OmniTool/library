@@ -17,6 +17,7 @@ public class DAOBookAuthor extends BaseDAOImpl {
         BookAuthor bookAuthor = (BookAuthor) entity;
         Session session = null;
         List<EntityBase> entities = new ArrayList<>();
+        if (entity == null) return entities;
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -31,6 +32,7 @@ public class DAOBookAuthor extends BaseDAOImpl {
         Session session = null;
         List<BookAuthor> entities = new ArrayList<>();
         List<Book> books = new ArrayList<>();
+        if (entity == null) return books;
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +
@@ -49,6 +51,7 @@ public class DAOBookAuthor extends BaseDAOImpl {
         Session session = null;
         List<BookAuthor> entities = new ArrayList<>();
         List<Author> authors = new ArrayList<>();
+        if (entity == null) return authors;
         try {
             session = HibernateUtil.getSession();
             entities = session.createQuery("FROM " + type.getSimpleName() +

@@ -29,16 +29,10 @@ public class RemoveBook extends HttpServlet {
             id = Integer.parseInt(ids);
             BookAdapter book = new BookAdapter();
             book.setId(id);
-                ManagerDAO dao = new DBManagerBook();
-                try {
-                    dao.delete(book);
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("books");
-                    dispatcher.forward(req, resp);
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } catch (NamingException e) {
-                    System.out.println(e.getMessage());
-                }
+            ManagerDAO dao = new DBManagerBook();
+            dao.delete(book);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("books");
+            dispatcher.forward(req, resp);
         }
     }
 }

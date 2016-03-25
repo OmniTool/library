@@ -28,16 +28,10 @@ public class RemoveAuthor extends HttpServlet {
             id = Integer.parseInt(ids);
             AuthorAdapter author = new AuthorAdapter();
             author.setId(id);
-                ManagerDAO dao = new DBManagerAuthor();
-                try {
-                    dao.delete(author);
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
-                    dispatcher.forward(req, resp);
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } catch (NamingException e) {
-                    System.out.println(e.getMessage());
-                }
+            ManagerDAO dao = new DBManagerAuthor();
+            dao.delete(author);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("authors");
+            dispatcher.forward(req, resp);
         }
     }
 }

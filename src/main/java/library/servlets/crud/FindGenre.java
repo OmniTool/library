@@ -26,20 +26,13 @@ public class FindGenre extends HttpServlet {
             dispatcher1.forward(req, resp);
         } else {
             id = Integer.parseInt(ids);
-            boolean isValid = true;
-            if (isValid && id != 0) {
+            if (id != 0) {
                 ManagerDAO dao = new DBManagerGenre();
-                try {
-                    GenreAdapter entity = (GenreAdapter) dao.getEntityById(id);
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
-                    req.setAttribute("entity", entity);
-                    req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
-                    dispatcher.forward(req, resp);
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } catch (NamingException e) {
-                    System.out.println(e.getMessage());
-                }
+                GenreAdapter entity = (GenreAdapter) dao.getEntityById(id);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("genreinfo.jsp");
+                req.setAttribute("entity", entity);
+                req.setAttribute("bread", "<a href=\"/genres\">Жанры</a>");
+                dispatcher.forward(req, resp);
             }
         }
     }

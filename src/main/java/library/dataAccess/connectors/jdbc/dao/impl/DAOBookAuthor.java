@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DAOBookAuthor implements BaseDAO<BookAuthor, Integer> {
 
-    DBConnector connector = new DBConnectorPool();
+    private DBConnector connector = new DBConnectorPool();
     
     @Override
     public List<BookAuthor> getAll() throws SQLException, NamingException {
