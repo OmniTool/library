@@ -1,8 +1,6 @@
 package library.servlets.crud;
 
 import library.dataAccess.accessPoint.DAO;
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
-import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.Book;
 
 import javax.naming.NamingException;

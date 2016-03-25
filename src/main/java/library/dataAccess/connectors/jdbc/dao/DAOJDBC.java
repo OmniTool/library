@@ -1,6 +1,6 @@
 package library.dataAccess.connectors.jdbc.dao;
 
-import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.accessPoint.ManagerDAO;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;

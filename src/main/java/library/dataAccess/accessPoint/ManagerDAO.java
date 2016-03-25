@@ -1,4 +1,4 @@
-package library.dataAccess.adapters.hibernate.dao;
+package library.dataAccess.accessPoint;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;

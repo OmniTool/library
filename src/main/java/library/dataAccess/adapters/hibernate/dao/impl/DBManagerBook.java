@@ -1,6 +1,6 @@
 package library.dataAccess.adapters.hibernate.dao.impl;
 
-import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.Book;
 import library.dataAccess.adapters.hibernate.entities.Genre;
 import library.dataAccess.connectors.hibernate.dao.impl.DAOBook;

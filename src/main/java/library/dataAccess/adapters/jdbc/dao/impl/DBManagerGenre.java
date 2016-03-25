@@ -1,6 +1,6 @@
 package library.dataAccess.adapters.jdbc.dao.impl;
 
-import library.dataAccess.adapters.jdbc.dao.ManagerDAOJDBC;
+import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.jdbc.entities.Genre;
 import library.dataAccess.connectors.jdbc.dao.impl.JDBCManagerGenre;
 
@@ -8,7 +8,7 @@ import javax.naming.NamingException;
 import java.sql.*;
 import java.util.List;
 
-public class DBManagerGenre implements ManagerDAOJDBC<Genre, Integer> {
+public class DBManagerGenre implements ManagerDAO<Genre, Integer> {
 
     private JDBCManagerGenre dao = new JDBCManagerGenre();
 

@@ -1,7 +1,7 @@
 package library.dataAccess.validators.impl;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
-import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.Author;
 import library.dataAccess.validators.Validator;
 

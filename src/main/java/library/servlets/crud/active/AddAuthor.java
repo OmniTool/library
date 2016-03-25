@@ -1,9 +1,8 @@
 package library.servlets.crud.active;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerAuthor;
-import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBook;
-import library.dataAccess.adapters.hibernate.dao.impl.DBManagerBookAuthor;
 import library.dataAccess.adapters.hibernate.entities.Author;
 import library.dataAccess.adapters.hibernate.entities.Book;
 import library.dataAccess.validators.impl.AuthorValidator;

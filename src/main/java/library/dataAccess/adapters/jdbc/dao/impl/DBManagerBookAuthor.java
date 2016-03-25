@@ -1,6 +1,6 @@
 package library.dataAccess.adapters.jdbc.dao.impl;
 
-import library.dataAccess.adapters.jdbc.dao.ManagerDAOJDBC;
+import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.jdbc.entities.Author;
 import library.dataAccess.adapters.jdbc.entities.Book;
 import library.dataAccess.adapters.jdbc.entities.BookAuthor;
@@ -10,7 +10,7 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DBManagerBookAuthor implements ManagerDAOJDBC<BookAuthor, Integer> {
+public class DBManagerBookAuthor implements ManagerDAO<BookAuthor, Integer> {
 
     private JDBCManagerBookAuthor dao = new JDBCManagerBookAuthor();
 

@@ -1,7 +1,7 @@
 package library.servlets.crud;
 
 import library.dataAccess.adapters.hibernate.dao.impl.DBManagerGenre;
-import library.dataAccess.adapters.hibernate.dao.ManagerDAO;
+import library.dataAccess.accessPoint.ManagerDAO;
 import library.dataAccess.adapters.hibernate.entities.Genre;
 import library.dataAccess.validators.impl.GenreValidator;
 import library.dataAccess.validators.Validator;

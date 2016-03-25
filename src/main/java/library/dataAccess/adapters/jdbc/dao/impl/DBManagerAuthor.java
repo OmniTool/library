@@ -3,12 +3,12 @@ package library.dataAccess.adapters.jdbc.dao.impl;
 
 import library.dataAccess.adapters.jdbc.entities.Author;
 import library.dataAccess.connectors.jdbc.dao.impl.JDBCManagerAuthor;
-import library.dataAccess.adapters.jdbc.dao.ManagerDAOJDBC;
+import library.dataAccess.accessPoint.ManagerDAO;
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DBManagerAuthor implements ManagerDAOJDBC<Author, Integer> {
+public class DBManagerAuthor implements ManagerDAO<Author, Integer> {
 
     private JDBCManagerAuthor dao = new JDBCManagerAuthor();
 
