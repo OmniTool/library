@@ -21,8 +21,8 @@ public class AddAuthor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAO dao = new DAO();
-        List<AuthorAdapter> authors = dao.getAllAuthor();
-        req.setAttribute("sourceListBook", authors);
+        List<BookAdapter> books = dao.getAllBook();
+        req.setAttribute("sourceListBook", books);
         RequestDispatcher dispatcher = req.getRequestDispatcher("addauthor.jsp");
         req.setAttribute("bread", "<a href=\"/authors\">Авторы</a>");
         dispatcher.forward(req, resp);
